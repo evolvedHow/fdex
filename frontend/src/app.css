@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+@import 'mapbox-gl/dist/mapbox-gl.css';
+@import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+
+@theme {
+  --font-sans: 'Roboto', 'Arial', sans-serif;
+  --color-primary: #1A1A1A;
+  --color-surface: #F5F5F5;
+}
+
+/* Geocoder override */
+.mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
+  font: inherit;
+  width: 350px;
+  max-width: 100%;
+}
+
+@media (max-width: 785px) {
+  .mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
+    font-size: 13px;
+  }
+
+  .mapboxgl-ctrl-group > button {
+    width: 20px;
+    height: 20px;
+  }
+}

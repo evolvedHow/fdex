@@ -1,0 +1,18 @@
+app:
+  name: "Fair Districts GA - Georgia Explorer"
+  version: "2.0.0"
+
+server:
+  host: ${HOST:-0.0.0.0}
+  port: ${PORT:-8000}
+
+map:
+  center: [-83.208092, 32.482618]
+  zoom:
+    desktop: 6.5
+    mobile: 5
+  minZoom: 5
+  maxZoom: 13
+  style: "mapbox://styles/mapbox/light-v10"
+  geocoderBbox: [-86.548059, 30.183318, -80.840278, 35.451994]
+  mobileBreakpoint: 785

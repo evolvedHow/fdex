@@ -1,0 +1,329 @@
+# ──────────────────────────────────────────────
+# Mapbox Vector Tilesets (hosted on your account)
+# Update these IDs after uploading to your Mapbox account
+# ──────────────────────────────────────────────
+tilesets:
+  tract:
+    url: "mapbox://fdgamaps.0rih3puc"
+    sourceLayer: "tract_census_2020-cmzo8u"
+  block:
+    url: "mapbox://fdgamaps.3hcg2lso"
+    sourceLayer: "block_census_2020_small-ai13v3"
+  precinct:
+    url: "mapbox://fdgamaps.97e7r27u"
+    sourceLayer: "precinct_2020-cw9lzx"
+
+# ──────────────────────────────────────────────
+# District Plans
+# Each plan generates 4 Mapbox layers: line, fill, hover, popup
+# districtProp: the GeoJSON property used to identify districts
+# ──────────────────────────────────────────────
+districtPlans:
+  # Enacted Maps for 2024 elections
+  - id: congress_r1
+    label: "Enacted US Congress, for 2024 elections"
+    geojson: congress_enacted_24_2024update.geojson
+    chamber: congress
+    districtProp: district
+    tooltipTitle: "Enacted Congressional Map"
+    group: "Enacted Maps to be used for 2024 election"
+    default: true
+
+  - id: senate_r1
+    label: "Enacted State Senate, for 2024 elections"
+    geojson: senate_enacted_24_2024update.geojson
+    chamber: senate
+    districtProp: district
+    tooltipTitle: "Enacted Senate Map"
+    group: "Enacted Maps to be used for 2024 election"
+
+  - id: house_r1
+    label: "Enacted State House, for 2024 elections"
+    geojson: house_enacted_24_2024update.geojson
+    chamber: house
+    districtProp: district
+    tooltipTitle: "Enacted House Map"
+    group: "Enacted Maps to be used for 2024 election"
+
+  # Current Maps until 2024
+  - id: congress_proposed_3
+    label: "Current US Congress, 2021 - 2024"
+    geojson: congress_enacted_2123_2024update.geojson
+    chamber: congress
+    districtProp: district
+    tooltipTitle: "Previous Congressional Map (2021 - 2023)"
+    group: "Current Maps until the 2024 election"
+
+  - id: senate_p3
+    label: "Current State Senate, 2021 - 2024"
+    geojson: senate_enacted_2123_2024update.geojson
+    chamber: senate
+    districtProp: district
+    tooltipTitle: "Previous State Senate Map (2021 - 2023)"
+    group: "Current Maps until the 2024 election"
+
+  - id: house_p3
+    label: "Current State House, 2021 - 2024"
+    geojson: house_enacted_2123_2024update.geojson
+    chamber: house
+    districtProp: district
+    tooltipTitle: "Previous State House Map (2021 - 2023)"
+    group: "Current Maps until the 2024 election"
+
+  # Previous Maps
+  - id: congress
+    label: "US Congress, 2011-2021"
+    geojson: congress12_census20.geojson
+    chamber: congress
+    districtProp: district
+    tooltipTitle: "Previous Congressional Map (2011 - 2021)"
+    group: "Previous Maps"
+
+  - id: senate
+    label: "State Senate, 2014-2021"
+    geojson: senate14_census20.geojson
+    chamber: senate
+    districtProp: district
+    tooltipTitle: "Previous State Senate Map (2014 - 2021)"
+    group: "Previous Maps"
+
+  - id: house
+    label: "State House, 2015-2021"
+    geojson: house15_census20.geojson
+    chamber: house
+    districtProp: district
+    tooltipTitle: "Previous State House Map (2015 - 2021)"
+    group: "Previous Maps"
+
+  # Other Maps Proposed in 2021 and 2023
+  - id: senate_r2
+    label: "State Senate, GSDC, 2023"
+    geojson: senate_remedy_2.geojson
+    chamber: senate
+    districtProp: district
+    tooltipTitle: "GSDC Senate Remedy Map"
+    group: "Other Maps Proposed in 2021 and 2023"
+
+  - id: house_r2
+    label: "State House, GHDC, 2023"
+    geojson: house_remedy_2.geojson
+    chamber: house
+    districtProp: district
+    tooltipTitle: "GHDC House Remedy Map"
+    group: "Other Maps Proposed in 2021 and 2023"
+
+  - id: congress_r2
+    label: "US Congress, GHDC & GSDC, 2023"
+    geojson: congress_remedy_2.geojson
+    chamber: congress
+    districtProp: district
+    tooltipTitle: "GHDC & GSDC Congressional Remedy Map"
+    group: "Other Maps Proposed in 2021 and 2023"
+
+  - id: congress_proposed
+    label: "US Congress, Senate Committee Chair, 2021"
+    geojson: congress21_census20.geojson
+    chamber: congress
+    districtProp: district
+    tooltipTitle: "Map proposed by Senate Committee Chair, 2021"
+    group: "Other Maps Proposed in 2021 and 2023"
+
+  - id: congress_proposed_2
+    label: "US Congress, Democratic Caucuses, 2021"
+    geojson: congress21_p2.geojson
+    chamber: congress
+    districtProp: district
+    tooltipTitle: "Map proposed by Democratic Caucuses, 2021"
+    group: "Other Maps Proposed in 2021 and 2023"
+
+  - id: senate_p1
+    label: "State Senate, Senate Democratic Caucus, 2021"
+    geojson: senate_prop1_dem.geojson
+    chamber: senate
+    districtProp: district
+    tooltipTitle: "Map proposed by Senate Democratic Caucus, Oct. 28, 2021"
+    group: "Other Maps Proposed in 2021 and 2023"
+
+  - id: senate_p2
+    label: "State Senate, Senate Committee Chair, 2021"
+    geojson: senate_prop2_rep.geojson
+    chamber: senate
+    districtProp: district
+    tooltipTitle: "Map proposed by Senate Committee Chair, Nov. 2, 2021"
+    group: "Other Maps Proposed in 2021 and 2023"
+
+  - id: house_p1
+    label: "State House, House Democratic Caucus, 2021"
+    geojson: house_prop1_dem.geojson
+    chamber: house
+    districtProp: district
+    tooltipTitle: "Map proposed by House Democratic Caucus, Oct. 29, 2021"
+    group: "Other Maps Proposed in 2021 and 2023"
+
+  - id: house_p2
+    label: "State House, House Committee Chair, 2021"
+    geojson: house_prop2_rep.geojson
+    chamber: house
+    districtProp: district
+    tooltipTitle: "Map proposed by House Committee Chair, Nov. 2, 2021"
+    group: "Other Maps Proposed in 2021 and 2023"
+
+# ──────────────────────────────────────────────
+# Demographic Overlays
+# ──────────────────────────────────────────────
+overlays:
+  - id: streets
+    label: "Streets Background Layer"
+    group: null
+
+  - id: bvap
+    label: "Percent Black Voting Age Population"
+    property: pct_bvp
+    group: "2020 US Census Demographics"
+    layers: [tract_bvap, block_bvap]
+    colorStops:
+      fill:
+        - [0, "#f2f0f7"]
+        - [0.249, "#aba8d0"]
+        - [0.499, "#865ebc"]
+        - [0.749, "#664296"]
+        - [1.1, "#d4d5d5"]
+      outline:
+        - [0, "#f2f0f7"]
+        - [0.249, "#aba8d0"]
+        - [0.499, "#865ebc"]
+        - [0.749, "#664296"]
+        - [1.1, "#d4d5d5"]
+    legend:
+      title: "Percent Black Voting-Age Population (2020)"
+      items:
+        - { label: "0% to 25%", color: "#f2f0f7" }
+        - { label: "25% to 50%", color: "#aba8d0" }
+        - { label: "50% to 75%", color: "#865ebc" }
+        - { label: "75% to 100%", color: "#664296" }
+
+  - id: hvap
+    label: "Percent Hispanic Voting Age Population"
+    property: pct_hvp
+    group: "2020 US Census Demographics"
+    layers: [tract_hvap, block_hvap]
+    colorStops:
+      fill:
+        - [0, "#feedde"]
+        - [0.249, "#fdbe85"]
+        - [0.499, "#e6550d"]
+        - [0.749, "#a63603"]
+        - [1.1, "#d4d5d5"]
+      outline:
+        - [0, "#feedde"]
+        - [0.249, "#fdbe85"]
+        - [0.499, "#e6550d"]
+        - [0.749, "#a63603"]
+        - [1.1, "#d4d5d5"]
+    legend:
+      title: "Percent Hispanic Voting-Age Population (2020)"
+      items:
+        - { label: "0% to 25%", color: "#feedde" }
+        - { label: "25% to 50%", color: "#fdbe85" }
+        - { label: "50% to 75%", color: "#e6550d" }
+        - { label: "75% to 100%", color: "#a63603" }
+
+  - id: avap
+    label: "Percent Asian Voting Age Population"
+    property: pct_avp
+    group: "2020 US Census Demographics"
+    layers: [tract_avap, block_avap]
+    colorStops:
+      fill:
+        - [0, "#edf8e9"]
+        - [0.249, "#bae4b3"]
+        - [0.499, "#31a354"]
+        - [0.749, "#006d2c"]
+        - [1.1, "#d4d5d5"]
+      outline:
+        - [0, "#edf8e9"]
+        - [0.249, "#bae4b3"]
+        - [0.499, "#31a354"]
+        - [0.749, "#006d2c"]
+        - [1.1, "#d4d5d5"]
+    legend:
+      title: "Percent Asian Voting Age Population (2020)"
+      items:
+        - { label: "0% to 25%", color: "#edf8e9" }
+        - { label: "25% to 50%", color: "#bae4b3" }
+        - { label: "50% to 75%", color: "#31a354" }
+        - { label: "75% to 100%", color: "#006d2c" }
+
+  - id: bipocvap
+    label: "Percent Minority Voting Age Population"
+    property: pct_bp_
+    group: "2020 US Census Demographics"
+    layers: [tract_bipocvap, block_bipocvap]
+    colorStops:
+      fill:
+        - [0, "#feebe2"]
+        - [0.249, "#fcc0c4"]
+        - [0.499, "#d64ba5"]
+        - [0.749, "#91318f"]
+        - [1.1, "#d4d5d5"]
+      outline:
+        - [0, "#feebe2"]
+        - [0.249, "#fcc0c4"]
+        - [0.499, "#d64ba5"]
+        - [0.749, "#91318f"]
+        - [1.1, "#d4d5d5"]
+    legend:
+      title: "Percent Minority Voting Age Population (2020)"
+      items:
+        - { label: "0% to 25%", color: "#feebe2" }
+        - { label: "25% to 50%", color: "#fcc0c4" }
+        - { label: "50% to 75%", color: "#d64ba5" }
+        - { label: "75% to 100%", color: "#91318f" }
+
+  - id: precinct_plean
+    label: "Partisan Lean, 2018-2021"
+    property: partisan
+    group: "Election Results by precinct"
+    layers: [precinct_plean]
+    colorStops:
+      fill:
+        - [0, "#bc131e"]
+        - [0.4, "#eb4956"]
+        - [0.465, "#c36e9e"]
+        - [0.5, "#7279db"]
+        - [0.535, "#3c6ebf"]
+        - [0.6, "#1f4bae"]
+        - [1.1, "#d4d5d5"]
+      outline:
+        - [0, "#c23a43"]
+        - [0.4, "#ed6d78"]
+        - [0.465, "#c991b1"]
+        - [0.5, "#979cde"]
+        - [0.535, "#5a83c4"]
+        - [0.6, "#3b61b8"]
+        - [1.1, "#d4d5d5"]
+    legend:
+      title: "Partisan Lean, Percent Democrat (2018-2022)"
+      items:
+        - { label: "< 40%", color: "#c23a43" }
+        - { label: "40% to 46.5%", color: "#ed6d78" }
+        - { label: "46.5% to 50%", color: "#c991b1" }
+        - { label: "50% to 53.5%", color: "#979cde" }
+        - { label: "53.5% to 60%", color: "#5a83c4" }
+        - { label: "> 60%", color: "#3b61b8" }
+
+# ──────────────────────────────────────────────
+# Boundary layers (cities, counties)
+# ──────────────────────────────────────────────
+boundaries:
+  cities:
+    geojson: places_2020data.geojson
+    lineColor: "#0AB2BB"
+    lineWidth: 1.5
+    fillColor: "#0AB2BB"
+    fillOpacity: 0.1
+    fillMinZoom: 11
+  counties:
+    geojson: county.geojson
+    lineColor: "#969696"
+    lineWidth: 1
