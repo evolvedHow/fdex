@@ -18,22 +18,24 @@ function stopsToStep(property: string, stops: [number, string][], defaultColor: 
 export function generateSources(config: AppConfig): Record<string, SourceSpec> {
   const sources: Record<string, SourceSpec> = {};
 
+  const base = import.meta.env.BASE_URL;
+
   // District plan GeoJSON sources
   for (const plan of config.districtPlans) {
     sources[`src_${plan.id}`] = {
       type: 'geojson',
-      data: `/data/${plan.geojson}`,
+      data: `${base}data/${plan.geojson}`,
     };
   }
 
   // Boundary sources
   sources['src_cities'] = {
     type: 'geojson',
-    data: `/data/${config.boundaries.cities.geojson}`,
+    data: `${base}data/${config.boundaries.cities.geojson}`,
   };
   sources['src_counties'] = {
     type: 'geojson',
-    data: `/data/${config.boundaries.counties.geojson}`,
+    data: `${base}data/${config.boundaries.counties.geojson}`,
   };
 
   // Vector tileset sources
@@ -209,7 +211,7 @@ export function generateLayers(config: AppConfig): LayerSpec[] {
     source: 'src_precinct',
     'source-layer': config.tilesets.precinct.sourceLayer,
     layout: { visibility: 'none' },
-    paint: { 'line-color': '#666666', 'line-width': 0.6, 'line-opacity': 0.7 },
+    paint: { 'line-color': '#222222', 'line-width': 1.0, 'line-opacity': 0.9 },
   } as LayerSpec);
 
   return layers;

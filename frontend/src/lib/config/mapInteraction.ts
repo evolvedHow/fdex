@@ -1,6 +1,6 @@
 import type mapboxgl from 'mapbox-gl';
 import type { AppConfig, DistrictPlan, Overlay } from '../types';
-import { setHoveredDistrict, setLocationCounty, setLocationPrecinct, setIsPinned, getIsPinned } from '../stores/state.svelte';
+import { setHoveredDistrict, setLocationCounty, setLocationPrecinct } from '../stores/state.svelte';
 
 /**
  * Register hover handlers for all district plans.
@@ -38,49 +38,18 @@ export function registerHoverHandlers(map: mapboxgl.Map, plans: DistrictPlan[]) 
     map.on('mouseleave', popupLayer, () => {
       map.setFilter(hoverLayer, ['==', prop, '']);
       map.getCanvas().style.cursor = '';
-      if (!getIsPinned()) {
-        setHoveredDistrict(null);
-        setLocationCounty(null);
-        setLocationPrecinct(null);
-      }
+      setHoveredDistrict(null);
+      setLocationCounty(null);
+      setLocationPrecinct(null);
     });
   }
 }
 
 /**
- * Register click handlers: clicking a district pins the sidebar; clicking empty space unpins.
+ * No-op: pin functionality removed. Called from MapView for compatibility.
  */
-export function registerClickHandlers(map: mapboxgl.Map, plans: DistrictPlan[]) {
-  // Click on any district popup layer → pin
-  for (const plan of plans) {
-    map.on('click', `${plan.id}_popup`, (e) => {
-      if (!e.features?.length) return;
-      const feature = e.features[0];
-      const districtVal = feature.properties?.[plan.districtProp] ?? feature.properties?.['DISTRICT'] ?? '';
-      map.setFilter(`${plan.id}_hover`, ['==', plan.districtProp, districtVal]);
-      setHoveredDistrict({ properties: feature.properties as any, tooltipTitle: plan.tooltipTitle });
-      const countyFeats = map.queryRenderedFeatures(e.point, { layers: ['county_fill'] });
-      setLocationCounty(countyFeats[0]?.properties?.COUNTY ?? null);
-      const precinctFeats = map.queryRenderedFeatures(e.point, { layers: ['precinct_plean', 'precinct_borders'] });
-      const pProps = precinctFeats[0]?.properties ?? null;
-      setLocationPrecinct(pProps ? { ...pProps } : null);
-      setIsPinned(true);
-    });
-  }
-
-  // Click on empty map space → unpin
-  map.on('click', (e) => {
-    const hits = map.queryRenderedFeatures(e.point, {
-      layers: plans.map((p) => `${p.id}_popup`),
-    });
-    if (!hits.length) {
-      setIsPinned(false);
-      setHoveredDistrict(null);
-      setLocationCounty(null);
-      setLocationPrecinct(null);
-    }
-  });
-}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function registerClickHandlers(_map: mapboxgl.Map, _plans: DistrictPlan[]) {}
 
 /**
  * Show a specific district level, hiding all others.
@@ -152,15 +121,6 @@ export function applyDistrictFill(
     return;
   }
 
-  // Precinct-only overlays are rendered by their own tile layer (already raised to the
-  // top by showMeasure). Coloring the district fill with precinct properties would push
-  // the fill/line/hover stack on top of the precinct layer and bury it.
-  const isPrecinctOnly = overlay.layers?.every((l) => l.startsWith('precinct_'));
-  if (isPrecinctOnly) {
-    setVisibility(map, fillLayer, 'none');
-    return;
-  }
-
   map.setPaintProperty(
     fillLayer,
     'fill-color',
@@ -175,11 +135,20 @@ export function applyDistrictFill(
 
   setVisibility(map, fillLayer, 'visible');
 
-  // Match original behaviour: fill on top → entire state coloured at any zoom.
-  // Precinct/tract overlays sit below and show through when showDistrict is off.
+  // Raise fill → line → hover to the top so the entire state is coloured at any zoom.
   try { map.moveLayer(fillLayer); } catch { /* layer not yet ready */ }
   try { map.moveLayer(levelId); } catch { /* layer not yet ready */ }
   try { map.moveLayer(hoverLayer); } catch { /* layer not yet ready */ }
+
+  // For precinct-based overlays, the district fill provides state-level fallback colour.
+  // Re-raise the precinct tile layer(s) above the district stack so precinct detail
+  // shows through when individual tiles are large enough to render (zoomed in).
+  const isPrecinctOnly = overlay.layers?.every((l) => l.startsWith('precinct_'));
+  if (isPrecinctOnly && overlay.layers) {
+    for (const layerId of overlay.layers) {
+      try { map.moveLayer(layerId); } catch { /* layer not yet ready */ }
+    }
+  }
 }
 
 /**

@@ -59,7 +59,7 @@
     const m = getMapInstance();
     const plan = currentPlan();
     if (!plan || !m) return false;
-    const res = await fetch(`/data/${plan.geojson}`);
+    const res = await fetch(`${import.meta.env.BASE_URL}data/${plan.geojson}`);
     const geojson = await res.json();
     const feature = geojson.features.find(
       (f: any) => parseInt(f.properties[plan.districtProp], 10) === num,

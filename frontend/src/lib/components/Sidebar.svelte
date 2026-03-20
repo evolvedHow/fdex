@@ -4,11 +4,6 @@
     getStateTotals,
     getChamberDemographics,
     getDemographicsTotals,
-    getIsPinned,
-    setIsPinned,
-    setHoveredDistrict,
-    setLocationCounty,
-    setLocationPrecinct,
     getLocationCounty,
     getLocationPrecinct,
   } from '../stores/state.svelte';
@@ -17,16 +12,8 @@
   let totals   = $derived(getStateTotals());
   let demData  = $derived(getChamberDemographics());
   let demTot   = $derived(getDemographicsTotals());
-  let pinned   = $derived(getIsPinned());
   let county   = $derived(getLocationCounty());
   let precinct = $derived(getLocationPrecinct());
-
-  function unpin() {
-    setIsPinned(false);
-    setHoveredDistrict(null);
-    setLocationCounty(null);
-    setLocationPrecinct(null);
-  }
 
   // ── Formatters ───────────────────────────────────────────────────────────
   function fmt(n: number | undefined): string {
@@ -112,6 +99,15 @@
       ['Single Parent',   pct(d.pct_single_parent),
         demTot.single_parent_count > 0 && d.single_parent_count != null ? d.single_parent_count / demTot.single_parent_count : null,
         isMaxF(d.pct_single_parent ?? 0, demTot.maxPctSingleParent)],
+      ['No Vehicle HH',   pct(d.pct_no_vehicle),
+        demTot.no_vehicle_count > 0 && d.no_vehicle_count != null ? d.no_vehicle_count / demTot.no_vehicle_count : null,
+        isMaxF(d.pct_no_vehicle ?? 0, demTot.maxPctNoVehicle)],
+      ['Uninsured',       pct(d.pct_uninsured),
+        demTot.uninsured_count > 0 && d.uninsured_count != null ? d.uninsured_count / demTot.uninsured_count : null,
+        isMaxF(d.pct_uninsured ?? 0, demTot.maxPctUninsured)],
+      ['Unemployment',    pct(d.pct_unemployed),
+        demTot.labor_force_count > 0 && d.unemployed_count != null ? d.unemployed_count / demTot.labor_force_count : null,
+        isMaxF(d.pct_unemployed ?? 0, demTot.maxPctUnemployed)],
     ];
   })());
 </script>
@@ -122,32 +118,16 @@
   {#if hovered}
     <!-- ── Header ──────────────────────────────────────────────────────── -->
     <div class="shrink-0 px-3 py-2.5 border-b border-gray-200 bg-[#F0F1F5]">
-      <div class="flex items-start justify-between gap-2">
-        <div class="min-w-0">
-          <div class="text-[13px] font-semibold leading-snug">
-            {hovered.tooltipTitle ?? ''}
-            {#if districtNum}
-              <span class="text-gray-500 font-normal"> · District {districtNum}</span>
-            {/if}
-          </div>
-          {#if county}
-            <div class="text-[11px] text-gray-500 mt-0.5">{county} County</div>
+      <div class="min-w-0">
+        <div class="text-[13px] font-semibold leading-snug">
+          {hovered.tooltipTitle ?? ''}
+          {#if districtNum}
+            <span class="text-gray-500 font-normal"> · District {districtNum}</span>
           {/if}
         </div>
-        <div class="flex items-center gap-1.5 shrink-0">
-          {#if pinned}
-            <span class="text-[10px] bg-[#29315F] text-white px-1.5 py-0.5 rounded font-medium">
-              📌 Pinned
-            </span>
-            <button
-              onclick={unpin}
-              class="text-gray-400 hover:text-gray-700 text-lg leading-none cursor-pointer"
-              title="Unpin"
-            >×</button>
-          {:else}
-            <span class="text-[10px] text-gray-400 italic">Click to pin</span>
-          {/if}
-        </div>
+        {#if county}
+          <div class="text-[11px] text-gray-500 mt-0.5">{county} County</div>
+        {/if}
       </div>
     </div>
 
@@ -267,16 +247,108 @@
     </div><!-- end scrollable -->
 
   {:else}
-    <!-- ── Empty state ──────────────────────────────────────────────────── -->
-    <div class="flex-1 flex flex-col items-center justify-center text-center text-gray-400 px-4 gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M9 20H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5"/>
-        <path d="M8 10h8M8 14h4"/>
-        <circle cx="17" cy="17" r="4"/>
-        <path d="m21 21-1.5-1.5"/>
-      </svg>
-      <div class="text-[13px] font-medium text-gray-500">No district selected</div>
-      <div class="text-[11px]">Hover over a district to preview details, or click to pin them here.</div>
+    <!-- ── Statewide totals ──────────────────────────────────────────────── -->
+    <div class="shrink-0 px-3 py-2.5 border-b border-gray-200 bg-[#F0F1F5]">
+      <div class="text-[13px] font-semibold leading-snug">Georgia Statewide</div>
+      <div class="text-[11px] text-gray-500 mt-0.5">Hover a district for details</div>
     </div>
+
+    {#if totals}
+      <div class="flex-1 overflow-y-auto px-3 py-2 text-[12px]">
+
+        <!-- VAP & Population -->
+        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
+          Statewide Metrics
+        </div>
+        <table class="w-full border-collapse mb-3">
+          <tbody>
+            <tr class="border-b border-gray-100">
+              <td class="text-gray-500 py-[3px] pr-2">Population</td>
+              <td class="text-right py-[3px] font-medium tabular-nums">{fmt(totals.pop)}</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="text-gray-500 py-[3px] pr-2">VAP 2020</td>
+              <td class="text-right py-[3px] font-medium tabular-nums">{fmt(totals.tvap)}</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="text-gray-500 py-[3px] pr-2">Black VAP</td>
+              <td class="text-right py-[3px] font-medium tabular-nums">
+                {totals.tvap > 0 ? pct(totals.bvap / totals.tvap) : '—'}
+                <span class="text-gray-400 font-normal text-[11px] ml-1">{fmt(totals.bvap)}</span>
+              </td>
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="text-gray-500 py-[3px] pr-2">Asian VAP</td>
+              <td class="text-right py-[3px] font-medium tabular-nums">
+                {totals.tvap > 0 ? pct(totals.avap / totals.tvap) : '—'}
+                <span class="text-gray-400 font-normal text-[11px] ml-1">{fmt(totals.avap)}</span>
+              </td>
+            </tr>
+            <tr class="border-b border-gray-100">
+              <td class="text-gray-500 py-[3px] pr-2">Hispanic VAP</td>
+              <td class="text-right py-[3px] font-medium tabular-nums">
+                {totals.tvap > 0 ? pct(totals.hvap / totals.tvap) : '—'}
+                <span class="text-gray-400 font-normal text-[11px] ml-1">{fmt(totals.hvap)}</span>
+              </td>
+            </tr>
+            <tr class="border-b border-gray-100 last:border-0">
+              <td class="text-gray-500 py-[3px] pr-2">Minority VAP</td>
+              <td class="text-right py-[3px] font-medium tabular-nums">
+                {totals.tvap > 0 ? pct(totals.bipocvap / totals.tvap) : '—'}
+                <span class="text-gray-400 font-normal text-[11px] ml-1">{fmt(totals.bipocvap)}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Census Demographics totals -->
+        {#if demTot}
+          <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
+            Census Demographics (ACS 5-yr)
+          </div>
+          <table class="w-full border-collapse mb-3">
+            <tbody>
+              <tr class="border-b border-gray-100">
+                <td class="text-gray-500 py-[3px] pr-2">Below Poverty</td>
+                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.poverty_count)}</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="text-gray-500 py-[3px] pr-2">Bachelor's+</td>
+                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.bachelors_plus_count)}</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="text-gray-500 py-[3px] pr-2">Married HH</td>
+                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.married_hh_count)}</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="text-gray-500 py-[3px] pr-2">Single Parent</td>
+                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.single_parent_count)}</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="text-gray-500 py-[3px] pr-2">No Vehicle HH</td>
+                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.no_vehicle_count)}</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="text-gray-500 py-[3px] pr-2">Uninsured</td>
+                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.uninsured_count)}</td>
+              </tr>
+              <tr class="border-b border-gray-100 last:border-0">
+                <td class="text-gray-500 py-[3px] pr-2">Unemployed</td>
+                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.unemployed_count)}</td>
+              </tr>
+            </tbody>
+          </table>
+        {/if}
+
+        <div class="text-gray-400 text-[10px] border-t border-gray-100 pt-2 italic">
+          * VAP estimates based on precincts · Census ACS 5-yr
+        </div>
+
+      </div>
+    {:else}
+      <div class="flex-1 flex items-center justify-center text-[12px] text-gray-400 italic px-4 text-center">
+        Loading statewide data…
+      </div>
+    {/if}
   {/if}
 </div>

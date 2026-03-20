@@ -4,8 +4,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node scripts/bake-config.mjs && vite",
+    "prebuild": "node scripts/bake-config.mjs",
     "build": "vite build",
+    "postbuild": "node scripts/copy-assets.mjs",
     "preview": "vite preview"
   },
   "devDependencies": {

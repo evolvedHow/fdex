@@ -49,6 +49,18 @@ VARIABLES: dict[str, str] = {
     "B11001_003E": "married_couple_hh",
     "B11001_006E": "male_single_parent",
     "B11001_009E": "female_single_parent",
+    # Vehicle ownership (B08201: Household Size by Vehicles Available)
+    "B08201_001E": "vehicle_hh_universe",
+    "B08201_002E": "no_vehicle_hh",
+    # Health insurance (B27010: Types of Health Insurance Coverage by Age)
+    "B27010_001E": "insurance_universe",
+    "B27010_017E": "uninsured_under19",  # under 19: no coverage
+    "B27010_033E": "uninsured_19_34",    # 19-34: no coverage
+    "B27010_050E": "uninsured_35_64",    # 35-64: no coverage
+    "B27010_066E": "uninsured_65plus",   # 65+: no coverage
+    # Unemployment (B23025: Employment Status for Population 16+)
+    "B23025_003E": "labor_force",
+    "B23025_005E": "unemployed",
 }
 
 # Census geographic levels and the key column they return
@@ -115,6 +127,15 @@ def fetch_acs(chamber: str, year: str, api_key: str | None) -> dict:
         married_hh   = safe_int(record.get("B11001_003E"))
         male_sp      = safe_int(record.get("B11001_006E"))
         female_sp    = safe_int(record.get("B11001_009E"))
+        vehicle_hh_u = safe_int(record.get("B08201_001E"))
+        no_vehicle   = safe_int(record.get("B08201_002E"))
+        ins_universe = safe_int(record.get("B27010_001E"))
+        uninsured    = (safe_int(record.get("B27010_017E")) +
+                        safe_int(record.get("B27010_033E")) +
+                        safe_int(record.get("B27010_050E")) +
+                        safe_int(record.get("B27010_066E")))
+        labor_force  = safe_int(record.get("B23025_003E"))
+        unemployed   = safe_int(record.get("B23025_005E"))
 
         bach_plus_count = edu_bach + edu_mast + edu_prof + edu_doc
         single_parent   = male_sp + female_sp
@@ -131,6 +152,13 @@ def fetch_acs(chamber: str, year: str, api_key: str | None) -> dict:
             "married_hh_count":    married_hh,
             "pct_single_parent":   round(single_parent / total_hh, 4) if total_hh > 0 else None,
             "single_parent_count": single_parent,
+            "pct_no_vehicle":      round(no_vehicle   / vehicle_hh_u, 4) if vehicle_hh_u > 0 else None,
+            "no_vehicle_count":    no_vehicle,
+            "pct_uninsured":       round(uninsured    / ins_universe, 4) if ins_universe > 0 else None,
+            "uninsured_count":     uninsured,
+            "pct_unemployed":      round(unemployed   / labor_force,  4) if labor_force  > 0 else None,
+            "unemployed_count":    unemployed,
+            "labor_force_count":   labor_force,
         }
 
     return result

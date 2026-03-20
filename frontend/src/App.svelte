@@ -12,7 +12,7 @@
 
   onMount(async () => {
     try {
-      const res = await fetch('/api/config');
+      const res = await fetch(`${import.meta.env.BASE_URL}config.json`);
       if (!res.ok) throw new Error(`Config fetch failed: ${res.status}`);
       const data: AppConfig = await res.json();
       setAppConfig(data);

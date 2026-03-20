@@ -103,6 +103,13 @@ export interface DistrictDemographics {
   married_hh_count?: number;
   pct_single_parent?: number | null;
   single_parent_count?: number;
+  pct_no_vehicle?: number | null;
+  no_vehicle_count?: number;
+  pct_uninsured?: number | null;
+  uninsured_count?: number;
+  pct_unemployed?: number | null;
+  unemployed_count?: number;
+  labor_force_count?: number;
 }
 
 /** Keyed by district number as string ("1", "2", …). */
@@ -114,11 +121,18 @@ export interface DemographicsTotals {
   bachelors_plus_count: number;
   married_hh_count: number;
   single_parent_count: number;
+  no_vehicle_count: number;
+  uninsured_count: number;
+  unemployed_count: number;
+  labor_force_count: number;
   maxMedianIncome: number;
   maxPctPoverty: number;
   maxPctBachelors: number;
   maxPctMarried: number;
   maxPctSingleParent: number;
+  maxPctNoVehicle: number;
+  maxPctUninsured: number;
+  maxPctUnemployed: number;
 }
 
 export interface MapState {

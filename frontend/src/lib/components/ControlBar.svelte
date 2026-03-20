@@ -15,7 +15,6 @@
   let { config }: Props = $props();
 
   let state  = $derived(getMapState());
-  let pinned = $state(true);
 
   // ── Grouped selectors ──────────────────────────────────────────────────
   let planGroups = $derived.by(() => {
@@ -55,10 +54,9 @@
   ] as const;
 </script>
 
-{#if pinned}
-  <!-- ── Expanded toolbar (single scrolling row) ───────────────────────── -->
-  <div class="shrink-0 bg-[#F0F1F5] border-b border-gray-300">
-    <div class="flex items-center gap-2 px-3 h-[52px] overflow-x-auto">
+<!-- ── Toolbar (single scrolling row) ────────────────────────────────── -->
+<div class="shrink-0 bg-[#F0F1F5] border-b border-gray-300">
+  <div class="flex items-center gap-2 px-3 h-[52px] overflow-x-auto">
 
       <!-- Boundary selector -->
       <select
@@ -126,42 +124,5 @@
         </button>
       {/each}
 
-      <!-- Spacer pushes pin to the far right -->
-      <div class="flex-1 min-w-[8px]"></div>
-
-      <!-- Pin / collapse button -->
-      <button
-        class="shrink-0 flex items-center gap-1 px-2.5 py-1 text-xs text-gray-500
-               border border-gray-300 rounded bg-white hover:bg-gray-100 cursor-pointer"
-        onclick={() => pinned = false}
-        title="Collapse toolbar"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <!-- pin icon -->
-          <line x1="12" y1="17" x2="12" y2="22"/>
-          <path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/>
-        </svg>
-        Unpin
-      </button>
     </div>
   </div>
-
-{:else}
-  <!-- ── Collapsed strip ────────────────────────────────────────────────── -->
-  <div class="shrink-0 bg-[#29315F] border-b border-[#1a2040]">
-    <button
-      class="w-full h-[26px] flex items-center justify-center gap-1.5
-             text-xs text-white/80 hover:text-white cursor-pointer"
-      onclick={() => pinned = true}
-      title="Expand toolbar"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24"
-           fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-        <line x1="12" y1="17" x2="12" y2="22"/>
-        <path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/>
-      </svg>
-      Show Controls
-    </button>
-  </div>
-{/if}

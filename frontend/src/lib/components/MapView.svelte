@@ -41,7 +41,7 @@
     const plan = config.districtPlans.find((p) => p.id === levelId);
     if (!plan) return;
     try {
-      const res = await fetch(`/data/${plan.geojson}`);
+      const res = await fetch(`${import.meta.env.BASE_URL}data/${plan.geojson}`);
       const geojson = await res.json();
       const totals: StateTotals = {
         pop: 0, tvap: 0, bvap: 0, avap: 0, hvap: 0, bipocvap: 0,
@@ -74,7 +74,7 @@
     const plan = config.districtPlans.find((p) => p.id === levelId);
     if (!plan) return;
     try {
-      const res = await fetch(`/api/demographics/${plan.chamber}`);
+      const res = await fetch(`${import.meta.env.BASE_URL}data/demographics/${plan.chamber}.json`);
       if (!res.ok) { setDemographics(null); return; }
       setDemographics(await res.json());
     } catch { setDemographics(null); }
