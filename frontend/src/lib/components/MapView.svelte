@@ -67,7 +67,7 @@
         if (bipocvap       > totals.maxBipocvap) totals.maxBipocvap = bipocvap;
       }
       setStateTotals(totals);
-    } catch { /* non-fatal */ }
+    } catch (e) { console.error('[loadStateTotals failed]', e); }
   }
 
   async function loadDemographics(levelId: string) {
@@ -98,35 +98,51 @@
     // Navigation controls (no compass)
     m.addControl(new mapboxgl.NavigationControl({ showCompass: false }));
 
+    m.on('error', (e) => {
+      console.error('[map error]', e.error);
+    });
+
     m.on('load', () => {
-      // Add all sources
-      const sources = generateSources(config);
-      for (const [id, spec] of Object.entries(sources)) {
-        m.addSource(id, spec);
+      try {
+        // Add all sources
+        const sources = generateSources(config);
+        for (const [id, spec] of Object.entries(sources)) {
+          try {
+            m.addSource(id, spec);
+          } catch (e) {
+            console.error(`[addSource failed] ${id}:`, e);
+          }
+        }
+
+        // Add all layers
+        const layers = generateLayers(config);
+        for (const layer of layers) {
+          try {
+            m.addLayer(layer);
+          } catch (e) {
+            console.error(`[addLayer failed] ${(layer as any).id}:`, e);
+          }
+        }
+
+        // Register hover handlers
+        registerHoverHandlers(m, config.districtPlans);
+        registerClickHandlers(m, config.districtPlans);
+
+        map = m;
+        mapReady = true;
+        setMapInstance(m);
+
+        // Apply initial state
+        showLevel(m, state.level, config.districtPlans);
+        showMeasure(m, state.measure, config.overlays);
+        applyDistrictFill(m, state.level, state.measure, config.overlays);
+
+        // Load state totals + census demographics for tooltip
+        loadStateTotals(state.level);
+        loadDemographics(state.level);
+      } catch (e) {
+        console.error('[map load callback failed]', e);
       }
-
-      // Add all layers
-      const layers = generateLayers(config);
-      for (const layer of layers) {
-        m.addLayer(layer);
-      }
-
-      // Register hover handlers
-      registerHoverHandlers(m, config.districtPlans);
-      registerClickHandlers(m, config.districtPlans);
-
-      map = m;
-      mapReady = true;
-      setMapInstance(m);
-
-      // Apply initial state
-      showLevel(m, state.level, config.districtPlans);
-      showMeasure(m, state.measure, config.overlays);
-      applyDistrictFill(m, state.level, state.measure, config.overlays);
-
-      // Load state totals + census demographics for tooltip
-      loadStateTotals(state.level);
-      loadDemographics(state.level);
     });
   });
 
