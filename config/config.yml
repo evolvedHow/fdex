@@ -2,6 +2,10 @@ app:
   name: "Fair Districts GA - Georgia Explorer"
   version: "2.0.0"
 
+analytics:
+  ga4_measurement_id: ""   # Override with GA4_MEASUREMENT_ID env var
+  clarity_project_id: ""   # Override with CLARITY_PROJECT_ID env var
+
 server:
   host: ${HOST:-0.0.0.0}
   port: ${PORT:-8000}
