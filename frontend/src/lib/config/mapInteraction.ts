@@ -162,13 +162,11 @@ function stopsToStep(property: string, stops: [number, string][], defaultColor: 
 /**
  * Apply district-level fill coloring based on the current measure.
  *
- * For precinct-only overlays (partisan lean): the precinct tile layer
- * provides all the colour. We hide the district fill and re-raise the
- * tile layer plus the district line/hover layers above it so boundaries
- * and the hover outline remain visible.
- *
- * For census overlays (bvap, hvap, …): colour the district fill polygon
- * and raise fill → line → hover to the top.
+ * All overlays (bvap, hvap, partisan lean, …) colour the district fill
+ * polygon using the overlay's property from the GeoJSON features, then
+ * raise fill → line → hover to the top so the entire state is shaded at
+ * any zoom level. The tile-based overlay layers (tract/block/precinct) sit
+ * below the district fill and are only visible when showDistrict is off.
  */
 export function applyDistrictFill(
   map: mapboxgl.Map,
@@ -184,19 +182,6 @@ export function applyDistrictFill(
   if (!overlay?.colorStops || !overlay.property) {
     // For 'streets' or unknown, just hide the fill
     setVisibility(map, fillLayer, 'none');
-    return;
-  }
-
-  // Precinct-only overlays: rely entirely on the tile layer for colour.
-  // Order: precinct tiles → district lines → hover outline (top).
-  const isPrecinctOnly = overlay.layers?.every((l) => l.startsWith('precinct_'));
-  if (isPrecinctOnly) {
-    setVisibility(map, fillLayer, 'none');
-    if (overlay.layers) {
-      for (const l of overlay.layers) { try { map.moveLayer(l); } catch { /* ok */ } }
-    }
-    try { map.moveLayer(levelId); } catch { /* ok */ }
-    try { map.moveLayer(hoverLayer); } catch { /* ok */ }
     return;
   }
 
