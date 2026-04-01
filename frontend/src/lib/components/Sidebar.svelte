@@ -15,6 +15,98 @@
   let county   = $derived(getLocationCounty());
   let precinct = $derived(getLocationPrecinct());
 
+  // ── Info overlay state ────────────────────────────────────────────────────
+  let activeInfoKey = $state<string | null>(null);
+
+  const INFO: Record<string, { title: string; desc: string }> = {
+    population: {
+      title: 'Total Population',
+      desc: 'The total number of residents in the district based on the 2020 Census. This includes all residents regardless of citizenship, age, or voting eligibility. Equal population across districts is the primary requirement of the "one person, one vote" standard in redistricting.',
+    },
+    vap: {
+      title: 'Voting Age Population (VAP)',
+      desc: 'The number of residents aged 18 or older based on the 2020 Census. VAP represents the pool of potentially eligible voters before accounting for citizenship or other eligibility factors. Estimates here are derived from precinct-level Census data.',
+    },
+    white_vap: {
+      title: 'White Voting Age Population',
+      desc: 'The estimated share and count of non-Hispanic white residents aged 18+, derived from 2020 Census precinct data. Racial composition of a district is one factor courts examine when evaluating compliance with the Voting Rights Act and assessing community representation.',
+    },
+    black_vap: {
+      title: 'Black Voting Age Population',
+      desc: 'The estimated share and count of non-Hispanic Black or African American residents aged 18+. The Voting Rights Act requires that district plans not dilute the voting strength of racial and language minority groups. Black VAP is a key metric in that analysis.',
+    },
+    asian_vap: {
+      title: 'Asian Voting Age Population',
+      desc: 'The estimated share and count of non-Hispanic Asian residents aged 18+. The Voting Rights Act protects Asian American voters as a language minority group in certain jurisdictions from having their voting strength diluted.',
+    },
+    hispanic_vap: {
+      title: 'Hispanic Voting Age Population',
+      desc: 'The estimated share and count of Hispanic or Latino residents aged 18+, of any race. The Voting Rights Act protects Hispanic voters\' equal opportunity to participate in the political process and elect representatives of their choice.',
+    },
+    minority_vap: {
+      title: 'Minority (BIPOC) Voting Age Population',
+      desc: 'The combined share of Black, Indigenous, and People of Color (BIPOC) residents aged 18+. This broad measure captures the total non-white voting-age population in the district. Note that individuals may identify with multiple racial/ethnic groups.',
+    },
+    partisan: {
+      title: 'Average Partisan Lean (2018–2022)',
+      desc: 'The district\'s average Democratic share of the two-party vote across multiple elections from 2018 to 2022. Values above 50% indicate the district leaned toward Democratic candidates on average; values below 50% toward Republican candidates. This is a historical summary measure based on actual election results — it does not predict future outcomes.',
+    },
+    election_results: {
+      title: 'Per-Election Results & Wasted Votes',
+      desc: 'Each row shows the Democratic share of the two-party vote for that election cycle, color-coded by which party carried the district. "Wasted D" and "Wasted R" show the fraction of each party\'s votes that were mathematically inefficient: votes beyond the winning threshold (for the winner) or all votes cast for the losing candidate. These wasted vote fractions are the building blocks of the Efficiency Gap fairness metric.',
+    },
+    efficiency_gap: {
+      title: 'Efficiency Gap',
+      desc: 'A quantitative measure of vote efficiency symmetry across a district plan, introduced by Stephanopoulos & McGhee (2015). It is calculated as: (total wasted votes for Party D − total wasted votes for Party R) ÷ total votes cast. A value near zero indicates both parties waste similar fractions of their votes. A large positive or negative value suggests the plan systematically produces more wasted votes for one party than the other — through packing (large win margins) or cracking (spreading supporters across losing districts). The sign tells you which direction the disparity runs. Scholars generally consider values above ±7–8% to be significant.',
+    },
+    mean_median: {
+      title: 'Mean–Median Difference',
+      desc: 'The difference between the mean (average) and median district-level partisan vote share across all districts in the plan. When supporters of one party are heavily concentrated in a few districts, the mean and median diverge. A value near zero suggests voter distributions are more symmetric across districts. A larger gap in either direction indicates one party\'s voters are more clustered — winning some districts by large margins while losing others by smaller ones. The sign indicates which direction the skew runs.',
+    },
+    median_income: {
+      title: 'Median Household Income',
+      desc: 'The midpoint of household income in the district, from the Census Bureau\'s American Community Survey (ACS) 5-year estimates. Half of households earn above this figure, half below. A useful economic indicator, though it does not capture the full income distribution or account for regional cost-of-living differences.',
+    },
+    poverty: {
+      title: 'Below Poverty Rate',
+      desc: 'The percentage of residents with income below the federal poverty threshold, from ACS 5-year estimates. The federal poverty line is a national standard and does not adjust for regional cost-of-living differences.',
+    },
+    bachelors: {
+      title: "Bachelor's Degree or Higher",
+      desc: "The share of adults aged 25+ who hold at least a bachelor's degree, from ACS 5-year estimates. Educational attainment is often correlated with labor market outcomes and civic participation rates.",
+    },
+    no_vehicle: {
+      title: 'No-Vehicle Households',
+      desc: 'The share of households with no vehicle available, from ACS 5-year estimates. This metric can reflect access constraints — including access to polling locations — and broader transportation infrastructure gaps.',
+    },
+    uninsured: {
+      title: 'Uninsured Rate',
+      desc: 'The share of the civilian noninstitutionalized population without health insurance coverage, from ACS 5-year estimates.',
+    },
+    unemployment: {
+      title: 'Unemployment Rate',
+      desc: 'The share of the civilian labor force that is unemployed and actively seeking work, from ACS 5-year estimates.',
+    },
+  };
+
+  // Maps table row labels to INFO keys for the ⓘ button lookup
+  const LABEL_TO_INFO: Record<string, string> = {
+    'Population':    'population',
+    'VAP 2020':      'vap',
+    'White VAP':     'white_vap',
+    'Black VAP':     'black_vap',
+    'Asian VAP':     'asian_vap',
+    'Hispanic VAP':  'hispanic_vap',
+    'Minority VAP':  'minority_vap',
+    'Dem 2018–22':   'partisan',
+    'Median Income': 'median_income',
+    'Below Poverty': 'poverty',
+    "Bachelor's+":   'bachelors',
+    'No Vehicle HH': 'no_vehicle',
+    'Uninsured':     'uninsured',
+    'Unemployment':  'unemployment',
+  };
+
   // ── Formatters ───────────────────────────────────────────────────────────
   function fmt(n: number | undefined): string {
     if (n == null) return '—';
@@ -88,26 +180,6 @@
     ];
   })());
 
-  // ── Per-district election results + wasted votes ──────────────────────────
-  type ElectionRow = { label: string; dem: number; wastedDPct: number; wastedRPct: number };
-
-  let electionRows = $derived<ElectionRow[]>((() => {
-    if (!hovered) return [];
-    const p = hovered.properties;
-    const rows: ElectionRow[] = [];
-    for (const { key, label } of ELECTION_DEFS) {
-      const dem = p[key] as number | undefined;
-      if (dem == null) continue;
-      rows.push({
-        label,
-        dem,
-        wastedDPct: dem > 0.5 ? dem - 0.5 : dem,
-        wastedRPct: dem > 0.5 ? 1 - dem   : 0.5 - dem,
-      });
-    }
-    return rows;
-  })());
-
   // ── Census demographics rows ──────────────────────────────────────────────
   let demoRows = $derived<Row[]>((() => {
     if (!hovered || !demData || !demTot) return [];
@@ -142,29 +214,80 @@
         isMaxF(d.pct_unemployed ?? 0, demTot.maxPctUnemployed)],
     ];
   })());
+
+  // ── Per-district election results + wasted votes ──────────────────────────
+  type ElectionRow = { label: string; dem: number; wastedDPct: number; wastedRPct: number };
+
+  let electionRows = $derived<ElectionRow[]>((() => {
+    if (!hovered) return [];
+    const p = hovered.properties;
+    const rows: ElectionRow[] = [];
+    for (const { key, label } of ELECTION_DEFS) {
+      const dem = p[key] as number | undefined;
+      if (dem == null) continue;
+      rows.push({
+        label,
+        dem,
+        wastedDPct: dem > 0.5 ? dem - 0.5 : dem,
+        wastedRPct: dem > 0.5 ? 1 - dem   : 0.5 - dem,
+      });
+    }
+    return rows;
+  })());
 </script>
 
 <!-- Fixed-width sidebar, full height, always visible -->
-<div class="w-[300px] shrink-0 flex flex-col bg-white border-l border-gray-200 text-[#29315F] overflow-hidden">
+<div class="w-[300px] shrink-0 flex flex-col bg-white border-l border-gray-200 text-[#29315F] overflow-hidden relative">
 
-  {#if hovered}
-    <!-- ── Header ──────────────────────────────────────────────────────── -->
-    <div class="shrink-0 px-3 py-2.5 border-b border-gray-200 bg-[#F0F1F5]">
-      <div class="min-w-0">
-        <div class="text-[13px] font-semibold leading-snug">
-          {hovered.tooltipTitle ?? ''}
-          {#if districtNum}
-            <span class="text-gray-500 font-normal"> · District {districtNum}</span>
-          {/if}
+  <!-- ── Info overlay ────────────────────────────────────────────────────── -->
+  {#if activeInfoKey && INFO[activeInfoKey]}
+    <div
+      class="absolute inset-0 bg-black/30 z-20 flex items-end"
+      role="button"
+      tabindex="0"
+      onclick={() => activeInfoKey = null}
+      onkeydown={(e) => e.key === 'Escape' && (activeInfoKey = null)}
+    >
+      <div
+        class="w-full bg-white border-t-2 border-[#29315F] shadow-xl p-4 max-h-[70%] overflow-y-auto"
+        role="none"
+        onclick={(e) => e.stopPropagation()}
+      >
+        <div class="flex items-start justify-between mb-2">
+          <div class="text-[13px] font-semibold text-[#29315F] leading-snug pr-2">
+            {INFO[activeInfoKey].title}
+          </div>
+          <button
+            type="button"
+            class="text-gray-400 hover:text-gray-700 text-[16px] leading-none shrink-0 mt-0.5"
+            onclick={() => activeInfoKey = null}
+            aria-label="Close"
+          >✕</button>
         </div>
-        {#if county}
-          <div class="text-[11px] text-gray-500 mt-0.5">{county} County</div>
-        {/if}
+        <p class="text-[11px] text-gray-600 leading-relaxed">
+          {INFO[activeInfoKey].desc}
+        </p>
       </div>
     </div>
+  {/if}
 
-    <!-- ── Scrollable content ───────────────────────────────────────────── -->
-    <div class="flex-1 overflow-y-auto px-3 py-2 text-[12px]">
+  <!-- ── Full-height scrollable content ─────────────────────────────────── -->
+  <div class="flex-1 overflow-y-auto">
+
+  {#if hovered}
+
+    <!-- Compact district title strip -->
+    <div class="px-3 pt-2 pb-1 border-b border-gray-100 bg-[#F0F1F5]">
+      <span class="text-[12px] font-semibold">{hovered.tooltipTitle ?? ''}</span>
+      {#if districtNum}
+        <span class="text-[11px] text-gray-500"> · District {districtNum}</span>
+      {/if}
+      {#if county}
+        <span class="text-[11px] text-gray-400"> · {county} Co.</span>
+      {/if}
+    </div>
+
+    <div class="px-3 py-2 text-[12px]">
 
       <!-- District Metrics -->
       <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
@@ -174,7 +297,17 @@
         <tbody>
           {#each planRows as [label, value, share, largest]}
             <tr class="border-b border-gray-100 last:border-0">
-              <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap align-top">{label}</td>
+              <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap align-top">
+                {label}
+                {#if LABEL_TO_INFO[label]}
+                  <button
+                    type="button"
+                    class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer"
+                    onclick={() => activeInfoKey = LABEL_TO_INFO[label]}
+                    title="What is this?"
+                  >ⓘ</button>
+                {/if}
+              </td>
               <td class="text-right py-[3px] align-top">
                 <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap">
                   {value}
@@ -198,8 +331,14 @@
 
       <!-- Election Results & Efficiency Gap -->
       {#if electionRows.length > 0}
-        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
+        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
           Election Results
+          <button
+            type="button"
+            class="text-gray-300 hover:text-blue-400 text-[10px] leading-none cursor-pointer font-normal normal-case"
+            onclick={() => activeInfoKey = 'election_results'}
+            title="What is this?"
+          >ⓘ</button>
         </div>
         <table class="w-full border-collapse mb-3">
           <thead>
@@ -241,7 +380,17 @@
             <tbody>
               {#each demoRows as [label, value, share, largest]}
                 <tr class="border-b border-gray-100 last:border-0">
-                  <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap align-top">{label}</td>
+                  <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap align-top">
+                    {label}
+                    {#if LABEL_TO_INFO[label]}
+                      <button
+                        type="button"
+                        class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer"
+                        onclick={() => activeInfoKey = LABEL_TO_INFO[label]}
+                        title="What is this?"
+                      >ⓘ</button>
+                    {/if}
+                  </td>
                   <td class="text-right py-[3px] align-top">
                     <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap">
                       {value}
@@ -306,20 +455,26 @@
           <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[4px] py-[1px] rounded leading-tight shrink-0">▲ max</span>
           <span>= largest district for this metric</span>
         </div>
+        <div class="flex items-center gap-1.5">
+          <span class="text-gray-400 text-[10px]">ⓘ</span>
+          <span>= click for metric description</span>
+        </div>
         <div class="italic">* VAP estimates based on precincts · Census ACS 5-yr</div>
       </div>
 
-    </div><!-- end scrollable -->
+    </div><!-- end district content -->
 
   {:else}
     <!-- ── Statewide totals ──────────────────────────────────────────────── -->
-    <div class="shrink-0 px-3 py-2.5 border-b border-gray-200 bg-[#F0F1F5]">
-      <div class="text-[13px] font-semibold leading-snug">Georgia Statewide</div>
-      <div class="text-[11px] text-gray-500 mt-0.5">Hover a district for details</div>
+
+    <!-- Compact statewide title strip -->
+    <div class="px-3 pt-2 pb-1 border-b border-gray-100 bg-[#F0F1F5]">
+      <span class="text-[12px] font-semibold">Georgia Statewide</span>
+      <span class="text-[11px] text-gray-500"> · Hover a district for details</span>
     </div>
 
     {#if totals}
-      <div class="flex-1 overflow-y-auto px-3 py-2 text-[12px]">
+      <div class="px-3 py-2 text-[12px]">
 
         <!-- VAP & Population -->
         <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
@@ -328,16 +483,25 @@
         <table class="w-full border-collapse mb-3">
           <tbody>
             <tr class="border-b border-gray-100">
-              <td class="text-gray-500 py-[3px] pr-2">Population</td>
+              <td class="text-gray-500 py-[3px] pr-2">
+                Population
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'population'} title="What is this?">ⓘ</button>
+              </td>
               <td class="text-right py-[3px] font-medium tabular-nums">{fmt(totals.pop)}</td>
             </tr>
             <tr class="border-b border-gray-100">
-              <td class="text-gray-500 py-[3px] pr-2">VAP 2020</td>
+              <td class="text-gray-500 py-[3px] pr-2">
+                VAP 2020
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'vap'} title="What is this?">ⓘ</button>
+              </td>
               <td class="text-right py-[3px] font-medium tabular-nums">{fmt(totals.tvap)}</td>
             </tr>
             {#if totals.wvap > 0}
             <tr class="border-b border-gray-100">
-              <td class="text-gray-500 py-[3px] pr-2">White VAP</td>
+              <td class="text-gray-500 py-[3px] pr-2">
+                White VAP
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'white_vap'} title="What is this?">ⓘ</button>
+              </td>
               <td class="text-right py-[3px] font-medium tabular-nums">
                 {totals.tvap > 0 ? pct(totals.wvap / totals.tvap) : '—'}
                 <span class="text-gray-400 font-normal text-[11px] ml-1">{fmt(totals.wvap)}</span>
@@ -345,28 +509,40 @@
             </tr>
             {/if}
             <tr class="border-b border-gray-100">
-              <td class="text-gray-500 py-[3px] pr-2">Black VAP</td>
+              <td class="text-gray-500 py-[3px] pr-2">
+                Black VAP
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'black_vap'} title="What is this?">ⓘ</button>
+              </td>
               <td class="text-right py-[3px] font-medium tabular-nums">
                 {totals.tvap > 0 ? pct(totals.bvap / totals.tvap) : '—'}
                 <span class="text-gray-400 font-normal text-[11px] ml-1">{fmt(totals.bvap)}</span>
               </td>
             </tr>
             <tr class="border-b border-gray-100">
-              <td class="text-gray-500 py-[3px] pr-2">Asian VAP</td>
+              <td class="text-gray-500 py-[3px] pr-2">
+                Asian VAP
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'asian_vap'} title="What is this?">ⓘ</button>
+              </td>
               <td class="text-right py-[3px] font-medium tabular-nums">
                 {totals.tvap > 0 ? pct(totals.avap / totals.tvap) : '—'}
                 <span class="text-gray-400 font-normal text-[11px] ml-1">{fmt(totals.avap)}</span>
               </td>
             </tr>
             <tr class="border-b border-gray-100">
-              <td class="text-gray-500 py-[3px] pr-2">Hispanic VAP</td>
+              <td class="text-gray-500 py-[3px] pr-2">
+                Hispanic VAP
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'hispanic_vap'} title="What is this?">ⓘ</button>
+              </td>
               <td class="text-right py-[3px] font-medium tabular-nums">
                 {totals.tvap > 0 ? pct(totals.hvap / totals.tvap) : '—'}
                 <span class="text-gray-400 font-normal text-[11px] ml-1">{fmt(totals.hvap)}</span>
               </td>
             </tr>
             <tr class="border-b border-gray-100 last:border-0">
-              <td class="text-gray-500 py-[3px] pr-2">Minority VAP</td>
+              <td class="text-gray-500 py-[3px] pr-2">
+                Minority VAP
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'minority_vap'} title="What is this?">ⓘ</button>
+              </td>
               <td class="text-right py-[3px] font-medium tabular-nums">
                 {totals.tvap > 0 ? pct(totals.bipocvap / totals.tvap) : '—'}
                 <span class="text-gray-400 font-normal text-[11px] ml-1">{fmt(totals.bipocvap)}</span>
@@ -421,7 +597,10 @@
           </div>
 
           <!-- Efficiency Gap per election -->
-          <div class="text-[10px] text-gray-500 mb-0.5 font-medium">Efficiency Gap</div>
+          <div class="text-[10px] text-gray-500 mb-0.5 font-medium flex items-center gap-1">
+            Efficiency Gap
+            <button type="button" class="text-gray-300 hover:text-blue-400 text-[10px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'efficiency_gap'} title="What is this?">ⓘ</button>
+          </div>
           <table class="w-full border-collapse mb-1">
             <tbody>
               {#each totals.elections.filter((e) => e.hasData) as el}
@@ -431,19 +610,22 @@
                     {el.eg > 0 ? '+' : ''}{(el.eg * 100).toFixed(1)}%
                   </td>
                   <td class="text-right py-[3px] text-gray-400 text-[10px] pl-1 whitespace-nowrap">
-                    {el.eg > 0 ? 'D disadvantaged' : 'R disadvantaged'}
+                    {el.eg > 0 ? 'D wasted > R' : 'R wasted > D'}
                   </td>
                 </tr>
               {/each}
             </tbody>
           </table>
           <div class="text-gray-400 text-[10px] mb-2 italic">
-            EG = (wasted D − wasted R) / total votes. Positive = D voters packed.
+            EG = (wasted D − wasted R) ÷ total votes cast.
           </div>
 
           <!-- Mean-Median Difference -->
           {#if totals.meanPartisan > 0}
-            <div class="text-[10px] text-gray-500 mb-0.5 font-medium">Mean–Median Difference</div>
+            <div class="text-[10px] text-gray-500 mb-0.5 font-medium flex items-center gap-1">
+              Mean–Median Difference
+              <button type="button" class="text-gray-300 hover:text-blue-400 text-[10px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'mean_median'} title="What is this?">ⓘ</button>
+            </div>
             <table class="w-full border-collapse mb-1">
               <tbody>
                 <tr class="border-b border-gray-100">
@@ -463,20 +645,26 @@
               </tbody>
             </table>
             <div class="text-gray-400 text-[10px] mb-3 italic">
-              Mean − median of district partisan lean. Positive = D voters packed into fewer districts.
+              Mean − median partisan lean across all districts.
             </div>
           {/if}
         {/if}
 
-        <div class="text-gray-400 text-[10px] border-t border-gray-100 pt-2 italic">
-          * VAP estimates based on precincts · Census ACS 5-yr
+        <div class="text-gray-400 text-[10px] border-t border-gray-100 pt-2 flex flex-col gap-1">
+          <div class="flex items-center gap-1.5">
+            <span class="text-gray-400 text-[10px]">ⓘ</span>
+            <span>= click for metric description</span>
+          </div>
+          <div class="italic">* VAP estimates based on precincts · Census ACS 5-yr</div>
         </div>
 
       </div>
     {:else}
-      <div class="flex-1 flex items-center justify-center text-[12px] text-gray-400 italic px-4 text-center">
+      <div class="flex-1 flex items-center justify-center text-[12px] text-gray-400 italic px-4 text-center py-8">
         Loading statewide data…
       </div>
     {/if}
   {/if}
+
+  </div><!-- end scrollable -->
 </div>
