@@ -1,10 +1,17 @@
 import type mapboxgl from 'mapbox-gl';
-import type { AppConfig, DistrictPlan, Overlay } from '../types';
-import { setHoveredDistrict, setLocationCounty, setLocationPrecinct } from '../stores/state.svelte';
+import type { DistrictPlan, Overlay } from '../types';
+import {
+  setHoveredDistrict,
+  setLocationCounty,
+  setLocationPrecinct,
+  setIsPinned,
+  getIsPinned,
+} from '../stores/state.svelte';
 
 /**
  * Register hover handlers for all district plans.
- * One mousemove + one mouseleave per plan — replaces 44 handlers from the original.
+ * When a district is pinned (click-selected), hover no longer changes the
+ * highlight or sidebar — but cursor still updates for visual feedback.
  */
 export function registerHoverHandlers(map: mapboxgl.Map, plans: DistrictPlan[]) {
   for (const plan of plans) {
@@ -15,11 +22,14 @@ export function registerHoverHandlers(map: mapboxgl.Map, plans: DistrictPlan[]) 
     map.on('mousemove', popupLayer, (e) => {
       if (!e.features?.length) return;
 
+      map.getCanvas().style.cursor = 'pointer';
+
+      if (getIsPinned()) return; // pinned: keep highlight and sidebar on clicked district
+
       const feature = e.features[0];
       const districtVal = feature.properties?.[prop] ?? feature.properties?.['DISTRICT'] ?? '';
 
       map.setFilter(hoverLayer, ['==', prop, districtVal]);
-      map.getCanvas().style.cursor = 'pointer';
 
       setHoveredDistrict({
         properties: feature.properties as any,
@@ -36,8 +46,9 @@ export function registerHoverHandlers(map: mapboxgl.Map, plans: DistrictPlan[]) 
     });
 
     map.on('mouseleave', popupLayer, () => {
-      map.setFilter(hoverLayer, ['==', prop, '']);
       map.getCanvas().style.cursor = '';
+      if (getIsPinned()) return; // pinned: keep highlight and sidebar data
+      map.setFilter(hoverLayer, ['==', prop, '']);
       setHoveredDistrict(null);
       setLocationCounty(null);
       setLocationPrecinct(null);
@@ -46,10 +57,57 @@ export function registerHoverHandlers(map: mapboxgl.Map, plans: DistrictPlan[]) 
 }
 
 /**
- * No-op: pin functionality removed. Called from MapView for compatibility.
+ * Register click handlers: clicking a district pins the sidebar and highlight;
+ * clicking anywhere outside all districts unpins and shows statewide data.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function registerClickHandlers(_map: mapboxgl.Map, _plans: DistrictPlan[]) {}
+export function registerClickHandlers(map: mapboxgl.Map, plans: DistrictPlan[]) {
+  // Click on a district → pin
+  for (const plan of plans) {
+    map.on('click', `${plan.id}_popup`, (e) => {
+      if (!e.features?.length) return;
+      const feature = e.features[0];
+      const districtVal =
+        feature.properties?.[plan.districtProp] ?? feature.properties?.['DISTRICT'] ?? '';
+
+      // Clear any previously-pinned hover filter before setting the new one
+      for (const p of plans) {
+        try { map.setFilter(`${p.id}_hover`, ['==', p.districtProp, '']); } catch { /* ok */ }
+      }
+      map.setFilter(`${plan.id}_hover`, ['==', plan.districtProp, districtVal]);
+
+      setHoveredDistrict({ properties: feature.properties as any, tooltipTitle: plan.tooltipTitle });
+      const countyFeats = map.queryRenderedFeatures(e.point, { layers: ['county_fill'] });
+      setLocationCounty(countyFeats[0]?.properties?.COUNTY ?? null);
+      const precinctFeats = map.queryRenderedFeatures(e.point, { layers: ['precinct_plean', 'precinct_borders'] });
+      const pProps = precinctFeats[0]?.properties ?? null;
+      setLocationPrecinct(pProps ? { ...pProps } : null);
+      setIsPinned(true);
+    });
+  }
+
+  // Click on empty map space → unpin and show statewide data
+  map.on('click', (e) => {
+    const hits = map.queryRenderedFeatures(e.point, {
+      layers: plans.map((p) => `${p.id}_popup`),
+    });
+    if (!hits.length) {
+      clearPin(map, plans);
+    }
+  });
+}
+
+/**
+ * Clear pin: reset all hover filters, unpin state, clear sidebar.
+ */
+export function clearPin(map: mapboxgl.Map, plans: DistrictPlan[]) {
+  for (const plan of plans) {
+    try { map.setFilter(`${plan.id}_hover`, ['==', plan.districtProp, '']); } catch { /* ok */ }
+  }
+  setIsPinned(false);
+  setHoveredDistrict(null);
+  setLocationCounty(null);
+  setLocationPrecinct(null);
+}
 
 /**
  * Show a specific district level, hiding all others.
@@ -103,6 +161,14 @@ function stopsToStep(property: string, stops: [number, string][], defaultColor: 
 
 /**
  * Apply district-level fill coloring based on the current measure.
+ *
+ * For precinct-only overlays (partisan lean): the precinct tile layer
+ * provides all the colour. We hide the district fill and re-raise the
+ * tile layer plus the district line/hover layers above it so boundaries
+ * and the hover outline remain visible.
+ *
+ * For census overlays (bvap, hvap, …): colour the district fill polygon
+ * and raise fill → line → hover to the top.
  */
 export function applyDistrictFill(
   map: mapboxgl.Map,
@@ -118,6 +184,19 @@ export function applyDistrictFill(
   if (!overlay?.colorStops || !overlay.property) {
     // For 'streets' or unknown, just hide the fill
     setVisibility(map, fillLayer, 'none');
+    return;
+  }
+
+  // Precinct-only overlays: rely entirely on the tile layer for colour.
+  // Order: precinct tiles → district lines → hover outline (top).
+  const isPrecinctOnly = overlay.layers?.every((l) => l.startsWith('precinct_'));
+  if (isPrecinctOnly) {
+    setVisibility(map, fillLayer, 'none');
+    if (overlay.layers) {
+      for (const l of overlay.layers) { try { map.moveLayer(l); } catch { /* ok */ } }
+    }
+    try { map.moveLayer(levelId); } catch { /* ok */ }
+    try { map.moveLayer(hoverLayer); } catch { /* ok */ }
     return;
   }
 
@@ -139,16 +218,6 @@ export function applyDistrictFill(
   try { map.moveLayer(fillLayer); } catch { /* layer not yet ready */ }
   try { map.moveLayer(levelId); } catch { /* layer not yet ready */ }
   try { map.moveLayer(hoverLayer); } catch { /* layer not yet ready */ }
-
-  // For precinct-based overlays, the district fill provides state-level fallback colour.
-  // Re-raise the precinct tile layer(s) above the district stack so precinct detail
-  // shows through when individual tiles are large enough to render (zoomed in).
-  const isPrecinctOnly = overlay.layers?.every((l) => l.startsWith('precinct_'));
-  if (isPrecinctOnly && overlay.layers) {
-    for (const layerId of overlay.layers) {
-      try { map.moveLayer(layerId); } catch { /* layer not yet ready */ }
-    }
-  }
 }
 
 /**

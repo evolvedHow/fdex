@@ -1,6 +1,9 @@
 node_modules/
 dist/
 .env
+# Generated build artifacts — contain secrets baked in at build time
+frontend/public/config.json
+frontend/public/analytics.js
 __pycache__/
 *.pyc
 .venv/

@@ -14,6 +14,7 @@
     toggleCities,
     toggleCounties,
     togglePrecincts,
+    clearPin,
   } from '../config/mapInteraction';
   import { setStateTotals, setMapInstance, setDemographics } from '../stores/state.svelte';
   import type { StateTotals } from '../types';
@@ -158,6 +159,7 @@
 
     if (state.level !== prevLevel) {
       prevLevel = state.level;
+      clearPin(map, config.districtPlans);
       showLevel(map, state.level, config.districtPlans);
       if (state.showDistrict) {
         hideDistrictFill(map, config.districtPlans);

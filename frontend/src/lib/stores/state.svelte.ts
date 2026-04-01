@@ -134,3 +134,7 @@ export function getLocationCounty()           { return locationCounty; }
 export function setLocationCounty(v: string | null) { locationCounty = v; }
 export function getLocationPrecinct()         { return locationPrecinct; }
 export function setLocationPrecinct(v: LocationPrecinct | null) { locationPrecinct = v; }
+
+let isPinned = $state(false);
+export function getIsPinned()           { return isPinned; }
+export function setIsPinned(v: boolean) { isPinned = v; }
