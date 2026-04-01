@@ -82,11 +82,18 @@ export interface DistrictProperties {
   DISTRICT?: number | string;
   pop?: number;
   tvap?: number;
+  pct_wvap_al?: number;
+  pct_bvap_al?: number;
   pct_bvp?: number;
   pct_avp?: number;
   pct_hvp?: number;
   pct_bp_?: number;
   partisan?: number;
+  g18_pct_dem?: number;
+  p20_pct_dem?: number;
+  r21_pct_dem?: number;
+  g22_pct_dem?: number;
+  s22_pct_dem?: number;
   [key: string]: unknown;
 }
 
@@ -149,9 +156,17 @@ export interface LocationPrecinct {
   [key: string]: unknown;
 }
 
+export interface ElectionStats {
+  key: string;
+  label: string;
+  eg: number;       // efficiency gap: (wastedD − wastedR) / totalVotes; positive = D disadvantaged
+  hasData: boolean; // false when no districts have this election's field
+}
+
 export interface StateTotals {
   pop: number;
   tvap: number;
+  wvap: number;
   bvap: number;
   avap: number;
   hvap: number;
@@ -159,8 +174,14 @@ export interface StateTotals {
   // Maximum absolute value across all districts (for "largest" badge)
   maxPop: number;
   maxTvap: number;
+  maxWvap: number;
   maxBvap: number;
   maxAvap: number;
   maxHvap: number;
   maxBipocvap: number;
+  // Partisan fairness metrics
+  meanPartisan: number;
+  medianPartisan: number;
+  meanMedian: number;     // mean − median; positive = D voters packed
+  elections: ElectionStats[];
 }

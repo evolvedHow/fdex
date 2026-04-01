@@ -45,6 +45,14 @@
   // ── District plan rows ────────────────────────────────────────────────────
   type Row = [string, string, number | null, boolean];
 
+  const ELECTION_DEFS = [
+    { key: 'g18_pct_dem', label: '2018 Gen' },
+    { key: 'p20_pct_dem', label: '2020 Pres' },
+    { key: 'r21_pct_dem', label: '2021 Runoff' },
+    { key: 'g22_pct_dem', label: '2022 Gen' },
+    { key: 's22_pct_dem', label: '2022 Senate' },
+  ];
+
   let planRows = $derived<Row[]>((() => {
     if (!hovered) return [];
     const p = hovered.properties;
@@ -53,6 +61,7 @@
     const distAvap   = (p.tvap ?? 0) * (p.pct_avp ?? 0);
     const distHvap   = (p.tvap ?? 0) * (p.pct_hvp ?? 0);
     const distBipoc  = (p.tvap ?? 0) * (p.pct_bp_ ?? 0);
+    const distWvap   = (p.tvap ?? 0) * (p.pct_wvap_al ?? 0);
     return [
       ['Population',   fmt(p.pop),
         t && p.pop  != null ? p.pop  / t.pop   : null,
@@ -60,6 +69,9 @@
       ['VAP 2020',     fmt(p.tvap),
         t && p.tvap != null ? p.tvap / t.tvap  : null,
         t != null && p.tvap != null && isMax(p.tvap,  t.maxTvap)],
+      ['White VAP',    pct(p.pct_wvap_al),
+        t && t.wvap    > 0 ? distWvap  / t.wvap    : null,
+        t != null && t.maxWvap > 0 && isMax(distWvap, t.maxWvap)],
       ['Black VAP',    pct(p.pct_bvp),
         t && t.bvap    > 0 ? distBvap  / t.bvap    : null,
         t != null && isMax(distBvap,   t.maxBvap)],
@@ -74,6 +86,26 @@
         t != null && isMax(distBipoc,  t.maxBipocvap)],
       ['Dem 2018–22',  pct(p.partisan), null, false],
     ];
+  })());
+
+  // ── Per-district election results + wasted votes ──────────────────────────
+  type ElectionRow = { label: string; dem: number; wastedDPct: number; wastedRPct: number };
+
+  let electionRows = $derived<ElectionRow[]>((() => {
+    if (!hovered) return [];
+    const p = hovered.properties;
+    const rows: ElectionRow[] = [];
+    for (const { key, label } of ELECTION_DEFS) {
+      const dem = p[key] as number | undefined;
+      if (dem == null) continue;
+      rows.push({
+        label,
+        dem,
+        wastedDPct: dem > 0.5 ? dem - 0.5 : dem,
+        wastedRPct: dem > 0.5 ? 1 - dem   : 0.5 - dem,
+      });
+    }
+    return rows;
   })());
 
   // ── Census demographics rows ──────────────────────────────────────────────
@@ -163,6 +195,39 @@
           {/each}
         </tbody>
       </table>
+
+      <!-- Election Results & Efficiency Gap -->
+      {#if electionRows.length > 0}
+        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
+          Election Results
+        </div>
+        <table class="w-full border-collapse mb-3">
+          <thead>
+            <tr>
+              <td class="text-gray-400 text-[10px] py-[2px] pr-2"></td>
+              <td class="text-right text-gray-400 text-[10px] py-[2px] pr-1">%Dem</td>
+              <td class="text-right text-gray-400 text-[10px] py-[2px] pr-1">Wasted D</td>
+              <td class="text-right text-gray-400 text-[10px] py-[2px]">Wasted R</td>
+            </tr>
+          </thead>
+          <tbody>
+            {#each electionRows as row}
+              <tr class="border-b border-gray-100 last:border-0">
+                <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap">{row.label}</td>
+                <td class="text-right py-[3px] pr-1 font-medium tabular-nums {row.dem > 0.5 ? 'text-blue-600' : 'text-red-600'}">
+                  {pct(row.dem)}
+                </td>
+                <td class="text-right py-[3px] pr-1 tabular-nums text-blue-500 text-[11px]">
+                  {pct(row.wastedDPct)}
+                </td>
+                <td class="text-right py-[3px] tabular-nums text-red-500 text-[11px]">
+                  {pct(row.wastedRPct)}
+                </td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      {/if}
 
       <!-- Census Demographics -->
       {#if demData}
@@ -270,6 +335,15 @@
               <td class="text-gray-500 py-[3px] pr-2">VAP 2020</td>
               <td class="text-right py-[3px] font-medium tabular-nums">{fmt(totals.tvap)}</td>
             </tr>
+            {#if totals.wvap > 0}
+            <tr class="border-b border-gray-100">
+              <td class="text-gray-500 py-[3px] pr-2">White VAP</td>
+              <td class="text-right py-[3px] font-medium tabular-nums">
+                {totals.tvap > 0 ? pct(totals.wvap / totals.tvap) : '—'}
+                <span class="text-gray-400 font-normal text-[11px] ml-1">{fmt(totals.wvap)}</span>
+              </td>
+            </tr>
+            {/if}
             <tr class="border-b border-gray-100">
               <td class="text-gray-500 py-[3px] pr-2">Black VAP</td>
               <td class="text-right py-[3px] font-medium tabular-nums">
@@ -338,6 +412,60 @@
               </tr>
             </tbody>
           </table>
+        {/if}
+
+        <!-- Fairness Metrics -->
+        {#if totals.elections.some((e) => e.hasData)}
+          <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
+            Fairness Metrics
+          </div>
+
+          <!-- Efficiency Gap per election -->
+          <div class="text-[10px] text-gray-500 mb-0.5 font-medium">Efficiency Gap</div>
+          <table class="w-full border-collapse mb-1">
+            <tbody>
+              {#each totals.elections.filter((e) => e.hasData) as el}
+                <tr class="border-b border-gray-100 last:border-0">
+                  <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap">{el.label}</td>
+                  <td class="text-right py-[3px] font-medium tabular-nums {el.eg > 0 ? 'text-blue-600' : 'text-red-600'}">
+                    {el.eg > 0 ? '+' : ''}{(el.eg * 100).toFixed(1)}%
+                  </td>
+                  <td class="text-right py-[3px] text-gray-400 text-[10px] pl-1 whitespace-nowrap">
+                    {el.eg > 0 ? 'D disadvantaged' : 'R disadvantaged'}
+                  </td>
+                </tr>
+              {/each}
+            </tbody>
+          </table>
+          <div class="text-gray-400 text-[10px] mb-2 italic">
+            EG = (wasted D − wasted R) / total votes. Positive = D voters packed.
+          </div>
+
+          <!-- Mean-Median Difference -->
+          {#if totals.meanPartisan > 0}
+            <div class="text-[10px] text-gray-500 mb-0.5 font-medium">Mean–Median Difference</div>
+            <table class="w-full border-collapse mb-1">
+              <tbody>
+                <tr class="border-b border-gray-100">
+                  <td class="text-gray-500 py-[3px] pr-2">Mean partisan</td>
+                  <td class="text-right py-[3px] font-medium tabular-nums">{pct(totals.meanPartisan)}</td>
+                </tr>
+                <tr class="border-b border-gray-100">
+                  <td class="text-gray-500 py-[3px] pr-2">Median partisan</td>
+                  <td class="text-right py-[3px] font-medium tabular-nums">{pct(totals.medianPartisan)}</td>
+                </tr>
+                <tr class="border-b border-gray-100 last:border-0">
+                  <td class="text-gray-500 py-[3px] pr-2 font-medium">MM Difference</td>
+                  <td class="text-right py-[3px] font-medium tabular-nums {totals.meanMedian > 0 ? 'text-blue-600' : 'text-red-600'}">
+                    {totals.meanMedian > 0 ? '+' : ''}{(totals.meanMedian * 100).toFixed(2)}%
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-gray-400 text-[10px] mb-3 italic">
+              Mean − median of district partisan lean. Positive = D voters packed into fewer districts.
+            </div>
+          {/if}
         {/if}
 
         <div class="text-gray-400 text-[10px] border-t border-gray-100 pt-2 italic">

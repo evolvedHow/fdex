@@ -38,6 +38,14 @@
   let prevShowCounty = $state(false);
   let prevShowPrecinct = $state(false);
 
+  const ELECTIONS = [
+    { key: 'g18_pct_dem', label: '2018 Gen' },
+    { key: 'p20_pct_dem', label: '2020 Pres' },
+    { key: 'r21_pct_dem', label: '2021 Runoff' },
+    { key: 'g22_pct_dem', label: '2022 Gen' },
+    { key: 's22_pct_dem', label: '2022 Senate' },
+  ] as const;
+
   async function loadStateTotals(levelId: string) {
     const plan = config.districtPlans.find((p) => p.id === levelId);
     if (!plan) return;
@@ -45,28 +53,78 @@
       const res = await fetch(`${import.meta.env.BASE_URL}data/${plan.geojson}`);
       const geojson = await res.json();
       const totals: StateTotals = {
-        pop: 0, tvap: 0, bvap: 0, avap: 0, hvap: 0, bipocvap: 0,
-        maxPop: 0, maxTvap: 0, maxBvap: 0, maxAvap: 0, maxHvap: 0, maxBipocvap: 0,
+        pop: 0, tvap: 0, wvap: 0, bvap: 0, avap: 0, hvap: 0, bipocvap: 0,
+        maxPop: 0, maxTvap: 0, maxWvap: 0, maxBvap: 0, maxAvap: 0, maxHvap: 0, maxBipocvap: 0,
+        meanPartisan: 0, medianPartisan: 0, meanMedian: 0,
+        elections: [],
       };
+
+      const egAccum: Record<string, { wastedD: number; wastedR: number; totalV: number }> = {};
+      for (const el of ELECTIONS) egAccum[el.key] = { wastedD: 0, wastedR: 0, totalV: 0 };
+      const partisanVals: number[] = [];
+
       for (const f of geojson.features) {
         const p = f.properties ?? {};
-        const bvap    = (p.tvap ?? 0) * (p.pct_bvp ?? 0);
-        const avap    = (p.tvap ?? 0) * (p.pct_avp ?? 0);
-        const hvap    = (p.tvap ?? 0) * (p.pct_hvp ?? 0);
-        const bipocvap = (p.tvap ?? 0) * (p.pct_bp_ ?? 0);
-        totals.pop      += p.pop   ?? 0;
-        totals.tvap     += p.tvap  ?? 0;
+        const tvap     = p.tvap  ?? 0;
+        const bvap     = tvap * (p.pct_bvp ?? 0);
+        const avap     = tvap * (p.pct_avp ?? 0);
+        const hvap     = tvap * (p.pct_hvp ?? 0);
+        const bipocvap = tvap * (p.pct_bp_ ?? 0);
+        const wvap     = tvap * (p.pct_wvap_al ?? 0);
+        totals.pop      += p.pop ?? 0;
+        totals.tvap     += tvap;
+        totals.wvap     += wvap;
         totals.bvap     += bvap;
         totals.avap     += avap;
         totals.hvap     += hvap;
         totals.bipocvap += bipocvap;
-        if ((p.pop   ?? 0) > totals.maxPop)     totals.maxPop     = p.pop   ?? 0;
-        if ((p.tvap  ?? 0) > totals.maxTvap)    totals.maxTvap    = p.tvap  ?? 0;
-        if (bvap           > totals.maxBvap)    totals.maxBvap    = bvap;
-        if (avap           > totals.maxAvap)    totals.maxAvap    = avap;
-        if (hvap           > totals.maxHvap)    totals.maxHvap    = hvap;
-        if (bipocvap       > totals.maxBipocvap) totals.maxBipocvap = bipocvap;
+        if ((p.pop ?? 0) > totals.maxPop)     totals.maxPop     = p.pop ?? 0;
+        if (tvap          > totals.maxTvap)    totals.maxTvap    = tvap;
+        if (wvap          > totals.maxWvap)    totals.maxWvap    = wvap;
+        if (bvap          > totals.maxBvap)    totals.maxBvap    = bvap;
+        if (avap          > totals.maxAvap)    totals.maxAvap    = avap;
+        if (hvap          > totals.maxHvap)    totals.maxHvap    = hvap;
+        if (bipocvap      > totals.maxBipocvap) totals.maxBipocvap = bipocvap;
+
+        if (p.partisan != null) partisanVals.push(p.partisan);
+
+        if (tvap > 0) {
+          for (const el of ELECTIONS) {
+            const dem = p[el.key];
+            if (typeof dem === 'number') {
+              const acc = egAccum[el.key];
+              if (dem > 0.5) {
+                acc.wastedD += (dem - 0.5) * tvap;
+                acc.wastedR += (1 - dem) * tvap;
+              } else {
+                acc.wastedD += dem * tvap;
+                acc.wastedR += (0.5 - dem) * tvap;
+              }
+              acc.totalV += tvap;
+            }
+          }
+        }
       }
+
+      // Mean-median difference
+      if (partisanVals.length > 0) {
+        const mean = partisanVals.reduce((a, b) => a + b, 0) / partisanVals.length;
+        const sorted = [...partisanVals].sort((a, b) => a - b);
+        const mid = Math.floor(sorted.length / 2);
+        const median = sorted.length % 2 === 0
+          ? (sorted[mid - 1] + sorted[mid]) / 2
+          : sorted[mid];
+        totals.meanPartisan   = mean;
+        totals.medianPartisan = median;
+        totals.meanMedian     = mean - median;
+      }
+
+      totals.elections = ELECTIONS.map((el) => {
+        const acc = egAccum[el.key];
+        const hasData = acc.totalV > 0;
+        return { key: el.key, label: el.label, eg: hasData ? (acc.wastedD - acc.wastedR) / acc.totalV : 0, hasData };
+      });
+
       setStateTotals(totals);
     } catch (e) { console.error('[loadStateTotals failed]', e); }
   }
