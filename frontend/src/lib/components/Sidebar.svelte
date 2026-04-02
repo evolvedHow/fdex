@@ -53,7 +53,7 @@
     },
     election_results: {
       title: 'Per-Election Results & Wasted Votes',
-      desc: 'Each bar shows the two-party vote split for that election. Blue (left) = Democratic share; red (right) = Republican share. The center line marks the 50% winning threshold. Dark color shows votes that counted toward winning (up to the threshold). Faded color shows wasted votes — surplus votes the winner didn\'t need, or all votes for the losing party (since a loss means none of those votes produced a seat). These per-district wasted vote fractions feed into the plan-level Efficiency Gap shown in the statewide view.',
+      desc: 'Each bar shows the two-party vote split and wasted-vote breakdown for one election cycle.\n\nBlue = Democratic share (left); Red = Republican share (right). The white center line marks the 50% winning threshold.\n\nDark color = votes that counted toward winning the seat (exactly 50% of all votes cast — just enough to secure the majority). Faded color = wasted votes: surplus votes the winner didn\'t need beyond 50%, or all votes cast for the losing party (since losing produces no seat regardless).\n\nBelow each bar, "X% wasted" shows each party\'s actual wasted-vote count for that election.\n\nExample — R wins 69% to 31% (R +38): The dark red segment is 50% wide (R\'s efficient votes). The faded red is 19% wide (R\'s surplus beyond 50%). The faded blue is 31% wide (all D votes, wasted on a loss). D wasted more raw votes (31%) than R (19%) despite R winning by a large margin — that imbalance is what the Efficiency Gap measures across all districts.',
     },
     efficiency_gap: {
       title: 'Efficiency Gap',
@@ -345,45 +345,58 @@
           >ⓘ</button>
         </div>
 
-        <div class="flex flex-col gap-[7px] mb-3">
+        <div class="flex flex-col gap-[9px] mb-2">
           {#each electionRows as row}
             {@const dPct = row.dem * 100}
             {@const rPct = (1 - row.dem) * 100}
             {@const dWins = row.dem > 0.5}
+            {@const dWasted = dWins ? dPct - 50 : dPct}
+            {@const rWasted = dWins ? rPct : rPct - 50}
             <div>
-              <!-- Label row -->
+              <!-- Label row: election + winner margin -->
               <div class="flex items-center justify-between mb-[2px]">
                 <span class="text-gray-500 text-[10px]">{row.label}</span>
                 <span class="text-[10px] font-semibold {dWins ? 'text-blue-600' : 'text-red-600'}">
-                  {dWins ? 'D +' : 'R +'}{Math.abs(dPct - rPct).toFixed(1)}
+                  {dWins ? 'D' : 'R'} +{Math.abs(dPct - rPct).toFixed(1)}
                 </span>
               </div>
 
-              <!-- Split bar: dark = votes up to winning threshold, faded = wasted -->
-              <div class="relative w-full h-[12px] rounded overflow-hidden flex">
+              <!--
+                Bar segments (always sum to 100%):
+                D wins: [dark-blue 50% efficient][light-blue dPct-50% surplus][light-red rPct% wasted]
+                R wins: [light-blue dPct% wasted][dark-red 50% efficient][light-red rPct-50% surplus]
+                Segment widths = actual wasted/efficient vote percentages.
+                Center line (|) marks the 50% winning threshold.
+              -->
+              <div class="relative w-full h-[13px] rounded overflow-hidden flex">
                 {#if dWins}
-                  <!-- D wins: [dark-blue 50%][light-blue D surplus][light-red all-R] -->
-                  <div class="h-full bg-blue-600" style="width:50%"></div>
-                  <div class="h-full bg-blue-300" style="width:{dPct - 50}%"></div>
-                  <div class="h-full bg-red-200 flex-1"></div>
+                  <div class="h-full bg-blue-600" style="width:50%"  title="D efficient: 50.0%"></div>
+                  <div class="h-full bg-blue-300" style="width:{dWasted}%" title="D surplus (wasted): {dWasted.toFixed(1)}%"></div>
+                  <div class="h-full bg-red-200"  style="width:{rPct}%"    title="R wasted: {rPct.toFixed(1)}%"></div>
                 {:else if row.dem < 0.5}
-                  <!-- R wins: [light-blue all-D][dark-red up-to-threshold][light-red R surplus] -->
-                  <div class="h-full bg-blue-200" style="width:{dPct}%"></div>
-                  <div class="h-full bg-red-600" style="width:{50 - dPct}%"></div>
-                  <div class="h-full bg-red-300 flex-1"></div>
+                  <div class="h-full bg-blue-200" style="width:{dPct}%"    title="D wasted: {dPct.toFixed(1)}%"></div>
+                  <div class="h-full bg-red-600"  style="width:50%"  title="R efficient: 50.0%"></div>
+                  <div class="h-full bg-red-300"  style="width:{rWasted}%" title="R surplus (wasted): {rWasted.toFixed(1)}%"></div>
                 {:else}
-                  <!-- Exact tie -->
                   <div class="h-full bg-blue-500" style="width:50%"></div>
-                  <div class="h-full bg-red-500 flex-1"></div>
+                  <div class="h-full bg-red-500"  style="width:50%"></div>
                 {/if}
                 <!-- 50% threshold line -->
                 <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/80 -translate-x-1/2"></div>
               </div>
 
-              <!-- % labels beneath bar -->
-              <div class="flex tabular-nums mt-[1px]">
-                <span class="text-[10px] {dWins ? 'text-blue-700 font-medium' : 'text-blue-400'}">{dPct.toFixed(1)}%</span>
-                <span class="flex-1 text-right text-[10px] {!dWins ? 'text-red-700 font-medium' : 'text-red-400'}">{rPct.toFixed(1)}%</span>
+              <!-- Vote share labels + wasted annotations -->
+              <div class="flex tabular-nums mt-[2px] items-start">
+                <div class="text-[10px] leading-tight">
+                  <span class="font-medium {dWins ? 'text-blue-700' : 'text-blue-400'}">D {dPct.toFixed(1)}%</span>
+                  <span class="text-gray-300 mx-0.5">·</span>
+                  <span class="text-gray-400">{dWasted.toFixed(1)}% wasted</span>
+                </div>
+                <div class="flex-1 text-right text-[10px] leading-tight">
+                  <span class="text-gray-400">{rWasted.toFixed(1)}% wasted</span>
+                  <span class="text-gray-300 mx-0.5">·</span>
+                  <span class="font-medium {!dWins ? 'text-red-700' : 'text-red-400'}">R {rPct.toFixed(1)}%</span>
+                </div>
               </div>
             </div>
           {/each}
@@ -392,13 +405,11 @@
         <!-- Bar legend -->
         <div class="text-gray-400 text-[10px] mb-3 flex flex-col gap-[2px]">
           <div class="flex items-center gap-1.5">
-            <span class="inline-block w-8 h-[6px] rounded-sm bg-gradient-to-r from-blue-600 to-blue-300 shrink-0"></span>
-            <span class="inline-block w-8 h-[6px] rounded-sm bg-gradient-to-r from-red-200 to-red-200 shrink-0 -ml-1"></span>
-            <span>dark = votes counted toward win · faded = wasted</span>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <span class="inline-block w-[2px] h-[10px] bg-gray-400 shrink-0 ml-[14px]"></span>
-            <span>center line = 50% threshold</span>
+            <span class="inline-block w-4 h-[6px] rounded-sm bg-blue-600 shrink-0"></span>
+            <span class="inline-block w-4 h-[6px] rounded-sm bg-blue-200 shrink-0"></span>
+            <span class="inline-block w-4 h-[6px] rounded-sm bg-red-600 shrink-0"></span>
+            <span class="inline-block w-4 h-[6px] rounded-sm bg-red-200 shrink-0"></span>
+            <span>dark = efficient · faded = wasted · | = 50% threshold</span>
           </div>
         </div>
       {/if}
