@@ -12,14 +12,39 @@ import type {
 // App configuration (loaded from backend)
 let appConfig = $state<AppConfig | null>(null);
 
+// ── localStorage persistence ──────────────────────────────────────────────
+const STORAGE_KEY = 'fdex_map_state';
+
+function loadStoredState(): Partial<MapState> {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch { return {}; }
+}
+
+function saveMapState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      level:        mapState.level,
+      measure:      mapState.measure,
+      showDistrict: mapState.showDistrict,
+      showCity:     mapState.showCity,
+      showCounty:   mapState.showCounty,
+      showPrecinct: mapState.showPrecinct,
+    }));
+  } catch { /* storage unavailable */ }
+}
+
+const _stored = loadStoredState();
+
 // Map UI state
 let mapState = $state<MapState>({
-  level: 'congress_r1',
-  measure: 'bvap',
-  showDistrict: true,
-  showCity: false,
-  showCounty: false,
-  showPrecinct: false,
+  level:        _stored.level        ?? 'congress_r1',
+  measure:      _stored.measure      ?? 'bvap',
+  showDistrict: _stored.showDistrict ?? true,
+  showCity:     _stored.showCity     ?? false,
+  showCounty:   _stored.showCounty   ?? false,
+  showPrecinct: _stored.showPrecinct ?? false,
 });
 
 // State-wide totals for the active district plan (used in tooltip shares)
@@ -55,26 +80,32 @@ export function getMapState() {
 
 export function setLevel(level: string) {
   mapState.level = level;
+  saveMapState();
 }
 
 export function setMeasure(measure: string) {
   mapState.measure = measure;
+  saveMapState();
 }
 
 export function setShowDistrict(show: boolean) {
   mapState.showDistrict = show;
+  saveMapState();
 }
 
 export function setShowCity(show: boolean) {
   mapState.showCity = show;
+  saveMapState();
 }
 
 export function setShowCounty(show: boolean) {
   mapState.showCounty = show;
+  saveMapState();
 }
 
 export function setShowPrecinct(show: boolean) {
   mapState.showPrecinct = show;
+  saveMapState();
 }
 
 export function getStateTotals() { return stateTotals; }

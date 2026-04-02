@@ -98,7 +98,7 @@
     'Asian VAP':     'asian_vap',
     'Hispanic VAP':  'hispanic_vap',
     'Minority VAP':  'minority_vap',
-    'Dem 2018–22':   'partisan',
+    'Partisan 2018–22': 'partisan',
     'Median Income': 'median_income',
     'Below Poverty': 'poverty',
     "Bachelor's+":   'bachelors',
@@ -176,7 +176,11 @@
       ['Minority VAP', pct(p.pct_bp_),
         t && t.bipocvap > 0 ? distBipoc / t.bipocvap : null,
         t != null && isMax(distBipoc,  t.maxBipocvap)],
-      ['Dem 2018–22',  pct(p.partisan), null, false],
+      ['Partisan 2018–22',
+        p.partisan != null
+          ? `${(p.partisan * 100).toFixed(1)}% D · ${((1 - p.partisan) * 100).toFixed(1)}% R`
+          : '—',
+        null, false],
     ];
   })());
 
