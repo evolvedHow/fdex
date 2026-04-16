@@ -139,12 +139,15 @@ export function showMeasure(map: mapboxgl.Map, measure: string, overlays: Overla
 
   if (measure === 'streets') return;
 
-  // Show matching layers and raise them to the top so they render above district fills/lines
+  // Show matching layers. Do NOT call moveLayer here — overlay layers are already
+  // above district popup fills in the initial z-order (generateLayers adds overlays
+  // after district layers). Moving vector tile layers above GeoJSON fills in Mapbox
+  // GL JS v3 breaks tile rendering (partial coverage). Georgia-Explorer also omits
+  // this moveLayer call.
   const overlay = overlays.find((o) => o.id === measure);
   if (!overlay?.layers) return;
   for (const layerId of overlay.layers) {
     setVisibility(map, layerId, 'visible');
-    try { map.moveLayer(layerId); } catch { /* layer not yet added */ }
   }
 }
 
@@ -152,7 +155,9 @@ export function showMeasure(map: mapboxgl.Map, measure: string, overlays: Overla
  * Convert [[value, color], ...] stops to a Mapbox GL JS v3 step expression.
  */
 function stopsToStep(property: string, stops: [number, string][], defaultColor: string): any[] {
-  const expr: any[] = ['step', ['get', property], defaultColor];
+  // coalesce handles null/missing properties — v2 interval coerced null→0 via JS
+  // numeric comparison; v3 step is type-strict and errors on null inputs.
+  const expr: any[] = ['step', ['coalesce', ['get', property], 0], defaultColor];
   for (const [val, color] of stops) {
     expr.push(val, color);
   }

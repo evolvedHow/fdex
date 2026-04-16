@@ -5,8 +5,8 @@ analytics:
 map:
   center: [-83.208092, 32.482618]
   zoom:
-    desktop: 6.5
-    mobile: 5
+    desktop: 7.0
+    mobile: 5.5
   minZoom: 5
   maxZoom: 13
   style: "mapbox://styles/mapbox/light-v10"

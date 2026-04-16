@@ -193,8 +193,7 @@
 
         // Apply initial state
         showLevel(m, state.level, config.districtPlans);
-        showMeasure(m, state.measure, config.overlays);
-        applyDistrictFill(m, state.level, state.measure, config.overlays);
+        applyCurrentOverlay(m);
 
         // Load state totals + census demographics for tooltip
         loadStateTotals(state.level);
@@ -211,6 +210,44 @@
     setMapInstance(null);
   });
 
+  /**
+   * Apply the current measure overlay with correct layer ordering.
+   *
+   * Layer order goal (bottom → top):
+   *   district_fill → overlay_tiles → district_line → district_hover
+   *   → county_borders → city_borders → city_borders_fill → precinct_borders
+   *
+   * applyDistrictFill moves the fill all the way to the top, which buries
+   * boundary line layers beneath it.  We fix that by always re-raising those
+   * boundary layers at the end so they're visible whenever toggled on.
+   */
+  function applyCurrentOverlay(m: mapboxgl.Map) {
+    showMeasure(m, state.measure, config.overlays);
+    hideDistrictFill(m, config.districtPlans);
+
+    if (state.showDistrict) {
+      // Districts toggle ON: raise district fill to top for solid block coloring.
+      applyDistrictFill(m, state.level, state.measure, config.overlays);
+    }
+    // Districts toggle OFF: the tile overlay (e.g. precinct_plean) renders on
+    // its own. No district-fill gap filler — it caused color inconsistency as
+    // tiles loaded incrementally at different zoom levels, and showed wrong
+    // district-level colors for precincts with missing partisan data.
+
+    // In Mapbox GL JS v3, vector tile layers (precinct_plean) break when they sit
+    // ABOVE a GeoJSON fill in the z-stack. Georgia-Explorer adds layers in reverse
+    // order so its popup fill naturally lands above precinct_plean. Replicate that
+    // here by explicitly raising the active popup fill above overlay layers.
+    try { m.moveLayer(`${state.level}_popup`); } catch { /* ok */ }
+
+    // Re-raise boundary/outline layers above everything (fill, tiles, district
+    // lines) so they are always visible when toggled on.
+    try { m.moveLayer('county_borders'); } catch { /* ok */ }
+    try { m.moveLayer('city_borders'); } catch { /* ok */ }
+    try { m.moveLayer('city_borders_fill'); } catch { /* ok */ }
+    try { m.moveLayer('precinct_borders'); } catch { /* ok */ }
+  }
+
   // React to state changes
   $effect(() => {
     if (!mapReady || !map) return;
@@ -219,10 +256,7 @@
       prevLevel = state.level;
       clearPin(map, config.districtPlans);
       showLevel(map, state.level, config.districtPlans);
-      if (state.showDistrict) {
-        hideDistrictFill(map, config.districtPlans);
-        applyDistrictFill(map, state.level, state.measure, config.overlays);
-      }
+      applyCurrentOverlay(map);
       loadStateTotals(state.level);
       loadDemographics(state.level);
     }
@@ -233,11 +267,7 @@
 
     if (state.measure !== prevMeasure) {
       prevMeasure = state.measure;
-      showMeasure(map, state.measure, config.overlays);
-      if (state.showDistrict) {
-        hideDistrictFill(map, config.districtPlans);
-        applyDistrictFill(map, state.level, state.measure, config.overlays);
-      }
+      applyCurrentOverlay(map);
     }
   });
 
@@ -246,10 +276,7 @@
 
     if (state.showDistrict !== prevShowDistrict) {
       prevShowDistrict = state.showDistrict;
-      hideDistrictFill(map, config.districtPlans);
-      if (state.showDistrict) {
-        applyDistrictFill(map, state.level, state.measure, config.overlays);
-      }
+      applyCurrentOverlay(map);
     }
   });
 

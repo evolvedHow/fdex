@@ -4,7 +4,7 @@
   import { getAppConfig, setAppConfig } from './lib/stores/state.svelte';
   import ControlBar from './lib/components/ControlBar.svelte';
   import MapView from './lib/components/MapView.svelte';
-  import Sidebar from './lib/components/Sidebar.svelte';
+  import BottomDrawer from './lib/components/BottomDrawer.svelte';
   import Legend from './lib/components/Legend.svelte';
 
   let config = $derived(getAppConfig());
@@ -48,13 +48,9 @@
       <div class="flex-1 relative overflow-hidden min-h-0">
         <MapView {config} />
         <Legend />
+        <BottomDrawer />
       </div>
     {/if}
   </div>
-
-  <!-- Right column: sidebar spans full screen height -->
-  {#if config}
-    <Sidebar />
-  {/if}
 
 </main>

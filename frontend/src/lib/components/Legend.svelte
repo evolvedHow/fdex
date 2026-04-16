@@ -12,7 +12,7 @@
 </script>
 
 {#if activeOverlay?.legend}
-  <div class="absolute bottom-[4%] left-2.5 z-50">
+  <div class="absolute top-2.5 right-2.5 z-10">
     <div
       class="inline-flex flex-wrap items-center gap-0 p-1.5
              border border-gray-300 rounded-lg bg-[#fafafa]

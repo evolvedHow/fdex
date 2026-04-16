@@ -5,7 +5,10 @@ type SourceSpec = mapboxgl.SourceSpecification;
 type LayerSpec = mapboxgl.LayerSpecification;
 
 function stopsToStep(property: string, stops: [number, string][], defaultColor: string): any[] {
-  const expr: any[] = ['step', ['get', property], defaultColor];
+  // Use coalesce so null/missing properties fall to 0 instead of crashing the step
+  // expression. Mapbox GL JS v2's interval function coerced null→0 via JS numeric
+  // comparison; v3's step expression is type-strict and errors on null.
+  const expr: any[] = ['step', ['coalesce', ['get', property], 0], defaultColor];
   for (const [val, color] of stops) {
     expr.push(val, color);
   }
