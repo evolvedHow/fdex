@@ -8,6 +8,12 @@
 #   ./scripts/sync_data.sh --dry-run                 # preview without copying
 
 set -e
+
+if [ -n "$CI" ]; then
+  echo "CI environment — skipping FDP sync (data already in repo)"
+  exit 0
+fi
+
 cd "$(dirname "$0")/.."
 
 DEST="$(pwd)/data"
