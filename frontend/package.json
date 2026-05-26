@@ -4,8 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "sync": "bash ../scripts/sync_data.sh",
     "dev": "node scripts/bake-config.mjs && vite",
-    "prebuild": "node scripts/bake-config.mjs",
+    "prebuild": "bash ../scripts/sync_data.sh && node scripts/bake-config.mjs",
     "build": "vite build",
     "postbuild": "node scripts/copy-assets.mjs",
     "preview": "vite preview"
