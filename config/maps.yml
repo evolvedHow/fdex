@@ -19,58 +19,33 @@ tilesets:
 # districtProp: the GeoJSON property used to identify districts
 # ──────────────────────────────────────────────
 districtPlans:
-  # Enacted Maps for 2024 elections
+  # Current Maps for 2024 and later elections
   - id: congress_r1
-    label: "Enacted US Congress, for 2024 elections"
+    label: "Current US Congress, for 2024 elections"
     geojson: congress_enacted_24_2024update.geojson
     chamber: congress
     districtProp: district
-    tooltipTitle: "Enacted Congressional Map"
-    group: "Enacted Maps to be used for 2024 election"
+    tooltipTitle: "Current Congressional Map"
+    group: "Current Maps, for 2024 and later elections"
     default: true
 
   - id: senate_r1
-    label: "Enacted State Senate, for 2024 elections"
+    label: "Current State Senate, for 2024 elections"
     geojson: senate_enacted_24_2024update.geojson
     chamber: senate
     districtProp: district
-    tooltipTitle: "Enacted Senate Map"
-    group: "Enacted Maps to be used for 2024 election"
+    tooltipTitle: "Current Senate Map"
+    group: "Current Maps, for 2024 and later elections"
 
   - id: house_r1
-    label: "Enacted State House, for 2024 elections"
+    label: "Current State House, for 2024 elections"
     geojson: house_enacted_24_2024update.geojson
     chamber: house
     districtProp: district
-    tooltipTitle: "Enacted House Map"
-    group: "Enacted Maps to be used for 2024 election"
+    tooltipTitle: "Current House Map"
+    group: "Current Maps, for 2024 and later elections"
 
-  # Current Maps until 2024
-  - id: congress_proposed_3
-    label: "Current US Congress, 2021 - 2024"
-    geojson: congress_enacted_2123_2024update.geojson
-    chamber: congress
-    districtProp: district
-    tooltipTitle: "Previous Congressional Map (2021 - 2023)"
-    group: "Current Maps until the 2024 election"
-
-  - id: senate_p3
-    label: "Current State Senate, 2021 - 2024"
-    geojson: senate_enacted_2123_2024update.geojson
-    chamber: senate
-    districtProp: district
-    tooltipTitle: "Previous State Senate Map (2021 - 2023)"
-    group: "Current Maps until the 2024 election"
-
-  - id: house_p3
-    label: "Current State House, 2021 - 2024"
-    geojson: house_enacted_2123_2024update.geojson
-    chamber: house
-    districtProp: district
-    tooltipTitle: "Previous State House Map (2021 - 2023)"
-    group: "Current Maps until the 2024 election"
-
-  # Previous Maps
+  # Previous Maps (2011-2021)
   - id: congress
     label: "US Congress, 2011-2021"
     geojson: congress12_census20.geojson
@@ -94,6 +69,31 @@ districtPlans:
     districtProp: district
     tooltipTitle: "Previous State House Map (2015 - 2021)"
     group: "Previous Maps"
+
+  # Prior Maps (2021-2024)
+  - id: congress_proposed_3
+    label: "US Congress, 2021 - 2024"
+    geojson: congress_enacted_2123_2024update.geojson
+    chamber: congress
+    districtProp: district
+    tooltipTitle: "Prior Congressional Map (2021 - 2024)"
+    group: "Prior Maps"
+
+  - id: senate_p3
+    label: "State Senate, 2021 - 2024"
+    geojson: senate_enacted_2123_2024update.geojson
+    chamber: senate
+    districtProp: district
+    tooltipTitle: "Prior State Senate Map (2021 - 2024)"
+    group: "Prior Maps"
+
+  - id: house_p3
+    label: "State House, 2021 - 2024"
+    geojson: house_enacted_2123_2024update.geojson
+    chamber: house
+    districtProp: district
+    tooltipTitle: "Prior State House Map (2021 - 2024)"
+    group: "Prior Maps"
 
   # Other Maps Proposed in 2021 and 2023
   - id: senate_r2
@@ -281,7 +281,7 @@ overlays:
         - { label: "75% to 100%", color: "#91318f" }
 
   - id: precinct_plean
-    label: "Partisan Lean, 2018-2021"
+    label: "Partisan Lean, 2018-2024"
     property: partisan
     group: "Election Results by precinct"
     layers: [precinct_plean]
@@ -303,7 +303,7 @@ overlays:
         - [0.6, "#3b61b8"]
         - [1.1, "#d4d5d5"]
     legend:
-      title: "Partisan Lean, Percent Democrat (2018-2022)"
+      title: "Partisan Lean, Percent Democrat (2018-2024)"
       items:
         - { label: "< 40%", color: "#c23a43" }
         - { label: "40% to 46.5%", color: "#ed6d78" }
