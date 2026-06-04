@@ -14,7 +14,7 @@
   let searching = $state(false);
   let errorMsg  = $state('');
 
-  const HINT = 'D5 = district · Cobb = county · or full address';
+  const HINT = 'D5 = district · Cobb County GA · or full address';
 
   function currentPlan(): DistrictPlan | undefined {
     return config.districtPlans.find((p) => p.id === state.level);
@@ -74,10 +74,16 @@
     const m = getMapInstance();
     if (!m) return false;
     const [minLng, minLat, maxLng, maxLat] = config.map.geocoderBbox;
+    // Append ", GA" when the query has no state context so county names
+    // ("Cobb", "Fulton") resolve to Georgia rather than other states.
+    const hasState = /\b(GA|Georgia)\b/i.test(q);
+    const geocodeQ = hasState ? q : `${q}, GA`;
+    const [cx, cy] = config.map.center;
     const url =
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json` +
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(geocodeQ)}.json` +
       `?bbox=${minLng},${minLat},${maxLng},${maxLat}` +
-      `&country=US&types=address,place,county,district,region&limit=1` +
+      `&proximity=${cx},${cy}` +
+      `&country=US&types=address,place,district,region&limit=1` +
       `&access_token=${config.mapboxToken}`;
     const res = await fetch(url);
     const data = await res.json();
@@ -126,7 +132,7 @@
       type="text"
       bind:value={query}
       onkeydown={onKeydown}
-      placeholder="D5 · county · address…"
+      placeholder="D5 · Cobb County GA · address…"
       class="w-[200px] px-2.5 py-1 text-sm rounded
              border border-gray-300 bg-white
              focus:outline-none focus:border-blue-400"
