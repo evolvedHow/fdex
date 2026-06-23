@@ -176,6 +176,15 @@ let drawerTab = $state<DrawerTab>('metrics');
 export function getDrawerTab()                { return drawerTab; }
 export function setDrawerTab(tab: DrawerTab)  { drawerTab = tab; }
 
+// ── Census demographics visibility (persisted) ───────────────────────────
+const CENSUS_KEY = 'fdex_show_census';
+let showCensus = $state(localStorage.getItem(CENSUS_KEY) === 'true');
+export function getShowCensus()               { return showCensus; }
+export function toggleShowCensus()            {
+  showCensus = !showCensus;
+  localStorage.setItem(CENSUS_KEY, String(showCensus));
+}
+
 // ── Mobile filters panel open/closed (not persisted) ─────────────────────
 let controlsOpen = $state(false);
 export function getControlsOpen()             { return controlsOpen; }

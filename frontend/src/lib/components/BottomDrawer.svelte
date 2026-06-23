@@ -9,6 +9,8 @@
     getLocationPrecinct,
     getDrawerTab,
     setDrawerTab,
+    getShowCensus,
+    toggleShowCensus,
     type DrawerTab,
   } from '../stores/state.svelte';
 
@@ -20,13 +22,46 @@
   let precinct = $derived(getLocationPrecinct());
 
   let activeDrawerTab = $derived(getDrawerTab());
+  let showCensus = $derived(getShowCensus());
 
-  const TABS: { key: DrawerTab; label: string }[] = [
-    { key: 'metrics',  label: 'Metrics'  },
-    { key: 'election', label: 'Election' },
-    { key: 'census',   label: 'Census'   },
-    { key: 'location', label: 'Location' },
-  ];
+  // When census is toggled off while on the census tab, fall back to metrics
+  $effect(() => {
+    if (!showCensus && activeDrawerTab === 'census') setDrawerTab('metrics');
+  });
+
+  let visibleTabs = $derived<{ key: DrawerTab; label: string }[]>(
+    showCensus
+      ? [
+          { key: 'metrics',  label: 'Metrics'  },
+          { key: 'election', label: 'Election' },
+          { key: 'census',   label: 'Census'   },
+          { key: 'location', label: 'Location' },
+        ]
+      : [
+          { key: 'metrics',  label: 'Metrics'  },
+          { key: 'election', label: 'Election' },
+          { key: 'location', label: 'Location' },
+        ]
+  );
+
+  // ── Swipe-to-collapse (phone) ─────────────────────────────────────────────
+  let swipeStartY = 0;
+  let swipeLastY  = 0;
+
+  function onDragTouchStart(e: TouchEvent) {
+    swipeStartY = e.touches[0].clientY;
+    swipeLastY  = swipeStartY;
+  }
+  function onDragTouchMove(e: TouchEvent) {
+    swipeLastY = e.touches[0].clientY;
+    e.preventDefault(); // prevent page scroll while dragging handle
+  }
+  function onDragTouchEnd() {
+    if (swipeLastY - swipeStartY > 50) {
+      expanded = false;
+      cancelCollapse();
+    }
+  }
 
   // ── Auto-hide ────────────────────────────────────────────────────────────
   let expanded = $state(false);
@@ -349,11 +384,24 @@
       style="background-color: rgba(255,255,255,{opacity/100})"
     >
 
+      <!-- ── Drag handle (phone only — swipe down to collapse) ──────────── -->
+      <div
+        class="sm:hidden flex justify-center items-center h-[22px] shrink-0 cursor-grab active:cursor-grabbing touch-none"
+        ontouchstart={onDragTouchStart}
+        ontouchmove={onDragTouchMove}
+        ontouchend={onDragTouchEnd}
+        role="button"
+        tabindex="0"
+        aria-label="Swipe down to collapse"
+      >
+        <div class="w-10 h-1 rounded-full bg-gray-300"></div>
+      </div>
+
       <!-- ── Tab bar (phone only) ──────────────────────────────────────── -->
       <div class="sm:hidden flex border-b border-gray-200 shrink-0">
-        {#each TABS as tab}
+        {#each visibleTabs as tab}
           <button
-            class="flex-1 py-2.5 text-[13px] font-medium text-center border-b-2 transition-colors cursor-pointer
+            class="flex-1 py-2 text-[13px] font-medium text-center border-b-2 transition-colors cursor-pointer
                    {activeDrawerTab === tab.key
                      ? 'border-[#29315F] text-[#29315F]'
                      : 'border-transparent text-gray-500'}"
@@ -518,7 +566,7 @@
                 Efficiency Gap
                 <button type="button" class="text-gray-300 hover:text-blue-400 text-[11px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'efficiency_gap'}>ⓘ</button>
               </div>
-              <table class="w-full border-collapse">
+              <table class="w-full border-collapse mb-4">
                 <tbody>
                   {#each totals.elections.filter((e) => e.hasData) as el}
                     <tr class="border-b border-gray-100 last:border-0">
@@ -531,6 +579,19 @@
                 </tbody>
               </table>
             {/if}
+            <!-- Census demographics toggle -->
+            <button
+              type="button"
+              class="w-full flex items-center justify-between py-2.5 px-3 rounded-lg border
+                     {showCensus ? 'border-[#29315F] bg-[#29315F]/5 text-[#29315F]' : 'border-gray-200 bg-gray-50 text-gray-500'}
+                     text-[13px] cursor-pointer"
+              onclick={toggleShowCensus}
+            >
+              <span>Census Demographics</span>
+              <span class="text-[12px] font-semibold {showCensus ? 'text-[#29315F]' : 'text-gray-400'}">
+                {showCensus ? '✓ Showing' : '+ Show'}
+              </span>
+            </button>
           {/if}
         </div>
 
@@ -608,44 +669,55 @@
             {/if}
           </div>
 
-          <!-- Right: census + location -->
+          <!-- Right: census (optional) + location -->
           <div class="overflow-y-auto px-2.5 py-2">
-            <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Census Demographics</div>
-            {#if demoRows.length > 0}
-              <table class="w-full border-collapse mb-3">
-                <tbody>
-                  {#each demoRows as [label, value, share, largest]}
-                    <tr class="border-b border-gray-100 last:border-0">
-                      <td class="text-gray-500 py-[3px] pr-1.5 whitespace-nowrap align-top text-[11px]">
-                        {label}
-                        {#if LABEL_TO_INFO[label]}
-                          <button type="button"
-                            class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer"
-                            onclick={() => activeInfoKey = LABEL_TO_INFO[label]}>ⓘ</button>
-                        {/if}
-                      </td>
-                      <td class="text-right py-[3px] align-top">
-                        <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap text-[11px]">
-                          {value}
-                          {#if share != null}
-                            <span class="text-gray-400 font-normal text-[10px]">{sharePct(share)}</span>
+            {#if showCensus}
+              <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center justify-between">
+                Census Demographics
+                <button type="button" class="text-gray-300 hover:text-red-400 text-[10px] leading-none cursor-pointer" onclick={toggleShowCensus} title="Hide census">✕</button>
+              </div>
+              {#if demoRows.length > 0}
+                <table class="w-full border-collapse mb-3">
+                  <tbody>
+                    {#each demoRows as [label, value, share, largest]}
+                      <tr class="border-b border-gray-100 last:border-0">
+                        <td class="text-gray-500 py-[3px] pr-1.5 whitespace-nowrap align-top text-[11px]">
+                          {label}
+                          {#if LABEL_TO_INFO[label]}
+                            <button type="button"
+                              class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer"
+                              onclick={() => activeInfoKey = LABEL_TO_INFO[label]}>ⓘ</button>
                           {/if}
-                          {#if largest}
-                            <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[3px] py-[1px] rounded leading-tight">▲</span>
-                          {/if}
-                        </div>
-                        {#if share != null}
-                          <div class="w-full h-[2px] bg-gray-100 rounded-full mt-[1px]">
-                            <div class="h-[2px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
+                        </td>
+                        <td class="text-right py-[3px] align-top">
+                          <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap text-[11px]">
+                            {value}
+                            {#if share != null}
+                              <span class="text-gray-400 font-normal text-[10px]">{sharePct(share)}</span>
+                            {/if}
+                            {#if largest}
+                              <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[3px] py-[1px] rounded leading-tight">▲</span>
+                            {/if}
                           </div>
-                        {/if}
-                      </td>
-                    </tr>
-                  {/each}
-                </tbody>
-              </table>
+                          {#if share != null}
+                            <div class="w-full h-[2px] bg-gray-100 rounded-full mt-[1px]">
+                              <div class="h-[2px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
+                            </div>
+                          {/if}
+                        </td>
+                      </tr>
+                    {/each}
+                  </tbody>
+                </table>
+              {:else}
+                <p class="text-[11px] text-gray-400 italic mb-3">No ACS data</p>
+              {/if}
             {:else}
-              <p class="text-[11px] text-gray-400 italic mb-3">No ACS data</p>
+              <button type="button"
+                class="w-full text-left text-[10px] text-gray-400 hover:text-[#29315F] mb-2 cursor-pointer flex items-center gap-1"
+                onclick={toggleShowCensus}>
+                <span class="text-[10px]">+</span> Show Census Demographics
+              </button>
             {/if}
             <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Location</div>
             <table class="w-full border-collapse">
@@ -761,9 +833,13 @@
             {/if}
           </div>
 
-          <!-- Col 3: Census Demographics -->
+          <!-- Col 3: Census Demographics (optional) -->
+          {#if showCensus}
           <div class="flex-1 flex flex-col min-w-0 overflow-y-auto border-r border-gray-200 px-2.5 py-2 text-[11px] text-[#29315F]">
-            <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Census Demographics</div>
+            <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center justify-between">
+              Census Demographics
+              <button type="button" class="text-gray-300 hover:text-red-400 text-[9px] cursor-pointer" onclick={toggleShowCensus} title="Hide">✕</button>
+            </div>
             {#if demoRows.length > 0}
               <table class="w-full border-collapse">
                 <tbody>
@@ -801,9 +877,17 @@
               <p class="text-[10px] text-gray-400 italic">No ACS data for this district</p>
             {/if}
           </div>
+          {/if}
 
-          <!-- Col 4: Location + Fairness -->
+          <!-- Col 4: Location + Fairness (+ census toggle when hidden) -->
           <div class="flex-1 flex flex-col min-w-0 overflow-y-auto px-2.5 py-2 text-[11px] text-[#29315F]">
+            {#if !showCensus}
+              <button type="button"
+                class="w-full text-left text-[9px] text-gray-400 hover:text-[#29315F] mb-2 cursor-pointer flex items-center gap-1"
+                onclick={toggleShowCensus}>
+                <span>+</span> Show Census Demographics
+              </button>
+            {/if}
             <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Location</div>
             <table class="w-full border-collapse mb-2">
               <tbody>
