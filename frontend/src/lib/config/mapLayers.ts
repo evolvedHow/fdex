@@ -123,8 +123,19 @@ function overlayLayers(config: AppConfig): LayerSpec[] {
         continue;
       }
 
-      const fillExpr = stopsToStep(overlay.property, overlay.colorStops.fill as [number, string][], 'rgba(0,0,0,0)');
-      const outlineExpr = stopsToStep(overlay.property, overlay.colorStops.outline as [number, string][], 'rgba(0,0,0,0)');
+      const stepFill = stopsToStep(overlay.property, overlay.colorStops.fill as [number, string][], 'rgba(0,0,0,0)');
+      const stepOutline = stopsToStep(overlay.property, overlay.colorStops.outline as [number, string][], 'rgba(0,0,0,0)');
+
+      let fillExpr: any = stepFill;
+      let outlineExpr: any = stepOutline;
+      if (overlay.id === 'precinct_plean') {
+        // Precincts with no major-party votes (e.g. industrial areas, rivers) have
+        // partisan = null or 0. Render transparent so the basemap shows through
+        // instead of the bottom-of-scale red.
+        const noData: any[] = ['==', ['coalesce', ['get', overlay.property], 0], 0];
+        fillExpr = ['case', noData, 'rgba(0,0,0,0)', stepFill];
+        outlineExpr = ['case', noData, 'rgba(0,0,0,0)', stepOutline];
+      }
       const layer: any = {
         id: layerId,
         type: 'fill',
