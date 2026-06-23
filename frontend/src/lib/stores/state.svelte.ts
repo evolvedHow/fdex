@@ -169,3 +169,15 @@ export function setLocationPrecinct(v: LocationPrecinct | null) { locationPrecin
 let isPinned = $state(false);
 export function getIsPinned()           { return isPinned; }
 export function setIsPinned(v: boolean) { isPinned = v; }
+
+// ── Mobile drawer tab (not persisted) ────────────────────────────────────
+export type DrawerTab = 'metrics' | 'election' | 'census' | 'location';
+let drawerTab = $state<DrawerTab>('metrics');
+export function getDrawerTab()                { return drawerTab; }
+export function setDrawerTab(tab: DrawerTab)  { drawerTab = tab; }
+
+// ── Mobile filters panel open/closed (not persisted) ─────────────────────
+let controlsOpen = $state(false);
+export function getControlsOpen()             { return controlsOpen; }
+export function setControlsOpen(v: boolean)   { controlsOpen = v; }
+export function toggleControlsOpen()          { controlsOpen = !controlsOpen; }

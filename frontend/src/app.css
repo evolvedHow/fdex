@@ -25,3 +25,23 @@
     height: 20px;
   }
 }
+
+/* Touch UX */
+button, select, input {
+  touch-action: manipulation;
+}
+
+@media (max-width: 639px) {
+  .mapboxgl-ctrl-group > button {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  /* Move Mapbox nav controls up to clear the 44px collapsed strip */
+  .mapboxgl-ctrl-bottom-right {
+    bottom: 52px;
+    right: 6px;
+  }
+  .mapboxgl-ctrl-bottom-left {
+    bottom: 52px;
+  }
+}

@@ -241,7 +241,7 @@
 </script>
 
 <!-- Fixed-width sidebar, full height, always visible -->
-<div class="w-[300px] shrink-0 flex flex-col bg-white border-l border-gray-200 text-[#29315F] overflow-hidden relative">
+<div class="w-[300px] xl:w-[320px] shrink-0 flex flex-col bg-white border-l border-gray-200 text-[#29315F] overflow-hidden relative">
 
   <!-- ── Info overlay ────────────────────────────────────────────────────── -->
   {#if activeInfoKey && INFO[activeInfoKey]}
@@ -268,7 +268,7 @@
             aria-label="Close"
           >✕</button>
         </div>
-        <p class="text-[11px] text-gray-600 leading-relaxed">
+        <p class="text-[13px] text-gray-600 leading-relaxed">
           {INFO[activeInfoKey].desc}
         </p>
       </div>
@@ -306,7 +306,7 @@
                 {#if LABEL_TO_INFO[label]}
                   <button
                     type="button"
-                    class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer"
+                    class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer"
                     onclick={() => activeInfoKey = LABEL_TO_INFO[label]}
                     title="What is this?"
                   >ⓘ</button>
@@ -431,7 +431,7 @@
                     {#if LABEL_TO_INFO[label]}
                       <button
                         type="button"
-                        class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer"
+                        class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer"
                         onclick={() => activeInfoKey = LABEL_TO_INFO[label]}
                         title="What is this?"
                       >ⓘ</button>
@@ -531,14 +531,14 @@
             <tr class="border-b border-gray-100">
               <td class="text-gray-500 py-[3px] pr-2">
                 Population
-                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'population'} title="What is this?">ⓘ</button>
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'population'} title="What is this?">ⓘ</button>
               </td>
               <td class="text-right py-[3px] font-medium tabular-nums">{fmt(totals.pop)}</td>
             </tr>
             <tr class="border-b border-gray-100">
               <td class="text-gray-500 py-[3px] pr-2">
                 VAP 2020
-                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'vap'} title="What is this?">ⓘ</button>
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'vap'} title="What is this?">ⓘ</button>
               </td>
               <td class="text-right py-[3px] font-medium tabular-nums">{fmt(totals.tvap)}</td>
             </tr>
@@ -546,7 +546,7 @@
             <tr class="border-b border-gray-100">
               <td class="text-gray-500 py-[3px] pr-2">
                 White VAP
-                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'white_vap'} title="What is this?">ⓘ</button>
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'white_vap'} title="What is this?">ⓘ</button>
               </td>
               <td class="text-right py-[3px] font-medium tabular-nums">
                 {totals.tvap > 0 ? pct(totals.wvap / totals.tvap) : '—'}
@@ -557,7 +557,7 @@
             <tr class="border-b border-gray-100">
               <td class="text-gray-500 py-[3px] pr-2">
                 Black VAP
-                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'black_vap'} title="What is this?">ⓘ</button>
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'black_vap'} title="What is this?">ⓘ</button>
               </td>
               <td class="text-right py-[3px] font-medium tabular-nums">
                 {totals.tvap > 0 ? pct(totals.bvap / totals.tvap) : '—'}
@@ -567,7 +567,7 @@
             <tr class="border-b border-gray-100">
               <td class="text-gray-500 py-[3px] pr-2">
                 Asian VAP
-                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'asian_vap'} title="What is this?">ⓘ</button>
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'asian_vap'} title="What is this?">ⓘ</button>
               </td>
               <td class="text-right py-[3px] font-medium tabular-nums">
                 {totals.tvap > 0 ? pct(totals.avap / totals.tvap) : '—'}
@@ -577,7 +577,7 @@
             <tr class="border-b border-gray-100">
               <td class="text-gray-500 py-[3px] pr-2">
                 Hispanic VAP
-                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'hispanic_vap'} title="What is this?">ⓘ</button>
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'hispanic_vap'} title="What is this?">ⓘ</button>
               </td>
               <td class="text-right py-[3px] font-medium tabular-nums">
                 {totals.tvap > 0 ? pct(totals.hvap / totals.tvap) : '—'}
@@ -587,7 +587,7 @@
             <tr class="border-b border-gray-100 last:border-0">
               <td class="text-gray-500 py-[3px] pr-2">
                 Minority VAP
-                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'minority_vap'} title="What is this?">ⓘ</button>
+                <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'minority_vap'} title="What is this?">ⓘ</button>
               </td>
               <td class="text-right py-[3px] font-medium tabular-nums">
                 {totals.tvap > 0 ? pct(totals.bipocvap / totals.tvap) : '—'}

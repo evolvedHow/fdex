@@ -12,11 +12,11 @@
 </script>
 
 {#if activeOverlay?.legend}
-  <div class="absolute top-2.5 right-2.5 z-10">
+  <div class="absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5 z-10">
     <div
       class="inline-flex flex-wrap items-center gap-0 p-1.5
              border border-gray-300 rounded-lg bg-[#fafafa]
-             w-[185px] max-md:w-[125px]"
+             w-[185px] max-md:w-[125px] max-sm:w-[105px]"
     >
       <div class="w-full font-bold text-black pb-1 text-center text-sm">
         {activeOverlay.legend.title}

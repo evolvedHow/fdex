@@ -7,6 +7,9 @@
     getDemographicsTotals,
     getLocationCounty,
     getLocationPrecinct,
+    getDrawerTab,
+    setDrawerTab,
+    type DrawerTab,
   } from '../stores/state.svelte';
 
   let hovered  = $derived(getHoveredDistrict());
@@ -15,6 +18,15 @@
   let demTot   = $derived(getDemographicsTotals());
   let county   = $derived(getLocationCounty());
   let precinct = $derived(getLocationPrecinct());
+
+  let activeDrawerTab = $derived(getDrawerTab());
+
+  const TABS: { key: DrawerTab; label: string }[] = [
+    { key: 'metrics',  label: 'Metrics'  },
+    { key: 'election', label: 'Election' },
+    { key: 'census',   label: 'Census'   },
+    { key: 'location', label: 'Location' },
+  ];
 
   // ── Auto-hide ────────────────────────────────────────────────────────────
   let expanded = $state(false);
@@ -44,7 +56,6 @@
     }
   }
 
-  // Expand on district hover; collapse quickly when cursor leaves all districts
   let _prevHovered = false;
   $effect(() => {
     if (hovered) {
@@ -282,7 +293,6 @@
     return rows;
   })());
 
-  // Partisan lean display for strip
   let partisanSummary = $derived((() => {
     if (!hovered?.properties?.partisan) return null;
     const p = hovered.properties.partisan as number;
@@ -305,17 +315,17 @@
       onclick={(e) => e.stopPropagation()}
     >
       <div class="flex items-start justify-between mb-2">
-        <div class="text-[13px] font-semibold text-[#29315F] leading-snug pr-2">
+        <div class="text-[14px] font-semibold text-[#29315F] leading-snug pr-2">
           {INFO[activeInfoKey].title}
         </div>
         <button
           type="button"
-          class="text-gray-400 hover:text-gray-700 text-[16px] leading-none shrink-0 mt-0.5 cursor-pointer"
+          class="text-gray-400 hover:text-gray-700 text-[18px] leading-none shrink-0 mt-0.5 cursor-pointer"
           onclick={() => activeInfoKey = null}
           aria-label="Close"
         >✕</button>
       </div>
-      <p class="text-[11px] text-gray-600 leading-relaxed whitespace-pre-line">
+      <p class="text-[13px] text-gray-600 leading-relaxed whitespace-pre-line">
         {INFO[activeInfoKey].desc}
       </p>
     </div>
@@ -334,133 +344,343 @@
   {#if expanded}
     <div
       transition:slide={{ duration: 200 }}
-      class="h-[210px] border-t border-gray-200 flex overflow-hidden shadow-[0_-4px_12px_rgba(0,0,0,0.12)]"
+      class="border-t border-gray-200 flex flex-col overflow-hidden shadow-[0_-4px_12px_rgba(0,0,0,0.12)]
+             h-[60vh] sm:h-[260px] lg:h-[210px]"
       style="background-color: rgba(255,255,255,{opacity/100})"
     >
-      {#if hovered}
-        <!-- ── District mode: 4 columns ──────────────────────────────── -->
 
-        <!-- Col 1: District Metrics -->
-        <div class="flex-1 flex flex-col min-w-0 overflow-y-auto border-r border-gray-200 px-2.5 py-2 text-[11px] text-[#29315F]">
-          <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
-            District Metrics
-          </div>
-          <table class="w-full border-collapse">
-            <tbody>
-              {#each planRows as [label, value, share, largest]}
-                <tr class="border-b border-gray-100 last:border-0">
-                  <td class="text-gray-500 py-[2px] pr-1.5 whitespace-nowrap align-top text-[10px]">
-                    {label}
-                    {#if LABEL_TO_INFO[label]}
-                      <button
-                        type="button"
-                        class="text-gray-300 hover:text-blue-400 ml-0.5 text-[9px] leading-none align-middle cursor-pointer"
-                        onclick={() => activeInfoKey = LABEL_TO_INFO[label]}
-                        title="What is this?"
-                      >ⓘ</button>
-                    {/if}
-                  </td>
-                  <td class="text-right py-[2px] align-top">
-                    <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap text-[10px]">
-                      {value}
-                      {#if share != null}
-                        <span class="text-gray-400 font-normal text-[9px]">{sharePct(share)}</span>
+      <!-- ── Tab bar (phone only) ──────────────────────────────────────── -->
+      <div class="sm:hidden flex border-b border-gray-200 shrink-0">
+        {#each TABS as tab}
+          <button
+            class="flex-1 py-2.5 text-[13px] font-medium text-center border-b-2 transition-colors cursor-pointer
+                   {activeDrawerTab === tab.key
+                     ? 'border-[#29315F] text-[#29315F]'
+                     : 'border-transparent text-gray-500'}"
+            onclick={() => setDrawerTab(tab.key)}
+          >{tab.label}</button>
+        {/each}
+      </div>
+
+      {#if hovered}
+
+        <!-- ══ PHONE: single-column tab content ══ -->
+        <div class="sm:hidden flex-1 overflow-y-auto px-3 py-2">
+          {#if activeDrawerTab === 'metrics'}
+            <!-- Metrics tab -->
+            <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2">District Metrics</div>
+            <table class="w-full border-collapse">
+              <tbody>
+                {#each planRows as [label, value, share, largest]}
+                  <tr class="border-b border-gray-100 last:border-0">
+                    <td class="text-gray-500 py-[5px] pr-2 whitespace-nowrap align-top text-[13px]">
+                      {label}
+                      {#if LABEL_TO_INFO[label]}
+                        <button type="button"
+                          class="text-gray-300 hover:text-blue-400 ml-0.5 text-[11px] leading-none align-middle cursor-pointer"
+                          onclick={() => activeInfoKey = LABEL_TO_INFO[label]}>ⓘ</button>
                       {/if}
-                      {#if largest}
-                        <span class="inline-block bg-amber-100 text-amber-700 text-[8px] font-semibold px-[3px] py-[1px] rounded leading-tight">▲</span>
-                      {/if}
-                    </div>
-                    {#if share != null}
-                      <div class="w-full h-[2px] bg-gray-100 rounded-full mt-[1px]">
-                        <div class="h-[2px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
+                    </td>
+                    <td class="text-right py-[5px] align-top">
+                      <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap text-[13px]">
+                        {value}
+                        {#if share != null}
+                          <span class="text-gray-400 font-normal text-[11px]">{sharePct(share)}</span>
+                        {/if}
+                        {#if largest}
+                          <span class="inline-block bg-amber-100 text-amber-700 text-[10px] font-semibold px-[3px] py-[1px] rounded leading-tight">▲</span>
+                        {/if}
                       </div>
-                    {/if}
+                      {#if share != null}
+                        <div class="w-full h-[3px] bg-gray-100 rounded-full mt-[2px]">
+                          <div class="h-[3px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
+                        </div>
+                      {/if}
+                    </td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+
+          {:else if activeDrawerTab === 'election'}
+            <!-- Election tab -->
+            <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2 flex items-center gap-1">
+              Election Results
+              <button type="button" class="text-gray-300 hover:text-blue-400 text-[11px] leading-none cursor-pointer font-normal normal-case"
+                onclick={() => activeInfoKey = 'election_results'}>ⓘ</button>
+            </div>
+            {#if electionRows.length > 0}
+              <div class="flex flex-col gap-[10px]">
+                {#each electionRows as row}
+                  {@const dPct = row.dem * 100}
+                  {@const rPct = (1 - row.dem) * 100}
+                  {@const dWins = row.dem > 0.5}
+                  {@const dWasted = dWins ? dPct - 50 : dPct}
+                  {@const rWasted = dWins ? rPct : rPct - 50}
+                  <div>
+                    <div class="flex items-center justify-between mb-[2px]">
+                      <span class="text-gray-500 text-[13px]">{row.label}</span>
+                      <span class="text-[13px] font-semibold {dWins ? 'text-blue-600' : 'text-red-600'}">
+                        {dWins ? 'D' : 'R'} +{Math.abs(dPct - rPct).toFixed(1)}
+                      </span>
+                    </div>
+                    <div class="relative w-full h-[14px] rounded overflow-hidden flex">
+                      {#if dWins}
+                        <div class="h-full bg-blue-600" style="width:50%"></div>
+                        <div class="h-full bg-blue-300" style="width:{dWasted}%"></div>
+                        <div class="h-full bg-red-200"  style="width:{rPct}%"></div>
+                      {:else if row.dem < 0.5}
+                        <div class="h-full bg-blue-200" style="width:{dPct}%"></div>
+                        <div class="h-full bg-red-600"  style="width:50%"></div>
+                        <div class="h-full bg-red-300"  style="width:{rWasted}%"></div>
+                      {:else}
+                        <div class="h-full bg-blue-500" style="width:50%"></div>
+                        <div class="h-full bg-red-500"  style="width:50%"></div>
+                      {/if}
+                      <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/80 -translate-x-1/2"></div>
+                    </div>
+                    <div class="flex tabular-nums mt-[2px] items-start">
+                      <span class="text-[11px] {dWins ? 'text-blue-700' : 'text-blue-400'}">D {dPct.toFixed(1)}%</span>
+                      <span class="text-[11px] text-gray-300 mx-0.5">·</span>
+                      <span class="text-[11px] text-gray-400">{dWasted.toFixed(1)}% wasted</span>
+                      <div class="flex-1 text-right">
+                        <span class="text-[11px] text-gray-400">{rWasted.toFixed(1)}% wasted</span>
+                        <span class="text-[11px] text-gray-300 mx-0.5">·</span>
+                        <span class="text-[11px] {!dWins ? 'text-red-700' : 'text-red-400'}">R {rPct.toFixed(1)}%</span>
+                      </div>
+                    </div>
+                  </div>
+                {/each}
+              </div>
+            {:else}
+              <p class="text-[13px] text-gray-400 italic">No election data</p>
+            {/if}
+
+          {:else if activeDrawerTab === 'census'}
+            <!-- Census tab -->
+            <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2">Census Demographics</div>
+            {#if demoRows.length > 0}
+              <table class="w-full border-collapse">
+                <tbody>
+                  {#each demoRows as [label, value, share, largest]}
+                    <tr class="border-b border-gray-100 last:border-0">
+                      <td class="text-gray-500 py-[5px] pr-2 whitespace-nowrap align-top text-[13px]">
+                        {label}
+                        {#if LABEL_TO_INFO[label]}
+                          <button type="button"
+                            class="text-gray-300 hover:text-blue-400 ml-0.5 text-[11px] leading-none align-middle cursor-pointer"
+                            onclick={() => activeInfoKey = LABEL_TO_INFO[label]}>ⓘ</button>
+                        {/if}
+                      </td>
+                      <td class="text-right py-[5px] align-top">
+                        <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap text-[13px]">
+                          {value}
+                          {#if share != null}
+                            <span class="text-gray-400 font-normal text-[11px]">{sharePct(share)}</span>
+                          {/if}
+                          {#if largest}
+                            <span class="inline-block bg-amber-100 text-amber-700 text-[10px] font-semibold px-[3px] py-[1px] rounded leading-tight">▲</span>
+                          {/if}
+                        </div>
+                        {#if share != null}
+                          <div class="w-full h-[3px] bg-gray-100 rounded-full mt-[2px]">
+                            <div class="h-[3px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
+                          </div>
+                        {/if}
+                      </td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+            {:else}
+              <p class="text-[13px] text-gray-400 italic">No ACS data for this district</p>
+            {/if}
+
+          {:else}
+            <!-- Location tab -->
+            <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2">Location</div>
+            <table class="w-full border-collapse mb-3">
+              <tbody>
+                <tr class="border-b border-gray-100">
+                  <td class="text-gray-500 py-[5px] pr-2 text-[13px]">County</td>
+                  <td class="text-right py-[5px] font-medium text-[13px]">{county ? `${county} Co.` : '—'}</td>
+                </tr>
+                <tr class="border-b border-gray-100 last:border-0">
+                  <td class="text-gray-500 py-[5px] pr-2 text-[13px]">Precinct Lean</td>
+                  <td class="text-right py-[5px] font-medium text-[13px]">
+                    {precinct?.partisan != null ? pct(precinct.partisan as number) : 'zoom in'}
                   </td>
                 </tr>
-              {/each}
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Col 2: Election Results -->
-        <div class="flex-[1.4] flex flex-col min-w-0 overflow-y-auto border-r border-gray-200 px-2.5 py-2 text-[11px]">
-          <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
-            Election Results
-            <button
-              type="button"
-              class="text-gray-300 hover:text-blue-400 text-[9px] leading-none cursor-pointer font-normal normal-case"
-              onclick={() => activeInfoKey = 'election_results'}
-              title="What is this?"
-            >ⓘ</button>
-          </div>
-
-          {#if electionRows.length > 0}
-            <div class="flex flex-col gap-[7px]">
-              {#each electionRows as row}
-                {@const dPct = row.dem * 100}
-                {@const rPct = (1 - row.dem) * 100}
-                {@const dWins = row.dem > 0.5}
-                {@const dWasted = dWins ? dPct - 50 : dPct}
-                {@const rWasted = dWins ? rPct : rPct - 50}
-                <div>
-                  <div class="flex items-center justify-between mb-[1px]">
-                    <span class="text-gray-500 text-[10px]">{row.label}</span>
-                    <span class="text-[10px] font-semibold {dWins ? 'text-blue-600' : 'text-red-600'}">
-                      {dWins ? 'D' : 'R'} +{Math.abs(dPct - rPct).toFixed(1)}
-                    </span>
-                  </div>
-                  <div class="relative w-full h-[11px] rounded overflow-hidden flex">
-                    {#if dWins}
-                      <div class="h-full bg-blue-600" style="width:50%" title="D efficient: 50.0%"></div>
-                      <div class="h-full bg-blue-300" style="width:{dWasted}%" title="D surplus"></div>
-                      <div class="h-full bg-red-200"  style="width:{rPct}%"    title="R wasted"></div>
-                    {:else if row.dem < 0.5}
-                      <div class="h-full bg-blue-200" style="width:{dPct}%"    title="D wasted"></div>
-                      <div class="h-full bg-red-600"  style="width:50%"        title="R efficient: 50.0%"></div>
-                      <div class="h-full bg-red-300"  style="width:{rWasted}%" title="R surplus"></div>
-                    {:else}
-                      <div class="h-full bg-blue-500" style="width:50%"></div>
-                      <div class="h-full bg-red-500"  style="width:50%"></div>
-                    {/if}
-                    <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/80 -translate-x-1/2"></div>
-                  </div>
-                  <div class="flex tabular-nums mt-[1px] items-start">
-                    <span class="text-[9px] {dWins ? 'text-blue-700' : 'text-blue-400'}">D {dPct.toFixed(1)}%</span>
-                    <span class="text-[9px] text-gray-300 mx-0.5">·</span>
-                    <span class="text-[9px] text-gray-400">{dWasted.toFixed(1)}% wasted</span>
-                    <div class="flex-1 text-right">
-                      <span class="text-[9px] text-gray-400">{rWasted.toFixed(1)}% wasted</span>
-                      <span class="text-[9px] text-gray-300 mx-0.5">·</span>
-                      <span class="text-[9px] {!dWins ? 'text-red-700' : 'text-red-400'}">R {rPct.toFixed(1)}%</span>
-                    </div>
-                  </div>
-                </div>
-              {/each}
-            </div>
-          {:else}
-            <p class="text-[10px] text-gray-400 italic">No election data</p>
+              </tbody>
+            </table>
+            {#if totals?.elections.some((e) => e.hasData)}
+              <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2 flex items-center gap-1">
+                Efficiency Gap
+                <button type="button" class="text-gray-300 hover:text-blue-400 text-[11px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'efficiency_gap'}>ⓘ</button>
+              </div>
+              <table class="w-full border-collapse">
+                <tbody>
+                  {#each totals.elections.filter((e) => e.hasData) as el}
+                    <tr class="border-b border-gray-100 last:border-0">
+                      <td class="text-gray-500 py-[5px] pr-2 text-[13px] whitespace-nowrap">{el.label}</td>
+                      <td class="text-right py-[5px] font-medium tabular-nums text-[13px] {el.eg > 0 ? 'text-blue-600' : 'text-red-600'}">
+                        {el.eg > 0 ? '+' : ''}{(el.eg * 100).toFixed(1)}%
+                      </td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+            {/if}
           {/if}
         </div>
 
-        <!-- Col 3: Census Demographics -->
-        <div class="flex-1 flex flex-col min-w-0 overflow-y-auto border-r border-gray-200 px-2.5 py-2 text-[11px] text-[#29315F]">
-          <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
-            Census Demographics
+        <!-- ══ TABLET: 2-column grid ══ -->
+        <div class="hidden sm:grid lg:hidden grid-cols-2 flex-1 overflow-hidden">
+          <!-- Left: metrics + election -->
+          <div class="overflow-y-auto border-r border-gray-200 px-2.5 py-2">
+            <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">District Metrics</div>
+            <table class="w-full border-collapse mb-3">
+              <tbody>
+                {#each planRows as [label, value, share, largest]}
+                  <tr class="border-b border-gray-100 last:border-0">
+                    <td class="text-gray-500 py-[3px] pr-1.5 whitespace-nowrap align-top text-[11px]">
+                      {label}
+                      {#if LABEL_TO_INFO[label]}
+                        <button type="button"
+                          class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer"
+                          onclick={() => activeInfoKey = LABEL_TO_INFO[label]}>ⓘ</button>
+                      {/if}
+                    </td>
+                    <td class="text-right py-[3px] align-top">
+                      <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap text-[11px]">
+                        {value}
+                        {#if share != null}
+                          <span class="text-gray-400 font-normal text-[10px]">{sharePct(share)}</span>
+                        {/if}
+                        {#if largest}
+                          <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[3px] py-[1px] rounded leading-tight">▲</span>
+                        {/if}
+                      </div>
+                      {#if share != null}
+                        <div class="w-full h-[2px] bg-gray-100 rounded-full mt-[1px]">
+                          <div class="h-[2px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
+                        </div>
+                      {/if}
+                    </td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+            {#if electionRows.length > 0}
+              <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Election Results</div>
+              <div class="flex flex-col gap-[6px]">
+                {#each electionRows as row}
+                  {@const dPct = row.dem * 100}
+                  {@const rPct = (1 - row.dem) * 100}
+                  {@const dWins = row.dem > 0.5}
+                  {@const dWasted = dWins ? dPct - 50 : dPct}
+                  {@const rWasted = dWins ? rPct : rPct - 50}
+                  <div>
+                    <div class="flex items-center justify-between mb-[1px]">
+                      <span class="text-gray-500 text-[10px]">{row.label}</span>
+                      <span class="text-[10px] font-semibold {dWins ? 'text-blue-600' : 'text-red-600'}">
+                        {dWins ? 'D' : 'R'} +{Math.abs(dPct - rPct).toFixed(1)}
+                      </span>
+                    </div>
+                    <div class="relative w-full h-[11px] rounded overflow-hidden flex">
+                      {#if dWins}
+                        <div class="h-full bg-blue-600" style="width:50%"></div>
+                        <div class="h-full bg-blue-300" style="width:{dWasted}%"></div>
+                        <div class="h-full bg-red-200"  style="width:{rPct}%"></div>
+                      {:else if row.dem < 0.5}
+                        <div class="h-full bg-blue-200" style="width:{dPct}%"></div>
+                        <div class="h-full bg-red-600"  style="width:50%"></div>
+                        <div class="h-full bg-red-300"  style="width:{rWasted}%"></div>
+                      {:else}
+                        <div class="h-full bg-blue-500" style="width:50%"></div>
+                        <div class="h-full bg-red-500"  style="width:50%"></div>
+                      {/if}
+                      <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/80 -translate-x-1/2"></div>
+                    </div>
+                  </div>
+                {/each}
+              </div>
+            {/if}
           </div>
-          {#if demoRows.length > 0}
+
+          <!-- Right: census + location -->
+          <div class="overflow-y-auto px-2.5 py-2">
+            <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Census Demographics</div>
+            {#if demoRows.length > 0}
+              <table class="w-full border-collapse mb-3">
+                <tbody>
+                  {#each demoRows as [label, value, share, largest]}
+                    <tr class="border-b border-gray-100 last:border-0">
+                      <td class="text-gray-500 py-[3px] pr-1.5 whitespace-nowrap align-top text-[11px]">
+                        {label}
+                        {#if LABEL_TO_INFO[label]}
+                          <button type="button"
+                            class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer"
+                            onclick={() => activeInfoKey = LABEL_TO_INFO[label]}>ⓘ</button>
+                        {/if}
+                      </td>
+                      <td class="text-right py-[3px] align-top">
+                        <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap text-[11px]">
+                          {value}
+                          {#if share != null}
+                            <span class="text-gray-400 font-normal text-[10px]">{sharePct(share)}</span>
+                          {/if}
+                          {#if largest}
+                            <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[3px] py-[1px] rounded leading-tight">▲</span>
+                          {/if}
+                        </div>
+                        {#if share != null}
+                          <div class="w-full h-[2px] bg-gray-100 rounded-full mt-[1px]">
+                            <div class="h-[2px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
+                          </div>
+                        {/if}
+                      </td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+            {:else}
+              <p class="text-[11px] text-gray-400 italic mb-3">No ACS data</p>
+            {/if}
+            <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Location</div>
             <table class="w-full border-collapse">
               <tbody>
-                {#each demoRows as [label, value, share, largest]}
+                <tr class="border-b border-gray-100">
+                  <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">County</td>
+                  <td class="text-right py-[3px] font-medium text-[11px]">{county ? `${county} Co.` : '—'}</td>
+                </tr>
+                <tr class="border-b border-gray-100 last:border-0">
+                  <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">Precinct Lean</td>
+                  <td class="text-right py-[3px] font-medium text-[11px]">
+                    {precinct?.partisan != null ? pct(precinct.partisan as number) : 'zoom in'}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ══ LAPTOP/DESKTOP: 4-column flex (unchanged) ══ -->
+        <div class="hidden lg:flex flex-1 overflow-hidden">
+
+          <!-- Col 1: District Metrics -->
+          <div class="flex-1 flex flex-col min-w-0 overflow-y-auto border-r border-gray-200 px-2.5 py-2 text-[11px] text-[#29315F]">
+            <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">District Metrics</div>
+            <table class="w-full border-collapse">
+              <tbody>
+                {#each planRows as [label, value, share, largest]}
                   <tr class="border-b border-gray-100 last:border-0">
                     <td class="text-gray-500 py-[2px] pr-1.5 whitespace-nowrap align-top text-[10px]">
                       {label}
                       {#if LABEL_TO_INFO[label]}
-                        <button
-                          type="button"
+                        <button type="button"
                           class="text-gray-300 hover:text-blue-400 ml-0.5 text-[9px] leading-none align-middle cursor-pointer"
-                          onclick={() => activeInfoKey = LABEL_TO_INFO[label]}
-                          title="What is this?"
-                        >ⓘ</button>
+                          onclick={() => activeInfoKey = LABEL_TO_INFO[label]}>ⓘ</button>
                       {/if}
                     </td>
                     <td class="text-right py-[2px] align-top">
@@ -483,245 +703,383 @@
                 {/each}
               </tbody>
             </table>
-          {:else}
-            <p class="text-[10px] text-gray-400 italic">No ACS data for this district</p>
-          {/if}
-        </div>
+          </div>
 
-        <!-- Col 4: Location + Fairness -->
-        <div class="flex-1 flex flex-col min-w-0 overflow-y-auto px-2.5 py-2 text-[11px] text-[#29315F]">
-          <!-- County + Precinct -->
-          <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Location</div>
-          <table class="w-full border-collapse mb-2">
-            <tbody>
-              <tr class="border-b border-gray-100">
-                <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">County</td>
-                <td class="text-right py-[2px] font-medium text-[10px]">{county ? `${county} Co.` : '—'}</td>
-              </tr>
-              <tr class="border-b border-gray-100 last:border-0">
-                <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Precinct Lean</td>
-                <td class="text-right py-[2px] font-medium text-[10px]">
-                  {precinct?.partisan != null ? pct(precinct.partisan as number) : 'zoom in'}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <!-- Efficiency Gap -->
-          {#if totals?.elections.some((e) => e.hasData)}
+          <!-- Col 2: Election Results -->
+          <div class="flex-[1.4] flex flex-col min-w-0 overflow-y-auto border-r border-gray-200 px-2.5 py-2 text-[11px]">
             <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
-              Efficiency Gap
-              <button type="button" class="text-gray-300 hover:text-blue-400 text-[9px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'efficiency_gap'} title="What is this?">ⓘ</button>
+              Election Results
+              <button type="button"
+                class="text-gray-300 hover:text-blue-400 text-[9px] leading-none cursor-pointer font-normal normal-case"
+                onclick={() => activeInfoKey = 'election_results'}>ⓘ</button>
             </div>
-            <table class="w-full border-collapse mb-2">
-              <tbody>
-                {#each totals.elections.filter((e) => e.hasData) as el}
-                  <tr class="border-b border-gray-100 last:border-0">
-                    <td class="text-gray-500 py-[2px] pr-1.5 text-[10px] whitespace-nowrap">{el.label}</td>
-                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px] {el.eg > 0 ? 'text-blue-600' : 'text-red-600'}">
-                      {el.eg > 0 ? '+' : ''}{(el.eg * 100).toFixed(1)}%
-                    </td>
-                  </tr>
+            {#if electionRows.length > 0}
+              <div class="flex flex-col gap-[7px]">
+                {#each electionRows as row}
+                  {@const dPct = row.dem * 100}
+                  {@const rPct = (1 - row.dem) * 100}
+                  {@const dWins = row.dem > 0.5}
+                  {@const dWasted = dWins ? dPct - 50 : dPct}
+                  {@const rWasted = dWins ? rPct : rPct - 50}
+                  <div>
+                    <div class="flex items-center justify-between mb-[1px]">
+                      <span class="text-gray-500 text-[10px]">{row.label}</span>
+                      <span class="text-[10px] font-semibold {dWins ? 'text-blue-600' : 'text-red-600'}">
+                        {dWins ? 'D' : 'R'} +{Math.abs(dPct - rPct).toFixed(1)}
+                      </span>
+                    </div>
+                    <div class="relative w-full h-[11px] rounded overflow-hidden flex">
+                      {#if dWins}
+                        <div class="h-full bg-blue-600" style="width:50%"></div>
+                        <div class="h-full bg-blue-300" style="width:{dWasted}%"></div>
+                        <div class="h-full bg-red-200"  style="width:{rPct}%"></div>
+                      {:else if row.dem < 0.5}
+                        <div class="h-full bg-blue-200" style="width:{dPct}%"></div>
+                        <div class="h-full bg-red-600"  style="width:50%"></div>
+                        <div class="h-full bg-red-300"  style="width:{rWasted}%"></div>
+                      {:else}
+                        <div class="h-full bg-blue-500" style="width:50%"></div>
+                        <div class="h-full bg-red-500"  style="width:50%"></div>
+                      {/if}
+                      <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/80 -translate-x-1/2"></div>
+                    </div>
+                    <div class="flex tabular-nums mt-[1px] items-start">
+                      <span class="text-[9px] {dWins ? 'text-blue-700' : 'text-blue-400'}">D {dPct.toFixed(1)}%</span>
+                      <span class="text-[9px] text-gray-300 mx-0.5">·</span>
+                      <span class="text-[9px] text-gray-400">{dWasted.toFixed(1)}% wasted</span>
+                      <div class="flex-1 text-right">
+                        <span class="text-[9px] text-gray-400">{rWasted.toFixed(1)}% wasted</span>
+                        <span class="text-[9px] text-gray-300 mx-0.5">·</span>
+                        <span class="text-[9px] {!dWins ? 'text-red-700' : 'text-red-400'}">R {rPct.toFixed(1)}%</span>
+                      </div>
+                    </div>
+                  </div>
                 {/each}
-              </tbody>
-            </table>
-
-            <!-- Mean-Median -->
-            {#if totals.meanPartisan > 0}
-              <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
-                Mean–Median
-                <button type="button" class="text-gray-300 hover:text-blue-400 text-[9px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'mean_median'} title="What is this?">ⓘ</button>
               </div>
+            {:else}
+              <p class="text-[10px] text-gray-400 italic">No election data</p>
+            {/if}
+          </div>
+
+          <!-- Col 3: Census Demographics -->
+          <div class="flex-1 flex flex-col min-w-0 overflow-y-auto border-r border-gray-200 px-2.5 py-2 text-[11px] text-[#29315F]">
+            <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Census Demographics</div>
+            {#if demoRows.length > 0}
               <table class="w-full border-collapse">
                 <tbody>
-                  <tr class="border-b border-gray-100">
-                    <td class="text-gray-500 py-[2px] text-[10px]">Mean</td>
-                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{pct(totals.meanPartisan)}</td>
-                  </tr>
-                  <tr class="border-b border-gray-100">
-                    <td class="text-gray-500 py-[2px] text-[10px]">Median</td>
-                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{pct(totals.medianPartisan)}</td>
-                  </tr>
-                  <tr>
-                    <td class="text-gray-500 py-[2px] text-[10px] font-medium">Diff</td>
-                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px] {totals.meanMedian > 0 ? 'text-blue-600' : 'text-red-600'}">
-                      {totals.meanMedian > 0 ? '+' : ''}{(totals.meanMedian * 100).toFixed(2)}%
-                    </td>
-                  </tr>
+                  {#each demoRows as [label, value, share, largest]}
+                    <tr class="border-b border-gray-100 last:border-0">
+                      <td class="text-gray-500 py-[2px] pr-1.5 whitespace-nowrap align-top text-[10px]">
+                        {label}
+                        {#if LABEL_TO_INFO[label]}
+                          <button type="button"
+                            class="text-gray-300 hover:text-blue-400 ml-0.5 text-[9px] leading-none align-middle cursor-pointer"
+                            onclick={() => activeInfoKey = LABEL_TO_INFO[label]}>ⓘ</button>
+                        {/if}
+                      </td>
+                      <td class="text-right py-[2px] align-top">
+                        <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap text-[10px]">
+                          {value}
+                          {#if share != null}
+                            <span class="text-gray-400 font-normal text-[9px]">{sharePct(share)}</span>
+                          {/if}
+                          {#if largest}
+                            <span class="inline-block bg-amber-100 text-amber-700 text-[8px] font-semibold px-[3px] py-[1px] rounded leading-tight">▲</span>
+                          {/if}
+                        </div>
+                        {#if share != null}
+                          <div class="w-full h-[2px] bg-gray-100 rounded-full mt-[1px]">
+                            <div class="h-[2px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
+                          </div>
+                        {/if}
+                      </td>
+                    </tr>
+                  {/each}
                 </tbody>
               </table>
+            {:else}
+              <p class="text-[10px] text-gray-400 italic">No ACS data for this district</p>
             {/if}
-          {/if}
-        </div>
+          </div>
+
+          <!-- Col 4: Location + Fairness -->
+          <div class="flex-1 flex flex-col min-w-0 overflow-y-auto px-2.5 py-2 text-[11px] text-[#29315F]">
+            <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Location</div>
+            <table class="w-full border-collapse mb-2">
+              <tbody>
+                <tr class="border-b border-gray-100">
+                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">County</td>
+                  <td class="text-right py-[2px] font-medium text-[10px]">{county ? `${county} Co.` : '—'}</td>
+                </tr>
+                <tr class="border-b border-gray-100 last:border-0">
+                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Precinct Lean</td>
+                  <td class="text-right py-[2px] font-medium text-[10px]">
+                    {precinct?.partisan != null ? pct(precinct.partisan as number) : 'zoom in'}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            {#if totals?.elections.some((e) => e.hasData)}
+              <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
+                Efficiency Gap
+                <button type="button" class="text-gray-300 hover:text-blue-400 text-[9px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'efficiency_gap'}>ⓘ</button>
+              </div>
+              <table class="w-full border-collapse mb-2">
+                <tbody>
+                  {#each totals.elections.filter((e) => e.hasData) as el}
+                    <tr class="border-b border-gray-100 last:border-0">
+                      <td class="text-gray-500 py-[2px] pr-1.5 text-[10px] whitespace-nowrap">{el.label}</td>
+                      <td class="text-right py-[2px] font-medium tabular-nums text-[10px] {el.eg > 0 ? 'text-blue-600' : 'text-red-600'}">
+                        {el.eg > 0 ? '+' : ''}{(el.eg * 100).toFixed(1)}%
+                      </td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+              {#if totals.meanPartisan > 0}
+                <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
+                  Mean–Median
+                  <button type="button" class="text-gray-300 hover:text-blue-400 text-[9px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'mean_median'}>ⓘ</button>
+                </div>
+                <table class="w-full border-collapse">
+                  <tbody>
+                    <tr class="border-b border-gray-100">
+                      <td class="text-gray-500 py-[2px] text-[10px]">Mean</td>
+                      <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{pct(totals.meanPartisan)}</td>
+                    </tr>
+                    <tr class="border-b border-gray-100">
+                      <td class="text-gray-500 py-[2px] text-[10px]">Median</td>
+                      <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{pct(totals.medianPartisan)}</td>
+                    </tr>
+                    <tr>
+                      <td class="text-gray-500 py-[2px] text-[10px] font-medium">Diff</td>
+                      <td class="text-right py-[2px] font-medium tabular-nums text-[10px] {totals.meanMedian > 0 ? 'text-blue-600' : 'text-red-600'}">
+                        {totals.meanMedian > 0 ? '+' : ''}{(totals.meanMedian * 100).toFixed(2)}%
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              {/if}
+            {/if}
+          </div>
+
+        </div><!-- end lg:flex -->
 
       {:else}
-        <!-- ── Statewide mode: 3 columns ──────────────────────────────── -->
+        <!-- ── Statewide mode ──────────────────────────────────────────────── -->
 
-        <!-- Col 1: Statewide Metrics -->
-        <div class="flex-1 flex flex-col min-w-0 overflow-y-auto border-r border-gray-200 px-2.5 py-2 text-[11px] text-[#29315F]">
-          <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Statewide Metrics</div>
-          {#if totals}
-            <table class="w-full border-collapse">
-              <tbody>
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">
-                    Population
-                    <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[9px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'population'}>ⓘ</button>
-                  </td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(totals.pop)}</td>
-                </tr>
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">
-                    VAP 2020
-                    <button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[9px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'vap'}>ⓘ</button>
-                  </td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(totals.tvap)}</td>
-                </tr>
-                {#if totals.wvap > 0}
+        <!-- Phone statewide tab content -->
+        <div class="sm:hidden flex-1 overflow-y-auto px-3 py-2">
+          {#if activeDrawerTab === 'metrics' || activeDrawerTab === 'census'}
+            {#if totals}
+              <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2">Statewide Metrics</div>
+              <table class="w-full border-collapse mb-3">
+                <tbody>
                   <tr class="border-b border-gray-100">
-                    <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">White VAP</td>
-                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">
-                      {totals.tvap > 0 ? pct(totals.wvap / totals.tvap) : '—'}
-                      <span class="text-gray-400 font-normal text-[9px] ml-0.5">{fmt(totals.wvap)}</span>
-                    </td>
+                    <td class="text-gray-500 py-[5px] pr-2 text-[13px]">Population</td>
+                    <td class="text-right py-[5px] font-medium tabular-nums text-[13px]">{fmt(totals.pop)}</td>
                   </tr>
-                {/if}
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Black VAP</td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">
-                    {totals.tvap > 0 ? pct(totals.bvap / totals.tvap) : '—'}
-                    <span class="text-gray-400 font-normal text-[9px] ml-0.5">{fmt(totals.bvap)}</span>
-                  </td>
-                </tr>
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Asian VAP</td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">
-                    {totals.tvap > 0 ? pct(totals.avap / totals.tvap) : '—'}
-                    <span class="text-gray-400 font-normal text-[9px] ml-0.5">{fmt(totals.avap)}</span>
-                  </td>
-                </tr>
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Hispanic VAP</td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">
-                    {totals.tvap > 0 ? pct(totals.hvap / totals.tvap) : '—'}
-                    <span class="text-gray-400 font-normal text-[9px] ml-0.5">{fmt(totals.hvap)}</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Minority VAP</td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">
-                    {totals.tvap > 0 ? pct(totals.bipocvap / totals.tvap) : '—'}
-                    <span class="text-gray-400 font-normal text-[9px] ml-0.5">{fmt(totals.bipocvap)}</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          {:else}
-            <p class="text-[10px] text-gray-400 italic">Loading…</p>
+                  <tr class="border-b border-gray-100">
+                    <td class="text-gray-500 py-[5px] pr-2 text-[13px]">VAP 2020</td>
+                    <td class="text-right py-[5px] font-medium tabular-nums text-[13px]">{fmt(totals.tvap)}</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="text-gray-500 py-[5px] pr-2 text-[13px]">Black VAP</td>
+                    <td class="text-right py-[5px] font-medium tabular-nums text-[13px]">{totals.tvap > 0 ? pct(totals.bvap / totals.tvap) : '—'}</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="text-gray-500 py-[5px] pr-2 text-[13px]">Hispanic VAP</td>
+                    <td class="text-right py-[5px] font-medium tabular-nums text-[13px]">{totals.tvap > 0 ? pct(totals.hvap / totals.tvap) : '—'}</td>
+                  </tr>
+                  <tr>
+                    <td class="text-gray-500 py-[5px] pr-2 text-[13px]">Minority VAP</td>
+                    <td class="text-right py-[5px] font-medium tabular-nums text-[13px]">{totals.tvap > 0 ? pct(totals.bipocvap / totals.tvap) : '—'}</td>
+                  </tr>
+                </tbody>
+              </table>
+            {:else}
+              <p class="text-[13px] text-gray-400 italic">Loading…</p>
+            {/if}
+          {:else if activeDrawerTab === 'election' || activeDrawerTab === 'location'}
+            {#if totals?.elections.some((e) => e.hasData)}
+              <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2">Efficiency Gap</div>
+              <table class="w-full border-collapse">
+                <tbody>
+                  {#each totals.elections.filter((e) => e.hasData) as el}
+                    <tr class="border-b border-gray-100 last:border-0">
+                      <td class="text-gray-500 py-[5px] pr-2 text-[13px] whitespace-nowrap">{el.label}</td>
+                      <td class="text-right py-[5px] font-medium tabular-nums text-[13px] {el.eg > 0 ? 'text-blue-600' : 'text-red-600'}">
+                        {el.eg > 0 ? '+' : ''}{(el.eg * 100).toFixed(1)}%
+                      </td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+            {:else}
+              <p class="text-[13px] text-gray-400 italic">Tap a district to see data</p>
+            {/if}
           {/if}
         </div>
 
-        <!-- Col 2: ACS Statewide -->
-        <div class="flex-1 flex flex-col min-w-0 overflow-y-auto border-r border-gray-200 px-2.5 py-2 text-[11px] text-[#29315F]">
-          <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Census Demographics (ACS 5-yr)</div>
-          {#if demTot}
-            <table class="w-full border-collapse">
-              <tbody>
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Below Poverty</td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.poverty_count)}</td>
-                </tr>
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Bachelor's+</td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.bachelors_plus_count)}</td>
-                </tr>
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Married HH</td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.married_hh_count)}</td>
-                </tr>
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Single Parent</td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.single_parent_count)}</td>
-                </tr>
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">No Vehicle HH</td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.no_vehicle_count)}</td>
-                </tr>
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Uninsured</td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.uninsured_count)}</td>
-                </tr>
-                <tr>
-                  <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Unemployed</td>
-                  <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.unemployed_count)}</td>
-                </tr>
-              </tbody>
-            </table>
-          {:else}
-            <p class="text-[10px] text-gray-400 italic">No ACS data loaded</p>
-          {/if}
-        </div>
-
-        <!-- Col 3: Fairness Metrics -->
-        <div class="flex-[1.4] flex flex-col min-w-0 overflow-y-auto px-2.5 py-2 text-[11px] text-[#29315F]">
-          {#if totals?.elections.some((e) => e.hasData)}
-            <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
-              Efficiency Gap
-              <button type="button" class="text-gray-300 hover:text-blue-400 text-[9px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'efficiency_gap'}>ⓘ</button>
-            </div>
-            <table class="w-full border-collapse mb-2">
-              <tbody>
-                {#each totals.elections.filter((e) => e.hasData) as el}
-                  <tr class="border-b border-gray-100 last:border-0">
-                    <td class="text-gray-500 py-[2px] pr-1.5 text-[10px] whitespace-nowrap">{el.label}</td>
-                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px] {el.eg > 0 ? 'text-blue-600' : 'text-red-600'}">
-                      {el.eg > 0 ? '+' : ''}{(el.eg * 100).toFixed(1)}%
-                    </td>
-                    <td class="text-right py-[2px] text-gray-400 text-[9px] pl-1 whitespace-nowrap">
-                      {el.eg > 0 ? 'D wasted > R' : 'R wasted > D'}
-                    </td>
-                  </tr>
-                {/each}
-              </tbody>
-            </table>
-            <div class="text-gray-400 text-[9px] mb-2 italic">EG = (wasted D − wasted R) ÷ total votes</div>
-
-            {#if totals.meanPartisan > 0}
-              <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
-                Mean–Median Difference
-                <button type="button" class="text-gray-300 hover:text-blue-400 text-[9px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'mean_median'}>ⓘ</button>
-              </div>
+        <!-- Tablet statewide: 2-col -->
+        <div class="hidden sm:grid lg:hidden grid-cols-2 flex-1 overflow-hidden">
+          <div class="overflow-y-auto border-r border-gray-200 px-2.5 py-2">
+            <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Statewide Metrics</div>
+            {#if totals}
               <table class="w-full border-collapse">
                 <tbody>
                   <tr class="border-b border-gray-100">
-                    <td class="text-gray-500 py-[2px] text-[10px]">Mean partisan</td>
-                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{pct(totals.meanPartisan)}</td>
+                    <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">Population</td>
+                    <td class="text-right py-[3px] font-medium tabular-nums text-[11px]">{fmt(totals.pop)}</td>
                   </tr>
                   <tr class="border-b border-gray-100">
-                    <td class="text-gray-500 py-[2px] text-[10px]">Median partisan</td>
-                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{pct(totals.medianPartisan)}</td>
+                    <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">VAP 2020</td>
+                    <td class="text-right py-[3px] font-medium tabular-nums text-[11px]">{fmt(totals.tvap)}</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">Black VAP</td>
+                    <td class="text-right py-[3px] font-medium tabular-nums text-[11px]">{totals.tvap > 0 ? pct(totals.bvap / totals.tvap) : '—'}</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">Hispanic VAP</td>
+                    <td class="text-right py-[3px] font-medium tabular-nums text-[11px]">{totals.tvap > 0 ? pct(totals.hvap / totals.tvap) : '—'}</td>
                   </tr>
                   <tr>
-                    <td class="text-gray-500 py-[2px] text-[10px] font-medium">MM Difference</td>
-                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px] {totals.meanMedian > 0 ? 'text-blue-600' : 'text-red-600'}">
-                      {totals.meanMedian > 0 ? '+' : ''}{(totals.meanMedian * 100).toFixed(2)}%
-                    </td>
+                    <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">Minority VAP</td>
+                    <td class="text-right py-[3px] font-medium tabular-nums text-[11px]">{totals.tvap > 0 ? pct(totals.bipocvap / totals.tvap) : '—'}</td>
                   </tr>
                 </tbody>
               </table>
             {/if}
-          {:else}
-            <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Fairness Metrics</div>
-            <p class="text-[10px] text-gray-400 italic">No election data loaded</p>
-          {/if}
+          </div>
+          <div class="overflow-y-auto px-2.5 py-2">
+            <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Fairness Metrics</div>
+            {#if totals?.elections.some((e) => e.hasData)}
+              <table class="w-full border-collapse">
+                <tbody>
+                  {#each totals.elections.filter((e) => e.hasData) as el}
+                    <tr class="border-b border-gray-100 last:border-0">
+                      <td class="text-gray-500 py-[3px] pr-1.5 text-[11px] whitespace-nowrap">{el.label}</td>
+                      <td class="text-right py-[3px] font-medium tabular-nums text-[11px] {el.eg > 0 ? 'text-blue-600' : 'text-red-600'}">
+                        {el.eg > 0 ? '+' : ''}{(el.eg * 100).toFixed(1)}%
+                      </td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+            {:else}
+              <p class="text-[11px] text-gray-400 italic">Hover a district for details</p>
+            {/if}
+          </div>
         </div>
-      {/if}
-    </div>
+
+        <!-- Laptop/Desktop statewide: 3-col flex (original) -->
+        <div class="hidden lg:flex flex-1 overflow-hidden">
+          <div class="flex-1 flex flex-col min-w-0 overflow-y-auto border-r border-gray-200 px-2.5 py-2 text-[11px] text-[#29315F]">
+            <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Statewide Metrics</div>
+            {#if totals}
+              <table class="w-full border-collapse">
+                <tbody>
+                  <tr class="border-b border-gray-100">
+                    <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Population<button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[9px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'population'}>ⓘ</button></td>
+                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(totals.pop)}</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">VAP 2020<button type="button" class="text-gray-300 hover:text-blue-400 ml-0.5 text-[9px] leading-none align-middle cursor-pointer" onclick={() => activeInfoKey = 'vap'}>ⓘ</button></td>
+                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(totals.tvap)}</td>
+                  </tr>
+                  {#if totals.wvap > 0}
+                    <tr class="border-b border-gray-100">
+                      <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">White VAP</td>
+                      <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{totals.tvap > 0 ? pct(totals.wvap / totals.tvap) : '—'}<span class="text-gray-400 font-normal text-[9px] ml-0.5">{fmt(totals.wvap)}</span></td>
+                    </tr>
+                  {/if}
+                  <tr class="border-b border-gray-100">
+                    <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Black VAP</td>
+                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{totals.tvap > 0 ? pct(totals.bvap / totals.tvap) : '—'}<span class="text-gray-400 font-normal text-[9px] ml-0.5">{fmt(totals.bvap)}</span></td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Asian VAP</td>
+                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{totals.tvap > 0 ? pct(totals.avap / totals.tvap) : '—'}<span class="text-gray-400 font-normal text-[9px] ml-0.5">{fmt(totals.avap)}</span></td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Hispanic VAP</td>
+                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{totals.tvap > 0 ? pct(totals.hvap / totals.tvap) : '—'}<span class="text-gray-400 font-normal text-[9px] ml-0.5">{fmt(totals.hvap)}</span></td>
+                  </tr>
+                  <tr>
+                    <td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Minority VAP</td>
+                    <td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{totals.tvap > 0 ? pct(totals.bipocvap / totals.tvap) : '—'}<span class="text-gray-400 font-normal text-[9px] ml-0.5">{fmt(totals.bipocvap)}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            {:else}
+              <p class="text-[10px] text-gray-400 italic">Loading…</p>
+            {/if}
+          </div>
+          <div class="flex-1 flex flex-col min-w-0 overflow-y-auto border-r border-gray-200 px-2.5 py-2 text-[11px] text-[#29315F]">
+            <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Census Demographics (ACS 5-yr)</div>
+            {#if demTot}
+              <table class="w-full border-collapse">
+                <tbody>
+                  <tr class="border-b border-gray-100"><td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Below Poverty</td><td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.poverty_count)}</td></tr>
+                  <tr class="border-b border-gray-100"><td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Bachelor's+</td><td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.bachelors_plus_count)}</td></tr>
+                  <tr class="border-b border-gray-100"><td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Married HH</td><td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.married_hh_count)}</td></tr>
+                  <tr class="border-b border-gray-100"><td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Single Parent</td><td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.single_parent_count)}</td></tr>
+                  <tr class="border-b border-gray-100"><td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">No Vehicle HH</td><td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.no_vehicle_count)}</td></tr>
+                  <tr class="border-b border-gray-100"><td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Uninsured</td><td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.uninsured_count)}</td></tr>
+                  <tr><td class="text-gray-500 py-[2px] pr-1.5 text-[10px]">Unemployed</td><td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{fmt(demTot.unemployed_count)}</td></tr>
+                </tbody>
+              </table>
+            {:else}
+              <p class="text-[10px] text-gray-400 italic">No ACS data loaded</p>
+            {/if}
+          </div>
+          <div class="flex-[1.4] flex flex-col min-w-0 overflow-y-auto px-2.5 py-2 text-[11px] text-[#29315F]">
+            {#if totals?.elections.some((e) => e.hasData)}
+              <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
+                Efficiency Gap
+                <button type="button" class="text-gray-300 hover:text-blue-400 text-[9px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'efficiency_gap'}>ⓘ</button>
+              </div>
+              <table class="w-full border-collapse mb-2">
+                <tbody>
+                  {#each totals.elections.filter((e) => e.hasData) as el}
+                    <tr class="border-b border-gray-100 last:border-0">
+                      <td class="text-gray-500 py-[2px] pr-1.5 text-[10px] whitespace-nowrap">{el.label}</td>
+                      <td class="text-right py-[2px] font-medium tabular-nums text-[10px] {el.eg > 0 ? 'text-blue-600' : 'text-red-600'}">{el.eg > 0 ? '+' : ''}{(el.eg * 100).toFixed(1)}%</td>
+                      <td class="text-right py-[2px] text-gray-400 text-[9px] pl-1 whitespace-nowrap">{el.eg > 0 ? 'D wasted > R' : 'R wasted > D'}</td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+              <div class="text-gray-400 text-[9px] mb-2 italic">EG = (wasted D − wasted R) ÷ total votes</div>
+              {#if totals.meanPartisan > 0}
+                <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
+                  Mean–Median Difference
+                  <button type="button" class="text-gray-300 hover:text-blue-400 text-[9px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'mean_median'}>ⓘ</button>
+                </div>
+                <table class="w-full border-collapse">
+                  <tbody>
+                    <tr class="border-b border-gray-100"><td class="text-gray-500 py-[2px] text-[10px]">Mean partisan</td><td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{pct(totals.meanPartisan)}</td></tr>
+                    <tr class="border-b border-gray-100"><td class="text-gray-500 py-[2px] text-[10px]">Median partisan</td><td class="text-right py-[2px] font-medium tabular-nums text-[10px]">{pct(totals.medianPartisan)}</td></tr>
+                    <tr><td class="text-gray-500 py-[2px] text-[10px] font-medium">MM Difference</td><td class="text-right py-[2px] font-medium tabular-nums text-[10px] {totals.meanMedian > 0 ? 'text-blue-600' : 'text-red-600'}">{totals.meanMedian > 0 ? '+' : ''}{(totals.meanMedian * 100).toFixed(2)}%</td></tr>
+                  </tbody>
+                </table>
+              {/if}
+            {:else}
+              <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Fairness Metrics</div>
+              <p class="text-[10px] text-gray-400 italic">No election data loaded</p>
+            {/if}
+          </div>
+        </div>
+
+      {/if}<!-- end hovered/statewide -->
+    </div><!-- end expanded panel -->
   {/if}
 
-  <!-- ── Collapsed strip (always visible at very bottom) ──────────────── -->
+  <!-- ── Collapsed strip (always visible) ──────────────────────────────── -->
   <div
-    class="h-7 border-t border-gray-300 flex items-center gap-2.5 px-3 cursor-pointer select-none shrink-0"
+    class="h-[44px] sm:h-[32px] lg:h-[28px] border-t border-gray-300 flex items-center gap-2.5 px-3
+           cursor-pointer select-none shrink-0"
     style="background-color: rgba(240,241,245,{opacity/100})"
     role="button"
     tabindex="0"
@@ -729,33 +1087,40 @@
     onkeydown={(e) => e.key === 'Enter' && toggleExpanded()}
   >
     {#if hovered}
-      <span class="text-[11px] font-semibold text-[#29315F] shrink-0">
+      <span class="text-[14px] sm:text-[12px] lg:text-[11px] font-semibold text-[#29315F] shrink-0 truncate max-w-[45vw] sm:max-w-none">
         {hovered.tooltipTitle ?? ''}{districtNum ? ` · District ${districtNum}` : ''}
       </span>
       {#if partisanSummary}
-        <span class="text-[10px] text-gray-500 shrink-0">{partisanSummary}</span>
+        <span class="hidden sm:inline text-[11px] lg:text-[10px] text-gray-500 shrink-0">{partisanSummary}</span>
       {/if}
       {#if hovered.properties?.pct_bvp != null}
-        <span class="text-[10px] text-gray-400 shrink-0">
+        <span class="hidden md:inline text-[10px] text-gray-400 shrink-0">
           · Black VAP {((hovered.properties.pct_bvp as number) * 100).toFixed(1)}%
         </span>
       {/if}
       {#if county}
-        <span class="text-[10px] text-gray-400 shrink-0">· {county} Co.</span>
+        <span class="hidden sm:inline text-[10px] lg:text-[10px] text-gray-400 shrink-0">· {county} Co.</span>
       {/if}
     {:else}
-      <span class="text-[10px] text-gray-500">Georgia Statewide · Hover a district for details</span>
+      <span class="text-[14px] sm:text-[11px] lg:text-[10px] text-gray-500">
+        <span class="sm:hidden">Tap a district for data</span>
+        <span class="hidden sm:inline">Georgia Statewide · Hover a district for details</span>
+      </span>
     {/if}
     <div class="ml-auto flex items-center gap-2 shrink-0">
+      <!-- Opacity slider hidden on phone (too fiddly) -->
       <input
         type="range" min="30" max="100" step="5"
         bind:value={opacity}
-        class="w-14 h-1 cursor-pointer accent-gray-400"
+        class="hidden sm:block w-14 h-1 cursor-pointer accent-gray-400"
         title="Drawer opacity"
         onclick={(e) => e.stopPropagation()}
         onkeydown={(e) => e.stopPropagation()}
       />
-      <span class="text-[10px] text-gray-400">{expanded ? '▼ hide' : '▲ stats'}</span>
+      <span class="text-[12px] sm:text-[10px] text-gray-400">
+        {expanded ? '▼' : '▲'}
+        <span class="hidden sm:inline">{expanded ? ' hide' : ' stats'}</span>
+      </span>
     </div>
   </div>
 </div>

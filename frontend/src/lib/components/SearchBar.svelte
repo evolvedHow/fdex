@@ -79,13 +79,19 @@
     const hasState = /\b(GA|Georgia)\b/i.test(q);
     const geocodeQ = hasState ? q : `${q}, GA`;
     const [cx, cy] = config.map.center;
+    // district = county-level; place = city/town; address = street; postcode, neighborhood for broader coverage
+    const TYPES = 'address,place,district,region,neighborhood,locality,postcode';
     const url =
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(geocodeQ)}.json` +
       `?bbox=${minLng},${minLat},${maxLng},${maxLat}` +
       `&proximity=${cx},${cy}` +
-      `&country=US&types=address,place,district,region&limit=1` +
+      `&country=US&types=${TYPES}&limit=1` +
       `&access_token=${config.mapboxToken}`;
     const res = await fetch(url);
+    if (!res.ok) {
+      console.error(`Mapbox geocoding error ${res.status}: ${res.statusText}`);
+      throw new Error(`Search service error (${res.status}) — try a district number like D7`);
+    }
     const data = await res.json();
     if (!data.features?.length) return false;
     const f = data.features[0];
@@ -112,9 +118,13 @@
         errorMsg = `District ${dm[1]} not found`;
         return;
       }
-      const found = await searchMapbox(q);
-      if (found) query = '';
-      else errorMsg = 'Location not found';
+      try {
+        const found = await searchMapbox(q);
+        if (found) query = '';
+        else errorMsg = 'Location not found';
+      } catch (err: any) {
+        errorMsg = err?.message ?? 'Search service unavailable';
+      }
     } finally {
       searching = false;
     }
@@ -133,14 +143,14 @@
       bind:value={query}
       onkeydown={onKeydown}
       placeholder="D5 · Cobb County GA · address…"
-      class="w-[200px] px-2.5 py-1 text-sm rounded
+      class="w-full max-w-[200px] px-2.5 py-1.5 sm:py-1 text-[15px] sm:text-sm rounded
              border border-gray-300 bg-white
              focus:outline-none focus:border-blue-400"
     />
     <button
       onclick={handleSearch}
       disabled={searching}
-      class="px-2.5 py-1 text-sm bg-[#29315F] text-white rounded
+      class="h-[38px] sm:h-auto px-2.5 py-1 text-sm bg-[#29315F] text-white rounded
              hover:bg-[#3a4580] disabled:opacity-50 cursor-pointer"
     >
       {searching ? '…' : 'Go'}
