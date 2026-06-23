@@ -1,5 +1,6 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
+  import { isSmallish } from '../utils/breakpoint.svelte';
   import {
     getHoveredDistrict,
     getStateTotals,
@@ -73,6 +74,9 @@
   }
 
   function scheduleCollapse(ms = 4000) {
+    // On touch / sub-laptop screens there is no hover signal to keep the drawer up,
+    // so leave it open until the user swipes the handle down (or taps the strip).
+    if (isSmallish.matches) return;
     clearTimeout(hideTimer ?? undefined);
     hideTimer = setTimeout(() => { expanded = false; }, ms);
   }
@@ -384,9 +388,9 @@
       style="background-color: rgba(255,255,255,{opacity/100})"
     >
 
-      <!-- ── Drag handle (phone only — swipe down to collapse) ──────────── -->
+      <!-- ── Drag handle (phone / tablet — swipe down to collapse) ──────── -->
       <div
-        class="sm:hidden flex justify-center items-center h-[22px] shrink-0 cursor-grab active:cursor-grabbing touch-none"
+        class="lg:hidden flex justify-center items-center h-[22px] shrink-0 cursor-grab active:cursor-grabbing touch-none"
         ontouchstart={onDragTouchStart}
         ontouchmove={onDragTouchMove}
         ontouchend={onDragTouchEnd}
@@ -397,8 +401,8 @@
         <div class="w-10 h-1 rounded-full bg-gray-300"></div>
       </div>
 
-      <!-- ── Tab bar (phone only) ──────────────────────────────────────── -->
-      <div class="sm:hidden flex border-b border-gray-200 shrink-0">
+      <!-- ── Tab bar (phone / tablet) ──────────────────────────────────── -->
+      <div class="lg:hidden flex border-b border-gray-200 shrink-0">
         {#each visibleTabs as tab}
           <button
             class="flex-1 py-2 text-[13px] font-medium text-center border-b-2 transition-colors cursor-pointer
@@ -412,8 +416,8 @@
 
       {#if hovered}
 
-        <!-- ══ PHONE: single-column tab content ══ -->
-        <div class="sm:hidden flex-1 overflow-y-auto px-3 py-2">
+        <!-- ══ PHONE / TABLET: single-column tab content ══ -->
+        <div class="lg:hidden flex-1 overflow-y-auto px-3 py-2">
           {#if activeDrawerTab === 'metrics'}
             <!-- Metrics tab -->
             <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2">District Metrics</div>
@@ -595,149 +599,7 @@
           {/if}
         </div>
 
-        <!-- ══ TABLET: 2-column grid ══ -->
-        <div class="hidden sm:grid lg:hidden grid-cols-2 flex-1 overflow-hidden">
-          <!-- Left: metrics + election -->
-          <div class="overflow-y-auto border-r border-gray-200 px-2.5 py-2">
-            <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">District Metrics</div>
-            <table class="w-full border-collapse mb-3">
-              <tbody>
-                {#each planRows as [label, value, share, largest]}
-                  <tr class="border-b border-gray-100 last:border-0">
-                    <td class="text-gray-500 py-[3px] pr-1.5 whitespace-nowrap align-top text-[11px]">
-                      {label}
-                      {#if LABEL_TO_INFO[label]}
-                        <button type="button"
-                          class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer"
-                          onclick={() => activeInfoKey = LABEL_TO_INFO[label]}>ⓘ</button>
-                      {/if}
-                    </td>
-                    <td class="text-right py-[3px] align-top">
-                      <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap text-[11px]">
-                        {value}
-                        {#if share != null}
-                          <span class="text-gray-400 font-normal text-[10px]">{sharePct(share)}</span>
-                        {/if}
-                        {#if largest}
-                          <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[3px] py-[1px] rounded leading-tight">▲</span>
-                        {/if}
-                      </div>
-                      {#if share != null}
-                        <div class="w-full h-[2px] bg-gray-100 rounded-full mt-[1px]">
-                          <div class="h-[2px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
-                        </div>
-                      {/if}
-                    </td>
-                  </tr>
-                {/each}
-              </tbody>
-            </table>
-            {#if electionRows.length > 0}
-              <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Election Results</div>
-              <div class="flex flex-col gap-[6px]">
-                {#each electionRows as row}
-                  {@const dPct = row.dem * 100}
-                  {@const rPct = (1 - row.dem) * 100}
-                  {@const dWins = row.dem > 0.5}
-                  {@const dWasted = dWins ? dPct - 50 : dPct}
-                  {@const rWasted = dWins ? rPct : rPct - 50}
-                  <div>
-                    <div class="flex items-center justify-between mb-[1px]">
-                      <span class="text-gray-500 text-[10px]">{row.label}</span>
-                      <span class="text-[10px] font-semibold {dWins ? 'text-blue-600' : 'text-red-600'}">
-                        {dWins ? 'D' : 'R'} +{Math.abs(dPct - rPct).toFixed(1)}
-                      </span>
-                    </div>
-                    <div class="relative w-full h-[11px] rounded overflow-hidden flex">
-                      {#if dWins}
-                        <div class="h-full bg-blue-600" style="width:50%"></div>
-                        <div class="h-full bg-blue-300" style="width:{dWasted}%"></div>
-                        <div class="h-full bg-red-200"  style="width:{rPct}%"></div>
-                      {:else if row.dem < 0.5}
-                        <div class="h-full bg-blue-200" style="width:{dPct}%"></div>
-                        <div class="h-full bg-red-600"  style="width:50%"></div>
-                        <div class="h-full bg-red-300"  style="width:{rWasted}%"></div>
-                      {:else}
-                        <div class="h-full bg-blue-500" style="width:50%"></div>
-                        <div class="h-full bg-red-500"  style="width:50%"></div>
-                      {/if}
-                      <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/80 -translate-x-1/2"></div>
-                    </div>
-                  </div>
-                {/each}
-              </div>
-            {/if}
-          </div>
-
-          <!-- Right: census (optional) + location -->
-          <div class="overflow-y-auto px-2.5 py-2">
-            {#if showCensus}
-              <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center justify-between">
-                Census Demographics
-                <button type="button" class="text-gray-300 hover:text-red-400 text-[10px] leading-none cursor-pointer" onclick={toggleShowCensus} title="Hide census">✕</button>
-              </div>
-              {#if demoRows.length > 0}
-                <table class="w-full border-collapse mb-3">
-                  <tbody>
-                    {#each demoRows as [label, value, share, largest]}
-                      <tr class="border-b border-gray-100 last:border-0">
-                        <td class="text-gray-500 py-[3px] pr-1.5 whitespace-nowrap align-top text-[11px]">
-                          {label}
-                          {#if LABEL_TO_INFO[label]}
-                            <button type="button"
-                              class="text-gray-300 hover:text-blue-400 ml-0.5 text-[10px] leading-none align-middle cursor-pointer"
-                              onclick={() => activeInfoKey = LABEL_TO_INFO[label]}>ⓘ</button>
-                          {/if}
-                        </td>
-                        <td class="text-right py-[3px] align-top">
-                          <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap text-[11px]">
-                            {value}
-                            {#if share != null}
-                              <span class="text-gray-400 font-normal text-[10px]">{sharePct(share)}</span>
-                            {/if}
-                            {#if largest}
-                              <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[3px] py-[1px] rounded leading-tight">▲</span>
-                            {/if}
-                          </div>
-                          {#if share != null}
-                            <div class="w-full h-[2px] bg-gray-100 rounded-full mt-[1px]">
-                              <div class="h-[2px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
-                            </div>
-                          {/if}
-                        </td>
-                      </tr>
-                    {/each}
-                  </tbody>
-                </table>
-              {:else}
-                <p class="text-[11px] text-gray-400 italic mb-3">No ACS data</p>
-              {/if}
-            {:else}
-              <button type="button"
-                class="w-full text-left text-[10px] text-gray-400 hover:text-[#29315F] mb-2 cursor-pointer flex items-center gap-1"
-                onclick={toggleShowCensus}>
-                <span class="text-[10px]">+</span> Show Census Demographics
-              </button>
-            {/if}
-            <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Location</div>
-            <table class="w-full border-collapse">
-              <tbody>
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">County</td>
-                  <td class="text-right py-[3px] font-medium text-[11px]">{county ? `${county} Co.` : '—'}</td>
-                </tr>
-                <tr class="border-b border-gray-100 last:border-0">
-                  <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">Precinct Lean</td>
-                  <td class="text-right py-[3px] font-medium text-[11px]">
-                    {precinct?.partisan != null ? pct(precinct.partisan as number) : 'zoom in'}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- ══ LAPTOP/DESKTOP: 4-column flex (unchanged) ══ -->
+        <!-- ══ LAPTOP/DESKTOP: 4-column flex ══ -->
         <div class="hidden lg:flex flex-1 overflow-hidden">
 
           <!-- Col 1: District Metrics -->
@@ -952,8 +814,8 @@
       {:else}
         <!-- ── Statewide mode ──────────────────────────────────────────────── -->
 
-        <!-- Phone statewide tab content -->
-        <div class="sm:hidden flex-1 overflow-y-auto px-3 py-2">
+        <!-- Phone / tablet statewide tab content -->
+        <div class="lg:hidden flex-1 overflow-y-auto px-3 py-2">
           {#if activeDrawerTab === 'metrics' || activeDrawerTab === 'census'}
             {#if totals}
               <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2">Statewide Metrics</div>
@@ -1005,59 +867,7 @@
           {/if}
         </div>
 
-        <!-- Tablet statewide: 2-col -->
-        <div class="hidden sm:grid lg:hidden grid-cols-2 flex-1 overflow-hidden">
-          <div class="overflow-y-auto border-r border-gray-200 px-2.5 py-2">
-            <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Statewide Metrics</div>
-            {#if totals}
-              <table class="w-full border-collapse">
-                <tbody>
-                  <tr class="border-b border-gray-100">
-                    <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">Population</td>
-                    <td class="text-right py-[3px] font-medium tabular-nums text-[11px]">{fmt(totals.pop)}</td>
-                  </tr>
-                  <tr class="border-b border-gray-100">
-                    <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">VAP 2020</td>
-                    <td class="text-right py-[3px] font-medium tabular-nums text-[11px]">{fmt(totals.tvap)}</td>
-                  </tr>
-                  <tr class="border-b border-gray-100">
-                    <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">Black VAP</td>
-                    <td class="text-right py-[3px] font-medium tabular-nums text-[11px]">{totals.tvap > 0 ? pct(totals.bvap / totals.tvap) : '—'}</td>
-                  </tr>
-                  <tr class="border-b border-gray-100">
-                    <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">Hispanic VAP</td>
-                    <td class="text-right py-[3px] font-medium tabular-nums text-[11px]">{totals.tvap > 0 ? pct(totals.hvap / totals.tvap) : '—'}</td>
-                  </tr>
-                  <tr>
-                    <td class="text-gray-500 py-[3px] pr-1.5 text-[11px]">Minority VAP</td>
-                    <td class="text-right py-[3px] font-medium tabular-nums text-[11px]">{totals.tvap > 0 ? pct(totals.bipocvap / totals.tvap) : '—'}</td>
-                  </tr>
-                </tbody>
-              </table>
-            {/if}
-          </div>
-          <div class="overflow-y-auto px-2.5 py-2">
-            <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Fairness Metrics</div>
-            {#if totals?.elections.some((e) => e.hasData)}
-              <table class="w-full border-collapse">
-                <tbody>
-                  {#each totals.elections.filter((e) => e.hasData) as el}
-                    <tr class="border-b border-gray-100 last:border-0">
-                      <td class="text-gray-500 py-[3px] pr-1.5 text-[11px] whitespace-nowrap">{el.label}</td>
-                      <td class="text-right py-[3px] font-medium tabular-nums text-[11px] {el.eg > 0 ? 'text-blue-600' : 'text-red-600'}">
-                        {el.eg > 0 ? '+' : ''}{(el.eg * 100).toFixed(1)}%
-                      </td>
-                    </tr>
-                  {/each}
-                </tbody>
-              </table>
-            {:else}
-              <p class="text-[11px] text-gray-400 italic">Hover a district for details</p>
-            {/if}
-          </div>
-        </div>
-
-        <!-- Laptop/Desktop statewide: 3-col flex (original) -->
+        <!-- Laptop/Desktop statewide: 3-col flex -->
         <div class="hidden lg:flex flex-1 overflow-hidden">
           <div class="flex-1 flex flex-col min-w-0 overflow-y-auto border-r border-gray-200 px-2.5 py-2 text-[11px] text-[#29315F]">
             <div class="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Statewide Metrics</div>
