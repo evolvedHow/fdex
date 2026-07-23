@@ -58,7 +58,7 @@ def load_env() -> dict[str, str]:
     return env
 
 
-def http_get(url: str, api_key: str, retries: int = 3) -> dict:
+def http_get(url: str, api_key: str, retries: int = 5) -> dict:
     req = urllib.request.Request(url, headers={"X-API-Key": api_key})
     for attempt in range(retries):
         try:
@@ -66,13 +66,38 @@ def http_get(url: str, api_key: str, retries: int = 3) -> dict:
                 return json.loads(r.read())
         except urllib.error.HTTPError as e:
             if e.code == 429 and attempt < retries - 1:
-                wait = 2 ** attempt
+                # OpenStates enforces 10 req/min; wait long enough for a
+                # fresh window. Respect Retry-After if provided.
+                retry_after = e.headers.get("Retry-After")
+                wait = int(retry_after) if retry_after and retry_after.isdigit() else 65
                 sys.stderr.write(f"  rate-limited, waiting {wait}s\n")
                 time.sleep(wait)
                 continue
             body = e.read().decode("utf-8", errors="replace")[:300]
             raise SystemExit(f"HTTP {e.code} on {url}\n{body}") from e
     raise SystemExit(f"exhausted retries on {url}")
+
+
+# OpenStates free tier caps at 10 requests/minute. Sleep enough between
+# calls to stay under the limit with margin (10/min = 6s each; use 7s).
+RATE_LIMIT_SLEEP_S = 7.0
+
+
+def clean_district(v) -> str:
+    """Normalize district identifiers so "14.0" (float from geojson) and
+    "14" (int/str from OpenStates) collide on the same key."""
+    if v is None:
+        return ""
+    s = str(v).strip()
+    if not s:
+        return ""
+    try:
+        f = float(s)
+        if f.is_integer():
+            return str(int(f))
+    except ValueError:
+        pass
+    return s
 
 
 def normalize_person(p: dict) -> dict:
@@ -97,7 +122,7 @@ def normalize_person(p: dict) -> dict:
         "phones": phones,
         "addresses": addresses,
         "website": p.get("openstates_url") or "",
-        "district": str(role.get("district") or ""),
+        "district": clean_district(role.get("district")),
         "title": role.get("title") or "",
         "org_classification": role.get("org_classification") or "",
     }
@@ -132,7 +157,7 @@ def fetch_state_legislators(api_key: str) -> tuple[dict, dict]:
         if page >= pag.get("max_page", 1):
             break
         page += 1
-        time.sleep(0.2)  # be polite
+        time.sleep(RATE_LIMIT_SLEEP_S)  # be polite
     return senate, house
 
 
@@ -166,7 +191,7 @@ def fetch_us_congress(api_key: str) -> tuple[dict, list]:
 
     for feat in geo["features"]:
         props = feat.get("properties") or {}
-        district = str(props.get("district") or props.get("DISTRICT") or "").strip()
+        district = clean_district(props.get("district") or props.get("DISTRICT"))
         if not district:
             continue
         lng, lat = polygon_centroid(feat["geometry"]["coordinates"])
@@ -183,11 +208,11 @@ def fetch_us_congress(api_key: str) -> tuple[dict, list]:
                 continue
             n = normalize_person(p)
             if "/cd:" in div and role.get("org_classification") == "lower":
-                us_house[str(role.get("district", district))] = n
+                us_house[clean_district(role.get("district") or district)] = n
             elif role.get("org_classification") == "upper":
                 # both US Senators are statewide; dedupe by openstates id
                 us_senate_by_id[n["id"]] = n
-        time.sleep(0.2)
+        time.sleep(RATE_LIMIT_SLEEP_S)
 
     return us_house, list(us_senate_by_id.values())
 
