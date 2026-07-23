@@ -1,0 +1,3936 @@
+generated_at: '2026-07-23T20:34:48Z'
+source: openstates.org v3
+state_senate:
+  '1':
+    id: ocd-person/fd2717f1-6294-4601-a027-8fc41195372c
+    name: Ben Watson
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/watson-ben-784.jpg
+    email: ben.watson@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-7880'
+    addresses:
+    - 'capitol: Room 325-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/ben-watson-7hgvJqrG0XNBlugC6jN5eG/
+    district: '1'
+    title: Senator
+    org_classification: upper
+  '46':
+    id: ocd-person/4dc87191-fa52-4c2f-bc9c-8823a8b4c882
+    name: Bill Cowsert
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/cowsert-bill-9.jpg
+    email: bill.cowsert@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-1366'
+    - 'district-mail: 706-543-7700'
+    addresses:
+    - 'capitol: State Capitol Room 432, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 512, Athens, GA 30603'
+    website: https://openstates.org/person/bill-cowsert-2Mm0knXw6zeZFhy7VbJo8o/
+    district: '46'
+    title: Senator
+    org_classification: upper
+  '4':
+    id: ocd-person/449db918-10b7-4fa7-a047-eb9de416dce3
+    name: Billy Hickman
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/hickman-billy-4972.jpg
+    email: billy.hickman@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-1371'
+    - 'district-mail: 912-682-5819'
+    addresses:
+    - 'capitol: Room 304-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 25, Statesboro, GA 30459'
+    website: https://openstates.org/person/billy-hickman-25TYaPFGSZXDd382emn27n/
+    district: '4'
+    title: Senator
+    org_classification: upper
+  '19':
+    id: ocd-person/e9c5a2fc-3354-49e1-ac29-783502155fe7
+    name: Blake Tillery
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/tillery-blake-4908.jpg
+    email: blake.tillery@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-5038'
+    - 'district: 912-537-3030'
+    addresses:
+    - 'capitol: State Capitol Room 234, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 404 Durden St., Vidalia, GA 30474'
+    website: https://openstates.org/person/blake-tillery-777X0WTAqltnm96jkxvgJz/
+    district: '19'
+    title: Senator
+    org_classification: upper
+  '50':
+    id: ocd-person/60bb96c4-f20c-4918-b88b-d7857341e5f4
+    name: Bo Hatchett
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/hatchett-bo-4984.jpg
+    email: bo.hatchett@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-7454'
+    addresses:
+    - 'capitol: State Capitol Room 109, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 2706, Clarkesville, GA 30523'
+    website: https://openstates.org/person/bo-hatchett-2wWzUOFv1GgTib6eZFXwIe/
+    district: '50'
+    title: Senator
+    org_classification: upper
+  '42':
+    id: ocd-person/3a5721a0-d848-40d0-a48a-66b797e7d7d9
+    name: Brian Strickland
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/strickland-brian-835.jpg
+    email: brian.strickland@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0508'
+    addresses:
+    - 'capitol: Room 324-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1895, McDonough, GA 30253'
+    website: https://openstates.org/person/brian-strickland-1m5NC4TmZfmQIdJ10bBd6H/
+    district: '42'
+    title: Senator
+    org_classification: upper
+  '13':
+    id: ocd-person/98850c9f-1c37-4177-9ad8-17d2b4d3c8d4
+    name: Carden Summers
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/summers-carden-4971.jpg
+    email: carden.summers@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-9224'
+    addresses:
+    - 'capitol: State Capitol Room 121-J, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 108 E. 13th Ave., Cordele, GA 31015'
+    website: https://openstates.org/person/carden-summers-4dndWB3TAVcKPpxAmRmbKu/
+    district: '13'
+    title: Senator
+    org_classification: upper
+  '52':
+    id: ocd-person/b11d0191-cd84-4a93-add6-ee65494caff2
+    name: Chuck Hufstetler
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/hufstetler-chuck-838.jpg
+    email: chuck.hufstetler@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0034'
+    addresses:
+    - 'capitol: State Capitol Room 121-C, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 3 Orchard Spring Drive, Rome, GA 30165'
+    website: https://openstates.org/person/chuck-hufstetler-5OCteokrcPmqZHKdJC7lHm/
+    district: '52'
+    title: Senator
+    org_classification: upper
+  '54':
+    id: ocd-person/1ac93f89-f367-4de3-82ba-79fa78d4d134
+    name: Chuck Payne
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/payne-chuck--4909.jpg
+    email: chuck.payne@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-5080'
+    addresses:
+    - 'capitol: State Capitol Room 432, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1074, Dalton, GA 30722'
+    website: https://openstates.org/person/chuck-payne-oXloR6K8vHUI3k3oiaHeW/
+    district: '54'
+    title: Senator
+    org_classification: upper
+  '45':
+    id: ocd-person/17a7e011-73f2-4ac5-8470-3436b47a6744
+    name: Clint Dixon
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/dixon-clint-4982.jpg
+    email: clint.dixon@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-2518'
+    addresses:
+    - 'capitol: State Capitol Room 421-A, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 802, Buford, GA 30515'
+    website: https://openstates.org/person/clint-dixon-idXeGBlxVqK8ju4EgdyFA/
+    district: '45'
+    title: Senator
+    org_classification: upper
+  '26':
+    id: ocd-person/4b05e770-4423-4b64-8ae1-9600e8c73244
+    name: David Lucas
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/lucas-david-157.jpg
+    email: david.lucas@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0150'
+    addresses:
+    - 'capitol: State Capitol Room 110-B, 206 Washington St. SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/david-lucas-2HZ7bbO7ukeabxJYuHwFBU/
+    district: '26'
+    title: Senator
+    org_classification: upper
+  '2':
+    id: ocd-person/73918c45-83c1-4d52-a84d-3ad7ad8de40b
+    name: Derek Mallow
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/mallow-derek-5007.jpg
+    email: derek.mallow@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-7586'
+    addresses:
+    - 'capitol: State Capitol Room 121-H, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 14034, Savannah, GA 31416'
+    website: https://openstates.org/person/derek-mallow-3W4dG0KknLaN8bm6oF1hPf/
+    district: '2'
+    title: Senator
+    org_classification: upper
+  '33':
+    id: ocd-person/efb9168c-b45a-4f43-bba5-d6f05e7d9cbe
+    name: Doc Rhett
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/rhett-michael--doc--855.jpg
+    email: michael.rhett@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0054'
+    addresses:
+    - 'capitol: Room 321-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 777, Marietta, GA 30061'
+    website: https://openstates.org/person/doc-rhett-7ILkbJ3V9D1BYUB8TjmGYI/
+    district: '33'
+    title: Senator
+    org_classification: upper
+  '28':
+    id: ocd-person/7f88fadb-2f51-48c7-8ae5-e20cd2f33e4a
+    name: Donzella James
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/james-donzella-372.jpg
+    email: donzella.james@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-1379'
+    addresses:
+    - 'capitol: State Capitol Room 121-D, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 311225, Atlanta, GA 30331'
+    website: https://openstates.org/person/donzella-james-3secmUsFngWEVFzNkKPI8Q/
+    district: '28'
+    title: Senator
+    org_classification: upper
+  '49':
+    id: ocd-person/6be704ef-6250-4e08-86d3-f5fa2e1eebf3
+    name: Drew Echols
+    party: Republican
+    image: https://www.gfpe.org/library/imglib/Drew-Echols-1.jpg
+    email: drew.echols@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-3931'
+    addresses:
+    - 'capitol: Room 305-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1600, Gainsville, GA 30503'
+    website: https://openstates.org/person/drew-echols-3HbkoZhTJQBlYUHUet4Wo7/
+    district: '49'
+    title: Senator
+    org_classification: upper
+  '15':
+    id: ocd-person/4cf7c975-678b-4e21-9877-6d22d7b37916
+    name: Ed Harbison
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/harbison-ed-17.jpg
+    email: ed.harbison@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0074'
+    addresses:
+    - 'capitol: State Capitol Room 420-C, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1292, Columbus, GA 31902'
+    website: https://openstates.org/person/ed-harbison-2LEeeu7Ijp3zMCoo0HGIBK/
+    district: '15'
+    title: Senator
+    org_classification: upper
+  '37':
+    id: ocd-person/777f58bb-9d6b-4755-ab7b-b94d11629cb5
+    name: Ed Setzler
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/setzler-ed-203.jpg
+    email: ed.setzler@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0256'
+    addresses:
+    - 'capitol: Room 322-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 1555 Boxwood Trace, Acworth, GA 30102'
+    website: https://openstates.org/person/ed-setzler-3dUHdWcbYBWXOfg3toTy2n/
+    district: '37'
+    title: Senator
+    org_classification: upper
+  '44':
+    id: ocd-person/3f15ad5e-877d-44aa-b5b3-b24587c42685
+    name: Elena Parent
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/parent-elena-768.jpg
+    email: elena.parent@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-5109'
+    addresses:
+    - 'capitol: State Capitol Room 121-A, 206 Washington St. SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/elena-parent-1v2QET7MFUSiokLOWhfRkD/
+    district: '44'
+    title: Senator
+    org_classification: upper
+  '10':
+    id: ocd-person/acc7c167-6251-4ce8-8021-511acfa291ef
+    name: Emanuel Jones
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/jones-emanuel-28.jpg
+    email: emanuel.jones@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0502'
+    addresses:
+    - 'capitol: State Capitol Room 420-A, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 370244, Decatur, GA 30037'
+    website: https://openstates.org/person/emanuel-jones-5G1y3swr2loKMgjidPGqA3/
+    district: '10'
+    title: Senator
+    org_classification: upper
+  '47':
+    id: ocd-person/9e417b67-da09-4516-b858-6b2458f53633
+    name: Frank Ginn
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/ginn-frank-751.jpg
+    email: frank.ginn@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-9224'
+    - 'district-mail: 706-680-4466'
+    addresses:
+    - 'capitol: State Capitol Room 121-I, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1136, Danielsville, GA 30633'
+    website: https://openstates.org/person/frank-ginn-4ociCwoMU7111Eudch9DIx/
+    district: '47'
+    title: Senator
+    org_classification: upper
+  '17':
+    id: ocd-person/df023a79-0194-4d1a-8755-5dee4053e1cc
+    name: Gail Davenport
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/davenport-gail-10.jpg
+    email: gail.davenport@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-5260'
+    addresses:
+    - 'capitol: State Capitol Room 121-G, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1074, Jonesboro, GA 30237'
+    website: https://openstates.org/person/gail-davenport-6moJ3H5Nnz7oItZHzquXRU/
+    district: '17'
+    title: Senator
+    org_classification: upper
+  '27':
+    id: ocd-person/1f7d013a-8861-4e08-b6bf-7c8d36f8107c
+    name: Greg Dolezal
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/dolezal-greg-4925.jpg
+    email: greg.dolezal@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0040'
+    addresses:
+    - 'capitol: State Capitol Room 421-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 6505 Shiloh Road Suite 200, Alpharetta, GA 30005'
+    website: https://openstates.org/person/greg-dolezal-xPt9CGpMZqDulbva8JwQW/
+    district: '27'
+    title: Senator
+    org_classification: upper
+  '22':
+    id: ocd-person/d7bfd125-d343-4acd-a4dc-480daf241af3
+    name: Harold Jones
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/jones-ii-harold-851.jpg
+    email: harold.jones@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0036'
+    - 'district: 706-339-1424'
+    addresses:
+    - 'capitol: State Capitol Room 121-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 437 Walker St., Augusta, GA 30901'
+    website: https://openstates.org/person/harold-jones-6Z70fvoZuJJBDjzwCKE4yB/
+    district: '22'
+    title: Senator
+    org_classification: upper
+  '35':
+    id: ocd-person/fcd57129-480c-4fba-a0d1-7fb369706611
+    name: Jaha Howard
+    party: Democratic
+    image: ''
+    email: jaha.howard@senate.ga.gov
+    phones:
+    - 'capitol-mail: 404-657-2099'
+    addresses:
+    - 'capitol-mail: Room 321-B, Coverdell Legislative Office Building, Atlanta, GA 30334'
+    - 'district: 4450 S. Cobb Drive, Smyrna, GA 30080'
+    website: https://openstates.org/person/jaha-howard-7h5bnciYPd2vcEz2gpUYZF/
+    district: '35'
+    title: Senator
+    org_classification: upper
+  '31':
+    id: ocd-person/cb7d8c1d-3c26-4f35-8d37-d1cf8a7ce207
+    name: Jason Anavitarte
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/anavitarte-jason-4980.jpg
+    email: jason.anavitarte@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0085'
+    addresses:
+    - 'capitol: State Capitol Room 236, 206 Washington St. SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/jason-anavitarte-6Byoh6JnmmK0uEIvTYseDn/
+    district: '31'
+    title: Senator
+    org_classification: upper
+  '21':
+    id: ocd-person/584267b0-e40b-4d6e-a7fe-4c076eb6214c
+    name: Jason Dickerson
+    party: Republican
+    image: ''
+    email: jason.dickerson@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-1378'
+    addresses:
+    - 'capitol: State Capitol Room 420-D, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 4445, Canton, GA 30114'
+    website: https://openstates.org/person/jason-dickerson-2gXff1tTilJRA4sjyRxBQy/
+    district: '21'
+    title: Senator
+    org_classification: upper
+  '56':
+    id: ocd-person/ac1cac30-3fec-4c56-b172-b483db465a6b
+    name: John Albers
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/albers-john-754.jpg
+    email: john.albers@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-8055'
+    addresses:
+    - 'capitol: State Capitol Room 421-C, 206 Washington St. SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/john-albers-5ElmaOW3CImOIZbmfNs1gR/
+    district: '56'
+    title: Senator
+    org_classification: upper
+  '14':
+    id: ocd-person/b83b0486-773f-4979-a1ce-e2f7f3e6d7e1
+    name: Josh McLaurin
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/mclaurin-josh-4942.jpg
+    email: josh.mclaurin@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-4228'
+    addresses:
+    - 'capitol: Room 323-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 567297, Atlanta, GA 31156'
+    website: https://openstates.org/person/josh-mclaurin-5bdYg1QjylfR616Tmh704n/
+    district: '14'
+    title: Senator
+    org_classification: upper
+  '32':
+    id: ocd-person/fc31ab02-026c-4173-86db-570c0b297c64
+    name: Kay Kirkpatrick
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/kirkpatrick-kay-4910.jpg
+    email: kay.kirkpatrick@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0508'
+    - 'district: 404-656-3932'
+    addresses:
+    - 'capitol: Room 324-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 2146 Roswell Road Suite 108895, Marietta, GA 30062'
+    website: https://openstates.org/person/kay-kirkpatrick-7fslPeuQMgvkumJPQeEJ6K/
+    district: '32'
+    title: Senator
+    org_classification: upper
+  '34':
+    id: ocd-person/0a816fbf-e5ec-4056-8b3e-08184400e71b
+    name: Kenya Wicks
+    party: Democratic
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Kenya_Wicks.JPG
+    email: kenya.wicks@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-1562'
+    addresses:
+    - 'capitol: Room 319-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 842, Fayetteville, GA 30214'
+    website: https://openstates.org/person/kenya-wicks-Jp4hrDaRnptZzdrxo4q7v/
+    district: '34'
+    title: Senator
+    org_classification: upper
+  '41':
+    id: ocd-person/2f8621bc-0548-457c-8b0d-9148e14b77fe
+    name: Kim Jackson
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/jackson-kim-4981.jpg
+    email: kim.jackson@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-6882'
+    addresses:
+    - 'capitol: Room 303-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1411, Pine Lake, GA 30072'
+    website: https://openstates.org/person/kim-jackson-1Rfw8khE54Asu2nvwgk9LK/
+    district: '41'
+    title: Senator
+    org_classification: upper
+  '53':
+    id: ocd-person/ae6e08e3-6971-4cd2-982a-48d650a343d5
+    name: Lanny Thomas
+    party: Republican
+    image: https://images.squarespace-cdn.com/content/69373488c86b8056febeb404/1f53a219-dd13-4b1b-8ab7-c71996cab9b7/Lanny+Thomas+for+Senate+in+road.jpg?content-type=image%2Fjpeg
+    email: lanny.thomas@senate.ga.gov
+    phones:
+    - 'capitol: 404-657-7716'
+    addresses:
+    - 'capitol: Room 323-B, Coverdell Legislative Office Building, Atlanta, GA 30334'
+    website: https://openstates.org/person/lanny-thomas-5J8wxGsNZ4F1SaOuzEeesX/
+    district: '53'
+    title: Senator
+    org_classification: upper
+  '20':
+    id: ocd-person/44a51125-9e82-41f6-8d4f-a646895b5994
+    name: Larry Walker
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/walker--iii-larry-4878.jpg
+    email: larry.walker@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0095'
+    addresses:
+    - 'capitol: State Capitol Room 421-A, 206 Washington St. SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/larry-walker-25Wufd7LtEYu2r7QBkWIia/
+    district: '20'
+    title: Senator
+    org_classification: upper
+  '24':
+    id: ocd-person/e11cecf4-f2e5-49d9-ba9e-47681f779438
+    name: Lee Anderson
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/anderson-lee-723.jpg
+    email: lee.anderson@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-5114'
+    addresses:
+    - 'capitol: Room 325-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 160 Louisville Road, Grovetown, GA 30813'
+    website: https://openstates.org/person/lee-anderson-6qmUXbgjbKbdvREWhabOTQ/
+    district: '24'
+    title: Senator
+    org_classification: upper
+  '16':
+    id: ocd-person/078246e9-90b8-43aa-bb92-d7016f517b8e
+    name: Marty Harbin
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/harbin-marty-850.jpg
+    email: marty.harbin@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0078'
+    - 'district: 404-656-0078'
+    addresses:
+    - 'capitol: Room 302-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 215 Greencastle Road, Tyrone, GA 30290'
+    website: https://openstates.org/person/marty-harbin-EATwp8cN3tQbu2hwo7yPe/
+    district: '16'
+    title: Senator
+    org_classification: upper
+  '6':
+    id: ocd-person/81b84318-8c9f-467f-a7c1-776d9c415f51
+    name: Matt Brass
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/brass-matt-4907.jpg
+    email: matt.brass@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0057'
+    - 'district-mail: 770-265-6100'
+    addresses:
+    - 'capitol: State Capitol Room 453, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1313, Newnan, GA 30264'
+    website: https://openstates.org/person/matt-brass-3wmDWjZQoqLM2JIdMBR8cb/
+    district: '6'
+    title: Senator
+    org_classification: upper
+  '23':
+    id: ocd-person/918888ac-edc7-4178-9133-d058f0f21010
+    name: Max Burns
+    party: Republican
+    image: ''
+    email: max.burns@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-1376'
+    addresses:
+    - 'capitol: Room 327-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 203, Sylvania, GA 30467'
+    website: https://openstates.org/person/max-burns-4QcHa3lPp6ivhkxY80BKs4/
+    district: '23'
+    title: Senator
+    org_classification: upper
+  '3':
+    id: ocd-person/011995be-4dd0-43b2-ae75-57ae45f53576
+    name: Mike Hodges
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/hodges-mike-5013.jpg
+    email: mike.hodges@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-7127'
+    - 'district: 912-464-1989'
+    addresses:
+    - 'capitol: Room 305-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 3410 Cypress Mill Road Box 101, Brunswick, GA 31525'
+    website: https://openstates.org/person/mike-hodges-24gRtDfNQQrErlUCgmYgY/
+    district: '3'
+    title: Senator
+    org_classification: upper
+  '36':
+    id: ocd-person/bf2c1ec5-d995-4605-85ac-139adb037d99
+    name: Nan Orrock
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/orrock-nan-33.jpg
+    email: nan.orrock@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-8054'
+    - 'district: 404-524-5999'
+    addresses:
+    - 'capitol: State Capitol Room 420-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 1070 Delaware Ave. SE, Atlanta, GA 30316'
+    website: https://openstates.org/person/nan-orrock-5ojhEyhy91AYbhStnt7kGf/
+    district: '36'
+    title: Senator
+    org_classification: upper
+  '9':
+    id: ocd-person/57ad1f65-9969-4be2-b262-684bf53123fb
+    name: Nikki Merritt
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/merritt-nikki-4978.jpg
+    email: nikki.merritt@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-1310'
+    addresses:
+    - 'capitol: State Capitol Room 319-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 1911 Grayson Highway Suite 8367, Grayson, GA 30017'
+    website: https://openstates.org/person/nikki-merritt-2fRRsiDnKjb2CeoTpK8Mqh/
+    district: '9'
+    title: Senator
+    org_classification: upper
+  '38':
+    id: ocd-person/069fb4fa-766b-40e4-90b7-ce96b4fa2ace
+    name: RaShaun Kemp
+    party: Democratic
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/RashaunKemp2024.png
+    email: rashaun.kemp@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0105'
+    - 'district-mail: 404-576-8986'
+    addresses:
+    - 'capitol: State Capitol Room 121-E, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 310041, Atlanta, GA 31131'
+    website: https://openstates.org/person/rashaun-kemp-CUwIHej1OKrLmV7GBwhOo/
+    district: '38'
+    title: Senator
+    org_classification: upper
+  '55':
+    id: ocd-person/8798a822-fee8-4546-bcdd-455f788bef44
+    name: Randal Mangham
+    party: Democratic
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Randal_Mangham.jpg
+    email: randal.mangham@senate.ga.gov
+    phones:
+    - 'capitol: 404-657-4640'
+    addresses:
+    - 'capitol: Room 320-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 870527, Stone Mountain, GA 30087'
+    website: https://openstates.org/person/randal-mangham-47rjAJCRCcmqtuxVdjO2Fg/
+    district: '55'
+    title: Senator
+    org_classification: upper
+  '29':
+    id: ocd-person/6da7fe11-4436-4854-8e1b-4c45dc4cdaac
+    name: Randy Robertson
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/robertson-randy-4926.jpg
+    email: randy.robertson@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0045'
+    addresses:
+    - 'capitol: State Capitol Room 421-F, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 62, Cataula, GA 31804'
+    website: https://openstates.org/person/randy-robertson-3Kuw3XoqHJBC20mOoZN1cy/
+    district: '29'
+    title: Senator
+    org_classification: upper
+  '25':
+    id: ocd-person/c7860bae-9d9c-449c-9903-20230eec50ac
+    name: Rick Williams
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/williams-rick-4905.jpg
+    email: rick.williams@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0082'
+    addresses:
+    - 'capitol: Room 327-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 1670 N. Jefferson St., Milledgeville, GA 31061'
+    website: https://openstates.org/person/rick-williams-64UjOAxLK6Ug74tMWms0ce/
+    district: '25'
+    title: Senator
+    org_classification: upper
+  '8':
+    id: ocd-person/b90b899d-87f0-43a5-9d15-6e310187ac41
+    name: Russ Goodman
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/goodman-russ-4977.jpg
+    email: russ.goodman@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-1318'
+    addresses:
+    - 'capitol: Room 301-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 9677 Frank S. Sessoms Memorial Highway, Homerville, GA 31634'
+    website: https://openstates.org/person/russ-goodman-5dAqtaoq1SOzUzDOaEdXXN/
+    district: '8'
+    title: Senator
+    org_classification: upper
+  '40':
+    id: ocd-person/218a4fc4-a568-4b78-b350-0d60c6b12d4c
+    name: Sally Harrell
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/harrell-sally-311.jpg
+    email: sally.harrell@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-7871'
+    addresses:
+    - 'capitol: State Capitol Room 110-D, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 941365, Atlanta, GA 31141'
+    website: https://openstates.org/person/sally-harrell-11HxEQQZ3hfi1NJgGTJY2G/
+    district: '40'
+    title: Senator
+    org_classification: upper
+  '11':
+    id: ocd-person/cbcdfca3-e47d-4b32-9164-ec0709a134bf
+    name: Sam Watson
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/watson-sam-837.jpg
+    email: sam.watson@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-0065'
+    addresses:
+    - 'capitol: Room 302-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 3914, Moultrie, GA 31776'
+    website: https://openstates.org/person/sam-watson-6CZZsIyrJSVTRidvK3CwW7/
+    district: '11'
+    title: Senator
+    org_classification: upper
+  '48':
+    id: ocd-person/314d7845-ba55-4bd4-809a-c7c7aea26690
+    name: Shawn Still
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/still-shawn-5016.jpg
+    email: shawn.still@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-7127'
+    addresses:
+    - 'capitol: State Capitol Room 421-D, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 2850 Simpson Circle, Norcross, GA 30071'
+    website: https://openstates.org/person/shawn-still-1V21ixmS86x5GvCGQ0tOD2/
+    district: '48'
+    title: Senator
+    org_classification: upper
+  '5':
+    id: ocd-person/5b6e0e37-802b-4103-b401-551532aba2e7
+    name: Sheikh Rahman
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/rahman-sheikh-4924.jpg
+    email: sheikh.rahman@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-7871'
+    addresses:
+    - 'capitol: State Capitol Room 110-C, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 464902, Lawrenceville, GA 30042'
+    website: https://openstates.org/person/sheikh-rahman-2mWb1vUTyRWDZCNomtfrrL/
+    district: '5'
+    title: Senator
+    org_classification: upper
+  '39':
+    id: ocd-person/2abbbe23-8cb6-4f33-afaf-38ce88a4e10c
+    name: Sonya Halpern
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/halpern-sonya-4985.jpg
+    email: sonya.halpern@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-9644'
+    addresses:
+    - 'capitol: Room 303-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 13142, Atlanta, GA 30324'
+    website: https://openstates.org/person/sonya-halpern-1IdTXHeguTGekIBduzRhoC/
+    district: '39'
+    title: Senator
+    org_classification: upper
+  '51':
+    id: ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc
+    name: Steve Gooch
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/gooch-steve-752.jpg
+    email: steve.gooch@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-9221'
+    addresses:
+    - 'capitol: Room 301-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 600, Dahlonega, GA 30533'
+    website: https://openstates.org/person/steve-gooch-6tsaG0c1I1I662fIuHoDCW/
+    district: '51'
+    title: Senator
+    org_classification: upper
+  '18':
+    id: ocd-person/516cb969-9467-490f-9a05-02c3e7decae3
+    name: Steven McNeel
+    party: Republican
+    image: https://static.wixstatic.com/media/717e3f_742258cc71f249009c9f26b868c3c467~mv2.jpg/v1/fill/w_953,h_602,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/717e3f_742258cc71f249009c9f26b868c3c467~mv2.jpg
+    email: steven.mcneel@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-2593'
+    addresses:
+    - 'capitol: Room 322-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/steven-mcneel-2Te44DsJoA8BxUo7WuxQbT/
+    district: '18'
+    title: Senator
+    org_classification: upper
+  '30':
+    id: ocd-person/93f45299-bfa2-4458-844a-5c6b9bdd8c1d
+    name: Tim Bearden
+    party: Republican
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Timothy_Bearden.jpg
+    email: timothy.bearden@senate.ga.gov
+    phones:
+    - 'capitol: 404-656-7872'
+    addresses:
+    - 'capitol: Room 304-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/tim-bearden-4VBWizdKo0XswOxxJnEtyv/
+    district: '30'
+    title: Senator
+    org_classification: upper
+  '43':
+    id: ocd-person/d9f1ea57-7b90-484a-9664-927a36c87e0c
+    name: Tonya Anderson
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/anderson-tonya-807.jpg
+    email: tonya.anderson@senate.ga.gov
+    phones:
+    - 'capitol: 404-463-2598'
+    addresses:
+    - 'capitol: State Capitol Room 110-A, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1026, Lithonia, GA 30058'
+    website: https://openstates.org/person/tonya-anderson-6dFtDTK3WQuxaaH2ZDhVpU/
+    district: '43'
+    title: Senator
+    org_classification: upper
+state_house:
+  '106':
+    id: ocd-person/938f2479-c51f-446a-87f0-76d4f07c61e5
+    name: Akbar Ali
+    party: Democratic
+    image: ''
+    email: akbar.ali@house.ga.gov
+    phones:
+    - 'capitol-mail: 404-656-0116'
+    addresses:
+    - 'capitol-mail: Room 409-E, Coverdell Legislative Office Building, Atlanta, GA 30334'
+    website: https://openstates.org/person/akbar-ali-4URHsTMjgEKtsaCFgjd7NV/
+    district: '106'
+    title: Representative
+    org_classification: lower
+  '168':
+    id: ocd-person/a5a0998b-3837-4c4e-a66b-a567dc2f9d77
+    name: Al Williams
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/williams-al-230.jpg
+    email: al.williams@house.ga.gov
+    phones:
+    - 'capitol: 404-656-6372'
+    addresses:
+    - 'capitol: Room 511-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 8216 E. Oglethorpe Highway, Midway, GA 31320'
+    website: https://openstates.org/person/al-williams-52X7x1OCerscb5DHp65obX/
+    district: '168'
+    title: Representative
+    org_classification: lower
+  '33':
+    id: ocd-person/bb48e87c-29db-4a4d-a278-fa299be2020e
+    name: Alan Powell
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/powell-alan-187.jpg
+    email: alan.powell@house.ga.gov
+    phones:
+    - 'capitol: 404-463-3793'
+    - 'district: 706-206-6500'
+    addresses:
+    - 'capitol: Room 613-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 3059 Ridge Road, Hartwell, GA 30643'
+    website: https://openstates.org/person/alan-powell-5hOsp6K6KiT8jtyX5KChKA/
+    district: '33'
+    title: Representative
+    org_classification: lower
+  '91':
+    id: ocd-person/b001a55f-61fa-4e62-85fd-ac6c282f2711
+    name: Angela Moore
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/moore-angela-5008.jpg
+    email: angela.moore@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0126'
+    - 'district: 678-824-5790'
+    addresses:
+    - 'capitol: Room 411-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 2724 Wesley Chapel Road Suite 361731, Decatur, GA 30034'
+    website: https://openstates.org/person/angela-moore-5M7OuOU2OIWd1tvj100oJF/
+    district: '91'
+    title: Representative
+    org_classification: lower
+  '169':
+    id: ocd-person/1d0deded-daaa-425b-b6aa-3612492dca5b
+    name: Angie O'Steen
+    party: Republican
+    image: https://angieosteen.com/wp-content/uploads/sites/109/2024/04/photo-mobile-1.jpg
+    email: angie.osteen@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0254'
+    addresses:
+    - 'capitol: Room 601-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/angie-o-steen-sp8scLzHXd2l0z0r5A8kt/
+    district: '169'
+    title: Representative
+    org_classification: lower
+  '163':
+    id: ocd-person/e16d6516-badc-4682-9e3a-84f30a44b060
+    name: Anne Westbrook
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/westbrook-anne-allen-5054.jpg
+    email: anneallen.westbrook@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0116'
+    addresses:
+    - 'capitol: Room 409-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/anne-westbrook-6rNGZ0KeoQWh2t2ZjPlx0y/
+    district: '163'
+    title: Representative
+    org_classification: lower
+  '96':
+    id: ocd-person/3b3da57c-2f96-4a94-a7bc-eb6a814cc627
+    name: Arlene Beckles
+    party: Democratic
+    image: https://bloximages.newyork1.vip.townnews.com/gwinnettdailypost.com/content/tncms/assets/v3/editorial/f/66/f663df0a-941b-11ec-92cf-a71cdde39cc5/621544040ce4c.image.jpg?crop=656%2C819%2C276%2C240
+    email: arlene.beckles@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0109'
+    addresses:
+    - 'capitol: Room 404-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 477, Norcross, GA 30091'
+    website: https://openstates.org/person/arlene-beckles-1nmicrZ9DDd5OrAaPYJdo7/
+    district: '96'
+    title: Representative
+    org_classification: lower
+  '135':
+    id: ocd-person/e4e40f68-0970-4392-b739-3c68f749bcdc
+    name: Beth Camp
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/camp-beth-5004.jpg
+    email: beth.camp@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7153'
+    addresses:
+    - 'capitol: State Capitol Room 218-D, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 1235 Strickland Road, Concord, GA 30206'
+    website: https://openstates.org/person/beth-camp-6xuTPOBqSVJBY7LS67zfrQ/
+    district: '135'
+    title: Representative
+    org_classification: lower
+  '147':
+    id: ocd-person/8b4b00cb-6f78-4b69-b788-796b19d94752
+    name: Bethany Ballard
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/ballard-bethany-5051.jpg
+    email: bethany.ballard@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0325'
+    addresses:
+    - 'capitol: Room 612-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/bethany-ballard-4EqD16fcoGsNBzDTwuXWr4/
+    district: '147'
+    title: Representative
+    org_classification: lower
+  '54':
+    id: ocd-person/c2c81ffc-f4b1-40f4-96b0-6309f89902ee
+    name: Betsy Holland
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/holland-betsy-4943.jpg
+    email: betsy.holland@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0116'
+    addresses:
+    - 'capitol: Room 409-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 535 Pine Tree Drive NE, Atlanta, GA 30305'
+    website: https://openstates.org/person/betsy-holland-5vXy42vXYzX8kMu5DYegeM/
+    district: '54'
+    title: Representative
+    org_classification: lower
+  '23':
+    id: ocd-person/f2444048-8c14-45b2-b700-37f7899fa5bb
+    name: Bill Fincher
+    party: Republican
+    image: ''
+    email: bill.fincher@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0254'
+    addresses:
+    - 'capitol: Room 601-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 109 Breckinridge Drive, Canton, GA 30115'
+    website: https://openstates.org/person/bill-fincher-7N9KhnJhLvonDRhyYZR3nv/
+    district: '23'
+    title: Representative
+    org_classification: lower
+  '161':
+    id: ocd-person/4a9ef816-9130-4510-a19e-3124e3f2aeed
+    name: Bill Hitchens
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/hitchens-bill-823.jpg
+    email: bill.hitchens@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5126'
+    addresses:
+    - 'capitol: State Capitol Room 217, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 2440 Rincon-Stillwell Road, Rincon, GA 31326'
+    website: https://openstates.org/person/bill-hitchens-2Go52QO994ILZs7oi52Zm1/
+    district: '161'
+    title: Representative
+    org_classification: lower
+  '157':
+    id: ocd-person/adefd0ba-43cd-4aae-9321-12f67e57ac8a
+    name: Bill Werkheiser
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/werkheiser-bill-863.jpg
+    email: bill.werkheiser@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5132'
+    - 'district-mail: 912-237-0145'
+    addresses:
+    - 'capitol: State Capitol Room 218-A, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 27, Glennville, GA 30427'
+    website: https://openstates.org/person/bill-werkheiser-5IDGe3p00v6PyDFc68FzcQ/
+    district: '157'
+    title: Representative
+    org_classification: lower
+  '152':
+    id: ocd-person/23dfc274-73d1-45df-b381-67e597cf0b84
+    name: Bill Yearta
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/yearta-bill-4969.jpg
+    email: bill.yearta@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0254'
+    - 'district: 229-776-2047'
+    addresses:
+    - 'capitol: Room 601-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 114 Carriage Lane, Sylvester, GA 31791'
+    website: https://openstates.org/person/bill-yearta-15gzN1zw53eXddzgvm5l8W/
+    district: '152'
+    title: Representative
+    org_classification: lower
+  '88':
+    id: ocd-person/96307d79-07d4-4f59-9dd3-b7f994d566d5
+    name: Billy Mitchell
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/mitchell-billy-172.jpg
+    email: billy.mitchell@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0287'
+    addresses:
+    - 'capitol: Room 607-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 88, Stone Mountain, GA 30086'
+    website: https://openstates.org/person/billy-mitchell-4ZP0YyPhQOVq3hKIvdScgX/
+    district: '88'
+    title: Representative
+    org_classification: lower
+  '21':
+    id: ocd-person/933a841a-19d6-42c2-a046-991ff9903a23
+    name: Brad Thomas
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/thomas-brad-4991.jpg
+    email: brad.thomas@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0152'
+    - 'district: 678-224-1490'
+    addresses:
+    - 'capitol: Room 401-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 2210 Holly Springs Parkway Unit 1280, Holly Springs, GA 30115'
+    website: https://openstates.org/person/brad-thomas-4Toc44uVQanLVmsfgwI3Gd/
+    district: '21'
+    title: Representative
+    org_classification: lower
+  '28':
+    id: ocd-person/c0b205e2-1542-4802-896d-fa7b2b6fc4d9
+    name: Brent Cox
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/cox-brent-5021.jpg
+    email: brent.cox@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0152'
+    addresses:
+    - 'capitol: Room 401-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/brent-cox-5rbsmDRYn0lsRvzEXNxWG1/
+    district: '28'
+    title: Representative
+    org_classification: lower
+  '132':
+    id: ocd-person/a53e6bbd-a5b8-436b-94ae-bebf957c5b61
+    name: Brian Prince
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/prince-brian-847.jpg
+    email: brian.prince@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0298'
+    addresses:
+    - 'capitol: Room 608-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 14264, Augusta, GA 30919'
+    website: https://openstates.org/person/brian-prince-51oG8qfzpNNIAB1zpoaJJR/
+    district: '132'
+    title: Representative
+    org_classification: lower
+  '112':
+    id: ocd-person/13b7af1b-5b56-481b-a81a-2001846188a6
+    name: Bruce Williamson
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/williamson-bruce-778.jpg
+    email: bruce.williamson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5025'
+    - 'district-mail: 770-267-2566'
+    addresses:
+    - 'capitol: State Capitol Room 415-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 430, Monroe, GA 30655'
+    website: https://openstates.org/person/bruce-williamson-bCnTfOC8e6l5TKz6UK9aA/
+    district: '112'
+    title: Representative
+    org_classification: lower
+  '56':
+    id: ocd-person/b1187e7a-8cea-4e91-9c9f-7c7c61df3c85
+    name: Bryce Berry
+    party: Democratic
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Bryce_Berry.jpg
+    email: bryce.berry@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0220'
+    addresses:
+    - 'capitol: Room 509-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 93004, Atlanta, GA 30318'
+    website: https://openstates.org/person/bryce-berry-5OApoOqblUiXTk3L9MkGFJ/
+    district: '56'
+    title: Representative
+    org_classification: lower
+  '167':
+    id: ocd-person/d40576ac-fbc0-4b42-98ee-f6362063784d
+    name: Buddy DeLoach
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/deloach-buddy-303.jpg
+    email: buddy.deloach@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7857'
+    addresses:
+    - 'capitol: State Capitol Room 401-H, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 2689 Sutherland Bluff Drive NE, Townsend, GA 31331'
+    website: https://openstates.org/person/buddy-deloach-6S4rwywAKduNNSLlHQpvgL/
+    district: '167'
+    title: Representative
+    org_classification: lower
+  '158':
+    id: ocd-person/842218b5-88ae-4ba8-8395-756bf3340e16
+    name: Butch Parrish
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/parrish-butch-183.jpg
+    email: butch.parrish@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5141'
+    - 'district: 478-237-3838'
+    addresses:
+    - 'capitol: State Capitol Room HM-1, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 132 Victory Drive, Swainsboro, GA 30401'
+    website: https://openstates.org/person/butch-parrish-41KZIRo1XyFsEHQPuPf8lC/
+    district: '158'
+    title: Representative
+    org_classification: lower
+  '162':
+    id: ocd-person/562e162f-2a60-441c-956b-11db12eef266
+    name: Carl Gilliard
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/gilliard-carl-4881.jpg
+    email: carl.gilliard@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7859'
+    addresses:
+    - 'capitol: Room 512-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: Garden City, GA'
+    website: https://openstates.org/person/carl-gilliard-2ccOuRudxaYC0pO6sBv0Rq/
+    district: '162'
+    title: Representative
+    org_classification: lower
+  '139':
+    id: ocd-person/3646e872-85a6-4383-97c5-36ff96ca7113
+    name: Carmen Rice
+    party: Republican
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/CarmenRice2024.jpg
+    email: carmen.rice@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0188'
+    addresses:
+    - 'capitol: Room 504-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1031, Columbus, GA 31808'
+    website: https://openstates.org/person/carmen-rice-1ePzQGBs5NzlYIoV3wymwd/
+    district: '139'
+    title: Representative
+    org_classification: lower
+  '141':
+    id: ocd-person/0f5a9273-2fc6-458f-af59-b75070a1dc76
+    name: Carolyn Hugley
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/hugley-carolyn-133.jpg
+    email: carolyn.hugley@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5058'
+    addresses:
+    - 'capitol: Room 609, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 6342, Columbus, GA 31917'
+    website: https://openstates.org/person/carolyn-hugley-SyH8hKWYVbb9svDKFB6Ig/
+    district: '141'
+    title: Representative
+    org_classification: lower
+  '24':
+    id: ocd-person/72370a62-92f4-46f1-ab7b-193a643085b8
+    name: Carter Barrett
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/barrett-carter-5020.jpg
+    email: carter.barrett@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0152'
+    addresses:
+    - 'capitol: Room 401-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/carter-barrett-3TWHI2HEYaagPD5tGV7TU8/
+    district: '24'
+    title: Representative
+    org_classification: lower
+  '20':
+    id: ocd-person/0d75f0d9-0242-4f72-b4f3-1cd085eb26b6
+    name: Charlice Byrd
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/byrd-charlice-75.jpg
+    email: charlice.byrd@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0213'
+    addresses:
+    - 'capitol: Room 508-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 1025 Rose Creek Drive Suite 620-165, Woodstock, GA 30189'
+    website: https://openstates.org/person/charlice-byrd-POnYi19zWBxBFNB4Zu6Yo/
+    district: '20'
+    title: Representative
+    org_classification: lower
+  '172':
+    id: ocd-person/cba2f06c-773c-49d3-949c-b1a2db377c21
+    name: Chas Cannon
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/cannon-charles--chas--5058.jpg
+    email: charles.cannon@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0177'
+    addresses:
+    - 'capitol: Room 501-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/chas-cannon-6CFu9onh2QzEQTS8OUhaGf/
+    district: '172'
+    title: Representative
+    org_classification: lower
+  '32':
+    id: ocd-person/d79c3e9b-b73d-416b-9bfd-8a0338d8256c
+    name: Chris Erwin
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/erwin-chris-4965.jpg
+    email: chris.erwin@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7850'
+    addresses:
+    - 'capitol: State Capitol Room 220-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 501029, Atlanta, GA 31150'
+    website: https://openstates.org/person/chris-erwin-6YqklP09rrvjWI4Y1m087w/
+    district: '32'
+    title: Representative
+    org_classification: lower
+  '104':
+    id: ocd-person/3ff894cb-f2e4-47d0-9f67-b125245a10c3
+    name: Chuck Efstration
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/efstration-chuck-846.jpg
+    email: chuck.efstration@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5052'
+    addresses:
+    - 'capitol: State Capitol Room 338, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1656, Dacula, GA 30019'
+    website: https://openstates.org/person/chuck-efstration-1wi7Lg6ypsXtcneCNaNe1z/
+    district: '104'
+    title: Representative
+    org_classification: lower
+  '49':
+    id: ocd-person/42517dd7-eccb-4d22-a795-cbd010b69ee6
+    name: Chuck Martin
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/martin-chuck-164.jpg
+    email: chuck.martin@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5146'
+    addresses:
+    - 'capitol: State Capitol Room 417-A, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 11770 Haynes Bridge Road Suite 205-544, Alpharetta, GA 30004'
+    website: https://openstates.org/person/chuck-martin-218jad1ZLQbjjPe1RX7QeM/
+    district: '49'
+    title: Representative
+    org_classification: lower
+  '118':
+    id: ocd-person/e1a9102d-f845-47f5-882e-e344eef060ec
+    name: Clint Crowe
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/crowe-clint-5002.jpg
+    email: clint.crowe@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0325'
+    addresses:
+    - 'capitol: Room 612-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 115 Mabry Road, Jackson, GA 30233'
+    website: https://openstates.org/person/clint-crowe-6roXD7OjVV3g8AYCQA7UYG/
+    district: '118'
+    title: Representative
+    org_classification: lower
+  '144':
+    id: ocd-person/ec6cf250-ebcc-4dda-89a5-12da9ebbe51a
+    name: Dale Washburn
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/washburn-dale-4958.jpg
+    email: dale.washburn@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0152'
+    addresses:
+    - 'capitol: Room 401-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 3040 Riverside Drive Suite C-2, Macon, GA 31210'
+    website: https://openstates.org/person/dale-washburn-7C7ycyD2FgZTPvDagOMHiU/
+    district: '144'
+    title: Representative
+    org_classification: lower
+  '133':
+    id: ocd-person/1a9598cc-056f-4725-a3fb-64c3f0fd26ed
+    name: Danny Mathis
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/mathis-danny-4959.jpg
+    email: danny.mathis@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0152'
+    addresses:
+    - 'capitol: Room 401-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 531, Cochran, GA 31014'
+    website: https://openstates.org/person/danny-mathis-oAAJrsiwXFFHeDqinYd9Z/
+    district: '133'
+    title: Representative
+    org_classification: lower
+  '95':
+    id: ocd-person/1f94316e-fb58-401f-bbfc-5ada0a717b6b
+    name: Dar'shun Kendrick
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/kendrick-dar-shun-770.jpg
+    email: darshun.kendrick@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0202'
+    addresses:
+    - 'capitol: Room 507-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 630, Lithonia, GA 30058'
+    website: https://openstates.org/person/dar-shun-kendrick-xaUANpmVaIEpRPeKf6OyZ/
+    district: '95'
+    title: Representative
+    org_classification: lower
+  '173':
+    id: ocd-person/d00eb950-0fb6-41ab-ae22-8e9ce84d7cf0
+    name: Darlene Taylor
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/taylor-darlene-786.jpg
+    email: darlene.taylor@house.ga.gov
+    phones:
+    - 'capitol: 404-463-2246'
+    - 'district-mail: 229-225-9943'
+    addresses:
+    - 'capitol: State Capitol Room 245-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 6580, Thomasville, GA 31758'
+    website: https://openstates.org/person/darlene-taylor-6Kb8EeUyL3uYPl7OKD2O3M/
+    district: '173'
+    title: Representative
+    org_classification: lower
+  '100':
+    id: ocd-person/ad18dba4-9247-4542-95b1-2ccef815dbc7
+    name: David Clark
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/clark-david-867.jpg
+    email: david.clark@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0188'
+    addresses:
+    - 'capitol: Room 504-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 420 S. Hill St., Buford, GA 30518'
+    website: https://openstates.org/person/david-clark-5Gd21gfkvV8et5ryuuPWbP/
+    district: '100'
+    title: Representative
+    org_classification: lower
+  '72':
+    id: ocd-person/9bcfa0eb-ee7d-4762-9555-7bc4a67d6417
+    name: David Huddleston
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/huddleston-david-5033.jpg
+    email: david.huddleston@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0325'
+    addresses:
+    - 'capitol: Room 612-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/david-huddleston-4k0hE6ebcCVjaxG2mn9wON/
+    district: '72'
+    title: Representative
+    org_classification: lower
+  '136':
+    id: ocd-person/0f288c5b-484a-4b70-8209-0a23f922edd1
+    name: David Jenkins
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/jenkins-david-5005.jpg
+    email: david.jenkins@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0188'
+    addresses:
+    - 'capitol: Room 504-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 833 John Trammell Road, Grantville, GA 30220'
+    website: https://openstates.org/person/david-jenkins-SbPlErIokooFKpDB614nh/
+    district: '136'
+    title: Representative
+    org_classification: lower
+  '153':
+    id: ocd-person/9a8e7b0c-3c19-473f-b04a-d3a17037af0a
+    name: David Sampson
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/sampson-david-5052.jpg
+    email: david.sampson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0109'
+    addresses:
+    - 'capitol: 1713 E. Oglethorpe, Albany, GA 31705'
+    - 'capitol: Room 404-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/david-sampson-4hdvnMl3cSCCmLJiHb0b3C/
+    district: '153'
+    title: Representative
+    org_classification: lower
+  '38':
+    id: ocd-person/83a7bbf2-d69c-4813-bbeb-52820e6b9af4
+    name: David Wilkerson
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/wilkerson-david-760.jpg
+    email: david.wilkerson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0314'
+    - 'district: 770-891-9736'
+    addresses:
+    - 'capitol: Room 611-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 3721 New Macland Road Suite 200-232, Powder Springs, GA 30127'
+    website: https://openstates.org/person/david-wilkerson-40QeGw1dkdwyqke80Xl7Y4/
+    district: '38'
+    title: Representative
+    org_classification: lower
+  '137':
+    id: ocd-person/5061bc6b-83af-46d0-a78d-30ebe10a63db
+    name: Debbie Buckner
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/buckner-debbie-71.jpg
+    email: debbie.buckner@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0116'
+    - 'district: 706-269-3630'
+    addresses:
+    - 'capitol: Room 409-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 780 Fielders Mill Road, Junction City, GA 31812'
+    website: https://openstates.org/person/debbie-buckner-2Rg3CVwR55GKM7o7ogpLb9/
+    district: '137'
+    title: Representative
+    org_classification: lower
+  '53':
+    id: ocd-person/b824f8fd-7343-449d-8027-fcd0afaf1949
+    name: Deborah Silcox
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/silcox-deborah-4887.jpg
+    email: deborah.silcox@house.ga.gov
+    phones:
+    - 'capitol: 404-657-1803'
+    addresses:
+    - 'capitol: Room 408-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 6300 Powers Ferry Road Suite 600, #177, Atlanta, GA 30339'
+    website: https://openstates.org/person/deborah-silcox-5bTU3BJmLYhRugPHXfBDLd/
+    district: '53'
+    title: Representative
+    org_classification: lower
+  '69':
+    id: ocd-person/1bb8d14b-9d5d-4edd-8c93-37e95991a8e4
+    name: Debra Bazemore
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/bazemore-debra-4890.jpg
+    email: debra.bazemore@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0202'
+    addresses:
+    - 'capitol: Room 507-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 7042 Galloway Pointe, Riverdale, GA 30296'
+    website: https://openstates.org/person/debra-bazemore-qJFn1fkdK2iyiW309rRaO/
+    district: '69'
+    title: Representative
+    org_classification: lower
+  '78':
+    id: ocd-person/016fb7f0-2b08-4587-b7f2-8d18c1d9b8f5
+    name: Demetrius Douglas
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/douglas-demetrius-817.jpg
+    email: demetrius.douglas@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7859'
+    addresses:
+    - 'capitol: Room 512-I, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 131, Stockbridge, GA 30281'
+    website: https://openstates.org/person/demetrius-douglas-2i2xql5xVnVukVntg8u7Z/
+    district: '78'
+    title: Representative
+    org_classification: lower
+  '68':
+    id: ocd-person/9046fcb2-f3eb-4233-bd92-32c94e60f9df
+    name: Derrick Jackson
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/jackson-derrick-4891.jpg
+    email: derrick.jackson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7859'
+    addresses:
+    - 'capitol: Room 512-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 100 Commerce Drive #1052, Tyrone, GA 30290'
+    website: https://openstates.org/person/derrick-jackson-4OFKqftYdeWBH68Xp5zhrL/
+    district: '68'
+    title: Representative
+    org_classification: lower
+  '30':
+    id: ocd-person/3a323603-753e-4380-993c-9bb2a7fc55f3
+    name: Derrick McCollum
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/mccollum-derrick-5022.jpg
+    email: derrick.mccollum@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0152'
+    addresses:
+    - 'capitol: Room 401-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/derrick-mccollum-1loV5a1w8xzmutcsQ4Lcxv/
+    district: '30'
+    title: Representative
+    org_classification: lower
+  '34':
+    id: ocd-person/8f76af22-98dc-4e1e-ba99-75b87c1129d6
+    name: Devan Seabaugh
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/seabaugh-devan-5009.jpg
+    email: devan.seabaugh@house.ga.gov
+    phones:
+    - 'capitol: 404-651-7737'
+    addresses:
+    - 'capitol: State Capitol Room 109, 206 Washington St. SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/devan-seabaugh-4Mi8m8LhZu0Lfel9T9mQTu/
+    district: '34'
+    title: Representative
+    org_classification: lower
+  '109':
+    id: ocd-person/8afda706-7afa-462c-89f2-0d6d5da010ff
+    name: Dewey McClain
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/mcclain-dewey-845.jpg
+    email: dewey.mcclain@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0220'
+    - 'district-mail: 404-525-3559'
+    addresses:
+    - 'capitol: Room 509-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1621, Lilburn, GA 30048'
+    website: https://openstates.org/person/dewey-mcclain-4EGrMCW0h0kQN58nZDQJzD/
+    district: '109'
+    title: Representative
+    org_classification: lower
+  '44':
+    id: ocd-person/81dde544-49e9-4fb0-9313-32eacaf6194b
+    name: Don Parsons
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/parsons-don-184.jpg
+    email: don.parsons@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5143'
+    - 'district: 770-977-4426'
+    addresses:
+    - 'capitol: State Capitol Room 402, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 3167 Sycamore Lane, Marietta, GA 30066'
+    website: https://openstates.org/person/don-parsons-3x3PpxD7oJVIxdmLisA11v/
+    district: '44'
+    title: Representative
+    org_classification: lower
+  '93':
+    id: ocd-person/818f1afb-2850-448e-99c1-be63a9acfe95
+    name: Doreen Carter
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/carter-doreen-3877.jpg
+    email: doreen.carter@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0220'
+    addresses:
+    - 'capitol: Room 509-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 2186, Lithonia, GA 30058'
+    website: https://openstates.org/person/doreen-carter-3wTPOELlPd6pskXHWEM5Ej/
+    district: '93'
+    title: Representative
+    org_classification: lower
+  '12':
+    id: ocd-person/f33d979c-554c-433e-ad0f-837eef1da589
+    name: Eddie Lumsden
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/lumsden-eddie-826.jpg
+    email: eddie.lumsden@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7850'
+    addresses:
+    - 'capitol: State Capitol Room 220-A, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 122, Armuchee, GA 30105'
+    website: https://openstates.org/person/eddie-lumsden-7OzHYYxLwSvxBKbIATWpHF/
+    district: '12'
+    title: Representative
+    org_classification: lower
+  '165':
+    id: ocd-person/18427775-e3e7-4730-bb6f-722616e6aebe
+    name: Edna Jackson
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/jackson-edna-5011.jpg
+    email: edna.jackson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0265'
+    addresses:
+    - 'capitol: Room 604-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 2227 N. Fernwood Court, Savannah, GA 31404'
+    website: https://openstates.org/person/edna-jackson-jmBqvVq47Oi4UVCHp3Uqs/
+    district: '165'
+    title: Representative
+    org_classification: lower
+  '116':
+    id: ocd-person/4615e308-db74-408f-89df-02be56b5013b
+    name: El-Mahdi Holly
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/holly-el-mahdi-4954.jpg
+    email: el-mahdi.holly@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0287'
+    - 'district: 770-284-8146'
+    addresses:
+    - 'capitol: Room 607-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 1740 Hudson Bridge Road Suite 1221, Stockbridge, GA 30253'
+    website: https://openstates.org/person/el-mahdi-holly-28FSqGOGh9aY06PrssyBR5/
+    district: '116'
+    title: Representative
+    org_classification: lower
+  '31':
+    id: ocd-person/3b2b9f31-6859-4582-8d82-581597c0c178
+    name: Emory Dunahoo
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/dunahoo-emory-797.jpg
+    email: emory.dunahoo@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7857'
+    addresses:
+    - 'capitol: State Capitol Room 401-J, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 4495 Bryant Quarter Road, Gillsville, GA 30543'
+    website: https://openstates.org/person/emory-dunahoo-1neTuqxVSyHzUgEJtBNULI/
+    district: '31'
+    title: Representative
+    org_classification: lower
+  '75':
+    id: ocd-person/fe4b934e-8976-4c62-bcb0-ed8ae9782560
+    name: Eric Bell
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/bell-eric-5061.jpg
+    email: eric.bell@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0126'
+    addresses:
+    - 'capitol: Room 411-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: Jonesboro, GA'
+    website: https://openstates.org/person/eric-bell-7jqaWZ1OZ2UwG4hMrNbXLU/
+    district: '75'
+    title: Representative
+    org_classification: lower
+  '121':
+    id: ocd-person/abece831-30a8-4cf8-94ff-d41f7f48197f
+    name: Eric Gisler
+    party: Democratic
+    image: ''
+    email: eric.gisler@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0287'
+    addresses:
+    - 'capitol: Room 607-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 803, Watkinsville, GA 30677'
+    website: https://openstates.org/person/eric-gisler-5EPxBvh39jaRc1hm5vFbjD/
+    district: '121'
+    title: Representative
+    org_classification: lower
+  '51':
+    id: ocd-person/bdc621be-7296-4383-8c45-b4533d1c106c
+    name: Esther Panitch
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/panitch-esther-5026.jpg
+    email: esther.panitch@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0287'
+    addresses:
+    - 'capitol: Room 607-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/esther-panitch-5m65y91GWC1gNRdu5PHYjM/
+    district: '51'
+    title: Representative
+    org_classification: lower
+  '149':
+    id: ocd-person/b261086c-7b16-4a8e-82a6-22df4445af84
+    name: Floyd Griffin
+    party: Democratic
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/FloydGriffin.JPG
+    email: floyd.griffin@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7859'
+    addresses:
+    - 'capitol: Room 512-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/floyd-griffin-5Qayepq8kAJNABz57kgZdM/
+    district: '149'
+    title: Representative
+    org_classification: lower
+  '102':
+    id: ocd-person/dc99efc3-076b-4d00-b4b0-66a0507a4057
+    name: Gabe Okoye
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/okoye-gabe-5041.jpg
+    email: gabe.okoye@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0220'
+    addresses:
+    - 'capitol: Room 509-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 121 E. Crogan St. #1715, Lawrenceville, GA 30046'
+    website: https://openstates.org/person/gabe-okoye-6iGezRblfxh2SP4zh777LD/
+    district: '102'
+    title: Representative
+    org_classification: lower
+  '42':
+    id: ocd-person/bd990496-ea34-4b79-8d6f-68cfed424c15
+    name: Gabriel Sanchez
+    party: Democratic
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Gabriel_SanchezGA.jpg
+    email: gabriel.sanchez@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0126'
+    addresses:
+    - 'capitol: Room 411-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/gabriel-sanchez-5llTi08XnArzVngdWU5DYj/
+    district: '42'
+    title: Representative
+    org_classification: lower
+  '125':
+    id: ocd-person/47fd36f3-f5d4-4ef6-a429-1ffc7681e233
+    name: Gary Richardson
+    party: Republican
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/GaryRichardson2024.jpg
+    email: gary.richardson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0254'
+    addresses:
+    - 'capitol: Room 601-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 154, Evans, GA 30809'
+    website: https://openstates.org/person/gary-richardson-2BqApJOJeasVevd0ps92zj/
+    district: '125'
+    title: Representative
+    org_classification: lower
+  '154':
+    id: ocd-person/570a213a-a475-4fd3-ac36-23e1bd1190be
+    name: Gerald Greene
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/greene-gerald-115.jpg
+    email: gerald.greene@house.ga.gov
+    phones:
+    - 'capitol: 404-656-9210'
+    addresses:
+    - 'capitol: State Capitol Room 416-A, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 5805 U.S. Highway 82 West, Cuthbert, GA 39840'
+    website: https://openstates.org/person/gerald-greene-2eExd54QzpRtTuIG93pDw6/
+    district: '154'
+    title: Representative
+    org_classification: lower
+  '36':
+    id: ocd-person/be05ace3-ea73-4f3f-85ae-c5ed313d4cbe
+    name: Ginny Ehrhart
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/ehrhart-ginny-4937.jpg
+    email: ginny.ehrhart@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5024'
+    addresses:
+    - 'capitol: State Capitol Room 415, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1206, Marietta, GA 30061'
+    website: https://openstates.org/person/ginny-ehrhart-5mZ8Pu0ZZPhDuIDHQ10WFC/
+    district: '36'
+    title: Representative
+    org_classification: lower
+  '119':
+    id: ocd-person/b39e2164-d570-45f2-b271-5e2fbe99c8d6
+    name: Holt Persinger
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/persinger-holt-5060.jpg
+    email: holt.persinger@house.ga.gov
+    phones:
+    - 'capitol: 404-656-6731'
+    addresses:
+    - 'capitol: Room 508-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 269, Winder, GA 30680'
+    website: https://openstates.org/person/holt-persinger-5SvtKB0gss9vBDLmZs01gc/
+    district: '119'
+    title: Representative
+    org_classification: lower
+  '120':
+    id: ocd-person/e73cb2a6-bf3e-4211-a386-142c18a4f607
+    name: Houston Gaines
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/gaines-houston-4955.jpg
+    email: houston.gaines@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0152'
+    addresses:
+    - 'capitol: Room 401-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1203, Athens, GA 30603'
+    website: https://openstates.org/person/houston-gaines-72KxvLe5L1XyA8034YxBDj/
+    district: '120'
+    title: Representative
+    org_classification: lower
+  '86':
+    id: ocd-person/2a68d594-e7d5-49cd-b615-6efb872430c3
+    name: Imani Barnes
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/barnes-imani-5037.jpg
+    email: imani.barnes@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0202'
+    addresses:
+    - 'capitol: Room 507-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/imani-barnes-1I1aOyqmgkTfEInxH2NJKN/
+    district: '86'
+    title: Representative
+    org_classification: lower
+  '55':
+    id: ocd-person/f02d369f-2d48-4d8d-853d-77ce5a8810fc
+    name: Inga Willis
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/willis-inga-5027.jpg
+    email: inga.willis@house.ga.gov
+    phones:
+    - 'capitol: 404-656-6372'
+    addresses:
+    - 'capitol: Room 511-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 794 Marietta St. NW Suite 93311, Atlanta, GA 30318'
+    website: https://openstates.org/person/inga-willis-7JCou5Wp1FgoZ3IIosyBGm/
+    district: '55'
+    title: Representative
+    org_classification: lower
+  '170':
+    id: ocd-person/37602f7b-947e-4067-8f2e-b2fec620643e
+    name: Jaclyn Ford
+    party: Republican
+    image: https://jaclynforgeorgia.com/wp-content/uploads/sites/127/2024/02/photo-mobile-2.jpg
+    email: jaclyn.ford@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0325'
+    addresses:
+    - 'capitol: Room 612-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 526, Tifton, GA 31793'
+    website: https://openstates.org/person/jaclyn-ford-1gUXA2mvMAsGGc4Anw0UeM/
+    district: '170'
+    title: Representative
+    org_classification: lower
+  '176':
+    id: ocd-person/dbce462d-74e3-42d3-bd6c-3b9f8eeb69fe
+    name: James Burchett
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/burchett-james-4967.jpg
+    email: james.burchett@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5024'
+    addresses:
+    - 'capitol: State Capitol Room 415, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 215 Pendleton St., Waycross, GA 31501'
+    website: https://openstates.org/person/james-burchett-6glaP0dQMf5s5DbjpAPvOI/
+    district: '176'
+    title: Representative
+    org_classification: lower
+  '47':
+    id: ocd-person/85740034-23b0-4001-9190-8948bd9f3b37
+    name: Jan Jones
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/jones-jan-142.jpg
+    email: jan.jones@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5072'
+    addresses:
+    - 'capitol: State Capitol Room 340, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 12850 Highway 9 Suite 600-356, Milton, GA 30004'
+    website: https://openstates.org/person/jan-jones-43ozVFbjTviRy7tpneTP4Z/
+    district: '47'
+    title: Representative
+    org_classification: lower
+  '108':
+    id: ocd-person/0461f02b-df18-4984-8b3b-ada287879d0a
+    name: Jasmine Clark
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/clark-jasmine-4953.jpg
+    email: jasmine.clark@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0287'
+    addresses:
+    - 'capitol: Room 607-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1922, Lilburn, GA 30048'
+    website: https://openstates.org/person/jasmine-clark-8Gj5GVqYVp38qaWIkslI2/
+    district: '108'
+    title: Representative
+    org_classification: lower
+  '6':
+    id: ocd-person/594aa971-500b-42a4-9d7a-1ceb4c029220
+    name: Jason Ridley
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/ridley-jason-4883.jpg
+    email: jason.ridley@house.ga.gov
+    phones:
+    - 'capitol: 404-656-3947'
+    addresses:
+    - 'capitol: Room 614-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 2010, Chatsworth, GA 30705'
+    website: https://openstates.org/person/jason-ridley-2iUR8R6Baubnmo0Xqx4u80/
+    district: '6'
+    title: Representative
+    org_classification: lower
+  '166':
+    id: ocd-person/38c596a4-df69-4a56-9329-be73f26bc7d5
+    name: Jesse Petrea
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/petrea-jesse-862.jpg
+    email: jesse.petrea@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5115'
+    addresses:
+    - 'capitol: State Capitol Room 226-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 108 Loyer Lane, Savannah, GA 31411'
+    website: https://openstates.org/person/jesse-petrea-1j7rqSiKXMCTUIk6upuu05/
+    district: '166'
+    title: Representative
+    org_classification: lower
+  '171':
+    id: ocd-person/c862c17f-ed00-41d7-97e5-1138f451a96c
+    name: Joe Campbell
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/campbell-joe-4970.jpg
+    email: joe.campbell@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0254'
+    addresses:
+    - 'capitol: Room 601-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 4556 Squirrel Haven Road, Camilla, GA 31730'
+    website: https://openstates.org/person/joe-campbell-667b0g3z3utQQ0mAkbd0Ae/
+    district: '171'
+    title: Representative
+    org_classification: lower
+  '46':
+    id: ocd-person/713cac52-0a57-4baa-8273-6eeca5b491df
+    name: John Carson
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/carson-john-795.jpg
+    email: john.carson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7855'
+    - 'district: 404-520-8826'
+    addresses:
+    - 'capitol: State Capitol Room 401-E, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 3605 Sandy Plains Road Suite 240-123, Marietta, GA 30066'
+    website: https://openstates.org/person/john-carson-3RfrMK1ocXpXG58IuaufTr/
+    district: '46'
+    title: Representative
+    org_classification: lower
+  '174':
+    id: ocd-person/a34c9a5a-f307-4c07-b766-3b3b1148d7b1
+    name: John Corbett
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/corbett-john-859.jpg
+    email: john.corbett@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5105'
+    addresses:
+    - 'capitol: State Capitol Room 131-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 1484 Georgia Highway 135 South, Lake Park, GA 31636'
+    website: https://openstates.org/person/john-corbett-4y8kvhAssAGkfIjeboRRGz/
+    district: '174'
+    title: Representative
+    org_classification: lower
+  '175':
+    id: ocd-person/9249be26-54d2-467a-88ec-2588b886148d
+    name: John LaHood
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/lahood-john-4923.jpg
+    email: john.lahood@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5105'
+    addresses:
+    - 'capitol: State Capitol Room 131-A, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 5500, Valdosta, GA 31603'
+    website: https://openstates.org/person/john-lahood-4S2ZybGNqXrK22famnUSUv/
+    district: '175'
+    title: Representative
+    org_classification: lower
+  '7':
+    id: ocd-person/8106e2d8-e1e3-42a8-b550-fbd2627fa474
+    name: Johnny Chastain
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/chastain-johnny-5057.jpg
+    email: johnny.chastain@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0325'
+    addresses:
+    - 'capitol: Room 612-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/johnny-chastain-3vT9k4iCydkiEqAOsVBtNk/
+    district: '7'
+    title: Representative
+    org_classification: lower
+  '159':
+    id: ocd-person/64012657-d026-411c-9525-3232524a5145
+    name: Jon Burns
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/burns-jon-73.jpg
+    email: jon.burns@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5020'
+    addresses:
+    - 'capitol: State Capitol Room 332, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1000, Springfield, GA 31329'
+    website: https://openstates.org/person/jon-burns-32hl0JzkV68yVZJd4Yel7t/
+    district: '159'
+    title: Representative
+    org_classification: lower
+  '22':
+    id: ocd-person/56f28f8a-9296-4e69-9bd4-d0101a42b359
+    name: Jordan Ridley
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/ridley-jordan-5019.jpg
+    email: jordan.ridley@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0254'
+    addresses:
+    - 'capitol: Room 601-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 772, Woodstock, GA 30188'
+    website: https://openstates.org/person/jordan-ridley-2e4Box1qVQifguLJubtPCr/
+    district: '22'
+    title: Representative
+    org_classification: lower
+  '19':
+    id: ocd-person/f36d2507-b19a-4ee5-b4f9-5c06df761edf
+    name: Joseph Gullett
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/gullett-joseph-4936.jpg
+    email: joseph.gullett@house.ga.gov
+    phones:
+    - 'capitol: 404-463-2248'
+    addresses:
+    - 'capitol: State Capitol Room 245-A, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 801626, Acworth, GA 30101'
+    website: https://openstates.org/person/joseph-gullett-7PL0uVnoZc32NCmMK93ZSJ/
+    district: '19'
+    title: Representative
+    org_classification: lower
+  '73':
+    id: ocd-person/0e45048c-c1a4-415f-9ee4-5d09ea857e2e
+    name: Josh Bonner
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/bonner-josh-4893.jpg
+    email: josh.bonner@house.ga.gov
+    phones:
+    - 'capitol: 404-463-7853'
+    addresses:
+    - 'capitol: State Capitol Room 401-F, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 3457, Peachtree City, GA 30269'
+    website: https://openstates.org/person/josh-bonner-QvQtTr6Xo3V7Tj9jKlQvG/
+    district: '73'
+    title: Representative
+    org_classification: lower
+  '71':
+    id: ocd-person/8b62e64b-bf80-4967-832b-8fb92cd6c4b3
+    name: Jutt Howard
+    party: Republican
+    image: https://ngturf.com/wp-content/uploads/2017/11/jutt.jpg
+    email: justin.howard@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0177'
+    addresses:
+    - 'capitol: 18 Capitol Square SW, Room 501-D, Coverdell Legislative Office Building, Atlanta, GA 30334'
+    website: https://openstates.org/person/jutt-howard-4F186NTHdAq0TrOrZdb95n/
+    district: '71'
+    title: Representative
+    org_classification: lower
+  '83':
+    id: ocd-person/eb28f991-35c9-4d84-a907-5be56aed1aff
+    name: Karen Lupton
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/lupton-karen-5035.jpg
+    email: karen.lupton@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0314'
+    addresses:
+    - 'capitol: Room 611-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/karen-lupton-79jvBkIQIcETaRA7R7AmVz/
+    district: '83'
+    title: Representative
+    org_classification: lower
+  '82':
+    id: ocd-person/f8db50e0-08ab-406c-ac8b-39c7038ef5ca
+    name: Karen Mathiak
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/mathiak-karen-4894.jpg
+    email: karen.mathiak@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0213'
+    addresses:
+    - 'capitol: Room 508-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 127 Dunwoody Circle, Griffin, GA 30223'
+    website: https://openstates.org/person/karen-mathiak-7ZaK8KRFGRO7eoBT6SdohG/
+    district: '82'
+    title: Representative
+    org_classification: lower
+  '85':
+    id: ocd-person/27365f19-a138-4a9e-9f6e-11352932e5d5
+    name: Karla Drenner
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/drenner-karla-95.jpg
+    email: karla.drenner@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0202'
+    addresses:
+    - 'capitol: Room 507-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 348, Avondale Estates, GA 30002'
+    website: https://openstates.org/person/karla-drenner-1BzY0mTU5QuskItUA50a0r/
+    district: '85'
+    title: Representative
+    org_classification: lower
+  '129':
+    id: ocd-person/4b3fdb35-d3fb-40aa-843e-d3900df37ce4
+    name: Karlton Howard
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/howard-karlton-5056.jpg
+    email: karlton.howard@house.ga.gov
+    phones:
+    - 'capitol: 404-656-6372'
+    addresses:
+    - 'capitol: Room 511-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/karlton-howard-2Hzbd2RfW6TKAZNzPGENt6/
+    district: '129'
+    title: Representative
+    org_classification: lower
+  '4':
+    id: ocd-person/97a40ea4-674f-4b84-8fd3-8bc2f3b4a35d
+    name: Kasey Carpenter
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/carpenter-kasey-4911.jpg
+    email: kasey.carpenter@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7857'
+    addresses:
+    - 'capitol: State Capitol Room 401-I, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1144, Dalton, GA 30722'
+    website: https://openstates.org/person/kasey-carpenter-4c8oZdfOfIw9lafipRwZeX/
+    district: '4'
+    title: Representative
+    org_classification: lower
+  '13':
+    id: ocd-person/bf68b3dc-ca81-49f9-8e33-fe27317183d3
+    name: Katie Dempsey
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/dempsey-katie-92.jpg
+    email: katie.dempsey@house.ga.gov
+    phones:
+    - 'capitol: 404-463-2248'
+    addresses:
+    - 'capitol: State Capitol Room 245-C, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 3 Central Plaza, #360, Rome, GA 30161'
+    website: https://openstates.org/person/katie-dempsey-5pBNmpUYOVnMxHCqWPnXkZ/
+    district: '13'
+    title: Representative
+    org_classification: lower
+  '63':
+    id: ocd-person/eff357d0-3187-4a7b-93fe-2d54d010b093
+    name: Kim Schofield
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/schofield-kim-4916.jpg
+    email: kim.schoefield@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0298'
+    addresses:
+    - 'capitol: Room 608-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: Atlanta, GA'
+    website: https://openstates.org/person/kim-schofield-7ImNCVLTfvhz4664CLEux9/
+    district: '63'
+    title: Representative
+    org_classification: lower
+  '66':
+    id: ocd-person/275b772e-6407-4aaa-8bd6-ceddad1da7fa
+    name: Kimberly Alexander
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/alexander-kimberly-806.jpg
+    email: kimberly.alexander@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7859'
+    addresses:
+    - 'capitol: Room 512-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 393, Hiram, GA 30141'
+    website: https://openstates.org/person/kimberly-alexander-1CGV2PHqu4XxaJYyewg9ZC/
+    district: '66'
+    title: Representative
+    org_classification: lower
+  '40':
+    id: ocd-person/fc1a5e1f-6ce4-47ab-987b-095afa166359
+    name: Kimberly New
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/new-kimberly-5030.jpg
+    email: kimberly.new@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0325'
+    addresses:
+    - 'capitol: Room 612-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/kimberly-new-7fi7DfEgCXUL7m5EL0fTuz/
+    district: '40'
+    title: Representative
+    org_classification: lower
+  '126':
+    id: ocd-person/1d9bb111-bf4f-4e4f-aa63-a2f6a94b566c
+    name: L.C. Myles
+    party: Democratic
+    image: ''
+    email: lc.myles@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0265'
+    addresses:
+    - 'capitol: Room 604-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 6084, Augusta, GA 30916'
+    website: https://openstates.org/person/l-c-myles-trvaDmAiFKvKldZ6vSRie/
+    district: '126'
+    title: Representative
+    org_classification: lower
+  '26':
+    id: ocd-person/7767ee85-7961-45ba-adc2-c3606b1c39b8
+    name: Lauren McDonald
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/mcdonald-lauren-4992.jpg
+    email: lauren.mcdonald@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7855'
+    - 'district: 770-886-9899'
+    addresses:
+    - 'capitol: State Capitol Room 401-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 4180 Creekwood Drive, Cumming, GA 30041'
+    website: https://openstates.org/person/lauren-mcdonald-3dJaCHv5PAYxnpDRMFll4C/
+    district: '26'
+    title: Representative
+    org_classification: lower
+  '27':
+    id: ocd-person/69493144-3e3e-49a8-9e1f-f9a948fd0ff3
+    name: Lee Hawkins
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/hawkins-lee-19.jpg
+    email: lee.hawkins@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7855'
+    addresses:
+    - 'capitol: State Capitol Room 401-C, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: Gainesville, GA'
+    website: https://openstates.org/person/lee-hawkins-3Cfdt8QMvHwwek1NaIjRrv/
+    district: '27'
+    title: Representative
+    org_classification: lower
+  '156':
+    id: ocd-person/df874c28-6403-42c1-9cbb-0855508cda85
+    name: Leesa Hagan
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/hagan-leesa-5010.jpg
+    email: leesa.hagan@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0177'
+    addresses:
+    - 'capitol: Room 501-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1228, Lyons, GA 30436'
+    website: https://openstates.org/person/leesa-hagan-6nn7RRvyHTrlqfmrvJntzR/
+    district: '156'
+    title: Representative
+    org_classification: lower
+  '160':
+    id: ocd-person/6971bb34-9ea4-4bdc-971e-c1a2c5de344c
+    name: Lehman Franklin
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/franklin-lehman-5053.jpg
+    email: lehman.franklin@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0178'
+    addresses:
+    - 'capitol: Room 501-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 2922, Statesboro, GA 30459'
+    website: https://openstates.org/person/lehman-franklin-3CyAWD7CMhyySMaHaCEp1o/
+    district: '160'
+    title: Representative
+    org_classification: lower
+  '35':
+    id: ocd-person/3a23acfd-5ce6-4e47-b641-1efdab05bdca
+    name: Lisa Campbell
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/campbell-lisa-5023.jpg
+    email: lisa.campbell@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0202'
+    addresses:
+    - 'capitol: 18 Capitol Square SW, Room 507-F, Coverdell Legislative Office Building, Atlanta, GA 30334'
+    - 'district: 2001 Duncan Drive Unit #2281, Kennesaw, GA 30156'
+    website: https://openstates.org/person/lisa-campbell-1lhrFJuRox6YBLLdvfrsWg/
+    district: '35'
+    title: Representative
+    org_classification: lower
+  '80':
+    id: ocd-person/7475f989-a4f9-4ac8-9188-26903a012d71
+    name: Long Tran
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/tran-long-5034.jpg
+    email: long.tran@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7859'
+    addresses:
+    - 'capitol: Room 512-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/long-tran-3Xl1WLjNwgZWKlaJBPLpkv/
+    district: '80'
+    title: Representative
+    org_classification: lower
+  '67':
+    id: ocd-person/ee575d7a-b5a1-419c-949d-4aa9290a67a1
+    name: Lydia Glaize
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/glaize-lydia-5031.jpg
+    email: lydia.glaize@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0116'
+    addresses:
+    - 'capitol: Room 409-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1255, Fairburn, GA 30213'
+    website: https://openstates.org/person/lydia-glaize-7Fk6BfQi5XZmc520yJ0S6D/
+    district: '67'
+    title: Representative
+    org_classification: lower
+  '70':
+    id: ocd-person/945875f7-f3c5-4c75-acd6-a195a0f76b12
+    name: Lynn Smith
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/smith-lynn-212.jpg
+    email: lynn.smith@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7149'
+    addresses:
+    - 'capitol: State Capitol Room 228-C, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 8 Evergreen Drive, Newnan, GA 30263'
+    website: https://openstates.org/person/lynn-smith-4VvI2z7aovCM4LlRvZ2Hha/
+    district: '70'
+    title: Representative
+    org_classification: lower
+  '128':
+    id: ocd-person/8e209d95-2333-4aa2-a628-1bdcec0674f5
+    name: Mack Jackson
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/jackson-mack-738.jpg
+    email: mack.jackson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0314'
+    addresses:
+    - 'capitol: Room 611-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 733 Evelyn St., Sandersville, GA 31082'
+    website: https://openstates.org/person/mack-jackson-4KBoZrzki8FCcPsY64m69l/
+    district: '128'
+    title: Representative
+    org_classification: lower
+  '127':
+    id: ocd-person/5e12fb82-1f69-46df-9ac5-a09ce51dd95b
+    name: Mark Newton
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/newton-mark-4902.jpg
+    email: mark.newton@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7855'
+    addresses:
+    - 'capitol: State Capitol Room 401-D, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: Augusta, GA'
+    website: https://openstates.org/person/mark-newton-2rVx8BYzxZaFd6GwN4bmSR/
+    district: '127'
+    title: Representative
+    org_classification: lower
+  '17':
+    id: ocd-person/6552dd8d-1020-4bbb-abfc-88975573ebd4
+    name: Martin Momtahan
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/momtahan-martin-4935.jpg
+    email: martin.momtahan@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0178'
+    addresses:
+    - 'capitol: Room 501-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 105 Village Walk Suite 278, Dallas, GA 30132'
+    website: https://openstates.org/person/martin-momtahan-35C5rm660SCQ9lhclSxd92/
+    district: '17'
+    title: Representative
+    org_classification: lower
+  '98':
+    id: ocd-person/9531d502-440c-48db-83c4-70dfbe9a9ea1
+    name: Marvin Lim
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/lim-marvin-4999.jpg
+    email: marvin.lim@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0314'
+    addresses:
+    - 'capitol: Room 611-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 931886, Norcross, GA 30093'
+    website: https://openstates.org/person/marvin-lim-4XWd3rsC1E7fZNBIth2Tcv/
+    district: '98'
+    title: Representative
+    org_classification: lower
+  '117':
+    id: ocd-person/7deae3f1-5548-4afe-9018-e8112945fd8d
+    name: Mary Ann Santos
+    party: Democratic
+    image: https://img1.wsimg.com/isteam/ip/d3c0c01c-397b-4334-bf90-8a34a01abd0f/IMG_7488-2b31e45.jpeg/:/cr=t:0%25,l:6.58%25,w:86.84%25,h:100%25/rs=w:355,h:355,cg:true
+    email: maryann.santos@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0202'
+    addresses:
+    - 'capitol: Room 507-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 922 Highway 81 East Suite 224, McDonough, GA 30252'
+    website: https://openstates.org/person/mary-ann-santos-3pbNw7Gti3HIbu0MbOAt6j/
+    district: '117'
+    title: Representative
+    org_classification: lower
+  '37':
+    id: ocd-person/4aec761f-5117-4f43-a487-9d77418f0bfa
+    name: Mary Frances Williams
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/williams-mary-frances-4938.jpg
+    email: maryfrances.williams@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0287'
+    - 'district-mail: 770-424-9084'
+    addresses:
+    - 'capitol: Room 607-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: 1000 Whitlock Ave. Suite 320, PMB #249, Marietta, GA 30064'
+    website: https://openstates.org/person/mary-frances-williams-2HNUiBYPVUGcTkpUAEUfdq/
+    district: '37'
+    title: Representative
+    org_classification: lower
+  '84':
+    id: ocd-person/e6ca1b23-0972-4df6-ab04-6186cf9da814
+    name: Mary Margaret Oliver
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/oliver-mary-margaret-181.jpg
+    email: mary.oliver@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0265'
+    - 'district: 404-377-0485'
+    addresses:
+    - 'capitol: Room 604-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 150 E. Ponce de Leon Ave. Suite 260, Decatur, GA 30030'
+    website: https://openstates.org/person/mary-margaret-oliver-71Ub4MMhxHxwFinJ4IAfWW/
+    district: '84'
+    title: Representative
+    org_classification: lower
+  '5':
+    id: ocd-person/9103b29e-964b-4637-9304-0e73216d7796
+    name: Matt Barton
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/barton-matt-4966.jpg
+    email: matt.barton@house.ga.gov
+    phones:
+    - 'capitol: 404-656-3947'
+    addresses:
+    - 'capitol: Room 614-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 572, Calhoun, GA 30703'
+    website: https://openstates.org/person/matt-barton-4PdZn4L0Xc5DrDWkYC8IAY/
+    district: '5'
+    title: Representative
+    org_classification: lower
+  '29':
+    id: ocd-person/99f0a2a7-8817-4756-a40e-575e259890e7
+    name: Matt Dubnik
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/dubnik-matt-4886.jpg
+    email: matt.dubnik@house.ga.gov
+    phones:
+    - 'capitol: 404-463-2246'
+    addresses:
+    - 'capitol: State Capitol Room 245-D, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: Gainesville, GA'
+    website: https://openstates.org/person/matt-dubnik-4gTnOVt4iC4ETT89DwaS9f/
+    district: '29'
+    title: Representative
+    org_classification: lower
+  '155':
+    id: ocd-person/c81779f3-65bf-4714-b295-79cac3b0da28
+    name: Matt Hatchett
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/hatchett-matt-781.jpg
+    email: matt.hatchett@house.ga.gov
+    phones:
+    - 'capitol: 404-463-2247'
+    addresses:
+    - 'capitol: State Capitol Room 243, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 709, Dublin, GA 31040'
+    website: https://openstates.org/person/matt-hatchett-65ZC2EFy784rhH3tVuPWZM/
+    district: '155'
+    title: Representative
+    org_classification: lower
+  '99':
+    id: ocd-person/0f4f3c5a-1192-4ec1-9698-4aef005b4875
+    name: Matt Reeves
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/reeves-matt-5040.jpg
+    email: matt.reeves@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0152'
+    - 'district: 770-236-9768'
+    addresses:
+    - 'capitol: Room 401-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 1960 Satellite Blvd. Suite 4000, Duluth, GA 30097'
+    website: https://openstates.org/person/matt-reeves-St5w2LSQzethppvGpzwMn/
+    district: '99'
+    title: Representative
+    org_classification: lower
+  '15':
+    id: ocd-person/909e9026-e549-494b-be99-e8562a389e0c
+    name: Matthew Gambill
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/gambill-matthew-4934.jpg
+    email: matthew.gambill@house.ga.gov
+    phones:
+    - 'capitol: 404-651-7737'
+    addresses:
+    - 'capitol: State Capitol Room 109, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 487, Cartersville, GA 30120'
+    website: https://openstates.org/person/matthew-gambill-4OtMEXkDP9XI6jTyCNMnEa/
+    district: '15'
+    title: Representative
+    org_classification: lower
+  '61':
+    id: ocd-person/f0af2586-d535-4e44-bcaa-65239f9390b1
+    name: Mekyah McQueen
+    party: Democratic
+    image: https://static.wixstatic.com/media/a3388b_311f34c52195445d89b52eadd1384ad8~mv2.png/v1/fill/w_640,h_838,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/a3388b_311f34c52195445d89b52eadd1384ad8~mv2.png
+    email: mekyah.mcqueen@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0109'
+    addresses:
+    - 'capitol: Room 404-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 2451 Cumberland Parkway Suite 3359, Atlanta, GA 30339'
+    website: https://openstates.org/person/mekyah-mcqueen-7KACRSPLHXNBBmQBYGQRN3/
+    district: '61'
+    title: Representative
+    org_classification: lower
+  '41':
+    id: ocd-person/68185f1d-fa54-4571-b305-fcd6c7dc024e
+    name: Michael Smith
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/smith-michael-832.jpg
+    email: michael.smith@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0265'
+    - 'district: 404-652-9227'
+    addresses:
+    - 'capitol: Room 604-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 2162 Caneridge Drive, Marietta, GA 30064'
+    website: https://openstates.org/person/michael-smith-3AQL4KaEmLcGIEGs50hI6A/
+    district: '41'
+    title: Representative
+    org_classification: lower
+  '50':
+    id: ocd-person/48b46caf-d38e-46ab-96ff-c268e23a7d76
+    name: Michelle Au
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/au-michelle-4983.jpg
+    email: michelle.au@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0314'
+    addresses:
+    - 'capitol: Room 611-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 5805 State Bridge Road Suite G238, Johns Creek, GA 30097'
+    website: https://openstates.org/person/michelle-au-2DBtuVLPbEzNmUsDtSlW1G/
+    district: '50'
+    title: Representative
+    org_classification: lower
+  '1':
+    id: ocd-person/f4f9be12-5d7c-4fae-8b7b-9e9d19d2282f
+    name: Mike Cameron
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/cameron-mike-4986.jpg
+    email: mike.cameron@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0188'
+    addresses:
+    - 'capitol: Room 504-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 1100 S. Crest Road, Rossville, GA 30741'
+    website: https://openstates.org/person/mike-cameron-7SGG91LjlY141r1IVhCefn/
+    district: '1'
+    title: Representative
+    org_classification: lower
+  '151':
+    id: ocd-person/1831cc73-e694-4cea-83a4-b55c3495f76a
+    name: Mike Cheokas
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/cheokas-mike-81.jpg
+    email: mike.cheokas@house.ga.gov
+    phones:
+    - 'capitol: 404-463-7853'
+    - 'district-mail: 229-924-7823'
+    addresses:
+    - 'capitol: State Capitol Room 401-G, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 824, Americus, GA 31709'
+    website: https://openstates.org/person/mike-cheokas-jeZa2Nh6ivN9L8ZTkpAio/
+    district: '151'
+    title: Representative
+    org_classification: lower
+  '142':
+    id: ocd-person/bad14891-c7bc-4ac4-b23a-fb5ae3878d67
+    name: Miriam Paris
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/paris-miriam-794.jpg
+    email: miriam.paris@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0109'
+    - 'district-mail: 478-737-3036'
+    addresses:
+    - 'capitol: Room 404-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 14056, Macon, GA 31203'
+    website: https://openstates.org/person/miriam-paris-5gWDMtm3Wf5ID5X0ovQw6B/
+    district: '142'
+    title: Representative
+    org_classification: lower
+  '3':
+    id: ocd-person/c4c6c741-0cb4-4179-b46d-9983421b8fdd
+    name: Mitchell Horner
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/horner-mitchell-5018.jpg
+    email: mitchell.horner@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0325'
+    addresses:
+    - 'capitol: Room 612-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/mitchell-horner-5zJKxR6lP6Zt4upDOf1qiT/
+    district: '3'
+    title: Representative
+    org_classification: lower
+  '14':
+    id: ocd-person/7ac30a66-1649-4a8c-a72f-a4b9a7ab1534
+    name: Mitchell Scoggins
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/scoggins-mitchell-4964.jpg
+    email: mitchell.scoggins@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0254'
+    addresses:
+    - 'capitol: Room 601-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 18, Rydal, GA 30171'
+    website: https://openstates.org/person/mitchell-scoggins-3jeCFyccqn2QSnUimLM4V2/
+    district: '14'
+    title: Representative
+    org_classification: lower
+  '143':
+    id: ocd-person/55074030-4d64-4da0-b68a-5e3945d00f25
+    name: Nissa Jones
+    party: Democratic
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/AnissaJones2024.jpg
+    email: anissa.jones@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0314'
+    addresses:
+    - 'capitol: Room 611-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 6581, Macon, GA 31208'
+    website: https://openstates.org/person/nissa-jones-2aRf0NkArO8Qh90y2ZR8j7/
+    district: '143'
+    title: Representative
+    org_classification: lower
+  '148':
+    id: ocd-person/3252da04-a17e-4298-b19d-9dd2fbf29ded
+    name: Noel Williams
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/williams--jr-noel-4960.jpg
+    email: noel.williams@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5146'
+    addresses:
+    - 'capitol: State Capitol Room 417-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 1308 Ogburn Road, Cordele, GA 31015'
+    website: https://openstates.org/person/noel-williams-1WxTjmNvf6hcURgroLRSSz/
+    district: '148'
+    title: Representative
+    org_classification: lower
+  '81':
+    id: ocd-person/fdf78e39-985f-48c3-8ed3-ccf15946871f
+    name: Noelle Kahaian
+    party: Republican
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/nkahaian.jpg
+    email: noelle.kahaian@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0177'
+    addresses:
+    - 'capitol: Room 501-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/noelle-kahaian-7jEBto75x9cM9M9vdKWZpP/
+    district: '81'
+    title: Representative
+    org_classification: lower
+  '89':
+    id: ocd-person/dbb81f07-2181-48dd-b383-19870e08d4fd
+    name: Omari Crawford
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/crawford-omari-5036.jpg
+    email: omari.crawford@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0314'
+    addresses:
+    - 'capitol: Room 611-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/omari-crawford-6gbSifpRWMtstaqSq8o9pF/
+    district: '89'
+    title: Representative
+    org_classification: lower
+  '58':
+    id: ocd-person/5c5ab5cb-54f6-4218-8d1d-a99d36bca436
+    name: Park Cannon
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/cannon-park-4880.jpg
+    email: park.cannon@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0287'
+    addresses:
+    - 'capitol: Room 607-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 931 Monroe Drive NE Suite 102 #460, Atlanta, GA 30308'
+    website: https://openstates.org/person/park-cannon-2oGkQ7HBFCy0ZCG5IjPfAU/
+    district: '58'
+    title: Representative
+    org_classification: lower
+  '150':
+    id: ocd-person/af51c2db-8871-45a4-803d-314fa2b9d18d
+    name: Patty Marie Stinson
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/bentley-patty-811.jpg
+    email: patty.stinson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0213'
+    addresses:
+    - 'capitol: Room 508-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 133 Railroad St., Butler, GA 31006'
+    website: https://openstates.org/person/patty-marie-stinson-5Kp1NFhdYKHkZm3AMIFyyj/
+    district: '150'
+    title: Representative
+    org_classification: lower
+  '59':
+    id: ocd-person/80928bd9-c963-4b21-954c-c62ee9373064
+    name: Phil Olaleye
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/olaleye-phil-5028.jpg
+    email: phil.olaleye@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0220'
+    addresses:
+    - 'capitol: Room 509-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 4104, Atlanta, GA 30302'
+    website: https://openstates.org/person/phil-olaleye-3ubzMOTcyFHEo8cXRLzCnE/
+    district: '59'
+    title: Representative
+    org_classification: lower
+  '115':
+    id: ocd-person/21651856-bba6-49fd-b3f8-8ed1b723e804
+    name: Regina Lewis-Ward
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/lewis-ward-regina-5001.jpg
+    email: regina.lewis-ward@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0287'
+    addresses:
+    - 'capitol: Room 607-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 289 Jonesboro Road Suite 401, McDonough, GA 30253'
+    website: https://openstates.org/person/regina-lewis-ward-110wjgNaAz5sF8dTybDRlE/
+    district: '115'
+    title: Representative
+    org_classification: lower
+  '111':
+    id: ocd-person/08ee45fd-d3f4-4129-9e7c-27cf52533ed2
+    name: Rey Martinez
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/martinez-reynaldo--rey--5045.jpg
+    email: reynaldo.martinez@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0254'
+    addresses:
+    - 'capitol: Room 601-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/rey-martinez-GqpS0JHUwDjSklPuXHWXC/
+    district: '111'
+    title: Representative
+    org_classification: lower
+  '77':
+    id: ocd-person/e04bd985-5b75-4551-84a1-f9797ac495d2
+    name: Rhonda Burnough
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/burnough-rhonda-4895.jpg
+    email: rhonda.burnough@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0116'
+    addresses:
+    - 'capitol: Room 409-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 7843 Clearview Circle, Riverdale, GA 30296'
+    website: https://openstates.org/person/rhonda-burnough-6pEwZEii7MJwJ7Ed6FC350/
+    district: '77'
+    title: Representative
+    org_classification: lower
+  '92':
+    id: ocd-person/bc40f904-9c20-41d0-80d5-e5645d3e6935
+    name: Rhonda Taylor
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/taylor-rhonda-4998.jpg
+    email: rhonda.taylor@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0265'
+    addresses:
+    - 'capitol: Room 604-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 82452, Conyers, GA 30013'
+    website: https://openstates.org/person/rhonda-taylor-5jEFVM3KYIQrlVkmagSJ2j/
+    district: '92'
+    title: Representative
+    org_classification: lower
+  '11':
+    id: ocd-person/4d1f5379-01e9-4f58-9868-42acc07ec7a8
+    name: Rick Jasperse
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/jasperse-rick-755.jpg
+    email: rick.jasperse@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7153'
+    addresses:
+    - 'capitol: State Capitol Room 218-C, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 89 Apple Valley Farm Lane, Jasper, GA 30143'
+    website: https://openstates.org/person/rick-jasperse-2LWixmYn3vIufw52HOs1zk/
+    district: '11'
+    title: Representative
+    org_classification: lower
+  '179':
+    id: ocd-person/1da20ad9-1a05-42ab-addb-7fbf295a0e5d
+    name: Rick Townsend
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/townsend-rick-5055.jpg
+    email: rick.townsend@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0178'
+    addresses:
+    - 'capitol: Room 501-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 20514, Saint Simons Island, GA 31522'
+    website: https://openstates.org/person/rick-townsend-tupWZgmhg2FlNMwe45L1p/
+    district: '179'
+    title: Representative
+    org_classification: lower
+  '131':
+    id: ocd-person/84eb7371-a332-4534-b3b3-542500c798f8
+    name: Rob Clifton
+    party: Republican
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/RobClifton2024.jpg
+    email: rob.clifton@house.ga.gov
+    phones:
+    - 'capitol: 404-657-1803'
+    addresses:
+    - 'capitol: Room 408-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 4324 Wheeler Road, Augusta, GA 30907'
+    website: https://openstates.org/person/rob-clifton-42oaUNYVxUSHxKToCZOSIy/
+    district: '131'
+    title: Representative
+    org_classification: lower
+  '123':
+    id: ocd-person/29210f3f-ec97-47c8-9492-b81154275109
+    name: Rob Leverett
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/leverett-rob-4993.jpg
+    email: rob.leverett@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5132'
+    addresses:
+    - 'capitol: State Capitol Room 218-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Drawer 399, Elberton, GA 30635'
+    website: https://openstates.org/person/rob-leverett-1FbnCsCxRai50jDzuiwRez/
+    district: '123'
+    title: Representative
+    org_classification: lower
+  '65':
+    id: ocd-person/5d77204f-89e7-43df-bccb-a08b9956132d
+    name: Robert Dawson
+    party: Democratic
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/rdawson.jpg
+    email: robert.dawson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-6372'
+    addresses:
+    - 'capitol: Room 511-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 571255, Atlanta, GA 30309'
+    website: https://openstates.org/person/robert-dawson-2qMj5W1hJSVbkLVCZHDvlV/
+    district: '65'
+    title: Representative
+    org_classification: lower
+  '134':
+    id: ocd-person/f863b50d-c865-463a-830a-e5648837d9f7
+    name: Robert Dickey
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/dickey-robert-791.jpg
+    email: robert.dickey@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5099'
+    - 'district: 478-836-4362'
+    addresses:
+    - 'capitol: State Capitol Room 228-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 3440 Musella Road, Musella, GA 31066'
+    website: https://openstates.org/person/robert-dickey-7Yhf8DoLMayxaYasPlqPix/
+    district: '134'
+    title: Representative
+    org_classification: lower
+  '74':
+    id: ocd-person/32c3fbdd-4034-47d0-b7ab-0411bd200737
+    name: Robert Flournoy
+    party: Democratic
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Robert_Flournoy_20241223_044055.jpg
+    email: robert.flournoy@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7859'
+    addresses:
+    - 'capitol: Room 512-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/robert-flournoy-1XnBEb1AMU0xkMhJ1ZZlgN/
+    district: '74'
+    title: Representative
+    org_classification: lower
+  '164':
+    id: ocd-person/aeaeb854-ff9c-47cb-8069-395b60ba05b2
+    name: Ron Stephens
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/stephens-ron-219.jpg
+    email: ron.stephens@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5115'
+    - 'district: 912-596-1998'
+    addresses:
+    - 'capitol: State Capitol Room 226-A, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 45 Cove Drive, Savannah, GA 31419'
+    website: https://openstates.org/person/ron-stephens-5JcVkouRWPBI6pbzUYxyUs/
+    district: '164'
+    title: Representative
+    org_classification: lower
+  '97':
+    id: ocd-person/d291834f-70cd-48b5-b7db-b05d23d74a4c
+    name: Ruwa Romman
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/romman-ruwa-5039.jpg
+    email: ruwa.romman@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0220'
+    addresses:
+    - 'capitol: Room 509-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 3870 Peachtree Industrial Blvd. Suite 340, #129, Duluth, GA 30096'
+    website: https://openstates.org/person/ruwa-romman-6PKt4Tp2yMdfHwyZ9CpcOS/
+    district: '97'
+    title: Representative
+    org_classification: lower
+  '90':
+    id: ocd-person/2a66b922-b812-4c45-9786-478187cd5e33
+    name: Saira Draper
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/draper-saira-5038.jpg
+    email: saira.draper@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0265'
+    addresses:
+    - 'capitol: Room 604-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/saira-draper-1I0caLyCyr23JxDithOQkN/
+    district: '90'
+    title: Representative
+    org_classification: lower
+  '107':
+    id: ocd-person/2ba0916f-40b1-4255-9496-94b12ccabd1e
+    name: Sam Park
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/park-sam-4901.jpg
+    email: samuel.park@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5059'
+    addresses:
+    - 'capitol: Room 609, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 4850 Sugarloaf Parkway Suite 209-188, Lawrenceville, GA 30044'
+    website: https://openstates.org/person/sam-park-1KK35lwBVKklb25ncpEh70/
+    district: '107'
+    title: Representative
+    org_classification: lower
+  '76':
+    id: ocd-person/21c6cae1-bcd2-4403-ad39-af04b64ce55c
+    name: Sandra Scott
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/scott-sandra-766.jpg
+    email: sandra.scott@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0314'
+    addresses:
+    - 'capitol: Room 611-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 3489 Oak Leaf Court, Rex, GA 30273'
+    website: https://openstates.org/person/sandra-scott-11jau1dBF8zlCjlt7WLomy/
+    district: '76'
+    title: Representative
+    org_classification: lower
+  '105':
+    id: ocd-person/4ab15127-5b7a-40bc-8807-26e8e8a73397
+    name: Sandy Donatucci
+    party: Republican
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Sandy_Donatucci_20240808_092636.jpg
+    email: sandy.donatucci@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0177'
+    addresses:
+    - 'capitol: Room 501-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 89, Buford, GA 30515'
+    website: https://openstates.org/person/sandy-donatucci-2GwSuRIWlWDQIPsn0IpunH/
+    district: '105'
+    title: Representative
+    org_classification: lower
+  '48':
+    id: ocd-person/91abe321-5ea4-4f17-b8d8-573d7cb913e6
+    name: Scott Hilton
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/hilton-scott-4899.jpg
+    email: scott.hilton@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0188'
+    addresses:
+    - 'capitol: Room 504-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 5425 Peachtree Parkway, Peachtree Corners, GA 30092'
+    website: https://openstates.org/person/scott-hilton-4QsRHj98yK64rQZVWXqxU6/
+    district: '48'
+    title: Representative
+    org_classification: lower
+  '101':
+    id: ocd-person/99ef9b20-6b1f-4831-8e58-a523de606cda
+    name: Scott Holcomb
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/holcomb-scott-769.jpg
+    email: scott.holcomb@house.ga.gov
+    phones:
+    - 'capitol: 404-656-6372'
+    addresses:
+    - 'capitol: Room 511-I, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 2306 Briarcliff Commons, Atlanta, GA 30345'
+    website: https://openstates.org/person/scott-holcomb-4gTKE8xe34jcMms7uh5OTi/
+    district: '101'
+    title: Representative
+    org_classification: lower
+  '110':
+    id: ocd-person/702658f4-8382-479a-9416-79928239d5e7
+    name: Segun Adeyina
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/adeyina-segun-5044.jpg
+    email: segun.adeyina@house.ga.gov
+    phones:
+    - 'capitol: 404-656-6372'
+    addresses:
+    - 'capitol: Room 511-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1222, Grayson, GA 30017'
+    website: https://openstates.org/person/segun-adeyina-3PcfG4Ci2E6Zf3t3STtCOF/
+    district: '110'
+    title: Representative
+    org_classification: lower
+  '45':
+    id: ocd-person/15db25fc-273b-467f-b8f9-897337f40b65
+    name: Sharon Cooper
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/cooper-sharon-86.jpg
+    email: sharon.cooper@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5069'
+    addresses:
+    - 'capitol: State Capitol Room 436, 206 Washington St. SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/sharon-cooper-fEzNOAmOFr5QjghIq8qCj/
+    district: '45'
+    title: Representative
+    org_classification: lower
+  '113':
+    id: ocd-person/e51d36a7-9684-4540-aae7-a5e60e434681
+    name: Sharon Henderson
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/henderson-sharon-5003.jpg
+    email: sharon.henderson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-7859'
+    addresses:
+    - 'capitol: Room 512-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/sharon-henderson-6yKanLvwFCraWB98BRrYO1/
+    district: '113'
+    title: Representative
+    org_classification: lower
+  '146':
+    id: ocd-person/ee145624-3295-4db4-b3ce-9d1583e4ef6e
+    name: Shaw Blackmon
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/blackmon-shaw-1878.jpg
+    email: shaw.blackmon@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5103'
+    addresses:
+    - 'capitol: State Capitol Room 133, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 729, Bonaire, GA 31005'
+    website: https://openstates.org/person/shaw-blackmon-7FFSzY32Vnp8U4mKCx5Gbm/
+    district: '146'
+    title: Representative
+    org_classification: lower
+  '52':
+    id: ocd-person/9007dcd9-3246-4cf3-9185-7478b3a9ad7a
+    name: Shea Roberts
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/roberts-shea-4994.jpg
+    email: shea.roberts@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0298'
+    addresses:
+    - 'capitol: Room 608-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 28571, Atlanta, GA 30358'
+    website: https://openstates.org/person/shea-roberts-4NmUHCIn0gQej1O32KCYR8/
+    district: '52'
+    title: Representative
+    org_classification: lower
+  '60':
+    id: ocd-person/b278b399-5ca3-4cd7-bc19-4053166577a2
+    name: Sheila Jones
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/jones-sheila-143.jpg
+    email: sheila.jones@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0308'
+    addresses:
+    - 'capitol: Room 404-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 310401, Atlanta, GA 31131'
+    website: https://openstates.org/person/sheila-jones-5QlnHremzeXHJy3zw3KGDi/
+    district: '60'
+    title: Representative
+    org_classification: lower
+  '130':
+    id: ocd-person/059c0e54-cc7b-4605-aee6-58388026a2fb
+    name: Sheila Nelson
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/nelson-sheila-4903.jpg
+    email: sheila.nelson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0126'
+    addresses:
+    - 'capitol: Room 411-A, Coverdell Legislative Office Building, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 5544, Augusta, GA 30916'
+    website: https://openstates.org/person/sheila-nelson-AaHK54umQO03r5KVfK0E7/
+    district: '130'
+    title: Representative
+    org_classification: lower
+  '43':
+    id: ocd-person/5474fbe2-6cdb-4ad2-9831-cdffaca442af
+    name: Solomon Adesanya
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/adesanya-solomon-5025.jpg
+    email: solomon.adesanya@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0220'
+    addresses:
+    - 'capitol: Room 509-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 674808, Marietta, GA 30006'
+    website: https://openstates.org/person/solomon-adesanya-2ZMofaBvE5Pu106CoTonrL/
+    district: '43'
+    title: Representative
+    org_classification: lower
+  '103':
+    id: ocd-person/64721c9b-451c-4bc9-9040-4ca232ffd746
+    name: Soo Hong
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/hong-soo-5042.jpg
+    email: soo.hong@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5025'
+    addresses:
+    - 'capitol: State Capitol Room 415, 206 Washington St. SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/soo-hong-33XNg4DA09eAYMp5a9YZzq/
+    district: '103'
+    title: Representative
+    org_classification: lower
+  '122':
+    id: ocd-person/e6ae8d30-4b1b-4b06-8918-2be6fa7f8108
+    name: Spencer Frye
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/frye-spencer-819.jpg
+    email: spencer.frye@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0265'
+    addresses:
+    - 'capitol: Room 604-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 1000 Newton Bridge Road, Athens, GA 30606'
+    website: https://openstates.org/person/spencer-frye-71I0L2Wx7XIVV33coIPBNo/
+    district: '122'
+    title: Representative
+    org_classification: lower
+  '57':
+    id: ocd-person/fa5d8d09-a0b9-4ba4-93da-a24902530416
+    name: Stacey Evans
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/evans-stacey-762.jpg
+    email: stacey.evans@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0116'
+    - 'district: 770-710-4087'
+    addresses:
+    - 'capitol: Room 409-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 750 Piedmont Ave. NE, Atlanta, GA 30308'
+    website: https://openstates.org/person/stacey-evans-7cQpkM9vRCm4y7uh01kS5G/
+    district: '57'
+    title: Representative
+    org_classification: lower
+  '8':
+    id: ocd-person/432ef767-d4c8-4736-b2ac-96397205fb3d
+    name: Stan Gunter
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/gunter-stan-4987.jpg
+    email: stan.gunter@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5125'
+    addresses:
+    - 'capitol: State Capitol Room 132, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 2376, Blairsville, GA 30514'
+    website: https://openstates.org/person/stan-gunter-22lwsMOu6fmahW4P5R4nHh/
+    district: '8'
+    title: Representative
+    org_classification: lower
+  '2':
+    id: ocd-person/80f4bbdf-02f3-4233-8456-e550e7e745af
+    name: Steve Tarvin
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/tarvin-steve-849.jpg
+    email: steve.tarvin@house.ga.gov
+    phones:
+    - 'capitol: 404-463-3793'
+    - 'district-mail: 423-605-7328'
+    addresses:
+    - 'capitol: Room 613-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 750, Chickamauga, GA 30707'
+    website: https://openstates.org/person/steve-tarvin-3vKrPmaXfBbq8Ged7ctcpr/
+    district: '2'
+    title: Representative
+    org_classification: lower
+  '178':
+    id: ocd-person/3194a8e0-aaf8-4686-b2c9-a22521f85fff
+    name: Steven Meeks
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/meeks-steven-4961.jpg
+    email: steven.meeks@house.ga.gov
+    phones:
+    - 'capitol: 404-463-2246'
+    addresses:
+    - 'capitol: State Capitol Room 245-F, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 178, Screven, GA 31560'
+    website: https://openstates.org/person/steven-meeks-1VYYp7ISoM0U7UtkRyVij1/
+    district: '178'
+    title: Representative
+    org_classification: lower
+  '180':
+    id: ocd-person/99082062-acd6-4c6b-bb45-2cfa071f19fc
+    name: Steven Sainz
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/sainz-steven-4962.jpg
+    email: steven.sainz@house.ga.gov
+    phones:
+    - 'capitol: 404-657-1803'
+    addresses:
+    - 'capitol: Room 408-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 2712 Osborne Road, St. Marys, GA 31558'
+    website: https://openstates.org/person/steven-sainz-4elXTBwsF3aig4GhhfosRw/
+    district: '180'
+    title: Representative
+    org_classification: lower
+  '64':
+    id: ocd-person/cabc1e6f-ba7c-4063-a778-707579f91ec8
+    name: Sylvia Wayfer
+    party: Democratic
+    image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Sylvia_Wayfer.jpg
+    email: sylvia.baker@house.ga.gov
+    phones:
+    - 'capitol: 404-656-6372'
+    addresses:
+    - 'capitol: Room 511-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/sylvia-wayfer-6AYQ4so5gA36q2Lh7Yuioy/
+    district: '64'
+    title: Representative
+    org_classification: lower
+  '145':
+    id: ocd-person/c5766526-3a5a-4d33-b5ff-a0d1d358d7ae
+    name: Tangie Herring
+    party: Democratic
+    image: https://images.squarespace-cdn.com/content/v1/64b7398b4867300614bcfe48/9ddc7dee-fc52-4309-a0dc-3c8671c9eaaa/Tangie+Herring_headshot.jpg?format=2500w
+    email: tangie.herring@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0202'
+    addresses:
+    - 'capitol: Room 507-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 871 Lee Road, Macon, GA 31024'
+    website: https://openstates.org/person/tangie-herring-60bathK2q78CoAr8DxAjiI/
+    district: '145'
+    title: Representative
+    org_classification: lower
+  '62':
+    id: ocd-person/6e5432a3-09ed-4813-b11d-e97222bb7e4d
+    name: Tanya Miller
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/miller-tanya-f-5029.jpg
+    email: tanya.miller@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0298'
+    addresses:
+    - 'capitol: Room 608-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/tanya-miller-3MBdKu9mhwJ72YY6DoB7pl/
+    district: '62'
+    title: Representative
+    org_classification: lower
+  '140':
+    id: ocd-person/9fe70ed7-31a0-4732-92b1-54d2a79a4654
+    name: Teddy Reese
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/reese-tremaine-teddy-5050.jpg
+    email: tremaine.reese@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0109'
+    addresses:
+    - 'capitol: Room 404-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 5974, Columbus, GA 31906'
+    website: https://openstates.org/person/teddy-reese-4rjNAnx98OLBffJIIoC0Fo/
+    district: '140'
+    title: Representative
+    org_classification: lower
+  '39':
+    id: ocd-person/aa7405f9-5c37-4ce8-a7eb-ac5949a6e776
+    name: Terry Cummings
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/cummings-terry-5024.jpg
+    email: terry.cummings@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0202'
+    addresses:
+    - 'capitol: Room 507-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district: 1400 Veterans Memorial Highway Suite 124-265, Mableton, GA 30126'
+    website: https://openstates.org/person/terry-cummings-5BdiXWy99evu7t4E1y6Zvi/
+    district: '39'
+    title: Representative
+    org_classification: lower
+  '114':
+    id: ocd-person/cf955c60-cbda-4414-9266-3d8dca3553fe
+    name: Tim Fleming
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/fleming-tim-5046.jpg
+    email: tim.fleming@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0188'
+    addresses:
+    - 'capitol: Room 504-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/tim-fleming-6JhfWeqahtE9l9nk9CBHxe/
+    district: '114'
+    title: Representative
+    org_classification: lower
+  '25':
+    id: ocd-person/45567c87-3ba6-49ec-9ea2-5ebb880aa94c
+    name: Todd Jones
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/jones-todd-4885.jpg
+    email: todd.jones@house.ga.gov
+    phones:
+    - 'capitol: 404-656-9210'
+    addresses:
+    - 'capitol: State Capitol Room 416-B, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 8175 Majors Ridge Way, Cumming, GA 30041'
+    website: https://openstates.org/person/todd-jones-26pzggO13gGwjbpjOCxmSS/
+    district: '25'
+    title: Representative
+    org_classification: lower
+  '16':
+    id: ocd-person/6ac8933e-8dde-4902-8eec-61cc5a91c844
+    name: Trey Kelley
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/kelley-trey-825.jpg
+    email: trey.kelley@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0188'
+    addresses:
+    - 'capitol: Room 504-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 206, Cedartown, GA 30125'
+    website: https://openstates.org/person/trey-kelley-3FUqgWDADgz5bo46V8FrFc/
+    district: '16'
+    title: Representative
+    org_classification: lower
+  '124':
+    id: ocd-person/9dfc8ec3-0935-4d1d-877d-e05cf7a5dca5
+    name: Trey Rhodes
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/rhodes-trey-876.jpg
+    email: trey.rhodes@house.ga.gov
+    phones:
+    - 'capitol: 404-656-5099'
+    addresses:
+    - 'capitol: State Capitol Room 228-A, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district: 1051 Ben Hammond Drive, Greensboro, GA 30642'
+    website: https://openstates.org/person/trey-rhodes-4o7DIa9Hh19lEU67FTDr6L/
+    district: '124'
+    title: Representative
+    org_classification: lower
+  '18':
+    id: ocd-person/4b162447-89a7-4ffc-acbf-617e1ad87e2a
+    name: Tyler Smith
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/smith-tyler-paul-4990.jpg
+    email: tyler.smith@house.ga.gov
+    phones:
+    - 'capitol: 404-463-7853'
+    addresses:
+    - 'capitol: State Capitol Room 401-K, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 605, Bremen, GA 30110'
+    website: https://openstates.org/person/tyler-smith-2HgXgVayNefCHky0tJVibi/
+    district: '18'
+    title: Representative
+    org_classification: lower
+  '138':
+    id: ocd-person/9deeb60b-4d1e-42b8-8052-d2808a30ea9a
+    name: Vance Smith
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/smith-vance-215.jpg
+    email: vance.smith@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0254'
+    addresses:
+    - 'capitol: Room 601-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 171, Pine Mountain, GA 31822'
+    website: https://openstates.org/person/vance-smith-4o0syA93myQpJxwWfh7014/
+    district: '138'
+    title: Representative
+    org_classification: lower
+  '94':
+    id: ocd-person/b9050158-4a6d-4332-8ad2-769472f52e3e
+    name: Venola Mason
+    party: Democratic
+    image: https://venolaforthefuture.com/wp-content/uploads/2026/02/Venola-Campaign-photo-Oval_s.png
+    email: venola.mason@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0126'
+    addresses:
+    - 'capitol: Room 411-B, Coverdell Legislative Office Building, Atlanta, GA 30334'
+    website: https://openstates.org/person/venola-mason-5d7roCoRO66ao9TzUraK7C/
+    district: '94'
+    title: Representative
+    org_classification: lower
+  '10':
+    id: ocd-person/546d682f-b256-4060-8fd3-084d7f118d43
+    name: Victor Anderson
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/anderson-victor-4989.jpg
+    email: victor.anderson@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0325'
+    addresses:
+    - 'capitol: Room 612-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1261, Cornelia, GA 30531'
+    website: https://openstates.org/person/victor-anderson-2ZJLz41tr6Dkehvd77DCRX/
+    district: '10'
+    title: Representative
+    org_classification: lower
+  '87':
+    id: ocd-person/e3b1be9c-b244-4466-9192-adc365a31cfb
+    name: Viola Davis
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/davis-viola-4947.jpg
+    email: viola.davis@house.ga.gov
+    phones:
+    - 'capitol: 404-656-0109'
+    addresses:
+    - 'capitol: Room 404-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 831592, Stone Mountain, GA 30083'
+    website: https://openstates.org/person/viola-davis-6veUEoc4Uyb65nilOmFfnn/
+    district: '87'
+    title: Representative
+    org_classification: lower
+  '9':
+    id: ocd-person/97a002db-6151-4fdf-9bce-013a6344764f
+    name: Will Wade
+    party: Republican
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/wade-will-4988.jpg
+    email: will.wade@house.ga.gov
+    phones:
+    - 'capitol: 404-651-7737'
+    addresses:
+    - 'capitol: State Capitol Room 109, 206 Washington St. SW, Atlanta, GA 30334'
+    - 'district-mail: P.O. Box 1685, Dawsonville, GA 30534'
+    website: https://openstates.org/person/will-wade-4c6xvumknUctjjrL1jLkqt/
+    district: '9'
+    title: Representative
+    org_classification: lower
+  '79':
+    id: ocd-person/6f986b42-14f6-4147-9466-c49294331db9
+    name: Yasmin Neal
+    party: Democratic
+    image: https://www.legis.ga.gov/api/images/default-source/portraits/neal-yasmin-765.jpg
+    email: yasmin.neal@house.ga.gov
+    phones:
+    - 'capitol: 404-656-6372'
+    addresses:
+    - 'capitol: Room 511-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+    website: https://openstates.org/person/yasmin-neal-3OZnqQpPwtSLRLnXciZHuz/
+    district: '79'
+    title: Representative
+    org_classification: lower
+us_house:
+  GA-2:
+    id: ocd-person/bbc6615a-22ca-51f6-b674-8c7753e93333
+    name: Sanford Bishop
+    party: Democratic
+    image: https://unitedstates.github.io/images/congress/450x550/B000490.jpg
+    email: https://bishop.house.gov/address_authentication?form=/contact
+    phones:
+    - 'capitol: 202-225-3631'
+    - 'capitol: 229-439-8067'
+    - 'district: 706-320-9477'
+    - 'district: 478-803-2631'
+    addresses:
+    - 'capitol: 2407 Rayburn House Office Building, Washington, DC 20515'
+    - 'capitol: Albany Towers 323 Pine Ave., Suite 400, Albany, GA 31701'
+    - 'district: 18 9th St. Suite 201, Columbus, GA 31901'
+    - 'district: 300 Mulberry St. Suite 502, Macon, GA 31201'
+    website: https://openstates.org/person/sanford-bishop-5iKDxckL1oQFd2Jw8Bp6Kh/
+    district: GA-2
+    title: Representative
+    org_classification: lower
+  GA-3:
+    id: ocd-person/8822d9c4-0917-4e09-89ae-7770a1e33ae4
+    name: Brian Jack
+    party: Republican
+    image: ''
+    email: https://jack.house.gov/contact/email-me
+    phones:
+    - 'capitol: 202-225-5901'
+    - 'district: 770-683-2033'
+    addresses:
+    - 'capitol: 1320 Longworth House Office Building, Washington, DC 20515'
+    - 'district: 1601 E. Highway 34 Suite B, Newnan, GA 30265'
+    website: https://openstates.org/person/brian-jack-48sslFjdI1RDq0Vb5Rn6Ie/
+    district: GA-3
+    title: Representative
+    org_classification: lower
+  GA-1:
+    id: ocd-person/85e43f57-4901-52fd-9fad-57373277f5e1
+    name: Buddy Carter
+    party: Republican
+    image: https://unitedstates.github.io/images/congress/450x550/C001103.jpg
+    email: https://buddycarter.house.gov/contact/
+    phones:
+    - 'capitol: 202-225-5831'
+    - 'district: 912-352-0101'
+    - 'district: 912-265-9010'
+    addresses:
+    - 'capitol: 2432 Rayburn House Office Building, Washington, DC 20515'
+    - 'district: 6602 Abercorn St. Suite 105B, Savannah, GA 31405'
+    - 'district: 777 Gloucester St. Suite 410, Brunswick, GA 31520'
+    website: https://openstates.org/person/buddy-carter-44eHuM3mSmI73M1M9WrE1p/
+    district: GA-1
+    title: Representative
+    org_classification: lower
+  GA-8:
+    id: ocd-person/20c33933-79f5-58d1-834c-60779932257e
+    name: Austin Scott
+    party: Republican
+    image: https://unitedstates.github.io/images/congress/450x550/S001189.jpg
+    email: https://austinscott.house.gov/contact-austin
+    phones:
+    - 'capitol: 202-225-6531'
+    - 'district: 478-971-1776'
+    - 'district: 229-396-5175'
+    addresses:
+    - 'capitol: 2185 Rayburn House Office Building, Washington, DC 20515'
+    - 'district: 120 Byrd Way Suite 100, Warner Robins, GA 31088'
+    - 'district: 127-B N. Central Ave., Tifton, GA 31794'
+    website: https://openstates.org/person/austin-scott-zoyFhIUMpPUlUDyLR990I/
+    district: GA-8
+    title: Representative
+    org_classification: lower
+  GA-12:
+    id: ocd-person/4cdf55a7-a62e-5b3d-a07f-305f4e9dc5c1
+    name: Rick Allen
+    party: Republican
+    image: https://unitedstates.github.io/images/congress/450x550/A000372.jpg
+    email: https://allen.house.gov/contact/
+    phones:
+    - 'capitol: 202-225-2823'
+    - 'district: 478-291-6324'
+    - 'district: 706-228-1980'
+    - 'district: 912-243-9452'
+    addresses:
+    - 'capitol: 462 Cannon House Office Building, Washington, DC 20515'
+    - 'district: 100 S. Church St., Dublin, GA 31021'
+    - 'district: 2743 Perimeter Parkway Building 200, Suite 105, Augusta, GA 30909'
+    - 'district: 50 E. Main St., Statesboro, GA 30458'
+    website: https://openstates.org/person/rick-allen-2L3Tp89ltIEw849VJluyRt/
+    district: GA-12
+    title: Representative
+    org_classification: lower
+  GA-11:
+    id: ocd-person/13e07344-3cec-5f29-a27b-2dd6979dbeb5
+    name: Barry Loudermilk
+    party: Republican
+    image: https://unitedstates.github.io/images/congress/450x550/L000583.jpg
+    email: https://loudermilk.house.gov/contact/
+    phones:
+    - 'capitol: 202-225-2931'
+    - 'district: 770-429-1776'
+    - 'district: 770-429-1776'
+    addresses:
+    - 'capitol: 2133 Rayburn House Office Building, Washington, DC 20515'
+    - 'district: 135 W. Cherokee Ave. Suite 122, Cartersville, GA 30120'
+    - 'district: 9898 Highway 92 Suite 100, Woodstock, GA 30188'
+    website: https://openstates.org/person/barry-loudermilk-bVQYGJUflfObO0TJGld6z/
+    district: GA-11
+    title: Representative
+    org_classification: lower
+  GA-6:
+    id: ocd-person/b5d26a8a-2954-574c-abf8-1c232e928c9c
+    name: Lucy McBath
+    party: Democratic
+    image: https://unitedstates.github.io/images/congress/450x550/M001208.jpg
+    email: https://mcbath.house.gov/email-me
+    phones:
+    - 'capitol: 202-225-4501'
+    - 'district: 470-773-6330'
+    addresses:
+    - 'capitol: 2246 Rayburn House Office Building, Washington, DC 20515'
+    - 'district: 3330 Cumberland Blvd. SE Suite 610, Atlanta, GA 30339'
+    website: https://openstates.org/person/lucy-mcbath-5X5lqCDOoj5VMfSH0O69j2/
+    district: GA-6
+    title: Representative
+    org_classification: lower
+  GA-5:
+    id: ocd-person/132a1bba-204a-5d4f-a406-40b4342bad1b
+    name: Nikema Williams
+    party: Democratic
+    image: https://unitedstates.github.io/images/congress/450x550/W000788.jpg
+    email: https://nikemawilliams.house.gov/contact
+    phones:
+    - 'capitol: 202-225-3801'
+    - 'district: 404-659-0116'
+    addresses:
+    - 'capitol: 1406 Longworth House Office Building, Washington, DC 20515'
+    - 'district: 100 Peachtree St. NW Suite 1920, Atlanta, GA 30303'
+    website: https://openstates.org/person/nikema-williams-aA63noeAbaFxgXgHyezBT/
+    district: GA-5
+    title: Representative
+    org_classification: lower
+  GA-4:
+    id: ocd-person/51b7316e-0885-571b-8a2e-daf54dd906bb
+    name: Hank Johnson
+    party: Democratic
+    image: https://unitedstates.github.io/images/congress/450x550/J000288.jpg
+    email: https://hankjohnson.house.gov/address_authentication?form=/contact
+    phones:
+    - 'capitol: 202-225-1605'
+    - 'district: 770-987-2291'
+    addresses:
+    - 'capitol: 2240 Rayburn House Office Building, Washington, DC 20515'
+    - 'district: 5240 Snapfinger Park Drive Suite 140, Decatur, GA 30035'
+    website: https://openstates.org/person/hank-johnson-2UC64YZn1aUBR62VTzG3kR/
+    district: GA-4
+    title: Representative
+    org_classification: lower
+  GA-13:
+    id: ocd-person/e6650822-1063-5485-b062-d169ea173ec2
+    name: David Scott
+    party: Democratic
+    image: https://unitedstates.github.io/images/congress/450x550/S001157.jpg
+    email: https://davidscott.house.gov/contact/contactform.htm
+    phones:
+    - 'capitol: 202-225-2939'
+    - 'district: 770-210-5073'
+    addresses:
+    - 'capitol: 468 Cannon House Office Building, Washington, DC 20515'
+    - 'district: 81 Upper Riverdale Road SW Suite 230, Riverdale, GA 30274'
+    website: https://openstates.org/person/david-scott-70kPDwslQnIIPOcWBi3mJW/
+    district: GA-13
+    title: Representative
+    org_classification: lower
+  GA-7:
+    id: ocd-person/3056cc98-9ca1-5293-8064-fc12fd9c689f
+    name: Rich McCormick
+    party: Republican
+    image: https://unitedstates.github.io/images/congress/450x550/M001218.jpg
+    email: https://mccormick.house.gov/address_authentication?form=/contact
+    phones:
+    - 'capitol: 202-225-4272'
+    - 'district: 770-232-3005'
+    addresses:
+    - 'capitol: 1719 Longworth House Office Building, Washington, DC 20515'
+    - 'district: 6230 Shiloh Road Suite 230, Alpharetta, GA 30005'
+    website: https://openstates.org/person/rich-mccormick-1TDIXW9alvLnVNfiuknTot/
+    district: GA-7
+    title: Representative
+    org_classification: lower
+  GA-9:
+    id: ocd-person/0dbe5471-29ea-5c84-8270-f55fee08d118
+    name: Andrew Clyde
+    party: Republican
+    image: https://unitedstates.github.io/images/congress/450x550/C001116.jpg
+    email: https://clyde.house.gov/contact/
+    phones:
+    - 'capitol: 202-225-9893'
+    - 'district: 470-768-6520'
+    addresses:
+    - 'capitol: 445 Cannon House Office Building, Washington, DC 20515'
+    - 'district: 210 Washington St. NW Suite 202, Gainesville, GA 30501'
+    website: https://openstates.org/person/andrew-clyde-PvsdTFsco5G1UqPp41h9c/
+    district: GA-9
+    title: Representative
+    org_classification: lower
+  GA-10:
+    id: ocd-person/0f7a88d1-4e4c-565a-b905-706181d7b561
+    name: Mike Collins
+    party: Republican
+    image: https://unitedstates.github.io/images/congress/450x550/C001129.jpg
+    email: https://collins.house.gov/contact
+    phones:
+    - 'capitol: 202-225-4101'
+    - 'district: 770-207-1776'
+    addresses:
+    - 'capitol: 2351 Rayburn House Office Building, Washington, DC 20515'
+    - 'district: 100 Court St., Monroe, GA 30655'
+    website: https://openstates.org/person/mike-collins-TCslPcjWHNiqdNTw63EQL/
+    district: GA-10
+    title: Representative
+    org_classification: lower
+us_senate:
+- id: ocd-person/4e48da38-17ab-5580-bced-2ea00b9b2843
+  name: Jon Ossoff
+  party: Democratic
+  image: https://unitedstates.github.io/images/congress/450x550/O000174.jpg
+  email: https://www.ossoff.senate.gov/contact-us/
+  phones:
+  - 'capitol: 202-224-3521'
+  - 'district: 706-261-5031'
+  - 'district: 706-780-7053'
+  - 'district: 470-786-7800'
+  - 'district: 912-200-9402'
+  addresses:
+  - 'capitol: 317 Hart Senate Office Building, Washington, DC 20510'
+  - 'district: 1 10th St. Suite 660, Augusta, GA 30901'
+  - 'district: 18 9th St., Suite 513, Columbus, GA 31901'
+  - 'district: 271 17th St. NW Suite 1510, Atlanta, GA 30363'
+  - 'district: 532 Stephenson Ave. Suite 103B, Savannah, GA 31405'
+  website: https://openstates.org/person/jon-ossoff-2Nih6ATbzWQaex4isGpjSV/
+  district: Georgia
+  title: Senator
+  org_classification: upper
+- id: ocd-person/37f5a4b9-98b2-5c3d-857b-6e02f5123345
+  name: Raphael Warnock
+  party: Democratic
+  image: https://unitedstates.github.io/images/congress/450x550/W000790.jpg
+  email: https://www.warnock.senate.gov/contact/contact-form/
+  phones:
+  - 'capitol: 202-224-3643'
+  - 'district: 770-694-7828'
+  addresses:
+  - 'capitol: 717 Hart Senate Office Building, Washington, DC 20510'
+  - 'district: 201 17th St. NW Suite 530, Atlanta, GA 30363'
+  website: https://openstates.org/person/raphael-warnock-1hapunp9ErAVaBO0UMTNkD/
+  district: Georgia
+  title: Senator
+  org_classification: upper
+- id: ocd-person/6da7fe11-4436-4854-8e1b-4c45dc4cdaac
+  name: Randy Robertson
+  party: Republican
+  image: https://www.legis.ga.gov/api/images/default-source/portraits/robertson-randy-4926.jpg
+  email: randy.robertson@senate.ga.gov
+  phones:
+  - 'capitol: 404-656-0045'
+  addresses:
+  - 'capitol: State Capitol Room 421-F, 206 Washington St. SW, Atlanta, GA 30334'
+  - 'district-mail: P.O. Box 62, Cataula, GA 31804'
+  website: https://openstates.org/person/randy-robertson-3Kuw3XoqHJBC20mOoZN1cy/
+  district: '29'
+  title: Senator
+  org_classification: upper
+- id: ocd-person/011995be-4dd0-43b2-ae75-57ae45f53576
+  name: Mike Hodges
+  party: Republican
+  image: https://www.legis.ga.gov/api/images/default-source/portraits/hodges-mike-5013.jpg
+  email: mike.hodges@senate.ga.gov
+  phones:
+  - 'capitol: 404-656-7127'
+  - 'district: 912-464-1989'
+  addresses:
+  - 'capitol: Room 305-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+  - 'district: 3410 Cypress Mill Road Box 101, Brunswick, GA 31525'
+  website: https://openstates.org/person/mike-hodges-24gRtDfNQQrErlUCgmYgY/
+  district: '3'
+  title: Senator
+  org_classification: upper
+- id: ocd-person/44a51125-9e82-41f6-8d4f-a646895b5994
+  name: Larry Walker
+  party: Republican
+  image: https://www.legis.ga.gov/api/images/default-source/portraits/walker--iii-larry-4878.jpg
+  email: larry.walker@senate.ga.gov
+  phones:
+  - 'capitol: 404-656-0095'
+  addresses:
+  - 'capitol: State Capitol Room 421-A, 206 Washington St. SW, Atlanta, GA 30334'
+  website: https://openstates.org/person/larry-walker-25Wufd7LtEYu2r7QBkWIia/
+  district: '20'
+  title: Senator
+  org_classification: upper
+- id: ocd-person/918888ac-edc7-4178-9133-d058f0f21010
+  name: Max Burns
+  party: Republican
+  image: ''
+  email: max.burns@senate.ga.gov
+  phones:
+  - 'capitol: 404-463-1376'
+  addresses:
+  - 'capitol: Room 327-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+  - 'district-mail: P.O. Box 203, Sylvania, GA 30467'
+  website: https://openstates.org/person/max-burns-4QcHa3lPp6ivhkxY80BKs4/
+  district: '23'
+  title: Senator
+  org_classification: upper
+- id: ocd-person/1ac93f89-f367-4de3-82ba-79fa78d4d134
+  name: Chuck Payne
+  party: Republican
+  image: https://www.legis.ga.gov/api/images/default-source/portraits/payne-chuck--4909.jpg
+  email: chuck.payne@senate.ga.gov
+  phones:
+  - 'capitol: 404-656-5080'
+  addresses:
+  - 'capitol: State Capitol Room 432, 206 Washington St. SW, Atlanta, GA 30334'
+  - 'district-mail: P.O. Box 1074, Dalton, GA 30722'
+  website: https://openstates.org/person/chuck-payne-oXloR6K8vHUI3k3oiaHeW/
+  district: '54'
+  title: Senator
+  org_classification: upper
+- id: ocd-person/fcd57129-480c-4fba-a0d1-7fb369706611
+  name: Jaha Howard
+  party: Democratic
+  image: ''
+  email: jaha.howard@senate.ga.gov
+  phones:
+  - 'capitol-mail: 404-657-2099'
+  addresses:
+  - 'capitol-mail: Room 321-B, Coverdell Legislative Office Building, Atlanta, GA 30334'
+  - 'district: 4450 S. Cobb Drive, Smyrna, GA 30080'
+  website: https://openstates.org/person/jaha-howard-7h5bnciYPd2vcEz2gpUYZF/
+  district: '35'
+  title: Senator
+  org_classification: upper
+- id: ocd-person/fc31ab02-026c-4173-86db-570c0b297c64
+  name: Kay Kirkpatrick
+  party: Republican
+  image: https://www.legis.ga.gov/api/images/default-source/portraits/kirkpatrick-kay-4910.jpg
+  email: kay.kirkpatrick@senate.ga.gov
+  phones:
+  - 'capitol: 404-656-0508'
+  - 'district: 404-656-3932'
+  addresses:
+  - 'capitol: Room 324-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+  - 'district: 2146 Roswell Road Suite 108895, Marietta, GA 30062'
+  website: https://openstates.org/person/kay-kirkpatrick-7fslPeuQMgvkumJPQeEJ6K/
+  district: '32'
+  title: Senator
+  org_classification: upper
+- id: ocd-person/bf2c1ec5-d995-4605-85ac-139adb037d99
+  name: Nan Orrock
+  party: Democratic
+  image: https://www.legis.ga.gov/api/images/default-source/portraits/orrock-nan-33.jpg
+  email: nan.orrock@senate.ga.gov
+  phones:
+  - 'capitol: 404-463-8054'
+  - 'district: 404-524-5999'
+  addresses:
+  - 'capitol: State Capitol Room 420-B, 206 Washington St. SW, Atlanta, GA 30334'
+  - 'district: 1070 Delaware Ave. SE, Atlanta, GA 30316'
+  website: https://openstates.org/person/nan-orrock-5ojhEyhy91AYbhStnt7kGf/
+  district: '36'
+  title: Senator
+  org_classification: upper
+- id: ocd-person/8798a822-fee8-4546-bcdd-455f788bef44
+  name: Randal Mangham
+  party: Democratic
+  image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Randal_Mangham.jpg
+  email: randal.mangham@senate.ga.gov
+  phones:
+  - 'capitol: 404-657-4640'
+  addresses:
+  - 'capitol: Room 320-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+  - 'district-mail: P.O. Box 870527, Stone Mountain, GA 30087'
+  website: https://openstates.org/person/randal-mangham-47rjAJCRCcmqtuxVdjO2Fg/
+  district: '55'
+  title: Senator
+  org_classification: upper
+- id: ocd-person/d9f1ea57-7b90-484a-9664-927a36c87e0c
+  name: Tonya Anderson
+  party: Democratic
+  image: https://www.legis.ga.gov/api/images/default-source/portraits/anderson-tonya-807.jpg
+  email: tonya.anderson@senate.ga.gov
+  phones:
+  - 'capitol: 404-463-2598'
+  addresses:
+  - 'capitol: State Capitol Room 110-A, 206 Washington St. SW, Atlanta, GA 30334'
+  - 'district-mail: P.O. Box 1026, Lithonia, GA 30058'
+  website: https://openstates.org/person/tonya-anderson-6dFtDTK3WQuxaaH2ZDhVpU/
+  district: '43'
+  title: Senator
+  org_classification: upper
+- id: ocd-person/1f7d013a-8861-4e08-b6bf-7c8d36f8107c
+  name: Greg Dolezal
+  party: Republican
+  image: https://www.legis.ga.gov/api/images/default-source/portraits/dolezal-greg-4925.jpg
+  email: greg.dolezal@senate.ga.gov
+  phones:
+  - 'capitol: 404-656-0040'
+  addresses:
+  - 'capitol: State Capitol Room 421-B, 206 Washington St. SW, Atlanta, GA 30334'
+  - 'district: 6505 Shiloh Road Suite 200, Alpharetta, GA 30005'
+  website: https://openstates.org/person/greg-dolezal-xPt9CGpMZqDulbva8JwQW/
+  district: '27'
+  title: Senator
+  org_classification: upper
+- id: ocd-person/6be704ef-6250-4e08-86d3-f5fa2e1eebf3
+  name: Drew Echols
+  party: Republican
+  image: https://www.gfpe.org/library/imglib/Drew-Echols-1.jpg
+  email: drew.echols@senate.ga.gov
+  phones:
+  - 'capitol: 404-463-3931'
+  addresses:
+  - 'capitol: Room 305-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+  - 'district-mail: P.O. Box 1600, Gainsville, GA 30503'
+  website: https://openstates.org/person/drew-echols-3HbkoZhTJQBlYUHUet4Wo7/
+  district: '49'
+  title: Senator
+  org_classification: upper
+- id: ocd-person/e11cecf4-f2e5-49d9-ba9e-47681f779438
+  name: Lee Anderson
+  party: Republican
+  image: https://www.legis.ga.gov/api/images/default-source/portraits/anderson-lee-723.jpg
+  email: lee.anderson@senate.ga.gov
+  phones:
+  - 'capitol: 404-656-5114'
+  addresses:
+  - 'capitol: Room 325-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
+  - 'district: 160 Louisville Road, Grovetown, GA 30813'
+  website: https://openstates.org/person/lee-anderson-6qmUXbgjbKbdvREWhabOTQ/
+  district: '24'
+  title: Senator
+  org_classification: upper
