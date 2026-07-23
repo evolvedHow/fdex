@@ -102,7 +102,14 @@
       expand();
     } else if (_prevHovered) {
       _prevHovered = false;
-      scheduleCollapse(1500);
+      if (isSmallish.matches) {
+        // Touch devices: tapping empty map clears the pin — collapse the
+        // drawer too, since there's no hover signal to keep it open.
+        expanded = false;
+        cancelCollapse();
+      } else {
+        scheduleCollapse(1500);
+      }
     }
   });
 
