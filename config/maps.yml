@@ -45,31 +45,6 @@ districtPlans:
     tooltipTitle: "Current House Map"
     group: "Current Maps, for 2024 and later elections"
 
-  # Previous Maps (2011-2021)
-  - id: congress
-    label: "US Congress, 2011-2021"
-    geojson: congress12_census20.geojson
-    chamber: congress
-    districtProp: district
-    tooltipTitle: "Previous Congressional Map (2011 - 2021)"
-    group: "Previous Maps"
-
-  - id: senate
-    label: "State Senate, 2014-2021"
-    geojson: senate14_census20.geojson
-    chamber: senate
-    districtProp: district
-    tooltipTitle: "Previous State Senate Map (2014 - 2021)"
-    group: "Previous Maps"
-
-  - id: house
-    label: "State House, 2015-2021"
-    geojson: house15_census20.geojson
-    chamber: house
-    districtProp: district
-    tooltipTitle: "Previous State House Map (2015 - 2021)"
-    group: "Previous Maps"
-
   # Prior Maps (2021-2024)
   - id: congress_proposed_3
     label: "US Congress, 2021 - 2024"
@@ -94,6 +69,31 @@ districtPlans:
     districtProp: district
     tooltipTitle: "Prior State House Map (2021 - 2024)"
     group: "Prior Maps"
+
+  # Older Maps (2011-2021)
+  - id: congress
+    label: "US Congress, 2011-2021"
+    geojson: congress12_census20.geojson
+    chamber: congress
+    districtProp: district
+    tooltipTitle: "Older Congressional Map (2011 - 2021)"
+    group: "Older Maps"
+
+  - id: senate
+    label: "State Senate, 2014-2021"
+    geojson: senate14_census20.geojson
+    chamber: senate
+    districtProp: district
+    tooltipTitle: "Older State Senate Map (2014 - 2021)"
+    group: "Older Maps"
+
+  - id: house
+    label: "State House, 2015-2021"
+    geojson: house15_census20.geojson
+    chamber: house
+    districtProp: district
+    tooltipTitle: "Older State House Map (2015 - 2021)"
+    group: "Older Maps"
 
   # Other Maps Proposed in 2021 and 2023
   - id: senate_r2
