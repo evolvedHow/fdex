@@ -6,6 +6,7 @@ import {
   setLocationPrecinct,
   setIsPinned,
   getIsPinned,
+  setPinnedLngLat,
 } from '../stores/state.svelte';
 
 /**
@@ -81,6 +82,7 @@ export function registerClickHandlers(map: mapboxgl.Map, plans: DistrictPlan[]) 
       const precinctFeats = map.queryRenderedFeatures(e.point, { layers: ['precinct_plean', 'precinct_borders'] });
       const pProps = precinctFeats[0]?.properties ?? null;
       setLocationPrecinct(pProps ? { ...pProps } : null);
+      setPinnedLngLat({ lng: e.lngLat.lng, lat: e.lngLat.lat });
       setIsPinned(true);
     });
   }
@@ -107,6 +109,7 @@ export function clearPin(map: mapboxgl.Map, plans: DistrictPlan[]) {
   setHoveredDistrict(null);
   setLocationCounty(null);
   setLocationPrecinct(null);
+  setPinnedLngLat(null);
 }
 
 /**

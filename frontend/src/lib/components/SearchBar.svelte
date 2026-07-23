@@ -1,7 +1,7 @@
 <script lang="ts">
   import type mapboxgl from 'mapbox-gl';
   import type { AppConfig, DistrictPlan } from '../types';
-  import { getMapState, getMapInstance, setHoveredDistrict } from '../stores/state.svelte';
+  import { getMapState, getMapInstance, setHoveredDistrict, setPinnedLngLat, setIsPinned } from '../stores/state.svelte';
 
   interface Props {
     config: AppConfig;
@@ -95,6 +95,12 @@
     const data = await res.json();
     if (!data.features?.length) return false;
     const f = data.features[0];
+    // Remember the geocoded point so the Contact panel can resolve
+    // reps for all three chambers, not just the currently-displayed plan.
+    if (Array.isArray(f.center) && f.center.length >= 2) {
+      setPinnedLngLat({ lng: f.center[0], lat: f.center[1] });
+      setIsPinned(true);
+    }
     highlightAfterMove();
     if (f.bbox) {
       m.fitBounds(f.bbox as mapboxgl.LngLatBoundsLike, { padding: 60, maxZoom: 13 });

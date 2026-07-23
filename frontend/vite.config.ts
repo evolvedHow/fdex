@@ -28,6 +28,8 @@ function serveLocalAssets() {
           const mime: Record<string, string> = {
             json: 'application/json',
             geojson: 'application/json',
+            yml: 'text/yaml',
+            yaml: 'text/yaml',
             png: 'image/png',
             svg: 'image/svg+xml',
             jpg: 'image/jpeg',

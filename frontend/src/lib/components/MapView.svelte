@@ -39,11 +39,12 @@
   let prevShowPrecinct = $state(false);
 
   const ELECTIONS = [
-    { key: 'g18_pct_dem', label: '2018 Gen' },
+    { key: 'g18_pct_dem', label: '2018 Gov' },
     { key: 'p20_pct_dem', label: '2020 Pres' },
-    { key: 'r21_pct_dem', label: '2021 Runoff' },
-    { key: 'g22_pct_dem', label: '2022 Gen' },
-    { key: 's22_pct_dem', label: '2022 Senate' },
+    { key: 'r21_pct_dem', label: '2021 US Sen Runoff' },
+    { key: 'g22_pct_dem', label: '2022 Gov' },
+    { key: 's22_pct_dem', label: '2022 US Sen' },
+    { key: 'p24_pct_dem', label: '2024 Pres' },
   ] as const;
 
   async function loadStateTotals(levelId: string) {

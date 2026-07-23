@@ -6,7 +6,9 @@
     getDemographicsTotals,
     getLocationCounty,
     getLocationPrecinct,
+    getIsPinned,
   } from '../stores/state.svelte';
+  import ContactPanel from './ContactPanel.svelte';
 
   let hovered  = $derived(getHoveredDistrict());
   let totals   = $derived(getStateTotals());
@@ -14,6 +16,7 @@
   let demTot   = $derived(getDemographicsTotals());
   let county   = $derived(getLocationCounty());
   let precinct = $derived(getLocationPrecinct());
+  let pinned   = $derived(getIsPinned());
 
   // ── Info overlay state ────────────────────────────────────────────────────
   let activeInfoKey = $state<string | null>(null);
@@ -48,8 +51,8 @@
       desc: 'The combined share of Black, Indigenous, and People of Color (BIPOC) residents aged 18+. This broad measure captures the total non-white voting-age population in the district. Note that individuals may identify with multiple racial/ethnic groups.',
     },
     partisan: {
-      title: 'Average Partisan Lean (2018–2022)',
-      desc: 'The district\'s average Democratic share of the two-party vote across multiple elections from 2018 to 2022. Values above 50% indicate the district leaned toward Democratic candidates on average; values below 50% toward Republican candidates. This is a historical summary measure based on actual election results — it does not predict future outcomes.',
+      title: 'Average Partisan Lean',
+      desc: 'The district\'s average Democratic share of the two-party vote across recent statewide elections (2018 Governor, 2020 President, 2021 US Senate Runoff, 2022 Governor, 2022 US Senate, and — when available — 2024 President). Values above 50% indicate the district leaned Democratic on average; values below 50% Republican. This is a historical summary based on actual results and does not predict future outcomes.',
     },
     election_results: {
       title: 'Per-Election Results & Wasted Votes',
@@ -98,7 +101,7 @@
     'Asian VAP':     'asian_vap',
     'Hispanic VAP':  'hispanic_vap',
     'Minority VAP':  'minority_vap',
-    'Partisan 2018–22': 'partisan',
+    'Partisan Lean': 'partisan',
     'Median Income': 'median_income',
     'Below Poverty': 'poverty',
     "Bachelor's+":   'bachelors',
@@ -106,6 +109,13 @@
     'Uninsured':     'uninsured',
     'Unemployment':  'unemployment',
   };
+
+  // Row labels are sometimes dynamic (e.g. "Partisan Lean 2018–24"). Resolve
+  // by prefix for those; exact match for everything else.
+  function infoKeyFor(label: string): string | null {
+    if (label.startsWith('Partisan Lean')) return 'partisan';
+    return LABEL_TO_INFO[label] ?? null;
+  }
 
   // ── Formatters ───────────────────────────────────────────────────────────
   function fmt(n: number | undefined): string {
@@ -138,12 +148,31 @@
   type Row = [string, string, number | null, boolean];
 
   const ELECTION_DEFS = [
-    { key: 'g18_pct_dem', label: '2018 Gen' },
+    { key: 'g18_pct_dem', label: '2018 Gov' },
     { key: 'p20_pct_dem', label: '2020 Pres' },
-    { key: 'r21_pct_dem', label: '2021 Runoff' },
-    { key: 'g22_pct_dem', label: '2022 Gen' },
-    { key: 's22_pct_dem', label: '2022 Senate' },
+    { key: 'r21_pct_dem', label: '2021 US Sen Runoff' },
+    { key: 'g22_pct_dem', label: '2022 Gov' },
+    { key: 's22_pct_dem', label: '2022 US Sen' },
+    { key: 'p24_pct_dem', label: '2024 Pres' },
   ];
+
+  // Partisan-lean label reflects the actual year range of race columns
+  // present on the feature (so it updates automatically when the data
+  // pipeline starts embedding 2024 President into the district geojsons).
+  let partisanLabel = $derived((() => {
+    const p = hovered?.properties;
+    if (!p) return 'Partisan Lean';
+    const years = ELECTION_DEFS
+      .filter((d) => typeof p[d.key] === 'number')
+      .map((d) => parseInt(d.label.match(/(\d{4})/)?.[1] ?? '0', 10))
+      .filter((y) => y > 0);
+    if (!years.length) return 'Partisan Lean';
+    const lo = Math.min(...years);
+    const hi = Math.max(...years);
+    return lo === hi
+      ? `Partisan Lean ${lo}`
+      : `Partisan Lean ${lo}–${String(hi).slice(-2)}`;
+  })());
 
   let planRows = $derived<Row[]>((() => {
     if (!hovered) return [];
@@ -176,7 +205,7 @@
       ['Minority VAP', pct(p.pct_bp_),
         t && t.bipocvap > 0 ? distBipoc / t.bipocvap : null,
         t != null && isMax(distBipoc,  t.maxBipocvap)],
-      ['Partisan 2018–22',
+      [partisanLabel,
         p.partisan != null
           ? `${(p.partisan * 100).toFixed(1)}% D · ${((1 - p.partisan) * 100).toFixed(1)}% R`
           : '—',
@@ -293,6 +322,15 @@
 
     <div class="px-3 py-2 text-[12px]">
 
+      {#if pinned}
+        <!-- Contact your representatives -->
+        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
+          Contact your representatives
+        </div>
+        <ContactPanel variant="full" />
+        <div class="border-t border-gray-100 my-3"></div>
+      {/if}
+
       <!-- District Metrics -->
       <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
         District Metrics
@@ -303,11 +341,11 @@
             <tr class="border-b border-gray-100 last:border-0">
               <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap align-top">
                 {label}
-                {#if LABEL_TO_INFO[label]}
+                {#if infoKeyFor(label)}
                   <button
                     type="button"
                     class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer"
-                    onclick={() => activeInfoKey = LABEL_TO_INFO[label]}
+                    onclick={() => activeInfoKey = infoKeyFor(label)}
                     title="What is this?"
                   >ⓘ</button>
                 {/if}
@@ -428,11 +466,11 @@
                 <tr class="border-b border-gray-100 last:border-0">
                   <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap align-top">
                     {label}
-                    {#if LABEL_TO_INFO[label]}
+                    {#if infoKeyFor(label)}
                       <button
                         type="button"
                         class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer"
-                        onclick={() => activeInfoKey = LABEL_TO_INFO[label]}
+                        onclick={() => activeInfoKey = infoKeyFor(label)}
                         title="What is this?"
                       >ⓘ</button>
                     {/if}

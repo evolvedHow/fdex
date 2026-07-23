@@ -170,8 +170,14 @@ let isPinned = $state(false);
 export function getIsPinned()           { return isPinned; }
 export function setIsPinned(v: boolean) { isPinned = v; }
 
+// Last pinned point on the map — used by ContactPanel to resolve districts
+// across all three chambers (congress/senate/house), not just the active one.
+let pinnedLngLat = $state<{ lng: number; lat: number } | null>(null);
+export function getPinnedLngLat()                                    { return pinnedLngLat; }
+export function setPinnedLngLat(v: { lng: number; lat: number } | null) { pinnedLngLat = v; }
+
 // ── Mobile drawer tab (not persisted) ────────────────────────────────────
-export type DrawerTab = 'metrics' | 'election' | 'census' | 'location';
+export type DrawerTab = 'metrics' | 'election' | 'census' | 'location' | 'contact';
 let drawerTab = $state<DrawerTab>('metrics');
 export function getDrawerTab()                { return drawerTab; }
 export function setDrawerTab(tab: DrawerTab)  { drawerTab = tab; }

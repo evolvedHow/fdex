@@ -12,8 +12,10 @@
     setDrawerTab,
     getShowCensus,
     toggleShowCensus,
+    getIsPinned,
     type DrawerTab,
   } from '../stores/state.svelte';
+  import ContactPanel from './ContactPanel.svelte';
 
   let hovered  = $derived(getHoveredDistrict());
   let totals   = $derived(getStateTotals());
@@ -37,11 +39,13 @@
           { key: 'election', label: 'Election' },
           { key: 'census',   label: 'Census'   },
           { key: 'location', label: 'Location' },
+          { key: 'contact',  label: 'Contact'  },
         ]
       : [
           { key: 'metrics',  label: 'Metrics'  },
           { key: 'election', label: 'Election' },
           { key: 'location', label: 'Location' },
+          { key: 'contact',  label: 'Contact'  },
         ]
   );
 
@@ -96,6 +100,7 @@
   }
 
   let _prevHovered = false;
+  let pinned = $derived(getIsPinned());
   $effect(() => {
     if (hovered) {
       _prevHovered = true;
@@ -103,9 +108,11 @@
     } else if (_prevHovered) {
       _prevHovered = false;
       if (isSmallish.matches) {
-        // Touch devices: tapping empty map clears the pin — collapse the
-        // drawer too, since there's no hover signal to keep it open.
-        expanded = false;
+        // Touch devices: only collapse when the user actually dismissed the
+        // pin (tap empty map → clearPin sets isPinned=false). A transient
+        // hovered=null while still pinned means we should stay expanded so
+        // the user can keep switching tabs without the drawer vanishing.
+        if (!pinned) expanded = false;
         cancelCollapse();
       } else {
         scheduleCollapse(1500);
@@ -151,8 +158,8 @@
       desc: 'The combined share of Black, Indigenous, and People of Color (BIPOC) residents aged 18+. This broad measure captures the total non-white voting-age population in the district. Note that individuals may identify with multiple racial/ethnic groups.',
     },
     partisan: {
-      title: 'Partisan Lean (2018–2022)',
-      desc: 'The district\'s average Democratic share of the two-party vote across five statewide elections: Governor (2018), President (2020), U.S. Senate Runoff (2021), Governor (2022), and U.S. Senate (2022). Values above 50% indicate the district leaned Democratic on average; values below 50% Republican. This is a historical summary based on actual results — it does not predict future outcomes.',
+      title: 'Partisan Lean',
+      desc: 'The district\'s average Democratic share of the two-party vote across recent statewide elections: Governor (2018), President (2020), U.S. Senate Runoff (2021), Governor (2022), U.S. Senate (2022), and — when available — President (2024). Values above 50% indicate the district leaned Democratic on average; values below 50% Republican. This is a historical summary based on actual results — it does not predict future outcomes.',
     },
     election_results: {
       title: 'Per-Election Results & Wasted Votes',
@@ -245,6 +252,7 @@
     { key: 'r21_pct_dem', label: '2021 US Sen Runoff' },
     { key: 'g22_pct_dem', label: '2022 Gov' },
     { key: 's22_pct_dem', label: '2022 US Sen' },
+    { key: 'p24_pct_dem', label: '2024 President' },
   ];
 
   let planRows = $derived<Row[]>((() => {
@@ -554,6 +562,13 @@
             {:else}
               <p class="text-[13px] text-gray-400 italic">No ACS data for this district</p>
             {/if}
+
+          {:else if activeDrawerTab === 'contact'}
+            <!-- Contact tab -->
+            <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2">
+              Contact your representatives
+            </div>
+            <ContactPanel variant="compact" />
 
           {:else}
             <!-- Location tab -->
