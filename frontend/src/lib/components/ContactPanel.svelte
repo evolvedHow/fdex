@@ -192,24 +192,6 @@
                     focus:outline-none focus:border-blue-400" />
     </div>
 
-    <!-- Federal reps (always shown) -->
-    <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">President</div>
-    {@render card(PRESIDENT, 'U.S. President')}
-
-    {#if reps.us_senate.length}
-      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">U.S. Senate</div>
-      {#each reps.us_senate as rep}
-        {@render card(rep, 'U.S. Senator')}
-      {/each}
-    {/if}
-
-    {#if reps.us_house}
-      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">U.S. House</div>
-      {@render card(reps.us_house, 'U.S. Representative')}
-    {:else if reps.districts.us_house === null}
-      <p class="text-[10px] text-gray-400 italic mb-2">Couldn't resolve your U.S. Congressional district.</p>
-    {/if}
-
     <!-- State reps (based on the location's state senate/house districts) -->
     {#if reps.state_senate}
       <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Georgia Senate</div>
@@ -224,6 +206,24 @@
     {:else if reps.districts.state_house === null}
       <p class="text-[10px] text-gray-400 italic mb-2">Couldn't resolve your Georgia House district.</p>
     {/if}
+
+    <!-- Federal reps (always shown) -->
+    {#if reps.us_senate.length}
+      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">U.S. Senate</div>
+      {#each reps.us_senate as rep}
+        {@render card(rep, 'U.S. Senator')}
+      {/each}
+    {/if}
+
+    {#if reps.us_house}
+      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">U.S. House</div>
+      {@render card(reps.us_house, 'U.S. Representative')}
+    {:else if reps.districts.us_house === null}
+      <p class="text-[10px] text-gray-400 italic mb-2">Couldn't resolve your U.S. Congressional district.</p>
+    {/if}
+
+    <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">President</div>
+    {@render card(PRESIDENT, 'U.S. President')}
 
     <div class="text-[9px] text-gray-400 italic mt-2 leading-snug">
       Contact info sourced from openstates.org. Text link opens SMS to Resistbot (50409).
