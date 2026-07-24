@@ -387,12 +387,17 @@
 {/if}
 
 <!-- ── Bottom drawer ─────────────────────────────────────────────────────── -->
+<!--
+  onmouseenter/leave only fire on hover-capable devices (desktop). Touch
+  devices synthesise mouseleave inconsistently on tap-release, so we guard
+  by media query rather than rely on the browser to skip synthesis.
+-->
 <div
   class="absolute bottom-0 left-0 right-0 z-20 flex flex-col"
   role="region"
   aria-label="District statistics"
-  onmouseenter={cancelCollapse}
-  onmouseleave={() => scheduleCollapse()}
+  onmouseenter={() => { if (!isSmallish.matches) cancelCollapse(); }}
+  onmouseleave={() => { if (!isSmallish.matches) scheduleCollapse(); }}
 >
   <!-- Expanded content panel (renders above the strip) -->
   {#if expanded}
@@ -403,28 +408,37 @@
       style="background-color: rgba(255,255,255,{opacity/100})"
     >
 
-      <!-- ── Drag handle (phone / tablet — swipe down to collapse) ──────── -->
-      <div
-        class="lg:hidden flex justify-center items-center h-[22px] shrink-0 cursor-grab active:cursor-grabbing touch-none"
-        ontouchstart={onDragTouchStart}
-        ontouchmove={onDragTouchMove}
-        ontouchend={onDragTouchEnd}
-        role="button"
-        tabindex="0"
-        aria-label="Swipe down to collapse"
-      >
-        <div class="w-10 h-1 rounded-full bg-gray-300"></div>
+      <!-- ── Drag handle + close button (phone / tablet) ──────────────── -->
+      <div class="lg:hidden relative flex justify-center items-center h-[26px] shrink-0">
+        <div
+          class="absolute inset-0 flex justify-center items-center cursor-grab active:cursor-grabbing touch-none"
+          ontouchstart={onDragTouchStart}
+          ontouchmove={onDragTouchMove}
+          ontouchend={onDragTouchEnd}
+          role="button"
+          tabindex="0"
+          aria-label="Swipe down to collapse"
+        >
+          <div class="w-10 h-1 rounded-full bg-gray-300"></div>
+        </div>
+        <button
+          type="button"
+          class="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full text-gray-500 hover:text-gray-800 hover:bg-gray-100 text-[18px] leading-none"
+          onclick={(e) => { e.stopPropagation(); expanded = false; cancelCollapse(); }}
+          aria-label="Close panel"
+        >✕</button>
       </div>
 
       <!-- ── Tab bar (phone / tablet) ──────────────────────────────────── -->
       <div class="lg:hidden flex border-b border-gray-200 shrink-0">
         {#each visibleTabs as tab}
           <button
+            type="button"
             class="flex-1 py-2 text-[13px] font-medium text-center border-b-2 transition-colors cursor-pointer
                    {activeDrawerTab === tab.key
                      ? 'border-[#29315F] text-[#29315F]'
                      : 'border-transparent text-gray-500'}"
-            onclick={() => setDrawerTab(tab.key)}
+            onclick={(e) => { e.stopPropagation(); setDrawerTab(tab.key); }}
           >{tab.label}</button>
         {/each}
       </div>

@@ -7,6 +7,11 @@
     getLocationCounty,
     getLocationPrecinct,
     getIsPinned,
+    getDrawerTab,
+    setDrawerTab,
+    getShowCensus,
+    toggleShowCensus,
+    type DrawerTab,
   } from '../stores/state.svelte';
   import ContactPanel from './ContactPanel.svelte';
 
@@ -17,6 +22,31 @@
   let county   = $derived(getLocationCounty());
   let precinct = $derived(getLocationPrecinct());
   let pinned   = $derived(getIsPinned());
+
+  let activeTab  = $derived(getDrawerTab());
+  let showCensus = $derived(getShowCensus());
+
+  // Fall back to Metrics if user turns Census off while viewing it
+  $effect(() => {
+    if (!showCensus && activeTab === 'census') setDrawerTab('metrics');
+  });
+
+  let visibleTabs = $derived<{ key: DrawerTab; label: string }[]>(
+    showCensus
+      ? [
+          { key: 'metrics',  label: 'Metrics'  },
+          { key: 'election', label: 'Election' },
+          { key: 'census',   label: 'Census'   },
+          { key: 'location', label: 'Location' },
+          { key: 'contact',  label: 'Contact'  },
+        ]
+      : [
+          { key: 'metrics',  label: 'Metrics'  },
+          { key: 'election', label: 'Election' },
+          { key: 'location', label: 'Location' },
+          { key: 'contact',  label: 'Contact'  },
+        ]
+  );
 
   // ── Info overlay state ────────────────────────────────────────────────────
   let activeInfoKey = $state<string | null>(null);
@@ -92,7 +122,6 @@
     },
   };
 
-  // Maps table row labels to INFO keys for the ⓘ button lookup
   const LABEL_TO_INFO: Record<string, string> = {
     'Population':    'population',
     'VAP 2020':      'vap',
@@ -110,8 +139,6 @@
     'Unemployment':  'unemployment',
   };
 
-  // Row labels are sometimes dynamic (e.g. "Partisan Lean 2018–24"). Resolve
-  // by prefix for those; exact match for everything else.
   function infoKeyFor(label: string): string | null {
     if (label.startsWith('Partisan Lean')) return 'partisan';
     return LABEL_TO_INFO[label] ?? null;
@@ -156,9 +183,6 @@
     { key: 'p24_pct_dem', label: '2024 Pres' },
   ];
 
-  // Partisan-lean label reflects the actual year range of race columns
-  // present on the feature (so it updates automatically when the data
-  // pipeline starts embedding 2024 President into the district geojsons).
   let partisanLabel = $derived((() => {
     const p = hovered?.properties;
     if (!p) return 'Partisan Lean';
@@ -213,7 +237,6 @@
     ];
   })());
 
-  // ── Census demographics rows ──────────────────────────────────────────────
   let demoRows = $derived<Row[]>((() => {
     if (!hovered || !demData || !demTot) return [];
     const key = String(Math.round(Number(hovered.properties.district ?? hovered.properties.DISTRICT ?? 0)));
@@ -248,7 +271,6 @@
     ];
   })());
 
-  // ── Per-district election results + wasted votes ──────────────────────────
   type ElectionRow = { label: string; dem: number; wastedDPct: number; wastedRPct: number };
 
   let electionRows = $derived<ElectionRow[]>((() => {
@@ -292,25 +314,21 @@
           </div>
           <button
             type="button"
-            class="text-gray-400 hover:text-gray-700 text-[16px] leading-none shrink-0 mt-0.5"
+            class="text-gray-400 hover:text-gray-700 text-[16px] leading-none shrink-0 mt-0.5 cursor-pointer"
             onclick={() => activeInfoKey = null}
             aria-label="Close"
           >✕</button>
         </div>
-        <p class="text-[13px] text-gray-600 leading-relaxed">
+        <p class="text-[13px] text-gray-600 leading-relaxed whitespace-pre-line">
           {INFO[activeInfoKey].desc}
         </p>
       </div>
     </div>
   {/if}
 
-  <!-- ── Full-height scrollable content ─────────────────────────────────── -->
-  <div class="flex-1 overflow-y-auto">
-
-  {#if hovered}
-
-    <!-- Compact district title strip -->
-    <div class="px-3 pt-2 pb-1 border-b border-gray-100 bg-[#F0F1F5]">
+  <!-- ── Title strip (always visible) ────────────────────────────────────── -->
+  <div class="px-3 pt-2 pb-1 border-b border-gray-100 bg-[#F0F1F5] shrink-0">
+    {#if hovered}
       <span class="text-[12px] font-semibold">{hovered.tooltipTitle ?? ''}</span>
       {#if districtNum}
         <span class="text-[11px] text-gray-500"> · District {districtNum}</span>
@@ -318,249 +336,90 @@
       {#if county}
         <span class="text-[11px] text-gray-400"> · {county} Co.</span>
       {/if}
-    </div>
-
-    <div class="px-3 py-2 text-[12px]">
-
-      {#if pinned}
-        <!-- Contact your representatives -->
-        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
-          Contact your representatives
-        </div>
-        <ContactPanel variant="full" />
-        <div class="border-t border-gray-100 my-3"></div>
-      {/if}
-
-      <!-- District Metrics -->
-      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
-        District Metrics
-      </div>
-      <table class="w-full border-collapse mb-3">
-        <tbody>
-          {#each planRows as [label, value, share, largest]}
-            <tr class="border-b border-gray-100 last:border-0">
-              <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap align-top">
-                {label}
-                {#if infoKeyFor(label)}
-                  <button
-                    type="button"
-                    class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer"
-                    onclick={() => activeInfoKey = infoKeyFor(label)}
-                    title="What is this?"
-                  >ⓘ</button>
-                {/if}
-              </td>
-              <td class="text-right py-[3px] align-top">
-                <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap">
-                  {value}
-                  {#if share != null}
-                    <span class="text-gray-400 font-normal text-[11px]">{sharePct(share)}</span>
-                  {/if}
-                  {#if largest}
-                    <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[4px] py-[1px] rounded leading-tight" title="Largest among all districts">▲ max</span>
-                  {/if}
-                </div>
-                {#if share != null}
-                  <div class="w-full h-[3px] bg-gray-100 rounded-full mt-[2px]">
-                    <div class="h-[3px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
-                  </div>
-                {/if}
-              </td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-
-      <!-- Election Results -->
-      {#if electionRows.length > 0}
-        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
-          Election Results
-          <button
-            type="button"
-            class="text-gray-300 hover:text-blue-400 text-[10px] leading-none cursor-pointer font-normal normal-case"
-            onclick={() => activeInfoKey = 'election_results'}
-            title="What is this?"
-          >ⓘ</button>
-        </div>
-
-        <div class="flex flex-col gap-[9px] mb-2">
-          {#each electionRows as row}
-            {@const dPct = row.dem * 100}
-            {@const rPct = (1 - row.dem) * 100}
-            {@const dWins = row.dem > 0.5}
-            {@const dWasted = dWins ? dPct - 50 : dPct}
-            {@const rWasted = dWins ? rPct : rPct - 50}
-            <div>
-              <!-- Label row: election + winner margin -->
-              <div class="flex items-center justify-between mb-[2px]">
-                <span class="text-gray-500 text-[10px]">{row.label}</span>
-                <span class="text-[10px] font-semibold {dWins ? 'text-blue-600' : 'text-red-600'}">
-                  {dWins ? 'D' : 'R'} +{Math.abs(dPct - rPct).toFixed(1)}
-                </span>
-              </div>
-
-              <!--
-                Bar segments (always sum to 100%):
-                D wins: [dark-blue 50% efficient][light-blue dPct-50% surplus][light-red rPct% wasted]
-                R wins: [light-blue dPct% wasted][dark-red 50% efficient][light-red rPct-50% surplus]
-                Segment widths = actual wasted/efficient vote percentages.
-                Center line (|) marks the 50% winning threshold.
-              -->
-              <div class="relative w-full h-[13px] rounded overflow-hidden flex">
-                {#if dWins}
-                  <div class="h-full bg-blue-600" style="width:50%"  title="D efficient: 50.0%"></div>
-                  <div class="h-full bg-blue-300" style="width:{dWasted}%" title="D surplus (wasted): {dWasted.toFixed(1)}%"></div>
-                  <div class="h-full bg-red-200"  style="width:{rPct}%"    title="R wasted: {rPct.toFixed(1)}%"></div>
-                {:else if row.dem < 0.5}
-                  <div class="h-full bg-blue-200" style="width:{dPct}%"    title="D wasted: {dPct.toFixed(1)}%"></div>
-                  <div class="h-full bg-red-600"  style="width:50%"  title="R efficient: 50.0%"></div>
-                  <div class="h-full bg-red-300"  style="width:{rWasted}%" title="R surplus (wasted): {rWasted.toFixed(1)}%"></div>
-                {:else}
-                  <div class="h-full bg-blue-500" style="width:50%"></div>
-                  <div class="h-full bg-red-500"  style="width:50%"></div>
-                {/if}
-                <!-- 50% threshold line -->
-                <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/80 -translate-x-1/2"></div>
-              </div>
-
-              <!-- Vote share labels + wasted annotations -->
-              <div class="flex tabular-nums mt-[2px] items-start">
-                <div class="text-[10px] leading-tight">
-                  <span class="font-medium {dWins ? 'text-blue-700' : 'text-blue-400'}">D {dPct.toFixed(1)}%</span>
-                  <span class="text-gray-300 mx-0.5">·</span>
-                  <span class="text-gray-400">{dWasted.toFixed(1)}% wasted</span>
-                </div>
-                <div class="flex-1 text-right text-[10px] leading-tight">
-                  <span class="text-gray-400">{rWasted.toFixed(1)}% wasted</span>
-                  <span class="text-gray-300 mx-0.5">·</span>
-                  <span class="font-medium {!dWins ? 'text-red-700' : 'text-red-400'}">R {rPct.toFixed(1)}%</span>
-                </div>
-              </div>
-            </div>
-          {/each}
-        </div>
-
-        <!-- Bar legend -->
-        <div class="text-gray-400 text-[10px] mb-3 flex flex-col gap-[2px]">
-          <div class="flex items-center gap-1.5">
-            <span class="inline-block w-4 h-[6px] rounded-sm bg-blue-600 shrink-0"></span>
-            <span class="inline-block w-4 h-[6px] rounded-sm bg-blue-200 shrink-0"></span>
-            <span class="inline-block w-4 h-[6px] rounded-sm bg-red-600 shrink-0"></span>
-            <span class="inline-block w-4 h-[6px] rounded-sm bg-red-200 shrink-0"></span>
-            <span>dark = efficient · faded = wasted · | = 50% threshold</span>
-          </div>
-        </div>
-      {/if}
-
-      <!-- Census Demographics -->
-      {#if demData}
-        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
-          Census Demographics (ACS 5-yr)
-        </div>
-        {#if demoRows.length === 0}
-          <p class="text-[11px] text-gray-400 italic mb-3">No ACS data for this district.</p>
-        {:else}
-          <table class="w-full border-collapse mb-3">
-            <tbody>
-              {#each demoRows as [label, value, share, largest]}
-                <tr class="border-b border-gray-100 last:border-0">
-                  <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap align-top">
-                    {label}
-                    {#if infoKeyFor(label)}
-                      <button
-                        type="button"
-                        class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer"
-                        onclick={() => activeInfoKey = infoKeyFor(label)}
-                        title="What is this?"
-                      >ⓘ</button>
-                    {/if}
-                  </td>
-                  <td class="text-right py-[3px] align-top">
-                    <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap">
-                      {value}
-                      {#if share != null}
-                        <span class="text-gray-400 font-normal text-[11px]">{sharePct(share)}</span>
-                      {/if}
-                      {#if largest}
-                        <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[4px] py-[1px] rounded leading-tight" title="Largest among all districts">▲ max</span>
-                      {/if}
-                    </div>
-                    {#if share != null}
-                      <div class="w-full h-[3px] bg-gray-100 rounded-full mt-[2px]">
-                        <div class="h-[3px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
-                      </div>
-                    {/if}
-                  </td>
-                </tr>
-              {/each}
-            </tbody>
-          </table>
-        {/if}
-      {/if}
-
-      <!-- County -->
-      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
-        County
-      </div>
-      <div class="mb-3 text-[12px]">
-        {#if county}
-          <div class="font-medium">{county} County</div>
-        {:else}
-          <div class="text-gray-400 italic">County data unavailable at this zoom</div>
-        {/if}
-      </div>
-
-      <!-- Precinct -->
-      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
-        Precinct
-      </div>
-      <div class="mb-3 text-[12px]">
-        {#if precinct && precinct.partisan != null}
-          <table class="w-full border-collapse">
-            <tbody>
-              <tr class="border-b border-gray-100">
-                <td class="text-gray-500 py-[3px] pr-2">Partisan Lean</td>
-                <td class="text-right py-[3px] font-medium tabular-nums">{pct(precinct.partisan as number)}</td>
-              </tr>
-            </tbody>
-          </table>
-        {:else}
-          <div class="text-gray-400 italic">Zoom in for precinct-level data</div>
-        {/if}
-      </div>
-
-      <!-- Legend -->
-      <div class="text-gray-400 text-[10px] border-t border-gray-100 pt-2 flex flex-col gap-1">
-        <div class="flex items-center gap-1.5">
-          <span class="inline-block w-5 h-[3px] bg-blue-400 rounded-full shrink-0"></span>
-          <span>% = district's share of state total</span>
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[4px] py-[1px] rounded leading-tight shrink-0">▲ max</span>
-          <span>= largest district for this metric</span>
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span class="text-gray-400 text-[10px]">ⓘ</span>
-          <span>= click for metric description</span>
-        </div>
-        <div class="italic">* VAP estimates based on precincts · Census ACS 5-yr</div>
-      </div>
-
-    </div><!-- end district content -->
-
-  {:else}
-    <!-- ── Statewide totals ──────────────────────────────────────────────── -->
-
-    <!-- Compact statewide title strip -->
-    <div class="px-3 pt-2 pb-1 border-b border-gray-100 bg-[#F0F1F5]">
+    {:else}
       <span class="text-[12px] font-semibold">Georgia Statewide</span>
       <span class="text-[11px] text-gray-500"> · Hover a district for details</span>
-    </div>
+    {/if}
+  </div>
 
-    {#if totals}
-      <div class="px-3 py-2 text-[12px]">
+  <!-- ── Tab bar ─────────────────────────────────────────────────────────── -->
+  <div class="flex border-b border-gray-200 shrink-0">
+    {#each visibleTabs as tab}
+      <button
+        type="button"
+        class="flex-1 py-1.5 text-[11px] font-medium text-center border-b-2 transition-colors cursor-pointer
+               {activeTab === tab.key
+                 ? 'border-[#29315F] text-[#29315F]'
+                 : 'border-transparent text-gray-500 hover:text-[#29315F]'}"
+        onclick={() => setDrawerTab(tab.key)}
+      >{tab.label}</button>
+    {/each}
+  </div>
 
-        <!-- VAP & Population -->
+  <!-- ── Scrollable content pane ─────────────────────────────────────────── -->
+  <div class="flex-1 overflow-y-auto px-3 py-2 text-[12px]">
+
+    {#if activeTab === 'metrics'}
+      {#if hovered}
+        <!-- District Metrics -->
+        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
+          District Metrics
+        </div>
+        <table class="w-full border-collapse">
+          <tbody>
+            {#each planRows as [label, value, share, largest]}
+              <tr class="border-b border-gray-100 last:border-0">
+                <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap align-top">
+                  {label}
+                  {#if infoKeyFor(label)}
+                    <button
+                      type="button"
+                      class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer"
+                      onclick={() => activeInfoKey = infoKeyFor(label)}
+                      title="What is this?"
+                    >ⓘ</button>
+                  {/if}
+                </td>
+                <td class="text-right py-[3px] align-top">
+                  <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap">
+                    {value}
+                    {#if share != null}
+                      <span class="text-gray-400 font-normal text-[11px]">{sharePct(share)}</span>
+                    {/if}
+                    {#if largest}
+                      <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[4px] py-[1px] rounded leading-tight" title="Largest among all districts">▲ max</span>
+                    {/if}
+                  </div>
+                  {#if share != null}
+                    <div class="w-full h-[3px] bg-gray-100 rounded-full mt-[2px]">
+                      <div class="h-[3px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
+                    </div>
+                  {/if}
+                </td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+
+        <!-- Legend under Metrics -->
+        <div class="text-gray-400 text-[10px] border-t border-gray-100 pt-2 mt-3 flex flex-col gap-1">
+          <div class="flex items-center gap-1.5">
+            <span class="inline-block w-5 h-[3px] bg-blue-400 rounded-full shrink-0"></span>
+            <span>% = district's share of state total</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[4px] py-[1px] rounded leading-tight shrink-0">▲ max</span>
+            <span>= largest district for this metric</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-gray-400 text-[10px]">ⓘ</span>
+            <span>= click for metric description</span>
+          </div>
+          <div class="italic">* VAP estimates based on precincts</div>
+        </div>
+
+      {:else if totals}
+        <!-- Statewide Metrics -->
         <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
           Statewide Metrics
         </div>
@@ -634,121 +493,256 @@
             </tr>
           </tbody>
         </table>
+        <div class="text-gray-400 text-[10px] italic">* VAP estimates based on precincts</div>
+      {:else}
+        <p class="text-[12px] text-gray-400 italic">Loading statewide data…</p>
+      {/if}
 
-        <!-- Census Demographics totals -->
-        {#if demTot}
-          <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
-            Census Demographics (ACS 5-yr)
+    {:else if activeTab === 'election'}
+      {#if hovered && electionRows.length > 0}
+        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
+          Election Results
+          <button
+            type="button"
+            class="text-gray-300 hover:text-blue-400 text-[10px] leading-none cursor-pointer font-normal normal-case"
+            onclick={() => activeInfoKey = 'election_results'}
+            title="What is this?"
+          >ⓘ</button>
+        </div>
+
+        <div class="flex flex-col gap-[9px] mb-2">
+          {#each electionRows as row}
+            {@const dPct = row.dem * 100}
+            {@const rPct = (1 - row.dem) * 100}
+            {@const dWins = row.dem > 0.5}
+            {@const dWasted = dWins ? dPct - 50 : dPct}
+            {@const rWasted = dWins ? rPct : rPct - 50}
+            <div>
+              <div class="flex items-center justify-between mb-[2px]">
+                <span class="text-gray-500 text-[10px]">{row.label}</span>
+                <span class="text-[10px] font-semibold {dWins ? 'text-blue-600' : 'text-red-600'}">
+                  {dWins ? 'D' : 'R'} +{Math.abs(dPct - rPct).toFixed(1)}
+                </span>
+              </div>
+              <div class="relative w-full h-[13px] rounded overflow-hidden flex">
+                {#if dWins}
+                  <div class="h-full bg-blue-600" style="width:50%"  title="D efficient: 50.0%"></div>
+                  <div class="h-full bg-blue-300" style="width:{dWasted}%" title="D surplus (wasted): {dWasted.toFixed(1)}%"></div>
+                  <div class="h-full bg-red-200"  style="width:{rPct}%"    title="R wasted: {rPct.toFixed(1)}%"></div>
+                {:else if row.dem < 0.5}
+                  <div class="h-full bg-blue-200" style="width:{dPct}%"    title="D wasted: {dPct.toFixed(1)}%"></div>
+                  <div class="h-full bg-red-600"  style="width:50%"  title="R efficient: 50.0%"></div>
+                  <div class="h-full bg-red-300"  style="width:{rWasted}%" title="R surplus (wasted): {rWasted.toFixed(1)}%"></div>
+                {:else}
+                  <div class="h-full bg-blue-500" style="width:50%"></div>
+                  <div class="h-full bg-red-500"  style="width:50%"></div>
+                {/if}
+                <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/80 -translate-x-1/2"></div>
+              </div>
+              <div class="flex tabular-nums mt-[2px] items-start">
+                <div class="text-[10px] leading-tight">
+                  <span class="font-medium {dWins ? 'text-blue-700' : 'text-blue-400'}">D {dPct.toFixed(1)}%</span>
+                  <span class="text-gray-300 mx-0.5">·</span>
+                  <span class="text-gray-400">{dWasted.toFixed(1)}% wasted</span>
+                </div>
+                <div class="flex-1 text-right text-[10px] leading-tight">
+                  <span class="text-gray-400">{rWasted.toFixed(1)}% wasted</span>
+                  <span class="text-gray-300 mx-0.5">·</span>
+                  <span class="font-medium {!dWins ? 'text-red-700' : 'text-red-400'}">R {rPct.toFixed(1)}%</span>
+                </div>
+              </div>
+            </div>
+          {/each}
+        </div>
+
+        <div class="text-gray-400 text-[10px] mt-2 flex flex-col gap-[2px]">
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <span class="inline-block w-4 h-[6px] rounded-sm bg-blue-600 shrink-0"></span>
+            <span class="inline-block w-4 h-[6px] rounded-sm bg-blue-200 shrink-0"></span>
+            <span class="inline-block w-4 h-[6px] rounded-sm bg-red-600 shrink-0"></span>
+            <span class="inline-block w-4 h-[6px] rounded-sm bg-red-200 shrink-0"></span>
+            <span>dark = efficient · faded = wasted</span>
           </div>
-          <table class="w-full border-collapse mb-3">
+        </div>
+      {:else if hovered}
+        <p class="text-[12px] text-gray-400 italic">No election data for this district.</p>
+      {:else}
+        <p class="text-[12px] text-gray-400 italic">Click a district to see per-election results.</p>
+      {/if}
+
+    {:else if activeTab === 'census'}
+      {#if hovered}
+        {#if demoRows.length > 0}
+          <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center justify-between">
+            <span>Census Demographics (ACS 5-yr)</span>
+            <button type="button" class="text-gray-300 hover:text-red-400 text-[10px] cursor-pointer" onclick={toggleShowCensus} title="Hide census tab">✕</button>
+          </div>
+          <table class="w-full border-collapse">
             <tbody>
-              <tr class="border-b border-gray-100">
-                <td class="text-gray-500 py-[3px] pr-2">Below Poverty</td>
-                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.poverty_count)}</td>
-              </tr>
-              <tr class="border-b border-gray-100">
-                <td class="text-gray-500 py-[3px] pr-2">Bachelor's+</td>
-                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.bachelors_plus_count)}</td>
-              </tr>
-              <tr class="border-b border-gray-100">
-                <td class="text-gray-500 py-[3px] pr-2">Married HH</td>
-                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.married_hh_count)}</td>
-              </tr>
-              <tr class="border-b border-gray-100">
-                <td class="text-gray-500 py-[3px] pr-2">Single Parent</td>
-                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.single_parent_count)}</td>
-              </tr>
-              <tr class="border-b border-gray-100">
-                <td class="text-gray-500 py-[3px] pr-2">No Vehicle HH</td>
-                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.no_vehicle_count)}</td>
-              </tr>
-              <tr class="border-b border-gray-100">
-                <td class="text-gray-500 py-[3px] pr-2">Uninsured</td>
-                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.uninsured_count)}</td>
-              </tr>
-              <tr class="border-b border-gray-100 last:border-0">
-                <td class="text-gray-500 py-[3px] pr-2">Unemployed</td>
-                <td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.unemployed_count)}</td>
-              </tr>
-            </tbody>
-          </table>
-        {/if}
-
-        <!-- Fairness Metrics -->
-        {#if totals.elections.some((e) => e.hasData)}
-          <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
-            Fairness Metrics
-          </div>
-
-          <!-- Efficiency Gap per election -->
-          <div class="text-[10px] text-gray-500 mb-0.5 font-medium flex items-center gap-1">
-            Efficiency Gap
-            <button type="button" class="text-gray-300 hover:text-blue-400 text-[10px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'efficiency_gap'} title="What is this?">ⓘ</button>
-          </div>
-          <table class="w-full border-collapse mb-1">
-            <tbody>
-              {#each totals.elections.filter((e) => e.hasData) as el}
+              {#each demoRows as [label, value, share, largest]}
                 <tr class="border-b border-gray-100 last:border-0">
-                  <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap">{el.label}</td>
-                  <td class="text-right py-[3px] font-medium tabular-nums {el.eg > 0 ? 'text-blue-600' : 'text-red-600'}">
-                    {el.eg > 0 ? '+' : ''}{(el.eg * 100).toFixed(1)}%
+                  <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap align-top">
+                    {label}
+                    {#if infoKeyFor(label)}
+                      <button
+                        type="button"
+                        class="text-gray-300 hover:text-blue-400 ml-0.5 text-[12px] leading-none align-middle cursor-pointer"
+                        onclick={() => activeInfoKey = infoKeyFor(label)}
+                      >ⓘ</button>
+                    {/if}
                   </td>
-                  <td class="text-right py-[3px] text-gray-400 text-[10px] pl-1 whitespace-nowrap">
-                    {el.eg > 0 ? 'D wasted > R' : 'R wasted > D'}
+                  <td class="text-right py-[3px] align-top">
+                    <div class="font-medium tabular-nums flex items-center justify-end gap-1 flex-wrap">
+                      {value}
+                      {#if share != null}
+                        <span class="text-gray-400 font-normal text-[11px]">{sharePct(share)}</span>
+                      {/if}
+                      {#if largest}
+                        <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-semibold px-[4px] py-[1px] rounded leading-tight">▲ max</span>
+                      {/if}
+                    </div>
+                    {#if share != null}
+                      <div class="w-full h-[3px] bg-gray-100 rounded-full mt-[2px]">
+                        <div class="h-[3px] rounded-full {largest ? 'bg-amber-400' : 'bg-blue-400'}" style="width: {Math.min(share * 100, 100)}%"></div>
+                      </div>
+                    {/if}
                   </td>
                 </tr>
               {/each}
             </tbody>
           </table>
-          <div class="text-gray-400 text-[10px] mb-2 italic">
-            EG = (wasted D − wasted R) ÷ total votes cast.
-          </div>
+        {:else}
+          <p class="text-[12px] text-gray-400 italic">No ACS data for this district.</p>
+        {/if}
+      {:else if demTot}
+        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center justify-between">
+          <span>Statewide Census (ACS 5-yr)</span>
+          <button type="button" class="text-gray-300 hover:text-red-400 text-[10px] cursor-pointer" onclick={toggleShowCensus} title="Hide census tab">✕</button>
+        </div>
+        <table class="w-full border-collapse">
+          <tbody>
+            <tr class="border-b border-gray-100"><td class="text-gray-500 py-[3px] pr-2">Below Poverty</td><td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.poverty_count)}</td></tr>
+            <tr class="border-b border-gray-100"><td class="text-gray-500 py-[3px] pr-2">Bachelor's+</td><td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.bachelors_plus_count)}</td></tr>
+            <tr class="border-b border-gray-100"><td class="text-gray-500 py-[3px] pr-2">Married HH</td><td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.married_hh_count)}</td></tr>
+            <tr class="border-b border-gray-100"><td class="text-gray-500 py-[3px] pr-2">Single Parent</td><td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.single_parent_count)}</td></tr>
+            <tr class="border-b border-gray-100"><td class="text-gray-500 py-[3px] pr-2">No Vehicle HH</td><td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.no_vehicle_count)}</td></tr>
+            <tr class="border-b border-gray-100"><td class="text-gray-500 py-[3px] pr-2">Uninsured</td><td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.uninsured_count)}</td></tr>
+            <tr class="border-b border-gray-100 last:border-0"><td class="text-gray-500 py-[3px] pr-2">Unemployed</td><td class="text-right py-[3px] font-medium tabular-nums">{fmt(demTot.unemployed_count)}</td></tr>
+          </tbody>
+        </table>
+      {:else}
+        <p class="text-[12px] text-gray-400 italic">No ACS data loaded.</p>
+      {/if}
 
-          <!-- Mean-Median Difference -->
-          {#if totals.meanPartisan > 0}
-            <div class="text-[10px] text-gray-500 mb-0.5 font-medium flex items-center gap-1">
-              Mean–Median Difference
-              <button type="button" class="text-gray-300 hover:text-blue-400 text-[10px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'mean_median'} title="What is this?">ⓘ</button>
-            </div>
-            <table class="w-full border-collapse mb-1">
+    {:else if activeTab === 'location'}
+      {#if hovered}
+        <!-- County -->
+        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">County</div>
+        <div class="mb-3">
+          {#if county}
+            <div class="font-medium">{county} County</div>
+          {:else}
+            <div class="text-gray-400 italic">County data unavailable at this zoom</div>
+          {/if}
+        </div>
+
+        <!-- Precinct -->
+        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Precinct</div>
+        <div class="mb-3">
+          {#if precinct && precinct.partisan != null}
+            <table class="w-full border-collapse">
               <tbody>
                 <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[3px] pr-2">Mean partisan</td>
-                  <td class="text-right py-[3px] font-medium tabular-nums">{pct(totals.meanPartisan)}</td>
-                </tr>
-                <tr class="border-b border-gray-100">
-                  <td class="text-gray-500 py-[3px] pr-2">Median partisan</td>
-                  <td class="text-right py-[3px] font-medium tabular-nums">{pct(totals.medianPartisan)}</td>
-                </tr>
-                <tr class="border-b border-gray-100 last:border-0">
-                  <td class="text-gray-500 py-[3px] pr-2 font-medium">MM Difference</td>
-                  <td class="text-right py-[3px] font-medium tabular-nums {totals.meanMedian > 0 ? 'text-blue-600' : 'text-red-600'}">
-                    {totals.meanMedian > 0 ? '+' : ''}{(totals.meanMedian * 100).toFixed(2)}%
-                  </td>
+                  <td class="text-gray-500 py-[3px] pr-2">Partisan Lean</td>
+                  <td class="text-right py-[3px] font-medium tabular-nums">{pct(precinct.partisan as number)}</td>
                 </tr>
               </tbody>
             </table>
-            <div class="text-gray-400 text-[10px] mb-3 italic">
-              Mean − median partisan lean across all districts.
-            </div>
+          {:else}
+            <div class="text-gray-400 italic">Zoom in for precinct-level data</div>
           {/if}
-        {/if}
+        </div>
+      {/if}
 
-        <div class="text-gray-400 text-[10px] border-t border-gray-100 pt-2 flex flex-col gap-1">
-          <div class="flex items-center gap-1.5">
-            <span class="text-gray-400 text-[10px]">ⓘ</span>
-            <span>= click for metric description</span>
-          </div>
-          <div class="italic">* VAP estimates based on precincts · Census ACS 5-yr</div>
+      <!-- Statewide fairness metrics — same on hovered and statewide views -->
+      {#if totals?.elections.some((e) => e.hasData)}
+        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1 flex items-center gap-1">
+          Efficiency Gap
+          <button type="button" class="text-gray-300 hover:text-blue-400 text-[10px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'efficiency_gap'} title="What is this?">ⓘ</button>
+        </div>
+        <table class="w-full border-collapse mb-1">
+          <tbody>
+            {#each totals.elections.filter((e) => e.hasData) as el}
+              <tr class="border-b border-gray-100 last:border-0">
+                <td class="text-gray-500 py-[3px] pr-2 whitespace-nowrap">{el.label}</td>
+                <td class="text-right py-[3px] font-medium tabular-nums {el.eg > 0 ? 'text-blue-600' : 'text-red-600'}">
+                  {el.eg > 0 ? '+' : ''}{(el.eg * 100).toFixed(1)}%
+                </td>
+                <td class="text-right py-[3px] text-gray-400 text-[10px] pl-1 whitespace-nowrap">
+                  {el.eg > 0 ? 'D wasted > R' : 'R wasted > D'}
+                </td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+        <div class="text-gray-400 text-[10px] mb-2 italic">
+          EG = (wasted D − wasted R) ÷ total votes cast.
         </div>
 
+        {#if totals.meanPartisan > 0}
+          <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1 mt-2 flex items-center gap-1">
+            Mean–Median Difference
+            <button type="button" class="text-gray-300 hover:text-blue-400 text-[10px] leading-none cursor-pointer" onclick={() => activeInfoKey = 'mean_median'} title="What is this?">ⓘ</button>
+          </div>
+          <table class="w-full border-collapse mb-1">
+            <tbody>
+              <tr class="border-b border-gray-100">
+                <td class="text-gray-500 py-[3px] pr-2">Mean partisan</td>
+                <td class="text-right py-[3px] font-medium tabular-nums">{pct(totals.meanPartisan)}</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="text-gray-500 py-[3px] pr-2">Median partisan</td>
+                <td class="text-right py-[3px] font-medium tabular-nums">{pct(totals.medianPartisan)}</td>
+              </tr>
+              <tr class="border-b border-gray-100 last:border-0">
+                <td class="text-gray-500 py-[3px] pr-2 font-medium">MM Difference</td>
+                <td class="text-right py-[3px] font-medium tabular-nums {totals.meanMedian > 0 ? 'text-blue-600' : 'text-red-600'}">
+                  {totals.meanMedian > 0 ? '+' : ''}{(totals.meanMedian * 100).toFixed(2)}%
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="text-gray-400 text-[10px] mb-3 italic">
+            Mean − median partisan lean across all districts.
+          </div>
+        {/if}
+      {/if}
+
+      <!-- Census demographics toggle -->
+      {#if !showCensus}
+        <button
+          type="button"
+          class="w-full flex items-center justify-between py-2 px-3 mt-2 rounded-lg border border-gray-200 bg-gray-50 text-gray-500 text-[11px] cursor-pointer hover:bg-gray-100"
+          onclick={toggleShowCensus}
+        >
+          <span>Census Demographics</span>
+          <span class="text-[11px] font-semibold text-gray-400">+ Show tab</span>
+        </button>
+      {/if}
+
+    {:else if activeTab === 'contact'}
+      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
+        Contact your representatives
       </div>
-    {:else}
-      <div class="flex-1 flex items-center justify-center text-[12px] text-gray-400 italic px-4 text-center py-8">
-        Loading statewide data…
-      </div>
+      {#if pinned}
+        <ContactPanel variant="full" />
+      {:else}
+        <p class="text-gray-400 italic text-[11px]">
+          Click anywhere on the map, or search an address, to see your state and
+          federal representatives and contact them directly.
+        </p>
+      {/if}
     {/if}
-  {/if}
 
   </div><!-- end scrollable -->
 </div>

@@ -85,6 +85,22 @@
     if (short === 'R') return 'bg-red-100 text-red-700';
     return 'bg-gray-200 text-gray-700';
   }
+
+  // Current U.S. President — federal, shown irrespective of pin location.
+  // Update when a new administration takes office.
+  const PRESIDENT: Legislator = {
+    id: 'us-president',
+    name: 'Donald J. Trump',
+    party: 'Republican',
+    image: '',
+    email: '',
+    phones: ['comments: (202) 456-1111'],
+    addresses: ['The White House, 1600 Pennsylvania Ave NW, Washington, DC 20500'],
+    website: 'https://www.whitehouse.gov/contact/',
+    district: '',
+    title: 'President',
+    org_classification: 'executive',
+  };
 </script>
 
 {#snippet card(rep: Legislator, chamberLabel: string)}
@@ -176,7 +192,10 @@
                     focus:outline-none focus:border-blue-400" />
     </div>
 
-    <!-- Legislator cards -->
+    <!-- Federal reps (always shown) -->
+    <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">President</div>
+    {@render card(PRESIDENT, 'U.S. President')}
+
     {#if reps.us_senate.length}
       <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">U.S. Senate</div>
       {#each reps.us_senate as rep}
@@ -191,14 +210,19 @@
       <p class="text-[10px] text-gray-400 italic mb-2">Couldn't resolve your U.S. Congressional district.</p>
     {/if}
 
+    <!-- State reps (based on the location's state senate/house districts) -->
     {#if reps.state_senate}
       <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Georgia Senate</div>
       {@render card(reps.state_senate, 'State Senator')}
+    {:else if reps.districts.state_senate === null}
+      <p class="text-[10px] text-gray-400 italic mb-2">Couldn't resolve your Georgia Senate district.</p>
     {/if}
 
     {#if reps.state_house}
       <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Georgia House</div>
       {@render card(reps.state_house, 'State Representative')}
+    {:else if reps.districts.state_house === null}
+      <p class="text-[10px] text-gray-400 italic mb-2">Couldn't resolve your Georgia House district.</p>
     {/if}
 
     <div class="text-[9px] text-gray-400 italic mt-2 leading-snug">
