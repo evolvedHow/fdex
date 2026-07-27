@@ -430,14 +430,22 @@
       </div>
 
       <!-- ── Tab bar (phone / tablet) ──────────────────────────────────── -->
+      <!--
+        Tab buttons use generous vertical padding + min-height 48px so the
+        touch target comfortably exceeds Apple/Google's 44px guideline.
+        Touch handlers stopPropagation to prevent tap-throughs to the map
+        (which would clearPin and collapse the drawer).
+      -->
       <div class="lg:hidden flex border-b border-gray-200 shrink-0">
         {#each visibleTabs as tab}
           <button
             type="button"
-            class="flex-1 py-2 text-[13px] font-medium text-center border-b-2 transition-colors cursor-pointer
+            class="flex-1 min-h-[48px] py-3 text-[14px] font-medium text-center border-b-2 transition-colors cursor-pointer touch-manipulation
                    {activeDrawerTab === tab.key
                      ? 'border-[#29315F] text-[#29315F]'
                      : 'border-transparent text-gray-500'}"
+            ontouchstart={(e) => e.stopPropagation()}
+            ontouchend={(e) => { e.stopPropagation(); e.preventDefault(); setDrawerTab(tab.key); }}
             onclick={(e) => { e.stopPropagation(); setDrawerTab(tab.key); }}
           >{tab.label}</button>
         {/each}
