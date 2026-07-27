@@ -100,6 +100,18 @@ def clean_district(v) -> str:
     return s
 
 
+def clean_cd(v) -> str:
+    """Normalize a U.S. House district to a bare number.
+
+    OpenStates reports congressional districts as "GA-14"; the fdex GeoJSONs
+    (and therefore the frontend lookup) use "14". Without this the us_house
+    map is keyed "GA-14" and every runtime lookup misses."""
+    s = clean_district(v)
+    if "-" in s:
+        s = s.rsplit("-", 1)[-1]
+    return clean_district(s)
+
+
 def normalize_person(p: dict) -> dict:
     """Reduce an OpenStates person record to just the fields fdex needs."""
     offices = p.get("offices") or []
@@ -161,22 +173,90 @@ def fetch_state_legislators(api_key: str) -> tuple[dict, dict]:
     return senate, house
 
 
-def polygon_centroid(coords: list) -> tuple[float, float]:
-    """Very rough centroid: mean of exterior-ring vertices. Fine for /people.geo."""
-    pts: list[tuple[float, float]] = []
+def _rings(geom: dict) -> list[list[tuple[float, float]]]:
+    """Exterior rings of a Polygon/MultiPolygon, largest-|area| first."""
+    t = geom.get("type")
+    coords = geom.get("coordinates") or []
+    polys = [coords] if t == "Polygon" else coords if t == "MultiPolygon" else []
+    out = []
+    for poly in polys:
+        if not poly:
+            continue
+        ring = [(float(x), float(y)) for x, y in poly[0]]
+        if len(ring) >= 4:
+            out.append(ring)
+    out.sort(key=lambda r: abs(_ring_area(r)), reverse=True)
+    return out
 
-    def walk(c):
-        if isinstance(c, list) and c and isinstance(c[0], (int, float)):
-            pts.append((c[0], c[1]))
-        elif isinstance(c, list):
-            for sub in c:
-                walk(sub)
 
-    walk(coords)
-    if not pts:
-        return (0.0, 0.0)
-    n = len(pts)
-    return (sum(p[0] for p in pts) / n, sum(p[1] for p in pts) / n)
+def _ring_area(ring: list[tuple[float, float]]) -> float:
+    a = 0.0
+    for i in range(len(ring) - 1):
+        x1, y1 = ring[i]
+        x2, y2 = ring[i + 1]
+        a += x1 * y2 - x2 * y1
+    return a / 2.0
+
+
+def interior_point(geom: dict) -> tuple[float, float]:
+    """A point guaranteed to fall *inside* the district.
+
+    A plain vertex-mean centroid lands outside concave districts — that is why
+    the previous build silently dropped GA-14 (its centroid resolved to a
+    neighbouring district, so /people.geo returned the wrong member and the
+    real one was never fetched). Instead scan horizontal lines across the
+    largest ring and take the midpoint of the widest interior span.
+    """
+    for ring in _rings(geom):
+        ys = [p[1] for p in ring]
+        y_lo, y_hi = min(ys), max(ys)
+        best: tuple[float, float, float] | None = None  # (width, lng, lat)
+        for i in range(1, 20):
+            y = y_lo + (y_hi - y_lo) * i / 20.0
+            xs = []
+            for j in range(len(ring) - 1):
+                x1, y1 = ring[j]
+                x2, y2 = ring[j + 1]
+                if (y1 > y) != (y2 > y):
+                    xs.append(x1 + (x2 - x1) * (y - y1) / (y2 - y1))
+            xs.sort()
+            # Spans between crossing pairs 0-1, 2-3, ... are inside the ring.
+            for k in range(0, len(xs) - 1, 2):
+                w = xs[k + 1] - xs[k]
+                if best is None or w > best[0]:
+                    best = (w, (xs[k] + xs[k + 1]) / 2.0, y)
+        if best:
+            return (best[1], best[2])
+    return (0.0, 0.0)
+
+
+def role_chamber(role: dict) -> str:
+    """Classify an OpenStates current_role by its OCD division, not by
+    org_classification alone.
+
+    Both U.S. Senators and Georgia state senators carry
+    org_classification == "upper", so filtering on that alone pulls every
+    state senator whose district happens to cover a congressional-district
+    sample point into the U.S. Senate list. The division id disambiguates:
+
+        ocd-division/country:us/state:ga          → U.S. Senate (statewide)
+        ocd-division/country:us/state:ga/cd:14    → U.S. House
+        ocd-division/country:us/state:ga/sldu:29  → GA Senate
+        ocd-division/country:us/state:ga/sldl:12  → GA House
+    """
+    div = role.get("division_id") or ""
+    if "/country:us/state:ga" not in div:
+        return ""
+    tail = div.split("/country:us/state:ga", 1)[1]
+    if not tail:
+        return "us_senate"
+    if tail.startswith("/cd:"):
+        return "us_house"
+    if tail.startswith("/sldu:"):
+        return "state_senate"
+    if tail.startswith("/sldl:"):
+        return "state_house"
+    return ""
 
 
 def fetch_us_congress(api_key: str) -> tuple[dict, list]:
@@ -188,31 +268,37 @@ def fetch_us_congress(api_key: str) -> tuple[dict, list]:
 
     us_house: dict[str, dict] = {}
     us_senate_by_id: dict[str, dict] = {}
+    expected: list[str] = []
 
     for feat in geo["features"]:
         props = feat.get("properties") or {}
         district = clean_district(props.get("district") or props.get("DISTRICT"))
         if not district:
             continue
-        lng, lat = polygon_centroid(feat["geometry"]["coordinates"])
+        expected.append(district)
+        lng, lat = interior_point(feat["geometry"])
         qs = urllib.parse.urlencode({"lat": f"{lat:.6f}", "lng": f"{lng:.6f}", "include": "offices"})
         url = f"{OPENSTATES_BASE}/people.geo?{qs}"
         sys.stderr.write(f"  /people.geo for CD-{district} @ ({lat:.3f},{lng:.3f})\n")
         data = http_get(url, api_key)
         for p in data.get("results", []):
             role = p.get("current_role") or {}
-            div = (role.get("division_id") or "")
-            if "/country:us/state:ga" not in div:
-                # geocentroid can spill into a neighbouring state for coastal
-                # districts; skip anything not Georgia-scoped
-                continue
+            chamber = role_chamber(role)
             n = normalize_person(p)
-            if "/cd:" in div and role.get("org_classification") == "lower":
-                us_house[clean_district(role.get("district") or district)] = n
-            elif role.get("org_classification") == "upper":
-                # both US Senators are statewide; dedupe by openstates id
+            if chamber == "us_house":
+                cd = clean_cd(role.get("district")) or district
+                n["district"] = cd
+                us_house[cd] = n
+            elif chamber == "us_senate":
+                # both U.S. Senators are statewide; dedupe by openstates id
                 us_senate_by_id[n["id"]] = n
+            # state legislators also come back from /people.geo — they are
+            # collected separately from /people and are ignored here.
         time.sleep(RATE_LIMIT_SLEEP_S)
+
+    missing = sorted(set(expected) - set(us_house), key=lambda d: int(d) if d.isdigit() else 0)
+    if missing:
+        sys.stderr.write(f"  WARNING: no U.S. House member resolved for CD {', '.join(missing)}\n")
 
     return us_house, list(us_senate_by_id.values())
 

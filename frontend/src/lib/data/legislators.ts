@@ -128,6 +128,22 @@ export interface ResolvedReps {
   districts: { us_house: string | null; state_senate: string | null; state_house: string | null };
 }
 
+/**
+ * A U.S. Senate seat is statewide, so its district reads "Georgia" — never a
+ * number. Georgia *state* senators share org_classification "upper" and used to
+ * leak into this list from the build script's geo lookups; drop anything that
+ * looks like a numbered seat so a stale legislators.yml can't put state
+ * senators under the "U.S. Senate" heading.
+ */
+function isUsSenator(rep: Legislator): boolean {
+  return !/^\d+$/.test((rep.district ?? '').trim());
+}
+
+/** Older builds keyed U.S. House seats "GA-14"; the GeoJSONs use "14". */
+function usHouseAt(db: LegislatorDb, cd: string): Legislator | null {
+  return db.us_house?.[cd] ?? db.us_house?.[`GA-${cd}`] ?? null;
+}
+
 export async function resolveReps(lng: number, lat: number): Promise<ResolvedReps | null> {
   const db = await loadLegislators();
   if (!db) return null;
@@ -137,8 +153,8 @@ export async function resolveReps(lng: number, lat: number): Promise<ResolvedRep
     districtAtPoint('house',    lng, lat),
   ]);
   return {
-    us_senate: db.us_senate ?? [],
-    us_house:   cd ? db.us_house[cd] ?? null : null,
+    us_senate: (db.us_senate ?? []).filter(isUsSenator),
+    us_house:   cd ? usHouseAt(db, cd) : null,
     state_senate: sd ? db.state_senate[sd] ?? null : null,
     state_house:  hd ? db.state_house[hd] ?? null : null,
     districts: { us_house: cd, state_senate: sd, state_house: hd },

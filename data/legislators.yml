@@ -1,4 +1,4 @@
-generated_at: '2026-07-23T20:34:48Z'
+generated_at: '2026-07-27T19:09:33Z'
 source: openstates.org v3
 state_senate:
   '1':
@@ -3491,7 +3491,7 @@ state_house:
     title: Representative
     org_classification: lower
 us_house:
-  GA-2:
+  '2':
     id: ocd-person/bbc6615a-22ca-51f6-b674-8c7753e93333
     name: Sanford Bishop
     party: Democratic
@@ -3508,10 +3508,10 @@ us_house:
     - 'district: 18 9th St. Suite 201, Columbus, GA 31901'
     - 'district: 300 Mulberry St. Suite 502, Macon, GA 31201'
     website: https://openstates.org/person/sanford-bishop-5iKDxckL1oQFd2Jw8Bp6Kh/
-    district: GA-2
+    district: '2'
     title: Representative
     org_classification: lower
-  GA-3:
+  '3':
     id: ocd-person/8822d9c4-0917-4e09-89ae-7770a1e33ae4
     name: Brian Jack
     party: Republican
@@ -3524,10 +3524,10 @@ us_house:
     - 'capitol: 1320 Longworth House Office Building, Washington, DC 20515'
     - 'district: 1601 E. Highway 34 Suite B, Newnan, GA 30265'
     website: https://openstates.org/person/brian-jack-48sslFjdI1RDq0Vb5Rn6Ie/
-    district: GA-3
+    district: '3'
     title: Representative
     org_classification: lower
-  GA-1:
+  '1':
     id: ocd-person/85e43f57-4901-52fd-9fad-57373277f5e1
     name: Buddy Carter
     party: Republican
@@ -3542,10 +3542,10 @@ us_house:
     - 'district: 6602 Abercorn St. Suite 105B, Savannah, GA 31405'
     - 'district: 777 Gloucester St. Suite 410, Brunswick, GA 31520'
     website: https://openstates.org/person/buddy-carter-44eHuM3mSmI73M1M9WrE1p/
-    district: GA-1
+    district: '1'
     title: Representative
     org_classification: lower
-  GA-8:
+  '8':
     id: ocd-person/20c33933-79f5-58d1-834c-60779932257e
     name: Austin Scott
     party: Republican
@@ -3560,10 +3560,10 @@ us_house:
     - 'district: 120 Byrd Way Suite 100, Warner Robins, GA 31088'
     - 'district: 127-B N. Central Ave., Tifton, GA 31794'
     website: https://openstates.org/person/austin-scott-zoyFhIUMpPUlUDyLR990I/
-    district: GA-8
+    district: '8'
     title: Representative
     org_classification: lower
-  GA-12:
+  '12':
     id: ocd-person/4cdf55a7-a62e-5b3d-a07f-305f4e9dc5c1
     name: Rick Allen
     party: Republican
@@ -3580,10 +3580,42 @@ us_house:
     - 'district: 2743 Perimeter Parkway Building 200, Suite 105, Augusta, GA 30909'
     - 'district: 50 E. Main St., Statesboro, GA 30458'
     website: https://openstates.org/person/rick-allen-2L3Tp89ltIEw849VJluyRt/
-    district: GA-12
+    district: '12'
     title: Representative
     org_classification: lower
-  GA-11:
+  '14':
+    id: ocd-person/84e83f43-5bd6-4074-ba64-0f6addc51718
+    name: Clay Fuller
+    party: Republican
+    image: https://img.legistorm.com/people/699/207699.jpg?rand=138603
+    email: ''
+    phones:
+    - 'capitol: 202-225-5211'
+    - 'district-mail: 706-226-5320'
+    addresses:
+    - 'capitol: 2201 Rayburn House Office Building, Washington, DC 20515'
+    - 'district-mail: P.O. Box 829, Dalton, GA 30722'
+    website: https://openstates.org/person/clay-fuller-42n7iARIHfycxIfiydzJU0/
+    district: '14'
+    title: Representative
+    org_classification: lower
+  '6':
+    id: ocd-person/b5d26a8a-2954-574c-abf8-1c232e928c9c
+    name: Lucy McBath
+    party: Democratic
+    image: https://unitedstates.github.io/images/congress/450x550/M001208.jpg
+    email: https://mcbath.house.gov/email-me
+    phones:
+    - 'capitol: 202-225-4501'
+    - 'district: 470-773-6330'
+    addresses:
+    - 'capitol: 2246 Rayburn House Office Building, Washington, DC 20515'
+    - 'district: 3330 Cumberland Blvd. SE Suite 610, Atlanta, GA 30339'
+    website: https://openstates.org/person/lucy-mcbath-5X5lqCDOoj5VMfSH0O69j2/
+    district: '6'
+    title: Representative
+    org_classification: lower
+  '11':
     id: ocd-person/13e07344-3cec-5f29-a27b-2dd6979dbeb5
     name: Barry Loudermilk
     party: Republican
@@ -3598,26 +3630,10 @@ us_house:
     - 'district: 135 W. Cherokee Ave. Suite 122, Cartersville, GA 30120'
     - 'district: 9898 Highway 92 Suite 100, Woodstock, GA 30188'
     website: https://openstates.org/person/barry-loudermilk-bVQYGJUflfObO0TJGld6z/
-    district: GA-11
+    district: '11'
     title: Representative
     org_classification: lower
-  GA-6:
-    id: ocd-person/b5d26a8a-2954-574c-abf8-1c232e928c9c
-    name: Lucy McBath
-    party: Democratic
-    image: https://unitedstates.github.io/images/congress/450x550/M001208.jpg
-    email: https://mcbath.house.gov/email-me
-    phones:
-    - 'capitol: 202-225-4501'
-    - 'district: 470-773-6330'
-    addresses:
-    - 'capitol: 2246 Rayburn House Office Building, Washington, DC 20515'
-    - 'district: 3330 Cumberland Blvd. SE Suite 610, Atlanta, GA 30339'
-    website: https://openstates.org/person/lucy-mcbath-5X5lqCDOoj5VMfSH0O69j2/
-    district: GA-6
-    title: Representative
-    org_classification: lower
-  GA-5:
+  '5':
     id: ocd-person/132a1bba-204a-5d4f-a406-40b4342bad1b
     name: Nikema Williams
     party: Democratic
@@ -3630,10 +3646,10 @@ us_house:
     - 'capitol: 1406 Longworth House Office Building, Washington, DC 20515'
     - 'district: 100 Peachtree St. NW Suite 1920, Atlanta, GA 30303'
     website: https://openstates.org/person/nikema-williams-aA63noeAbaFxgXgHyezBT/
-    district: GA-5
+    district: '5'
     title: Representative
     org_classification: lower
-  GA-4:
+  '4':
     id: ocd-person/51b7316e-0885-571b-8a2e-daf54dd906bb
     name: Hank Johnson
     party: Democratic
@@ -3646,10 +3662,10 @@ us_house:
     - 'capitol: 2240 Rayburn House Office Building, Washington, DC 20515'
     - 'district: 5240 Snapfinger Park Drive Suite 140, Decatur, GA 30035'
     website: https://openstates.org/person/hank-johnson-2UC64YZn1aUBR62VTzG3kR/
-    district: GA-4
+    district: '4'
     title: Representative
     org_classification: lower
-  GA-13:
+  '13':
     id: ocd-person/e6650822-1063-5485-b062-d169ea173ec2
     name: David Scott
     party: Democratic
@@ -3662,10 +3678,10 @@ us_house:
     - 'capitol: 468 Cannon House Office Building, Washington, DC 20515'
     - 'district: 81 Upper Riverdale Road SW Suite 230, Riverdale, GA 30274'
     website: https://openstates.org/person/david-scott-70kPDwslQnIIPOcWBi3mJW/
-    district: GA-13
+    district: '13'
     title: Representative
     org_classification: lower
-  GA-7:
+  '7':
     id: ocd-person/3056cc98-9ca1-5293-8064-fc12fd9c689f
     name: Rich McCormick
     party: Republican
@@ -3678,10 +3694,10 @@ us_house:
     - 'capitol: 1719 Longworth House Office Building, Washington, DC 20515'
     - 'district: 6230 Shiloh Road Suite 230, Alpharetta, GA 30005'
     website: https://openstates.org/person/rich-mccormick-1TDIXW9alvLnVNfiuknTot/
-    district: GA-7
+    district: '7'
     title: Representative
     org_classification: lower
-  GA-9:
+  '9':
     id: ocd-person/0dbe5471-29ea-5c84-8270-f55fee08d118
     name: Andrew Clyde
     party: Republican
@@ -3694,10 +3710,10 @@ us_house:
     - 'capitol: 445 Cannon House Office Building, Washington, DC 20515'
     - 'district: 210 Washington St. NW Suite 202, Gainesville, GA 30501'
     website: https://openstates.org/person/andrew-clyde-PvsdTFsco5G1UqPp41h9c/
-    district: GA-9
+    district: '9'
     title: Representative
     org_classification: lower
-  GA-10:
+  '10':
     id: ocd-person/0f7a88d1-4e4c-565a-b905-706181d7b561
     name: Mike Collins
     party: Republican
@@ -3710,7 +3726,7 @@ us_house:
     - 'capitol: 2351 Rayburn House Office Building, Washington, DC 20515'
     - 'district: 100 Court St., Monroe, GA 30655'
     website: https://openstates.org/person/mike-collins-TCslPcjWHNiqdNTw63EQL/
-    district: GA-10
+    district: '10'
     title: Representative
     org_classification: lower
 us_senate:
@@ -3748,189 +3764,5 @@ us_senate:
   - 'district: 201 17th St. NW Suite 530, Atlanta, GA 30363'
   website: https://openstates.org/person/raphael-warnock-1hapunp9ErAVaBO0UMTNkD/
   district: Georgia
-  title: Senator
-  org_classification: upper
-- id: ocd-person/6da7fe11-4436-4854-8e1b-4c45dc4cdaac
-  name: Randy Robertson
-  party: Republican
-  image: https://www.legis.ga.gov/api/images/default-source/portraits/robertson-randy-4926.jpg
-  email: randy.robertson@senate.ga.gov
-  phones:
-  - 'capitol: 404-656-0045'
-  addresses:
-  - 'capitol: State Capitol Room 421-F, 206 Washington St. SW, Atlanta, GA 30334'
-  - 'district-mail: P.O. Box 62, Cataula, GA 31804'
-  website: https://openstates.org/person/randy-robertson-3Kuw3XoqHJBC20mOoZN1cy/
-  district: '29'
-  title: Senator
-  org_classification: upper
-- id: ocd-person/011995be-4dd0-43b2-ae75-57ae45f53576
-  name: Mike Hodges
-  party: Republican
-  image: https://www.legis.ga.gov/api/images/default-source/portraits/hodges-mike-5013.jpg
-  email: mike.hodges@senate.ga.gov
-  phones:
-  - 'capitol: 404-656-7127'
-  - 'district: 912-464-1989'
-  addresses:
-  - 'capitol: Room 305-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
-  - 'district: 3410 Cypress Mill Road Box 101, Brunswick, GA 31525'
-  website: https://openstates.org/person/mike-hodges-24gRtDfNQQrErlUCgmYgY/
-  district: '3'
-  title: Senator
-  org_classification: upper
-- id: ocd-person/44a51125-9e82-41f6-8d4f-a646895b5994
-  name: Larry Walker
-  party: Republican
-  image: https://www.legis.ga.gov/api/images/default-source/portraits/walker--iii-larry-4878.jpg
-  email: larry.walker@senate.ga.gov
-  phones:
-  - 'capitol: 404-656-0095'
-  addresses:
-  - 'capitol: State Capitol Room 421-A, 206 Washington St. SW, Atlanta, GA 30334'
-  website: https://openstates.org/person/larry-walker-25Wufd7LtEYu2r7QBkWIia/
-  district: '20'
-  title: Senator
-  org_classification: upper
-- id: ocd-person/918888ac-edc7-4178-9133-d058f0f21010
-  name: Max Burns
-  party: Republican
-  image: ''
-  email: max.burns@senate.ga.gov
-  phones:
-  - 'capitol: 404-463-1376'
-  addresses:
-  - 'capitol: Room 327-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
-  - 'district-mail: P.O. Box 203, Sylvania, GA 30467'
-  website: https://openstates.org/person/max-burns-4QcHa3lPp6ivhkxY80BKs4/
-  district: '23'
-  title: Senator
-  org_classification: upper
-- id: ocd-person/1ac93f89-f367-4de3-82ba-79fa78d4d134
-  name: Chuck Payne
-  party: Republican
-  image: https://www.legis.ga.gov/api/images/default-source/portraits/payne-chuck--4909.jpg
-  email: chuck.payne@senate.ga.gov
-  phones:
-  - 'capitol: 404-656-5080'
-  addresses:
-  - 'capitol: State Capitol Room 432, 206 Washington St. SW, Atlanta, GA 30334'
-  - 'district-mail: P.O. Box 1074, Dalton, GA 30722'
-  website: https://openstates.org/person/chuck-payne-oXloR6K8vHUI3k3oiaHeW/
-  district: '54'
-  title: Senator
-  org_classification: upper
-- id: ocd-person/fcd57129-480c-4fba-a0d1-7fb369706611
-  name: Jaha Howard
-  party: Democratic
-  image: ''
-  email: jaha.howard@senate.ga.gov
-  phones:
-  - 'capitol-mail: 404-657-2099'
-  addresses:
-  - 'capitol-mail: Room 321-B, Coverdell Legislative Office Building, Atlanta, GA 30334'
-  - 'district: 4450 S. Cobb Drive, Smyrna, GA 30080'
-  website: https://openstates.org/person/jaha-howard-7h5bnciYPd2vcEz2gpUYZF/
-  district: '35'
-  title: Senator
-  org_classification: upper
-- id: ocd-person/fc31ab02-026c-4173-86db-570c0b297c64
-  name: Kay Kirkpatrick
-  party: Republican
-  image: https://www.legis.ga.gov/api/images/default-source/portraits/kirkpatrick-kay-4910.jpg
-  email: kay.kirkpatrick@senate.ga.gov
-  phones:
-  - 'capitol: 404-656-0508'
-  - 'district: 404-656-3932'
-  addresses:
-  - 'capitol: Room 324-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
-  - 'district: 2146 Roswell Road Suite 108895, Marietta, GA 30062'
-  website: https://openstates.org/person/kay-kirkpatrick-7fslPeuQMgvkumJPQeEJ6K/
-  district: '32'
-  title: Senator
-  org_classification: upper
-- id: ocd-person/bf2c1ec5-d995-4605-85ac-139adb037d99
-  name: Nan Orrock
-  party: Democratic
-  image: https://www.legis.ga.gov/api/images/default-source/portraits/orrock-nan-33.jpg
-  email: nan.orrock@senate.ga.gov
-  phones:
-  - 'capitol: 404-463-8054'
-  - 'district: 404-524-5999'
-  addresses:
-  - 'capitol: State Capitol Room 420-B, 206 Washington St. SW, Atlanta, GA 30334'
-  - 'district: 1070 Delaware Ave. SE, Atlanta, GA 30316'
-  website: https://openstates.org/person/nan-orrock-5ojhEyhy91AYbhStnt7kGf/
-  district: '36'
-  title: Senator
-  org_classification: upper
-- id: ocd-person/8798a822-fee8-4546-bcdd-455f788bef44
-  name: Randal Mangham
-  party: Democratic
-  image: https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Randal_Mangham.jpg
-  email: randal.mangham@senate.ga.gov
-  phones:
-  - 'capitol: 404-657-4640'
-  addresses:
-  - 'capitol: Room 320-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
-  - 'district-mail: P.O. Box 870527, Stone Mountain, GA 30087'
-  website: https://openstates.org/person/randal-mangham-47rjAJCRCcmqtuxVdjO2Fg/
-  district: '55'
-  title: Senator
-  org_classification: upper
-- id: ocd-person/d9f1ea57-7b90-484a-9664-927a36c87e0c
-  name: Tonya Anderson
-  party: Democratic
-  image: https://www.legis.ga.gov/api/images/default-source/portraits/anderson-tonya-807.jpg
-  email: tonya.anderson@senate.ga.gov
-  phones:
-  - 'capitol: 404-463-2598'
-  addresses:
-  - 'capitol: State Capitol Room 110-A, 206 Washington St. SW, Atlanta, GA 30334'
-  - 'district-mail: P.O. Box 1026, Lithonia, GA 30058'
-  website: https://openstates.org/person/tonya-anderson-6dFtDTK3WQuxaaH2ZDhVpU/
-  district: '43'
-  title: Senator
-  org_classification: upper
-- id: ocd-person/1f7d013a-8861-4e08-b6bf-7c8d36f8107c
-  name: Greg Dolezal
-  party: Republican
-  image: https://www.legis.ga.gov/api/images/default-source/portraits/dolezal-greg-4925.jpg
-  email: greg.dolezal@senate.ga.gov
-  phones:
-  - 'capitol: 404-656-0040'
-  addresses:
-  - 'capitol: State Capitol Room 421-B, 206 Washington St. SW, Atlanta, GA 30334'
-  - 'district: 6505 Shiloh Road Suite 200, Alpharetta, GA 30005'
-  website: https://openstates.org/person/greg-dolezal-xPt9CGpMZqDulbva8JwQW/
-  district: '27'
-  title: Senator
-  org_classification: upper
-- id: ocd-person/6be704ef-6250-4e08-86d3-f5fa2e1eebf3
-  name: Drew Echols
-  party: Republican
-  image: https://www.gfpe.org/library/imglib/Drew-Echols-1.jpg
-  email: drew.echols@senate.ga.gov
-  phones:
-  - 'capitol: 404-463-3931'
-  addresses:
-  - 'capitol: Room 305-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
-  - 'district-mail: P.O. Box 1600, Gainsville, GA 30503'
-  website: https://openstates.org/person/drew-echols-3HbkoZhTJQBlYUHUet4Wo7/
-  district: '49'
-  title: Senator
-  org_classification: upper
-- id: ocd-person/e11cecf4-f2e5-49d9-ba9e-47681f779438
-  name: Lee Anderson
-  party: Republican
-  image: https://www.legis.ga.gov/api/images/default-source/portraits/anderson-lee-723.jpg
-  email: lee.anderson@senate.ga.gov
-  phones:
-  - 'capitol: 404-656-5114'
-  addresses:
-  - 'capitol: Room 325-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334'
-  - 'district: 160 Louisville Road, Grovetown, GA 30813'
-  website: https://openstates.org/person/lee-anderson-6qmUXbgjbKbdvREWhabOTQ/
-  district: '24'
   title: Senator
   org_classification: upper

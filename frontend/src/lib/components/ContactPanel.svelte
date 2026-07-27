@@ -79,6 +79,12 @@
     ].join('\n');
   }
 
+  /** Statewide seats report district "Georgia" — don't render "District Georgia". */
+  function districtSuffix(rep: Legislator): string {
+    const d = (rep.district ?? '').trim();
+    return /^\d+$/.test(d) ? ` · District ${d}` : '';
+  }
+
   function partyBadge(p: string): string {
     const short = p?.[0] ?? '?';
     if (short === 'D') return 'bg-blue-100 text-blue-700';
@@ -119,7 +125,7 @@
           </span>
         </div>
         <div class="text-[10px] text-gray-500">
-          {chamberLabel}{rep.district ? ` · District ${rep.district}` : ''}
+          {chamberLabel}{districtSuffix(rep)}
         </div>
       </div>
     </div>
@@ -209,7 +215,9 @@
 
     <!-- Federal reps (always shown) -->
     {#if reps.us_senate.length}
-      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">U.S. Senate</div>
+      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
+        U.S. Senate <span class="normal-case font-normal text-gray-300">· statewide</span>
+      </div>
       {#each reps.us_senate as rep}
         {@render card(rep, 'U.S. Senator')}
       {/each}
