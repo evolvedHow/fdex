@@ -94,6 +94,7 @@ export interface DistrictProperties {
   r21_pct_dem?: number;
   g22_pct_dem?: number;
   s22_pct_dem?: number;
+  p24_pct_dem?: number;
   [key: string]: unknown;
 }
 
