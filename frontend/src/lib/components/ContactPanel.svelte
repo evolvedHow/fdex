@@ -198,14 +198,12 @@
                     focus:outline-none focus:border-blue-400" />
     </div>
 
-    <!-- State reps (based on the location's state senate/house districts) -->
-    {#if reps.state_senate}
-      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Georgia Senate</div>
-      {@render card(reps.state_senate, 'State Senator')}
-    {:else if reps.districts.state_senate === null}
-      <p class="text-[10px] text-gray-400 italic mb-2">Couldn't resolve your Georgia Senate district.</p>
-    {/if}
-
+    <!--
+      Ordered most local first. The seats that change with the clicked point
+      lead — Georgia House (smallest district), Georgia Senate, then U.S.
+      House. The two U.S. Senate seats and the President are the same for
+      every point in the state, so they sit at the bottom.
+    -->
     {#if reps.state_house}
       <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Georgia House</div>
       {@render card(reps.state_house, 'State Representative')}
@@ -213,14 +211,11 @@
       <p class="text-[10px] text-gray-400 italic mb-2">Couldn't resolve your Georgia House district.</p>
     {/if}
 
-    <!-- Federal reps (always shown) -->
-    {#if reps.us_senate.length}
-      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
-        U.S. Senate <span class="normal-case font-normal text-gray-300">· statewide</span>
-      </div>
-      {#each reps.us_senate as rep}
-        {@render card(rep, 'U.S. Senator')}
-      {/each}
+    {#if reps.state_senate}
+      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Georgia Senate</div>
+      {@render card(reps.state_senate, 'State Senator')}
+    {:else if reps.districts.state_senate === null}
+      <p class="text-[10px] text-gray-400 italic mb-2">Couldn't resolve your Georgia Senate district.</p>
     {/if}
 
     {#if reps.us_house}
@@ -230,7 +225,19 @@
       <p class="text-[10px] text-gray-400 italic mb-2">Couldn't resolve your U.S. Congressional district.</p>
     {/if}
 
-    <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">President</div>
+    <!-- Statewide / national — identical for every point on the map -->
+    {#if reps.us_senate.length}
+      <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1 mt-3 pt-2 border-t border-gray-100">
+        U.S. Senate <span class="normal-case font-normal text-gray-400">· same statewide</span>
+      </div>
+      {#each reps.us_senate as rep}
+        {@render card(rep, 'U.S. Senator')}
+      {/each}
+    {/if}
+
+    <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
+      President <span class="normal-case font-normal text-gray-400">· national</span>
+    </div>
     {@render card(PRESIDENT, 'U.S. President')}
 
     <div class="text-[9px] text-gray-400 italic mt-2 leading-snug">
