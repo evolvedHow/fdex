@@ -135,7 +135,7 @@
     },
     vap: {
       title: 'Voting Age Population (VAP)',
-      desc: 'The number of residents aged 18 or older based on the 2020 Census. VAP represents the pool of potentially eligible voters before accounting for citizenship or other eligibility factors. Estimates here are derived from precinct-level Census data.',
+      desc: 'The number of residents aged 18 or older. The Census Bureau\'s standard VAP figure includes everyone 18+, regardless of where they live. This map instead uses a modified VAP that subtracts the population held in state and federal correctional facilities (2020 Census block group quarters type "correctional facilities for adults"), because Georgia\'s prison population is concentrated in a handful of rural counties and counting it as VAP would overstate the eligible-voter base there. District totals are assembled from individual Census blocks — the smallest unit the Census publishes — rather than from precincts, so district lines that split a precinct still get an accurate population count on each side.',
     },
     white_vap: {
       title: 'White Voting Age Population',
@@ -246,13 +246,14 @@
   // ── District plan rows ────────────────────────────────────────────────────
   type Row = [string, string, number | null, boolean];
 
+  // Newest election first — most recent results are the ones people look for.
   const ELECTION_DEFS = [
-    { key: 'g18_pct_dem', label: '2018 Gov' },
-    { key: 'p20_pct_dem', label: '2020 President' },
-    { key: 'r21_pct_dem', label: '2021 US Sen Runoff' },
-    { key: 'g22_pct_dem', label: '2022 Gov' },
-    { key: 's22_pct_dem', label: '2022 US Sen' },
     { key: 'p24_pct_dem', label: '2024 President' },
+    { key: 's22_pct_dem', label: '2022 US Sen' },
+    { key: 'g22_pct_dem', label: '2022 Gov' },
+    { key: 'r21_pct_dem', label: '2021 US Sen Runoff' },
+    { key: 'p20_pct_dem', label: '2020 President' },
+    { key: 'g18_pct_dem', label: '2018 Gov' },
   ];
 
   let planRows = $derived<Row[]>((() => {

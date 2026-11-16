@@ -41,8 +41,17 @@ export function generateSources(config: AppConfig): Record<string, SourceSpec> {
     data: `${base}data/${config.boundaries.counties.geojson}`,
   };
 
-  // Vector tileset sources
+  // Precincts: local GeoJSON (built by fdp/scripts/build_precinct_geojson.py),
+  // not a Mapbox vector tileset — avoids depending on an externally-uploaded
+  // tileset for data that's rebuilt as part of the regular data pipeline.
+  sources['src_precinct'] = {
+    type: 'geojson',
+    data: `${base}data/precinct_scored.geojson`,
+  };
+
+  // Vector tileset sources (tract/block — too large for a GeoJSON source)
   for (const [key, ts] of Object.entries(config.tilesets)) {
+    if (key === 'precinct') continue;
     sources[`src_${key}`] = {
       type: 'vector',
       url: ts.url,
@@ -104,7 +113,7 @@ function overlayLayers(config: AppConfig): LayerSpec[] {
 
     for (const layerId of overlay.layers) {
       let source: string;
-      let sourceLayer: string;
+      let sourceLayer: string | undefined;
       let minzoom: number | undefined;
       let maxzoom: number | undefined;
 
@@ -117,8 +126,9 @@ function overlayLayers(config: AppConfig): LayerSpec[] {
         sourceLayer = ts.block.sourceLayer;
         minzoom = 11;
       } else if (layerId.startsWith('precinct_')) {
+        // Local GeoJSON source — no source-layer (that's a vector-tile concept).
         source = 'src_precinct';
-        sourceLayer = ts.precinct.sourceLayer;
+        sourceLayer = undefined;
       } else {
         continue;
       }
@@ -128,7 +138,7 @@ function overlayLayers(config: AppConfig): LayerSpec[] {
 
       let fillExpr: any = stepFill;
       let outlineExpr: any = stepOutline;
-      if (overlay.id === 'precinct_plean') {
+      if (overlay.id.startsWith('precinct_')) {
         // Precincts with no major-party votes (e.g. industrial areas, rivers) have
         // partisan = null or 0. Render transparent so the basemap shows through
         // instead of the bottom-of-scale red.
@@ -140,7 +150,6 @@ function overlayLayers(config: AppConfig): LayerSpec[] {
         id: layerId,
         type: 'fill',
         source,
-        'source-layer': sourceLayer,
         layout: { visibility: 'none' },
         paint: {
           'fill-color': fillExpr,
@@ -148,6 +157,7 @@ function overlayLayers(config: AppConfig): LayerSpec[] {
           'fill-outline-color': outlineExpr,
         },
       };
+      if (sourceLayer !== undefined) layer['source-layer'] = sourceLayer;
 
       if (minzoom !== undefined) layer.minzoom = minzoom;
       if (maxzoom !== undefined) layer.maxzoom = maxzoom;
@@ -223,7 +233,6 @@ export function generateLayers(config: AppConfig): LayerSpec[] {
     id: 'precinct_borders',
     type: 'line',
     source: 'src_precinct',
-    'source-layer': config.tilesets.precinct.sourceLayer,
     layout: { visibility: 'none' },
     paint: { 'line-color': '#222222', 'line-width': 1.0, 'line-opacity': 0.9 },
   } as LayerSpec);

@@ -14,6 +14,10 @@
   let searching = $state(false);
   let errorMsg  = $state('');
 
+  type Suggestion = { label: string; center: [number, number]; bbox?: [number, number, number, number] };
+  let suggestions = $state<Suggestion[]>([]);
+  let suggestTimer: ReturnType<typeof setTimeout> | null = null;
+
   const HINT = 'D5 = district · Cobb County GA · or full address';
 
   function currentPlan(): DistrictPlan | undefined {
@@ -70,6 +74,65 @@
     return true;
   }
 
+  /** Live suggestions as the user types — debounced, does not move the map. */
+  async function fetchSuggestions(q: string) {
+    const [minLng, minLat, maxLng, maxLat] = config.map.geocoderBbox;
+    const hasState = /\b(GA|Georgia)\b/i.test(q);
+    const geocodeQ = hasState ? q : `${q}, GA`;
+    const [cx, cy] = config.map.center;
+    const TYPES = 'address,place,district,region,neighborhood,locality,postcode';
+    const url =
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(geocodeQ)}.json` +
+      `?bbox=${minLng},${minLat},${maxLng},${maxLat}` +
+      `&proximity=${cx},${cy}` +
+      `&country=US&types=${TYPES}&limit=5` +
+      `&access_token=${config.mapboxToken}`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) { suggestions = []; return; }
+      const data = await res.json();
+      suggestions = (data.features ?? []).map((f: any) => ({
+        label: f.place_name as string,
+        center: f.center as [number, number],
+        bbox: f.bbox as [number, number, number, number] | undefined,
+      }));
+    } catch {
+      suggestions = []; // suggestions are best-effort; Go/Enter still works
+    }
+  }
+
+  function onInput() {
+    errorMsg = '';
+    if (suggestTimer) clearTimeout(suggestTimer);
+    const q = query.trim();
+    // District shortcuts ("D5") don't geocode — skip suggestion lookup.
+    if (q.length < 3 || /^[Dd]\s*\d*$/.test(q)) { suggestions = []; return; }
+    suggestTimer = setTimeout(() => fetchSuggestions(q), 300);
+  }
+
+  function flyToSuggestion(s: Suggestion) {
+    const m = getMapInstance();
+    if (!m) return;
+    if (Array.isArray(s.center) && s.center.length >= 2) {
+      setPinnedLngLat({ lng: s.center[0], lat: s.center[1] });
+      setIsPinned(true);
+    }
+    highlightAfterMove();
+    if (s.bbox) {
+      m.fitBounds(s.bbox as mapboxgl.LngLatBoundsLike, { padding: 60, maxZoom: 13 });
+    } else {
+      m.flyTo({ center: s.center, zoom: 12 });
+    }
+  }
+
+  function selectSuggestion(s: Suggestion) {
+    flyToSuggestion(s);
+    query = '';
+    suggestions = [];
+    errorMsg = '';
+    setHoveredDistrict(null);
+  }
+
   async function searchMapbox(q: string): Promise<boolean> {
     const m = getMapInstance();
     if (!m) return false;
@@ -115,6 +178,7 @@
     if (!q || !getMapInstance()) return;
     searching = true;
     errorMsg = '';
+    suggestions = [];
     setHoveredDistrict(null);
     try {
       const dm = q.trim().match(/^[Dd]\s*(\d+)$/);
@@ -138,16 +202,18 @@
 
   function onKeydown(e: KeyboardEvent) {
     if (e.key === 'Enter') handleSearch();
-    if (e.key === 'Escape') { query = ''; errorMsg = ''; setHoveredDistrict(null); }
+    if (e.key === 'Escape') { query = ''; errorMsg = ''; suggestions = []; setHoveredDistrict(null); }
   }
 </script>
 
-<div class="flex flex-col gap-0.5">
+<div class="flex flex-col gap-0.5 relative">
   <div class="flex gap-1.5 items-center">
     <input
       type="text"
       bind:value={query}
+      oninput={onInput}
       onkeydown={onKeydown}
+      onblur={() => setTimeout(() => { suggestions = []; }, 150)}
       placeholder="D5 · Cobb County GA · address…"
       class="w-full max-w-[200px] px-2.5 py-1.5 sm:py-1 text-[15px] sm:text-sm rounded
              border border-gray-300 bg-white
@@ -162,6 +228,25 @@
       {searching ? '…' : 'Go'}
     </button>
   </div>
+
+  {#if suggestions.length > 0}
+    <ul
+      class="absolute top-full left-0 z-50 w-full max-w-[260px] mt-0.5 bg-white
+             border border-gray-300 rounded shadow-lg overflow-hidden"
+    >
+      {#each suggestions as s}
+        <li>
+          <button
+            type="button"
+            onmousedown={(e) => { e.preventDefault(); selectSuggestion(s); }}
+            class="w-full text-left px-2.5 py-1.5 text-sm hover:bg-blue-50 cursor-pointer
+                   border-b border-gray-100 last:border-b-0 truncate"
+          >{s.label}</button>
+        </li>
+      {/each}
+    </ul>
+  {/if}
+
   {#if errorMsg}
     <div class="text-xs text-red-600 mt-0.5">{errorMsg}</div>
   {:else if !compact}

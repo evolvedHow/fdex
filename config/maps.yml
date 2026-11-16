@@ -9,9 +9,10 @@ tilesets:
   block:
     url: "mapbox://fdgamaps.3hcg2lso"
     sourceLayer: "block_census_2020_small-ai13v3"
-  precinct:
-    url: "mapbox://fdgamaps.97e7r27u"
-    sourceLayer: "precinct_2020-cw9lzx"
+  # Precincts are NOT a Mapbox tileset — they're a local GeoJSON
+  # (data/precinct_scored.geojson, built by fdp/scripts/build_precinct_geojson.py)
+  # so the six elections stay current without a manual Mapbox Studio re-upload.
+  # See src_precinct in frontend/src/lib/config/mapLayers.ts.
 
 # ──────────────────────────────────────────────
 # District Plans
@@ -281,7 +282,7 @@ overlays:
         - { label: "75% to 100%", color: "#91318f" }
 
   - id: precinct_plean
-    label: "Partisan Lean, 2018-2024"
+    label: "Partisan Lean, 2018-2024 (avg. of 6 elections, by precinct)"
     property: partisan
     group: "Election Results by precinct"
     layers: [precinct_plean]
@@ -304,6 +305,103 @@ overlays:
         - [1.1, "#d4d5d5"]
     legend:
       title: "Partisan Lean, Percent Democrat (2018-2024)"
+      items:
+        - { label: "< 40%", color: "#c23a43" }
+        - { label: "40% to 46.5%", color: "#ed6d78" }
+        - { label: "46.5% to 50%", color: "#c991b1" }
+        - { label: "50% to 53.5%", color: "#979cde" }
+        - { label: "53.5% to 60%", color: "#5a83c4" }
+        - { label: "> 60%", color: "#3b61b8" }
+
+  - id: precinct_p24
+    label: "2024 President — Actual Results (by precinct)"
+    property: p24_pct_dem
+    group: "Election Results by precinct"
+    layers: [precinct_p24]
+    colorStops:
+      fill:
+        - [0, "#bc131e"]
+        - [0.4, "#eb4956"]
+        - [0.465, "#c36e9e"]
+        - [0.5, "#7279db"]
+        - [0.535, "#3c6ebf"]
+        - [0.6, "#1f4bae"]
+        - [1.1, "#d4d5d5"]
+      outline:
+        - [0, "#c23a43"]
+        - [0.4, "#ed6d78"]
+        - [0.465, "#c991b1"]
+        - [0.5, "#979cde"]
+        - [0.535, "#5a83c4"]
+        - [0.6, "#3b61b8"]
+        - [1.1, "#d4d5d5"]
+    legend:
+      title: "2024 President, Percent Democrat (Actual, by precinct)"
+      items:
+        - { label: "< 40%", color: "#c23a43" }
+        - { label: "40% to 46.5%", color: "#ed6d78" }
+        - { label: "46.5% to 50%", color: "#c991b1" }
+        - { label: "50% to 53.5%", color: "#979cde" }
+        - { label: "53.5% to 60%", color: "#5a83c4" }
+        - { label: "> 60%", color: "#3b61b8" }
+
+  # District-level actual results (not an average) — read straight off each
+  # plan's own GeoJSON via applyDistrictFill(), so no vector tileset needed.
+  # Only renders while the "Districts" display layer is on.
+  - id: district_p24
+    label: "2024 President — Actual Results"
+    property: p24_pct_dem
+    group: "Election Results by District (actual, single election)"
+    colorStops:
+      fill:
+        - [0, "#bc131e"]
+        - [0.4, "#eb4956"]
+        - [0.465, "#c36e9e"]
+        - [0.5, "#7279db"]
+        - [0.535, "#3c6ebf"]
+        - [0.6, "#1f4bae"]
+        - [1.1, "#d4d5d5"]
+      outline:
+        - [0, "#c23a43"]
+        - [0.4, "#ed6d78"]
+        - [0.465, "#c991b1"]
+        - [0.5, "#979cde"]
+        - [0.535, "#5a83c4"]
+        - [0.6, "#3b61b8"]
+        - [1.1, "#d4d5d5"]
+    legend:
+      title: "2024 President, Percent Democrat (Actual)"
+      items:
+        - { label: "< 40%", color: "#c23a43" }
+        - { label: "40% to 46.5%", color: "#ed6d78" }
+        - { label: "46.5% to 50%", color: "#c991b1" }
+        - { label: "50% to 53.5%", color: "#979cde" }
+        - { label: "53.5% to 60%", color: "#5a83c4" }
+        - { label: "> 60%", color: "#3b61b8" }
+
+  - id: district_s22
+    label: "2022 US Senate — Actual Results"
+    property: s22_pct_dem
+    group: "Election Results by District (actual, single election)"
+    colorStops:
+      fill:
+        - [0, "#bc131e"]
+        - [0.4, "#eb4956"]
+        - [0.465, "#c36e9e"]
+        - [0.5, "#7279db"]
+        - [0.535, "#3c6ebf"]
+        - [0.6, "#1f4bae"]
+        - [1.1, "#d4d5d5"]
+      outline:
+        - [0, "#c23a43"]
+        - [0.4, "#ed6d78"]
+        - [0.465, "#c991b1"]
+        - [0.5, "#979cde"]
+        - [0.535, "#5a83c4"]
+        - [0.6, "#3b61b8"]
+        - [1.1, "#d4d5d5"]
+    legend:
+      title: "2022 US Senate, Percent Democrat (Actual)"
       items:
         - { label: "< 40%", color: "#c23a43" }
         - { label: "40% to 46.5%", color: "#ed6d78" }
